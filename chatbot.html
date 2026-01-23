@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cyber AI - Your intelligent cybersecurity assistant powered by Google Gemini">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Cyber AI - CyberGuard</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236366F1'/><text y='75' font-size='70' text-anchor='middle' x='50' fill='white'>🤖</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=3.0">
+    <link rel="stylesheet" href="chatbot.css">
+    <script type="importmap">
+    {
+      "imports": {
+        "@google/generative-ai": "https://esm.run/@google/generative-ai"
+      }
+    }
+    </script>
+</head>
+<body>
+    <!-- Animated Cyber Background -->
+    <div id="bg-container" class="bg-container">
+        <canvas id="cyber-canvas"></canvas>
+        <div class="cyber-grid-overlay"></div>
+        <div class="cyber-glow-effect"></div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav>
+        <div class="navbar">
+            <div class="logo">🛡️ CyberGuard</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="threats.html">Threats</a></li>
+                <li><a href="threat-map.html">Threat Map</a></li>
+                <li><a href="frameworks.html">Frameworks</a></li>
+                <li><a href="learning.html">Learn</a></li>
+                <li><a href="tools.html">Tools</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="chatbot.html">AI Chat</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="navbar-right">
+                <button id="theme-toggle" class="theme-toggle-btn" title="Toggle theme">🌙</button>
+                <button id="hamburger-btn" class="hamburger-btn" title="Menu" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hamburger Menu -->
+    <div id="hamburger-overlay" class="hamburger-overlay"></div>
+    <div id="hamburger-menu" class="hamburger-menu">
+        <button id="hamburger-close" class="hamburger-close">✕</button>
+        <ul class="hamburger-menu-list">
+            <li><a href="index.html" class="hamburger-link">Home</a></li>
+            <li><a href="about.html" class="hamburger-link">About Us</a></li>
+            <li><a href="case-studies.html" class="hamburger-link">Case Studies</a></li>
+            <li><a href="community.html" class="hamburger-link">Community</a></li>
+            <li><a href="privacy-policy.html" class="hamburger-link">Privacy Policy</a></li>
+            <li><a href="terms-of-service.html" class="hamburger-link">Terms of Service</a></li>
+        </ul>
+    </div>
+
+    <div class="chat-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <button class="new-chat-btn">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M10 4V16M4 10H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                New Chat
+            </button>
+            
+            <div class="chat-history-section">
+                <h3 class="chat-history-title">CHAT HISTORY</h3>
+                <p class="no-history">No chat history yet</p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="chat-header">
+                <button class="menu-toggle" id="menu-toggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M3 12H21M3 6H21M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+                <div class="header-info">
+                    <div class="bot-icon">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <rect width="32" height="32" rx="8" fill="#6366F1"/>
+                            <path d="M16 8C13.79 8 12 9.79 12 12V14H10V20H22V14H20V12C20 9.79 18.21 8 16 8ZM16 10C17.1 10 18 10.9 18 12V14H14V12C14 10.9 14.9 10 16 10Z" fill="white"/>
+                        </svg>
+                    </div>
+                    <div class="header-text">
+                        <h1 class="bot-name">Cyber AI</h1>
+                        <p class="bot-subtitle">● Powered by Gemini 2.5 Flash</p>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Chat Messages Area -->
+            <div class="chat-messages" id="chat-messages">
+                <div class="welcome-screen">
+                    <div class="sparkle-icon">
+                        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                            <circle cx="40" cy="40" r="40" fill="#E8E8FF" opacity="0.3"/>
+                            <path d="M40 20L42.5 37.5L60 40L42.5 42.5L40 60L37.5 42.5L20 40L37.5 37.5L40 20Z" fill="#8B8BF6"/>
+                            <path d="M52 28L53.5 34.5L60 36L53.5 37.5L52 44L50.5 37.5L44 36L50.5 34.5L52 28Z" fill="#8B8BF6"/>
+                        </svg>
+                    </div>
+                    <h2 class="welcome-title">How can I help you today?</h2>
+                    <p class="welcome-subtitle">I'm powered by Google Gemini. You can chat with me, ask questions, and upload files for analysis.</p>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-container">
+                <div class="input-wrapper">
+                    <input 
+                        type="text" 
+                        class="chat-input" 
+                        id="chat-input"
+                        placeholder="Type a message..."
+                        autocomplete="off"
+                    />
+                    <button class="send-btn" id="send-btn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>🛡️ CyberGuard</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                    Your trusted resource for cybersecurity education, frameworks, and best practices.
+                </p>
+                 <div class="social-links">
+                    <a href="https://github.com/"><img src="./Icons/Github-Logo-PNG-Photo-1.png" alt="GitHub" style="width: 35px; height: 20px; filter: brightness(0) invert(1);"></a>
+                    <a href="https://x.com/" title="Twitter">𝕏</a>
+                    <a href="https://in.linkedin.com/?mcid=6844056167778418689&src=go-pa&trk=sem-ga_campid.14650114788_asid.151761418307_crid.657403558715_kw.linkedin%20login_d.c_tid.kwd-12704335873_n.g_mt.e_geo.9040243&cid=&gclsrc=aw.ds&gad_source=1&gad_campaignid=14650114788&gbraid=0AAAAABKX7wGkDyHEA_MbDu4Zfag0E9xaq&gclid=CjwKCAiAjojLBhAlEiwAcjhrDuzTNnDEosiin0bM5mg-08UJ9raSASZWTRJl8L8twDVKIXPAUDeXWhoC9oIQAvD_BwE" title="LinkedIn">in</a>
+                    <a href="https://mail.google.com/mail/u/0/#inbox" title="Email">✉️</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="threats.html">Threats & Vulnerabilities</a></li>
+                    <li><a href="frameworks.html">Security Frameworks</a></li>
+                    <li><a href="learning.html">Learning Resources</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="tools.html">Tools & Utilities</a></li>
+                    <li><a href="blog.html">Blog & Updates</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-of-service.html">Terms & Conditions</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 CyberGuard - Cybersecurity Education Platform. All rights reserved. | Made with  for a secure digital world</p>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+    <script src="cyber-background.js"></script>
+    <script type="module" src="chatbot-ui.js?v=10"></script>
+    <script>
+        let lastModified = null;
+        setInterval(async () => {
+            try {
+                const response = await fetch(window.location.href, { 
+                    method: 'HEAD',
+                    cache: 'no-cache'
+                });
+                const modified = response.headers.get('Last-Modified');
+                if (lastModified === null) {
+                    lastModified = modified;
+                } else if (lastModified !== modified) {
+                    window.location.reload(true);
+                }
+            } catch (e) {
+                console.log('Auto-reload check failed:', e);
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

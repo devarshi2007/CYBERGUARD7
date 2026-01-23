@@ -1,0 +1,465 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Privacy Policy for CyberGuard - Cybersecurity Education Platform. Learn about our commitment to data protection and user privacy.">
+    <meta name="theme-color" content="#00E5FF">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Privacy Policy - CyberGuard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <!-- Plausible Analytics for Privacy-Respecting Usage Tracking -->
+    <script defer data-domain="cyberguard.local" src="https://plausible.io/js/script.js"></script>
+    <!-- Notification Blocker -->
+    <script>
+        const MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.addedNodes.length) {
+                    mutation.addedNodes.forEach((node) => {
+                        if (node.nodeType === 1) {
+                            if (node.className && (node.className.includes('notification') || node.className.includes('update') || node.className.includes('modal'))) {
+                                node.remove();
+                            }
+                        }
+                    });
+                }
+            });
+        });
+        observer.observe(document.body || document.documentElement, { childList: true, subtree: true });
+    </script>
+    <!-- Crisp Chat Widget for AI Support - DISABLED -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/azonix" rel="stylesheet">
+    <style>
+        .hero h1 {
+            font-family: 'Azonix', sans-serif;
+            font-size: 3.5rem;
+            line-height: 1.5;
+            color: #ffffff;
+            text-shadow: 0 0 10px #00e6e6, 0 0 20px #00e6e6;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Cyber Background -->
+    <div id="bg-container" class="bg-container">
+        <canvas id="cyber-canvas"></canvas>
+        <div class="cyber-grid-overlay"></div>
+        <div class="cyber-glow-effect"></div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav>
+        <div class="navbar">
+            <div class="logo">🛡️ CyberGuard</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="threats.html">Threats</a></li>
+                <li><a href="threat-map.html">Threat Map</a></li>
+                <li><a href="frameworks.html">Frameworks</a></li>
+                <li><a href="learning.html">Learn</a></li>
+                <li><a href="tools.html">Tools</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="chatbot.html">AI Chat</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="navbar-right">
+                <button id="theme-toggle" class="theme-toggle-btn" title="Toggle theme">🌙</button>
+                <button id="hamburger-btn" class="hamburger-btn" title="Menu" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hamburger Menu -->
+    <div id="hamburger-overlay" class="hamburger-overlay"></div>
+    <div id="hamburger-menu" class="hamburger-menu">
+        <button id="hamburger-close" class="hamburger-close">✕</button>
+        <ul class="hamburger-menu-list">
+            <li><a href="index.html" class="hamburger-link">Home</a></li>
+            <li><a href="about.html" class="hamburger-link">About Us</a></li>
+            <li><a href="case-studies.html" class="hamburger-link">Case Studies</a></li>
+            <li><a href="community.html" class="hamburger-link">Community</a></li>
+            <li><a href="privacy-policy.html" class="hamburger-link">Privacy Policy</a></li>
+            <li><a href="terms-of-service.html" class="hamburger-link">Terms of Service</a></li>
+        </ul>
+    </div>
+    <!-- Hero Section -->
+    <section class="hero" style="background: linear-gradient(135deg, rgba(0, 229, 255, 0.1), rgba(164, 0, 255, 0.1)); padding: 3rem 0;">
+        <div class="container">
+            <h1 style="margin-bottom: 1rem;"> Privacy Policy</h1>
+            <p style="font-size: 1.1rem; color: var(--text-light); max-width: 600px;">
+                Your privacy is important to us. This policy explains how CyberGuard collects, uses, and protects your data.
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="container" style="padding: 4rem 0;">
+        <div style="max-width: 900px; margin: 0 auto; line-height: 1.8;">
+            
+            <div style="background: rgba(0, 229, 255, 0.05); border-left: 4px solid var(--cyan); padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem;">
+                <p><strong>Last Updated: December 2024</strong></p>
+                <p>This Privacy Policy applies to cyberguard.local and all associated services. By accessing our website, you agree to the terms outlined in this policy.</p>
+            </div>
+
+            <h2 style="color: var(--cyan); margin-top: 2rem;"> 1. Information We Collect</h2>
+            <div style="background: rgba(26, 39, 68, 0.6); padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                <h3 style="color: var(--text-light); margin-bottom: 1rem;">Information You Provide</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.8rem;">• <strong>Contact Forms:</strong> Name, email, company, and message content</li>
+                    <li style="margin-bottom: 0.8rem;">• <strong>Lead Magnets:</strong> First name, email, company, company size</li>
+                    <li style="margin-bottom: 0.8rem;">• <strong>Chat Support:</strong> Messages sent through Crisp.chat widget</li>
+                    <li style="margin-bottom: 0.8rem;">• <strong>Newsletter Signup:</strong> Email address for security updates</li>
+                </ul>
+            </div>
+
+            <div style="background: rgba(26, 39, 68, 0.6); padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                <h3 style="color: var(--text-light); margin-bottom: 1rem;">Information Collected Automatically</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.8rem;">• <strong>Analytics:</strong> Page views, scroll depth, button clicks (via Plausible.io)</li>
+                    <li style="margin-bottom: 0.8rem;">• <strong>Device Information:</strong> Browser type, OS, device type</li>
+                    <li style="margin-bottom: 0.8rem;">• <strong>Referrer Data:</strong> How you found us (traffic source)</li>
+                    <li style="margin-bottom: 0.8rem;">• <strong>Local Storage:</strong> User preferences (theme, language) stored locally</li>
+                    <li style="margin-bottom: 0.8rem;">• <strong>Tool Usage:</strong> Anonymous tool interactions (Browser Scanner, Risk Calculator)</li>
+                </ul>
+            </div>
+
+            <h2 style="color: var(--cyan); margin-top: 2rem;"> 2. How We Use Your Information</h2>
+            <div style="background: rgba(26, 39, 68, 0.6); padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.8rem;">✓ <strong>Provide Services:</strong> Deliver educational content and security tools</li>
+                    <li style="margin-bottom: 0.8rem;">✓ <strong>Improve Experience:</strong> Analyze usage patterns to enhance features</li>
+                    <li style="margin-bottom: 0.8rem;">✓ <strong>Communication:</strong> Send security alerts, updates, and newsletters</li>
+                    <li style="margin-bottom: 0.8rem;">✓ <strong>Support:</strong> Respond to inquiries and provide customer service</li>
+                    <li style="margin-bottom: 0.8rem;">✓ <strong>Security:</strong> Detect abuse, fraud, and protect site integrity</li>
+                    <li style="margin-bottom: 0.8rem;">✓ <strong>Legal Compliance:</strong> Fulfill legal obligations under GDPR, CCPA, etc.</li>
+                </ul>
+            </div>
+
+            <h2 style="color: var(--cyan); margin-top: 2rem;"> 3. Data Protection & Security</h2>
+            <div style="background: rgba(26, 39, 68, 0.6); padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                <p style="margin-bottom: 1rem;">CyberGuard implements industry-standard security measures:</p>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.8rem;"> <strong>HTTPS/TLS:</strong> All data transmitted with AES-256 encryption</li>
+                    <li style="margin-bottom: 0.8rem;"> <strong>HSTS:</strong> HTTP Strict Transport Security enforced (1-year preload)</li>
+                    <li style="margin-bottom: 0.8rem;"> <strong>CSP Headers:</strong> Content Security Policy prevents XSS attacks</li>
+                    <li style="margin-bottom: 0.8rem;"> <strong>No Data Storage:</strong> Security tools run client-side (no server processing)</li>
+                    <li style="margin-bottom: 0.8rem;"> <strong>Secure Forms:</strong> Form submissions via Formspree with TLS</li>
+                    <li style="margin-bottom: 0.8rem;"> <strong>Regular Audits:</strong> Security assessments and penetration testing</li>
+                </ul>
+            </div>
+
+            <h2 style="color: var(--cyan); margin-top: 2rem;"> 4. Analytics & Tracking</h2>
+            <div style="background: rgba(26, 39, 68, 0.6); padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                <p style="margin-bottom: 1rem;"><strong>Plausible Analytics (Privacy-First):</strong></p>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.8rem;">✓ <strong>No Cookies:</strong> GDPR-compliant, cookieless tracking</li>
+                    <li style="margin-bottom: 0.8rem;">✓ <strong>No IP Logging:</strong> IP addresses are anonymized</li>
+                    <li style="margin-bottom: 0.8rem;">✓ <strong>No Personal Data:</strong> Tracks only aggregate metrics</li>
+                    <li style="margin-bottom: 0.8rem;">✓ <strong>Data Ownership:</strong> You retain 100% data ownership</li>
+                    <li style="margin-bottom: 0.8rem;">✓ <strong>GDPR Compliant:</strong> No consent needed for analytics</li>
+                </ul>
+                <p style="margin-top: 1rem; color: var(--text-muted);">We do NOT use Google Analytics, Facebook Pixel, or other invasive tracking technologies.</p>
+            </div>
+
+            <h2 style="color: var(--cyan); margin-top: 2rem;"> 5. Cookies & Local Storage</h2>
+            <div style="background: rgba(26, 39, 68, 0.6); padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                <p style="margin-bottom: 1rem;"><strong>Local Storage (Client-Side Only):</strong></p>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.8rem;">• <strong>Theme Preference:</strong> Light/dark mode selection</li>
+                    <li style="margin-bottom: 0.8rem;">• <strong>Tool History:</strong> Previous search/tool queries</li>
+                    <li style="margin-bottom: 0.8rem;">• <strong>User Session:</strong> Temporary session data</li>
+                </ul>
+                <p style="margin-top: 1rem; margin-bottom: 1rem;"><strong>Third-Party Services:</strong></p>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.8rem;">• <strong>Crisp Chat:</strong> May store chat history for support continuity</li>
+                    <li style="margin-bottom: 0.8rem;">• <strong>Formspree:</strong> Stores form submissions for response tracking</li>
+                </ul>
+                <p style="margin-top: 1rem;">You can disable local storage through your browser settings without affecting site functionality.</p>
+            </div>
+
+            <h2 style="color: var(--cyan); margin-top: 2rem;"> 6. Third-Party Services</h2>
+            <div style="background: rgba(26, 39, 68, 0.6); padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                <p style="margin-bottom: 1rem;">CyberGuard integrates with trusted third-party services:</p>
+                <div style="margin-bottom: 1rem;">
+                    <p><strong>Formspree</strong> - Form Processing</p>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Handles contact and lead magnet form submissions. Data processed per Formspree privacy policy.</p>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <p><strong>Crisp Chat</strong> - Live Support Widget</p>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Enables real-time chat support. Messages processed per Crisp privacy policy.</p>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <p><strong>Plausible Analytics</strong> - Web Analytics</p>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Privacy-first analytics. No personal data collected. GDPR/CCPA compliant.</p>
+                </div>
+                <div>
+                    <p><strong>Leaflet.js / OpenStreetMap</strong> - Threat Map</p>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Client-side map rendering. No tracking or data collection.</p>
+                </div>
+            </div>
+
+            <h2 style="color: var(--cyan); margin-top: 2rem;"> 7. International Data Transfers</h2>
+            <div style="background: rgba(26, 39, 68, 0.6); padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                <p>CyberGuard operates in compliance with GDPR, CCPA, and other international data protection regulations. If you're accessing from the EU, UK, or other regions with specific requirements:</p>
+                <ul style="list-style: none; padding: 0; margin-top: 1rem;">
+                    <li style="margin-bottom: 0.8rem;">• <strong>Standard Contractual Clauses:</strong> Data transfers use approved mechanisms</li>
+                    <li style="margin-bottom: 0.8rem;">• <strong>Data Processing Agreements:</strong> Third-party vendors signed DPAs</li>
+                    <li style="margin-bottom: 0.8rem;">• <strong>Minimization:</strong> We collect only essential data</li>
+                </ul>
+            </div>
+
+            <h2 style="color: var(--cyan); margin-top: 2rem;"> 8. Your Rights & Choices</h2>
+            <div style="background: rgba(26, 39, 68, 0.6); padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                <p style="margin-bottom: 1rem;">You have the following rights regarding your data:</p>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.8rem;"> <strong>Right to Access:</strong> Request a copy of your personal data</li>
+                    <li style="margin-bottom: 0.8rem;"> <strong>Right to Rectification:</strong> Correct inaccurate information</li>
+                    <li style="margin-bottom: 0.8rem;"> <strong>Right to Erasure:</strong> Request deletion of your data (within legal limits)</li>
+                    <li style="margin-bottom: 0.8rem;"> <strong>Right to Object:</strong> Opt-out of marketing communications</li>
+                    <li style="margin-bottom: 0.8rem;">⬇ <strong>Right to Data Portability:</strong> Receive data in portable format</li>
+                </ul>
+                <p style="margin-top: 1.5rem;">To exercise these rights, email <strong>privacy@cyberguard.local</strong> with your request.</p>
+            </div>
+
+            <h2 style="color: var(--cyan); margin-top: 2rem;"> 9. Marketing Communications</h2>
+            <div style="background: rgba(26, 39, 68, 0.6); padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                <p style="margin-bottom: 1rem;">We may send you:</p>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.8rem;"> Security alerts and threat intelligence updates</li>
+                    <li style="margin-bottom: 0.8rem;"> New learning resources and educational content</li>
+                    <li style="margin-bottom: 0.8rem;"> Product updates and feature announcements</li>
+                    <li style="margin-bottom: 0.8rem;"> Promotional offers and webinars</li>
+                </ul>
+                <p style="margin-top: 1rem;">Each email contains an unsubscribe link. You can manage preferences at any time.</p>
+            </div>
+
+            <h2 style="color: var(--cyan); margin-top: 2rem;"> 10. Data Retention</h2>
+            <div style="background: rgba(26, 39, 68, 0.6); padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid var(--cyan);">
+                            <th style="text-align: left; padding: 0.8rem;">Data Type</th>
+                            <th style="text-align: left; padding: 0.8rem;">Retention Period</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid rgba(0, 229, 255, 0.2);">
+                            <td style="padding: 0.8rem;">Contact Form Submissions</td>
+                            <td style="padding: 0.8rem;">12 months</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(0, 229, 255, 0.2);">
+                            <td style="padding: 0.8rem;">Lead Magnet Registrations</td>
+                            <td style="padding: 0.8rem;">24 months (for nurturing)</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(0, 229, 255, 0.2);">
+                            <td style="padding: 0.8rem;">Analytics Data</td>
+                            <td style="padding: 0.8rem;">24 months (Plausible default)</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(0, 229, 255, 0.2);">
+                            <td style="padding: 0.8rem;">Chat Transcripts</td>
+                            <td style="padding: 0.8rem;">90 days (Crisp default)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.8rem;">Local Storage Data</td>
+                            <td style="padding: 0.8rem;">Until cleared by user</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 style="color: var(--cyan); margin-top: 2rem;"> 11. Children's Privacy</h2>
+            <div style="background: rgba(26, 39, 68, 0.6); padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                <p>CyberGuard is not intended for children under 13. We do not knowingly collect personal information from minors. If we discover we've collected data from a child under 13, we'll delete it immediately.</p>
+                <p style="margin-top: 1rem;">If you're under 18, please ask your parent/guardian's permission before providing information.</p>
+            </div>
+
+            <h2 style="color: var(--cyan); margin-top: 2rem;"> 12. Policy Changes</h2>
+            <div style="background: rgba(26, 39, 68, 0.6); padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                <p>We may update this privacy policy periodically. Major changes will be announced via email (if you've provided it) or prominent site notification. Your continued use of CyberGuard indicates acceptance of updated policies.</p>
+            </div>
+
+            <h2 style="color: var(--cyan); margin-top: 2rem;"> 13. Contact Us</h2>
+            <div style="background: rgba(0, 229, 255, 0.1); border-left: 4px solid var(--cyan); padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                <p style="margin-bottom: 1rem;"><strong>For privacy-related questions or requests:</strong></p>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.8rem;">📧 Email: <strong>privacy@cyberguard.local</strong></li>
+                    <li style="margin-bottom: 0.8rem;"> Visit: <a href="contact.html" style="color: var(--cyan); text-decoration: none;">contact.html</a></li>
+                    <li> Use the Crisp Chat widget for immediate support</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>🛡️ CyberGuard</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                    Your trusted resource for cybersecurity education, frameworks, and best practices.
+                </p>
+                 <div class="social-links">
+                    <a href="https://github.com/"><img src="./Icons/Github-Logo-PNG-Photo-1.png" alt="GitHub" style="width: 35px; height: 20px; filter: brightness(0) invert(1);"></a>
+                    <a href="https://x.com/" title="Twitter">𝕏</a>
+                    <a href="https://in.linkedin.com/?mcid=6844056167778418689&src=go-pa&trk=sem-ga_campid.14650114788_asid.151761418307_crid.657403558715_kw.linkedin%20login_d.c_tid.kwd-12704335873_n.g_mt.e_geo.9040243&cid=&gclsrc=aw.ds&gad_source=1&gad_campaignid=14650114788&gbraid=0AAAAABKX7wGkDyHEA_MbDu4Zfag0E9xaq&gclid=CjwKCAiAjojLBhAlEiwAcjhrDuzTNnDEosiin0bM5mg-08UJ9raSASZWTRJl8L8twDVKIXPAUDeXWhoC9oIQAvD_BwE" title="LinkedIn">in</a>
+                    <a href="https://mail.google.com/mail/u/0/#inbox" title="Email">✉️</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="threats.html">Threats & Vulnerabilities</a></li>
+                    <li><a href="frameworks.html">Security Frameworks</a></li>
+                    <li><a href="learning.html">Learning Resources</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="tools.html">Tools & Utilities</a></li>
+                    <li><a href="blog.html">Blog & Updates</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-of-service.html">Terms & Conditions</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 CyberGuard - Cybersecurity Education Platform. All rights reserved. | Made with  for a secure digital world</p>
+        </div>
+    </footer>
+
+
+    <script>
+    window.cyberKnowledgeBase = {
+        "fundamentals": [
+            {
+                "keyword": "cybersecurity",
+                "title": "What is Cybersecurity?",
+                "answer": "Cybersecurity is the practice of protecting systems, networks, and data from digital attacks and unauthorized access. It involves implementing technical, operational, and management practices to defend against threats like malware, ransomware, phishing, and data breaches.",
+                "relatedTopics": ["network security", "data protection", "encryption", "authentication"]
+            },
+            {
+                "keyword": "network security fundamentals",
+                "title": "Network Security Fundamentals",
+                "answer": "Network security involves securing data in transit and at rest across networks. Key components include firewalls, intrusion detection/prevention systems, VPNs, segmentation, and monitoring. Defense-in-depth strategies use multiple layers of security controls.",
+                "relatedTopics": ["firewall", "VPN", "segmentation", "monitoring"]
+            },
+            {
+                "keyword": "virus vs worm",
+                "title": "Difference Between Virus and Worm",
+                "answer": "A virus requires user action to spread (like opening a file), while a worm spreads automatically across networks without user intervention. Both are malware designed to damage systems, but worms are more dangerous because they can propagate rapidly.",
+                "relatedTopics": ["malware", "ransomware", "trojan"]
+            },
+            {
+                "keyword": "CIA triad",
+                "title": "CIA Triad (Confidentiality, Integrity, Availability)",
+                "answer": "The CIA Triad is the foundational model of cybersecurity: Confidentiality (data privacy), Integrity (data accuracy/authenticity), and Availability (data accessibility). All security controls aim to maintain these three principles.",
+                "relatedTopics": ["encryption", "authentication", "access control", "backup"]
+            },
+            {
+                "keyword": "authentication vs authorization",
+                "title": "Authentication vs Authorization",
+                "answer": "Authentication verifies who you are (proving identity), while authorization determines what you can access (permissions). Authentication uses passwords, biometrics, or MFA; authorization uses roles, policies, and access control lists.",
+                "relatedTopics": ["MFA", "OAuth", "RBAC", "access control"]
+            }
+        ],
+        "basics": [
+            {"keyword": "password", "title": "Password Security Best Practices", "answer": "Use 12+ characters with mixed case, numbers, and symbols. Never reuse passwords. Use a password manager. Enable MFA. Change passwords if compromised.", "relatedTopics": ["MFA", "password manager"]},
+            {"keyword": "encryption", "title": "What is Encryption?", "answer": "Encryption converts readable data (plaintext) into unreadable code (ciphertext) using algorithms and keys. Only those with the decryption key can read it. AES-256 and RSA are common encryption standards.", "relatedTopics": ["cryptography", "SSL/TLS", "key management"]},
+            {"keyword": "brute force attack", "title": "Brute Force Attack", "answer": "An attack that tries all possible password combinations until finding the correct one. Defenses include rate limiting, account lockouts, strong passwords, and MFA.", "relatedTopics": ["dictionary attack", "rainbow table", "MFA"]},
+            {"keyword": "botnet", "title": "What is a Botnet?", "answer": "A network of infected computers (bots) controlled by an attacker. Used for DDoS attacks, spam, data theft, and cryptocurrency mining. Spread through malware and unpatched vulnerabilities.", "relatedTopics": ["malware", "DDoS", "command and control"]},
+            {"keyword": "data breach", "title": "Understanding Data Breaches", "answer": "Unauthorized access and theft of sensitive data. Can result from weak security, phishing, ransomware, or insider threats. Impacts: stolen identities, financial loss, compliance penalties.", "relatedTopics": ["incident response", "GDPR", "breach notification"]},
+            {"keyword": "VPN", "title": "Virtual Private Network (VPN)", "answer": "Encrypts all internet traffic and masks your IP address by routing through a secure tunnel. Protects privacy on public WiFi and prevents ISP tracking.", "relatedTopics": ["encryption", "proxy", "Tor"]},
+            {"keyword": "2FA", "title": "Two-Factor Authentication (2FA)", "answer": "Requires two forms of verification: something you know (password) and something you have (phone, app, hardware key). Significantly improves account security.", "relatedTopics": ["MFA", "authentication", "TOTP"]},
+            {"keyword": "firewall", "title": "What is a Firewall?", "answer": "Network security device that monitors and controls incoming/outgoing traffic based on rules. Blocks unauthorized access while allowing legitimate traffic. First line of defense.", "relatedTopics": ["network security", "IDS/IPS", "WAF"]}
+        ],
+        "attacks": [
+            {"keyword": "phishing", "title": "Phishing Attacks", "answer": "Fraudulent emails or messages tricking users into revealing credentials or clicking malicious links. Prevention: verify senders, avoid clicking unknown links, enable email filtering.", "relatedTopics": ["spear phishing", "whaling", "social engineering"]},
+            {"keyword": "SQL injection", "title": "SQL Injection Attack", "answer": "Attackers insert malicious SQL code into input fields to manipulate database queries. Can expose, modify, or delete data. Prevention: use parameterized queries and input validation.", "relatedTopics": ["web security", "OWASP Top 10", "prepared statements"]},
+            {"keyword": "XSS", "title": "Cross-Site Scripting (XSS)", "answer": "Injecting malicious scripts into web pages viewed by other users. Steals cookies, sessions, or credentials. Types: stored, reflected, DOM-based. Prevention: input/output encoding.", "relatedTopics": ["web security", "OWASP Top 10", "CSP"]},
+            {"keyword": "MITM", "title": "Man-in-the-Middle Attack", "answer": "Attacker intercepts communication between two parties. Can eavesdrop, modify, or inject malicious data. Prevention: use HTTPS/TLS encryption and verify certificates.", "relatedTopics": ["encryption", "SSL/TLS", "certificate pinning"]},
+            {"keyword": "ARP spoofing", "title": "ARP Spoofing Attack", "answer": "Attacker sends forged ARP messages to associate their MAC address with a legitimate IP. Enables MITM attacks and traffic redirection.", "relatedTopics": ["network attack", "MITM", "MAC spoofing"]},
+            {"keyword": "session hijacking", "title": "Session Hijacking", "answer": "Attacker steals a user's session token/cookie to impersonate them. Prevention: use secure cookies (HTTPS only), short expiration times, re-authentication.", "relatedTopics": ["web security", "CSRF", "token management"]},
+            {"keyword": "buffer overflow", "title": "Buffer Overflow Attack", "answer": "Attacker writes data beyond a buffer's boundary, overwriting adjacent memory. Can execute malicious code. Prevention: input validation, safe functions, ASLR/DEP.", "relatedTopics": ["memory safety", "code injection", "fuzzing"]},
+            {"keyword": "DDoS", "title": "Distributed Denial of Service (DDoS)", "answer": "Overwhelming a service with traffic from many sources to make it unavailable. Amplification, volumetric, protocol, and application-layer attacks exist. Mitigation: rate limiting, WAF, CDN.", "relatedTopics": ["DoS", "botnet", "traffic analysis"]}
+        ],
+        "advanced": [
+            {"keyword": "ransomware kill chain", "title": "Ransomware Kill Chain", "answer": "1) Initial Access: phishing, exploits; 2) Persistence: backdoors; 3) Reconnaissance: discovering assets; 4) Lateral Movement: spreading; 5) Encryption: deploying malware; 6) Extortion: demanding ransom.", "relatedTopics": ["incident response", "threat hunting", "indicators of compromise"]},
+            {"keyword": "PTES lifecycle", "title": "Penetration Testing Execution Standard (PTES)", "answer": "7-phase framework: Pre-engagement, Reconnaissance, Scanning, Enumeration, Vulnerability Analysis, Exploitation, Reporting. Provides structured approach to authorized security testing.", "relatedTopics": ["penetration testing", "methodology", "NIST"]},
+            {"keyword": "APT", "title": "Advanced Persistent Threat (APT)", "answer": "Sophisticated, long-term cyberattack against specific targets (governments, enterprises). Characteristics: stealth, persistence, advanced techniques, nation-state backing.", "relatedTopics": ["threat actors", "attribution", "threat intelligence"]},
+            {"keyword": "Kerberoasting", "title": "Kerberoasting Attack", "answer": "Extracting and cracking service account password hashes from Kerberos TGS tickets. Effective against Active Directory. Mitigation: strong service account passwords, monitoring.", "relatedTopics": ["Active Directory", "Kerberos", "credential theft"]},
+            {"keyword": "side-channel attack", "title": "Side-Channel Attack", "answer": "Exploiting physical phenomena (timing, power consumption, electromagnetic radiation) rather than algorithm weaknesses. Examples: timing attacks, power analysis, cache attacks.", "relatedTopics": ["cryptanalysis", "hardware security", "differential power analysis"]},
+            {"keyword": "hypervisor escape", "title": "Hypervisor Escape", "answer": "Breaking out of a virtual machine to access the host hypervisor and other VMs. Critical for cloud security. Requires exploiting hypervisor vulnerabilities.", "relatedTopics": ["virtualization", "container escape", "cloud security"]},
+            {"keyword": "memory forensics", "title": "Memory Forensics", "answer": "Analyzing RAM to find malware, credentials, and evidence of attacks. Tools extract processes, network connections, file system data before systems are shut down.", "relatedTopics": ["digital forensics", "incident response", "malware analysis"]}
+        ],
+        "architecture": [
+            {"keyword": "PKI", "title": "Public Key Infrastructure (PKI)", "answer": "Framework for creating, managing, and distributing digital certificates and keys. Enables encryption, authentication, and digital signatures. Based on Certificate Authorities (CAs).", "relatedTopics": ["encryption", "digital certificates", "CA"]},
+            {"keyword": "OAuth 2.0", "title": "OAuth 2.0 Authorization Framework", "answer": "Standard for delegated authorization. Allows users to grant apps access to accounts without sharing passwords. Uses tokens instead of credentials. Widely adopted for SSO.", "relatedTopics": ["authentication", "SSO", "OpenID Connect"]},
+            {"keyword": "micro-segmentation", "title": "Micro-Segmentation", "answer": "Dividing networks into small, isolated segments with strict access controls. Each segment requires authentication. Limits lateral movement after breach.", "relatedTopics": ["network security", "zero trust", "segmentation"]},
+            {"keyword": "zero trust", "title": "Zero Trust Architecture", "answer": "Never trust, always verify. All users, devices, and traffic treated as untrusted. Requires authentication, authorization, and encryption for every access attempt.", "relatedTopics": ["security model", "micro-segmentation", "CASA"]},
+            {"keyword": "network segmentation", "title": "Network Segmentation", "answer": "Dividing network into subnets with access controls between segments. Prevents lateral movement, limits breach impact, and improves monitoring.", "relatedTopics": ["firewalls", "VLANs", "micro-segmentation"]},
+            {"keyword": "SIEM", "title": "Security Information and Event Management (SIEM)", "answer": "Collects, analyzes, and correlates logs from all systems. Detects anomalies, threat indicators, and compliance violations. Essential for threat detection and response.", "relatedTopics": ["log management", "threat detection", "incident response"]},
+            {"keyword": "sandboxing", "title": "Sandboxing", "answer": "Isolated environment for executing untrusted code or files. Prevents malware from accessing the main system. Used in browsers, email, and endpoint security.", "relatedTopics": ["malware analysis", "containerization", "virtualization"]}
+        ],
+        "risk-response": [
+            {"keyword": "risk assessment", "title": "Risk Assessment Process", "answer": "Identifying assets, threats, vulnerabilities, likelihood, and impact. Risk = Probability × Impact. Prioritizes which risks to mitigate first.", "relatedTopics": ["CVSS", "threat modeling", "risk management"]},
+            {"keyword": "NIST incident response", "title": "NIST Incident Response Lifecycle", "answer": "4 phases: Preparation, Detection & Analysis, Containment, Eradication, Recovery, Post-Incident Activities. Structured approach to handling security incidents.", "relatedTopics": ["incident handling", "forensics", "playbooks"]},
+            {"keyword": "CVE/CVSS", "title": "CVE & CVSS Scores", "answer": "CVE: Common Vulnerabilities and Exposures database ID. CVSS: Common Vulnerability Scoring System (0-10 scale) measuring severity. Helps prioritize patching.", "relatedTopics": ["vulnerability management", "patch management", "threat intelligence"]},
+            {"keyword": "anomaly detection", "title": "Anomaly Detection in Security", "answer": "Identifying unusual patterns or behaviors that deviate from baseline. Uses ML/AI. Detects insider threats, compromise, and advanced attacks.", "relatedTopics": ["machine learning", "UEBA", "behavioral analytics"]},
+            {"keyword": "supply-chain attacks", "title": "Supply Chain Attacks", "answer": "Compromising software, hardware, or services to breach downstream customers. Examples: SolarWinds, 3CX. Prevention: vendor assessment, code review, monitoring.", "relatedTopics": ["third-party risk", "software security", "threat intelligence"]},
+            {"keyword": "OSINT", "title": "Open Source Intelligence (OSINT)", "answer": "Gathering intelligence from publicly available sources. Identifies exposed data, vulnerable systems, attacker infrastructure. Used for reconnaissance and threat hunting.", "relatedTopics": ["threat intelligence", "reconnaissance", "data leaks"]},
+            {"keyword": "digital forensics", "title": "Digital Forensics", "answer": "Collecting, analyzing, and preserving digital evidence for investigations. Maintains chain of custody. Determines what happened during an incident.", "relatedTopics": ["incident response", "memory forensics", "log analysis"]}
+        ]
+    };
+    </script>
+
+    <script src="api.js"></script>
+    <script src="app.js"></script>
+    <script src="script.js"></script>
+    <!-- Animated Background System -->
+    <script src="cyber-background.js"></script>
+    <!-- Service Worker Registration for PWA -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => {
+                        console.log('Service Worker registered:', registration);
+                    })
+                    .catch(error => {
+                        console.log('Service Worker registration failed:', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

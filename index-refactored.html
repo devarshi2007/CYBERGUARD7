@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CyberGuard - Modern Cybersecurity Education Platform">
+    <title>CyberGuard - Cybersecurity Education</title>
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://hn.algolia.com">
+    <link rel="preconnect" href="https://generativelanguage.googleapis.com">
+    
+    <!-- CSS - Keep existing stylesheet -->
+    <link rel="stylesheet" href="./style.css">
+    
+    <!-- Preload critical resources -->
+    <link rel="modulepreload" href="/src/main.js">
+    <link rel="modulepreload" href="/src/utils/dom.js">
+</head>
+<body>
+    <!-- Your existing HTML content here -->
+    <div id="app">
+        <!-- Existing page structure -->
+    </div>
+
+    <!-- Modern ES Module Loading Strategy -->
+    <!-- Critical: Loaded immediately -->
+    <script type="module" src="/src/main.js"></script>
+    
+    <!-- Non-critical: Lazy loaded via dynamic imports in main.js -->
+    <!-- Assistant, News, Attack Mapper, Forms - loaded only when DOM elements present -->
+    
+    <!-- Legacy browser fallback (optional) -->
+    <script nomodule>
+        alert('Please upgrade to a modern browser for the best experience.');
+    </script>
+</body>
+</html>

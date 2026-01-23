@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn Zero Trust Architecture principles with interactive simulations and practical implementations">
+    <title>Zero Trust Architecture - CyberGuard</title>
+    <link rel="stylesheet" href="style.css?v=3.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/azonix" rel="stylesheet">
+    <style>
+        .hero h1 {
+            font-family: 'Azonix', sans-serif;
+            font-size: 3.5rem;
+            line-height: 1.5;
+            color: #ffffff;
+            text-shadow: 0 0 10px #00e6e6, 0 0 20px #00e6e6;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+    </style>
+    <style>
+        .simulation-workspace {
+            background: rgba(26, 39, 68, 0.6);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--cyan);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+        }
+
+        .network-diagram {
+            background: rgba(10, 15, 31, 0.8);
+            border: 2px solid var(--cyan);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            min-height: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .node {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid var(--cyan);
+        }
+
+        .node:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px var(--cyan);
+        }
+
+        .node.verified {
+            border-color: var(--green);
+            background: rgba(0, 255, 30, 0.2);
+        }
+
+        .node.blocked {
+            border-color: #FF6B00;
+            background: rgba(255, 107, 0, 0.2);
+        }
+
+        .node.checking {
+            border-color: #FFC100;
+            background: rgba(255, 193, 0, 0.2);
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .connection-line {
+            position: absolute;
+            height: 2px;
+            background: var(--cyan);
+            transform-origin: left center;
+            opacity: 0.5;
+        }
+
+        .principle-card {
+            background: linear-gradient(135deg, rgba(0, 229, 255, 0.1), rgba(164, 0, 255, 0.1));
+            border: 2px solid var(--cyan);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .maturity-level {
+            display: flex;
+            justify-content: space-between;
+            margin: 2rem 0;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .maturity-stage {
+            flex: 1;
+            min-width: 200px;
+            background: rgba(26, 39, 68, 0.6);
+            border: 2px solid var(--cyan);
+            border-radius: 15px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .maturity-stage:hover {
+            border-color: var(--purple);
+            transform: translateY(-5px);
+        }
+
+        .maturity-stage.active {
+            border-color: var(--green);
+            background: rgba(0, 255, 30, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="bg-container" class="bg-container">
+        <canvas id="cyber-canvas"></canvas>
+        <div class="cyber-grid-overlay"></div>
+        <div class="cyber-glow-effect"></div>
+    </div>
+
+        <nav>
+        <div class="navbar">
+            <div class="logo">🛡️ CyberGuard</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="threats.html">Threats</a></li>
+                <li><a href="threat-map.html">Threat Map</a></li>
+                <li><a href="frameworks.html">Frameworks</a></li>
+                <li><a href="learning.html">Learn</a></li>
+                <li><a href="tools.html">Tools</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="chatbot.html">AI Chat</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="navbar-right">
+                <button id="theme-toggle" class="theme-toggle-btn" title="Toggle theme">🌙</button>
+                <button id="hamburger-btn" class="hamburger-btn" title="Menu" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hamburger Menu -->
+    <div id="hamburger-overlay" class="hamburger-overlay"></div>
+    <div id="hamburger-menu" class="hamburger-menu">
+        <button id="hamburger-close" class="hamburger-close">✕</button>
+        <ul class="hamburger-menu-list">
+            <li><a href="index.html" class="hamburger-link">Home</a></li>
+            <li><a href="about.html" class="hamburger-link">About Us</a></li>
+            <li><a href="case-studies.html" class="hamburger-link">Case Studies</a></li>
+            <li><a href="community.html" class="hamburger-link">Community</a></li>
+            <li><a href="privacy-policy.html" class="hamburger-link">Privacy Policy</a></li>
+            <li><a href="terms-of-service.html" class="hamburger-link">Terms of Service</a></li>
+        </ul>
+    </div>
+    <section class="hero">
+        <div class="cyber-grid"></div>
+        <div class="hero-content">
+            <h1> Zero Trust Architecture</h1>
+            <p>Never Trust, Always Verify - Modern security for modern threats</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <section class="section">
+            <h2> What is Zero Trust?</h2>
+            <div class="principle-card">
+                <p style="color: var(--text-light); font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+                    Zero Trust is a security model that assumes <strong>no implicit trust</strong> for any user, device, or service—regardless of whether they're inside or outside the network perimeter. Every access request is fully authenticated, authorized, and encrypted before granting access.
+                </p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                    <div style="background: rgba(0, 229, 255, 0.1); border-left: 4px solid var(--cyan); padding: 1.5rem; border-radius: 10px;">
+                        <h4 style="color: var(--cyan); margin-bottom: 0.5rem;">Traditional Security</h4>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">
+                            "Castle and moat" - Trust everything inside the perimeter
+                        </p>
+                    </div>
+                    <div style="background: rgba(0, 255, 30, 0.1); border-left: 4px solid var(--green); padding: 1.5rem; border-radius: 10px;">
+                        <h4 style="color: var(--green); margin-bottom: 0.5rem;">Zero Trust Model</h4>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">
+                            "Never trust, always verify" - Verify every access request
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2> Core Principles of Zero Trust</h2>
+            
+            <div class="cards-grid">
+                <div class="card">
+                    <h3 style="color: var(--cyan);">1. Verify Explicitly</h3>
+                    <p>Always authenticate and authorize based on all available data points including user identity, location, device health, service or workload, data classification, and anomalies.</p>
+                    <ul style="color: var(--text-muted); margin-top: 1rem; line-height: 1.8;">
+                        <li>Multi-factor authentication (MFA)</li>
+                        <li>Device health verification</li>
+                        <li>Behavioral analytics</li>
+                        <li>Contextual access policies</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 style="color: var(--cyan);">2. Least Privilege Access</h3>
+                    <p>Limit user access with Just-In-Time and Just-Enough-Access (JIT/JEA), risk-based adaptive policies, and data protection to help secure both data and productivity.</p>
+                    <ul style="color: var(--text-muted); margin-top: 1rem; line-height: 1.8;">
+                        <li>Role-based access control (RBAC)</li>
+                        <li>Time-limited permissions</li>
+                        <li>Micro-segmentation</li>
+                        <li>Privileged access management</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 style="color: var(--cyan);">3. Assume Breach</h3>
+                    <p>Minimize blast radius and segment access. Verify end-to-end encryption and use analytics to get visibility, drive threat detection, and improve defenses.</p>
+                    <ul style="color: var(--text-muted); margin-top: 1rem; line-height: 1.8;">
+                        <li>Network segmentation</li>
+                        <li>Continuous monitoring</li>
+                        <li>Threat detection & response</li>
+                        <li>Incident response planning</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2> Interactive Zero Trust Simulation</h2>
+            <div class="simulation-workspace">
+                <p style="color: var(--text-light); margin-bottom: 2rem;">
+                    Click on each node to see how Zero Trust verification works. Watch how access requests are verified at each step.
+                </p>
+                
+                <div class="network-diagram" id="networkDiagram">
+                    <div class="node" id="user" style="left: 50px; top: 180px;" onclick="simulateAccess('user')">👤
+                        
+                    </div>
+                    <div class="node" id="device" style="left: 200px; top: 100px;" onclick="simulateAccess('device')">💻
+                        
+                    </div>
+                    <div class="node" id="identity" style="left: 200px; top: 260px;" onclick="simulateAccess('identity')">🔑
+                        
+                    </div>
+                    <div class="node" id="policy" style="left: 400px; top: 180px;" onclick="simulateAccess('policy')">📋
+                        
+                    </div>
+                    <div class="node" id="data" style="left: 600px; top: 180px;" onclick="simulateAccess('data')">📁
+                        
+                    </div>
+                </div>
+
+                <div style="background: rgba(0, 229, 255, 0.05); border: 2px solid var(--cyan); border-radius: 15px; padding: 2rem; margin-top: 2rem;">
+                    <h3 style="color: var(--cyan); margin-bottom: 1rem;">Access Log:</h3>
+                    <div id="accessLog" style="color: var(--text-light); font-family: 'Courier New', monospace; font-size: 0.9rem; line-height: 1.8; max-height: 200px; overflow-y: auto;">
+                        Click a node to start verification process...
+                    </div>
+                </div>
+
+                <button class="btn btn-secondary" style="width: 100%; margin-top: 1.5rem;" onclick="resetSimulation()"> Reset Simulation</button>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2> Zero Trust Maturity Model</h2>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">
+                Organizations typically progress through these stages when implementing Zero Trust. Click each stage to learn more.
+            </p>
+            
+            <div class="maturity-level">
+                <div class="maturity-stage" onclick="showMaturityDetails('traditional')">
+                    <h3 style="color: #FF6B00; margin-bottom: 1rem;">Stage 0: Traditional</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Perimeter-based security with VPNs and firewalls</p>
+                </div>
+                <div class="maturity-stage" onclick="showMaturityDetails('initial')">
+                    <h3 style="color: #FFC100; margin-bottom: 1rem;">Stage 1: Initial</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Basic MFA and identity management</p>
+                </div>
+                <div class="maturity-stage" onclick="showMaturityDetails('advanced')">
+                    <h3 style="color: var(--cyan); margin-bottom: 1rem;">Stage 2: Advanced</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Policy-driven access, micro-segmentation</p>
+                </div>
+                <div class="maturity-stage" onclick="showMaturityDetails('optimal')">
+                    <h3 style="color: var(--green); margin-bottom: 1rem;">Stage 3: Optimal</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Full automation, AI-driven policies</p>
+                </div>
+            </div>
+
+            <div id="maturityDetails" style="background: rgba(0, 229, 255, 0.05); border: 2px solid var(--cyan); border-radius: 15px; padding: 2rem; margin-top: 2rem; display: none;">
+                <h3 id="maturityTitle" style="color: var(--cyan); margin-bottom: 1rem;"></h3>
+                <div id="maturityContent"></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2> Implementing Zero Trust</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3> Phase 1: Assess</h3>
+                    <ul style="color: var(--text-light); line-height: 1.8;">
+                        <li>Identify critical assets and data</li>
+                        <li>Map current security posture</li>
+                        <li>Assess user and device inventory</li>
+                        <li>Identify gaps in visibility</li>
+                        <li>Define success metrics</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3> Phase 2: Build</h3>
+                    <ul style="color: var(--text-light); line-height: 1.8;">
+                        <li>Deploy identity & access management</li>
+                        <li>Implement micro-segmentation</li>
+                        <li>Enable MFA everywhere</li>
+                        <li>Deploy endpoint protection</li>
+                        <li>Establish policy framework</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3> Phase 3: Optimize</h3>
+                    <ul style="color: var(--text-light); line-height: 1.8;">
+                        <li>Continuous monitoring & analytics</li>
+                        <li>Automate policy enforcement</li>
+                        <li>Refine access policies</li>
+                        <li>Integrate threat intelligence</li>
+                        <li>Regular security assessments</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="background: linear-gradient(135deg, rgba(0, 229, 255, 0.1), rgba(164, 0, 255, 0.1)); border: 2px solid var(--cyan); border-radius: 20px; padding: 3rem;">
+            <h2 style="text-align: center; margin-bottom: 2rem;"> Zero Trust Technologies</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+                <div>
+                    <h4 style="color: var(--cyan); margin-bottom: 1rem;">Identity & Access</h4>
+                    <ul style="color: var(--text-light); line-height: 1.8;">
+                        <li>Azure AD / Okta / Auth0</li>
+                        <li>FIDO2 / WebAuthn</li>
+                        <li>Privileged Access Management</li>
+                        <li>Conditional Access Policies</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 style="color: var(--cyan); margin-bottom: 1rem;">Network Security</h4>
+                    <ul style="color: var(--text-light); line-height: 1.8;">
+                        <li>Software-Defined Perimeter (SDP)</li>
+                        <li>Zero Trust Network Access (ZTNA)</li>
+                        <li>Micro-segmentation tools</li>
+                        <li>Cloud Security Posture Management</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 style="color: var(--cyan); margin-bottom: 1rem;">Endpoint & Data</h4>
+                    <ul style="color: var(--text-light); line-height: 1.8;">
+                        <li>Endpoint Detection & Response</li>
+                        <li>Mobile Device Management</li>
+                        <li>Data Loss Prevention</li>
+                        <li>Cloud Access Security Brokers</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 style="color: var(--cyan); margin-bottom: 1rem;">Visibility & Analytics</h4>
+                    <ul style="color: var(--text-light); line-height: 1.8;">
+                        <li>SIEM platforms</li>
+                        <li>User Behavior Analytics (UBA)</li>
+                        <li>Network Traffic Analysis</li>
+                        <li>Threat Intelligence Platforms</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>🛡️ CyberGuard</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                    Your trusted resource for cybersecurity education, frameworks, and best practices.
+                </p>
+                 <div class="social-links">
+                    <a href="https://github.com/"><img src="./Icons/Github-Logo-PNG-Photo-1.png" alt="GitHub" style="width: 35px; height: 20px; filter: brightness(0) invert(1);"></a>
+                    <a href="https://x.com/" title="Twitter">𝕏</a>
+                    <a href="https://in.linkedin.com/?mcid=6844056167778418689&src=go-pa&trk=sem-ga_campid.14650114788_asid.151761418307_crid.657403558715_kw.linkedin%20login_d.c_tid.kwd-12704335873_n.g_mt.e_geo.9040243&cid=&gclsrc=aw.ds&gad_source=1&gad_campaignid=14650114788&gbraid=0AAAAABKX7wGkDyHEA_MbDu4Zfag0E9xaq&gclid=CjwKCAiAjojLBhAlEiwAcjhrDuzTNnDEosiin0bM5mg-08UJ9raSASZWTRJl8L8twDVKIXPAUDeXWhoC9oIQAvD_BwE" title="LinkedIn">in</a>
+                    <a href="https://mail.google.com/mail/u/0/#inbox" title="Email">✉️</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="threats.html">Threats & Vulnerabilities</a></li>
+                    <li><a href="frameworks.html">Security Frameworks</a></li>
+                    <li><a href="learning.html">Learning Resources</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="tools.html">Tools & Utilities</a></li>
+                    <li><a href="blog.html">Blog & Updates</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-of-service.html">Terms & Conditions</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 CyberGuard - Cybersecurity Education Platform. All rights reserved. | Made with  for a secure digital world</p>
+        </div>
+    </footer>
+
+
+    <script src="cyber-background.js"></script>
+    <script src="script.js"></script>
+    <script>
+        let verificationStep = 0;
+        const accessLog = document.getElementById('accessLog');
+
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const color = type === 'success' ? 'var(--green)' : 
+                         type === 'error' ? '#FF6B00' : 
+                         type === 'warning' ? '#FFC100' : 'var(--cyan)';
+            accessLog.innerHTML += `<div style="color: ${color};">[${timestamp}] ${message}</div>`;
+            accessLog.scrollTop = accessLog.scrollHeight;
+        }
+
+        function simulateAccess(nodeId) {
+            const node = document.getElementById(nodeId);
+            node.classList.add('checking');
+
+            setTimeout(() => {
+                node.classList.remove('checking');
+                
+                const isAllowed = Math.random() > 0.2;
+                
+                if (isAllowed) {
+                    node.classList.add('verified');
+                    
+                    switch(nodeId) {
+                        case 'user':
+                            log('✓ User identity verified via MFA', 'success');
+                            log('→ Checking device health...', 'info');
+                            break;
+                        case 'device':
+                            log('✓ Device compliant: OS updated, EDR active', 'success');
+                            log('→ Validating identity credentials...', 'info');
+                            break;
+                        case 'identity':
+                            log('✓ Identity authenticated: john.doe@company.com', 'success');
+                            log('→ Evaluating access policies...', 'info');
+                            break;
+                        case 'policy':
+                            log('✓ Access policy matched: RBAC verified', 'success');
+                            log('✓ Risk score: LOW (location, time, behavior normal)', 'success');
+                            log('→ Granting access to data...', 'info');
+                            break;
+                        case 'data':
+                            log('✓ Access GRANTED to Sales Reports', 'success');
+                            log('✓ Encryption enabled, session monitored', 'success');
+                            log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'info');
+                            break;
+                    }
+                } else {
+                    node.classList.add('blocked');
+                    log(`✗ ${nodeId.toUpperCase()} verification FAILED`, 'error');
+                    log('✗ Access DENIED - See administrator', 'error');
+                    log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'error');
+                }
+            }, 1500);
+        }
+
+        function resetSimulation() {
+            document.querySelectorAll('.node').forEach(node => {
+                node.className = 'node';
+            });
+            accessLog.innerHTML = 'Click a node to start verification process...';
+            verificationStep = 0;
+        }
+
+        const maturityData = {
+            traditional: {
+                title: 'Stage 0: Traditional Security',
+                content: `
+                    <h4 style="color: #FF6B00; margin-bottom: 1rem;">Characteristics:</h4>
+                    <ul style="color: var(--text-light); line-height: 1.8;">
+                        <li>Perimeter-based security model</li>
+                        <li>VPN for remote access</li>
+                        <li>Implicit trust within network</li>
+                        <li>Basic firewall rules</li>
+                        <li>Limited visibility into user activity</li>
+                    </ul>
+                    <h4 style="color: #FF6B00; margin: 1.5rem 0 1rem;">Risks:</h4>
+                    <ul style="color: var(--text-muted); line-height: 1.8;">
+                        <li>Vulnerable to lateral movement</li>
+                        <li>Large attack surface</li>
+                        <li>Difficult to detect insider threats</li>
+                        <li>Compliance challenges</li>
+                    </ul>
+                `
+            },
+            initial: {
+                title: 'Stage 1: Initial Zero Trust',
+                content: `
+                    <h4 style="color: #FFC100; margin-bottom: 1rem;">Characteristics:</h4>
+                    <ul style="color: var(--text-light); line-height: 1.8;">
+                        <li>MFA deployed for critical systems</li>
+                        <li>Basic identity and access management</li>
+                        <li>Some network segmentation</li>
+                        <li>Cloud security basics</li>
+                        <li>Starting to log and monitor</li>
+                    </ul>
+                    <h4 style="color: #FFC100; margin: 1.5rem 0 1rem;">Next Steps:</h4>
+                    <ul style="color: var(--text-muted); line-height: 1.8;">
+                        <li>Extend MFA to all applications</li>
+                        <li>Implement conditional access policies</li>
+                        <li>Deploy endpoint protection</li>
+                        <li>Enhance logging and monitoring</li>
+                    </ul>
+                `
+            },
+            advanced: {
+                title: 'Stage 2: Advanced Zero Trust',
+                content: `
+                    <h4 style="color: var(--cyan); margin-bottom: 1rem;">Characteristics:</h4>
+                    <ul style="color: var(--text-light); line-height: 1.8;">
+                        <li>Policy-driven access control</li>
+                        <li>Micro-segmentation implemented</li>
+                        <li>Continuous authentication and authorization</li>
+                        <li>Device health verification</li>
+                        <li>Integration with threat intelligence</li>
+                    </ul>
+                    <h4 style="color: var(--cyan); margin: 1.5rem 0 1rem;">Capabilities:</h4>
+                    <ul style="color: var(--text-muted); line-height: 1.8;">
+                        <li>Real-time risk assessment</li>
+                        <li>Automated policy enforcement</li>
+                        <li>Advanced threat detection</li>
+                        <li>Comprehensive visibility</li>
+                    </ul>
+                `
+            },
+            optimal: {
+                title: 'Stage 3: Optimal Zero Trust',
+                content: `
+                    <h4 style="color: var(--green); margin-bottom: 1rem;">Characteristics:</h4>
+                    <ul style="color: var(--text-light); line-height: 1.8;">
+                        <li>Fully automated policy management</li>
+                        <li>AI/ML-driven threat detection</li>
+                        <li>Dynamic risk-based access</li>
+                        <li>Predictive security analytics</li>
+                        <li>Zero trust extended to all resources</li>
+                    </ul>
+                    <h4 style="color: var(--green); margin: 1.5rem 0 1rem;">Benefits:</h4>
+                    <ul style="color: var(--text-muted); line-height: 1.8;">
+                        <li>Minimal attack surface</li>
+                        <li>Rapid threat response</li>
+                        <li>Optimized user experience</li>
+                        <li>Strong compliance posture</li>
+                        <li>Continuous improvement</li>
+                    </ul>
+                `
+            }
+        };
+
+        function showMaturityDetails(stage) {
+            const details = maturityData[stage];
+            document.getElementById('maturityTitle').textContent = details.title;
+            document.getElementById('maturityContent').innerHTML = details.content;
+            document.getElementById('maturityDetails').style.display = 'block';
+            
+            document.querySelectorAll('.maturity-stage').forEach(s => s.classList.remove('active'));
+            event.target.closest('.maturity-stage').classList.add('active');
+        }
+    </script>
+</body>
+</html>

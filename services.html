@@ -1,0 +1,608 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CyberGuard Services - Penetration Testing, Managed Detection & Response (MDR), vCISO, and Security Training.">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Services - CyberGuard</title>
+    <link rel="stylesheet" href="style.css?v=3.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/azonix" rel="stylesheet">
+    <style>
+        .hero h1 {
+            font-family: 'Azonix', sans-serif;
+            font-size: 3.5rem;
+            line-height: 1.5;
+            color: #ffffff;
+            text-shadow: 0 0 10px #00e6e6, 0 0 20px #00e6e6;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Cyber Background -->
+    <div id="bg-container" class="bg-container">
+        <canvas id="cyber-canvas"></canvas>
+        <div class="cyber-grid-overlay"></div>
+        <div class="cyber-glow-effect"></div>
+    </div>
+    
+    <!-- Navigation -->
+        <nav>
+        <div class="navbar">
+            <div class="logo">🛡️ CyberGuard</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="threats.html">Threats</a></li>
+                <li><a href="threat-map.html">Threat Map</a></li>
+                <li><a href="frameworks.html">Frameworks</a></li>
+                <li><a href="learning.html">Learn</a></li>
+                <li><a href="tools.html">Tools</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="chatbot.html">AI Chat</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="navbar-right">
+                <button id="theme-toggle" class="theme-toggle-btn" title="Toggle theme">🌙</button>
+                <button id="hamburger-btn" class="hamburger-btn" title="Menu" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hamburger Menu -->
+    <div id="hamburger-overlay" class="hamburger-overlay"></div>
+    <div id="hamburger-menu" class="hamburger-menu">
+        <button id="hamburger-close" class="hamburger-close">✕</button>
+        <ul class="hamburger-menu-list">
+            <li><a href="index.html" class="hamburger-link">Home</a></li>
+            <li><a href="about.html" class="hamburger-link">About Us</a></li>
+            <li><a href="case-studies.html" class="hamburger-link">Case Studies</a></li>
+            <li><a href="community.html" class="hamburger-link">Community</a></li>
+            <li><a href="privacy-policy.html" class="hamburger-link">Privacy Policy</a></li>
+            <li><a href="terms-of-service.html" class="hamburger-link">Terms of Service</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="cyber-grid"></div>
+        <div class="hero-content">
+            <h1>Professional Security Services</h1>
+            <p>Expert-led solutions tailored to your organization's security needs</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Intro -->
+        <section class="section">
+            <p style="text-align: center; color: var(--text-muted); max-width: 800px; margin: 0 auto; font-size: 1.1rem; line-height: 1.8;">
+                Beyond education, CyberGuard offers professional services delivered by certified security experts. From penetration testing to 24/7 threat monitoring, we help organizations identify vulnerabilities and defend against real-world attacks.
+            </p>
+        </section>
+
+        <!-- Services Grid -->
+        <section class="section">
+            <h2>Our Service Offerings</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto;">
+                
+                <!-- Penetration Testing -->
+                <div style="background: rgba(26, 39, 68, 0.6); border: 2px solid var(--cyan); border-radius: 20px; padding: 2rem; transition: all 0.3s ease;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;"></div>
+                    <h3 style="color: var(--cyan); margin-bottom: 1rem;">Penetration Testing</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.7;">
+                        Authorized security assessments to identify vulnerabilities before attackers do. We test networks, applications, and security controls to provide actionable recommendations.
+                    </p>
+                    <div style="background: rgba(0, 229, 255, 0.1); border-radius: 10px; padding: 1rem; margin-bottom: 1.5rem;">
+                        <p style="color: var(--text-light); margin-bottom: 0.5rem;"><strong>Includes:</strong></p>
+                        <ul style="color: var(--text-muted); list-style: none; margin: 0; padding: 0;">
+                            <li>✓ Network penetration tests</li>
+                            <li>✓ Web app security assessments</li>
+                            <li>✓ API testing</li>
+                            <li>✓ Social engineering simulations</li>
+                            <li>✓ Detailed report & remediation plan</li>
+                        </ul>
+                    </div>
+                    <div style="font-size: 0.9rem; color: var(--purple); font-weight: 600;">Starting at ₹50,000</div>
+                </div>
+
+                <!-- MDR Service -->
+                <div style="background: rgba(26, 39, 68, 0.6); border: 2px solid var(--purple); border-radius: 20px; padding: 2rem; transition: all 0.3s ease;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;"></div>
+                    <h3 style="color: var(--purple); margin-bottom: 1rem;">Managed Detection & Response (MDR)</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.7;">
+                        24/7 threat monitoring and incident response. Our SOC team watches your environment, detects anomalies, and responds to threats in real-time.
+                    </p>
+                    <div style="background: rgba(164, 0, 255, 0.1); border-radius: 10px; padding: 1rem; margin-bottom: 1.5rem;">
+                        <p style="color: var(--text-light); margin-bottom: 0.5rem;"><strong>Includes:</strong></p>
+                        <ul style="color: var(--text-muted); list-style: none; margin: 0; padding: 0;">
+                            <li>✓ 24/7 security monitoring</li>
+                            <li>✓ Threat detection & analysis</li>
+                            <li>✓ Rapid incident response</li>
+                            <li>✓ Threat intelligence feeds</li>
+                            <li>✓ Weekly/monthly reports</li>
+                        </ul>
+                    </div>
+                    <div style="font-size: 0.9rem; color: var(--cyan); font-weight: 600;">From ₹20,000/month</div>
+                </div>
+
+                <!-- vCISO Service -->
+                <div style="background: rgba(26, 39, 68, 0.6); border: 2px solid var(--green); border-radius: 20px; padding: 2rem; transition: all 0.3s ease;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;"></div>
+                    <h3 style="color: var(--green); margin-bottom: 1rem;">Virtual Chief Information Security Officer (vCISO)</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.7;">
+                        Get C-level security leadership without the full-time cost. Our vCISO service provides strategic guidance, policy development, and compliance management.
+                    </p>
+                    <div style="background: rgba(0, 255, 136, 0.1); border-radius: 10px; padding: 1rem; margin-bottom: 1.5rem;">
+                        <p style="color: var(--text-light); margin-bottom: 0.5rem;"><strong>Includes:</strong></p>
+                        <ul style="color: var(--text-muted); list-style: none; margin: 0; padding: 0;">
+                            <li>✓ Security strategy development</li>
+                            <li>✓ Policy & compliance management</li>
+                            <li>✓ Risk assessments</li>
+                            <li>✓ Board reporting & guidance</li>
+                            <li>✓ 10-20 hours/month consultation</li>
+                        </ul>
+                    </div>
+                    <div style="font-size: 0.9rem; color: var(--purple); font-weight: 600;">From ₹30,000/month</div>
+                </div>
+
+                <!-- Security Training -->
+                <div style="background: rgba(26, 39, 68, 0.6); border: 2px solid var(--warning); border-radius: 20px; padding: 2rem; transition: all 0.3s ease;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;"></div>
+                    <h3 style="color: var(--warning); margin-bottom: 1rem;">Security Awareness Training</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.7;">
+                        Custom training programs for your employees. Build a security-conscious culture with engaging workshops, phishing simulations, and ongoing education.
+                    </p>
+                    <div style="background: rgba(255, 107, 0, 0.1); border-radius: 10px; padding: 1rem; margin-bottom: 1.5rem;">
+                        <p style="color: var(--text-light); margin-bottom: 0.5rem;"><strong>Includes:</strong></p>
+                        <ul style="color: var(--text-muted); list-style: none; margin: 0; padding: 0;">
+                            <li>✓ Custom training modules</li>
+                            <li>✓ Phishing simulations</li>
+                            <li>✓ Interactive workshops</li>
+                            <li>✓ Compliance training (GDPR, HIPAA)</li>
+                            <li>✓ Metrics & reporting</li>
+                        </ul>
+                    </div>
+                    <div style="font-size: 0.9rem; color: var(--cyan); font-weight: 600;">From ₹5,000/year per employee</div>
+                </div>
+
+                <!-- Security Audit -->
+                <div style="background: rgba(26, 39, 68, 0.6); border: 2px solid var(--cyan); border-radius: 20px; padding: 2rem; transition: all 0.3s ease;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;"></div>
+                    <h3 style="color: var(--cyan); margin-bottom: 1rem;">Security Audit & Compliance</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.7;">
+                        Comprehensive audits against frameworks like ISO 27001, NIST, PCI-DSS, and HIPAA. We help you achieve and maintain compliance certifications.
+                    </p>
+                    <div style="background: rgba(0, 229, 255, 0.1); border-radius: 10px; padding: 1rem; margin-bottom: 1.5rem;">
+                        <p style="color: var(--text-light); margin-bottom: 0.5rem;"><strong>Includes:</strong></p>
+                        <ul style="color: var(--text-muted); list-style: none; margin: 0; padding: 0;">
+                            <li>✓ Framework assessment</li>
+                            <li>✓ Gap analysis</li>
+                            <li>✓ Remediation roadmap</li>
+                            <li>✓ Ongoing compliance support</li>
+                            <li>✓ Certification preparation</li>
+                        </ul>
+                    </div>
+                    <div style="font-size: 0.9rem; color: var(--purple); font-weight: 600;">Starting at ₹50,000</div>
+                </div>
+
+                <!-- Incident Response -->
+                <div style="background: rgba(26, 39, 68, 0.6); border: 2px solid var(--purple); border-radius: 20px; padding: 2rem; transition: all 0.3s ease;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;"></div>
+                    <h3 style="color: var(--purple); margin-bottom: 1rem;">Incident Response & Forensics</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.7;">
+                        When you need help now. Our incident response team provides rapid containment, investigation, and recovery from security breaches.
+                    </p>
+                    <div style="background: rgba(164, 0, 255, 0.1); border-radius: 10px; padding: 1rem; margin-bottom: 1.5rem;">
+                        <p style="color: var(--text-light); margin-bottom: 0.5rem;"><strong>Includes:</strong></p>
+                        <ul style="color: var(--text-muted); list-style: none; margin: 0; padding: 0;">
+                            <li>✓ 24/7 emergency hotline</li>
+                            <li>✓ Rapid containment</li>
+                            <li>✓ Forensic investigation</li>
+                            <li>✓ Root cause analysis</li>
+                            <li>✓ Recovery assistance</li>
+                        </ul>
+                    </div>
+                    <div style="font-size: 0.9rem; color: var(--cyan); font-weight: 600;">Hourly rates available</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Comparison -->
+        <section class="section">
+            <h2>Service Comparison</h2>
+            <div style="overflow-x: auto; max-width: 1200px; margin: 0 auto;">
+                <table style="width: 100%; border-collapse: collapse; color: var(--text-light);">
+                    <thead>
+                        <tr style="background: rgba(0, 229, 255, 0.1); border-bottom: 2px solid var(--cyan);">
+                            <th style="padding: 1rem; text-align: left; color: var(--cyan);">Feature</th>
+                            <th style="padding: 1rem; text-align: center;">Pen Testing</th>
+                            <th style="padding: 1rem; text-align: center;">MDR</th>
+                            <th style="padding: 1rem; text-align: center;">vCISO</th>
+                            <th style="padding: 1rem; text-align: center;">Training</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid rgba(0, 229, 255, 0.2);">
+                            <td style="padding: 1rem;">Vulnerability Identification</td>
+                            <td style="padding: 1rem; text-align: center;">✓</td>
+                            <td style="padding: 1rem; text-align: center;">✓</td>
+                            <td style="padding: 1rem; text-align: center;">✓</td>
+                            <td style="padding: 1rem; text-align: center;">✓</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(0, 229, 255, 0.2);">
+                            <td style="padding: 1rem;">24/7 Monitoring</td>
+                            <td style="padding: 1rem; text-align: center;">-</td>
+                            <td style="padding: 1rem; text-align: center; color: var(--green);">✓</td>
+                            <td style="padding: 1rem; text-align: center;">✓</td>
+                            <td style="padding: 1rem; text-align: center;">-</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(0, 229, 255, 0.2);">
+                            <td style="padding: 1rem;">Incident Response</td>
+                            <td style="padding: 1rem; text-align: center;">-</td>
+                            <td style="padding: 1rem; text-align: center; color: var(--green);">✓</td>
+                            <td style="padding: 1rem; text-align: center;">✓</td>
+                            <td style="padding: 1rem; text-align: center;">-</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(0, 229, 255, 0.2);">
+                            <td style="padding: 1rem;">Employee Training</td>
+                            <td style="padding: 1rem; text-align: center;">-</td>
+                            <td style="padding: 1rem; text-align: center;">-</td>
+                            <td style="padding: 1rem; text-align: center;">✓</td>
+                            <td style="padding: 1rem; text-align: center; color: var(--green);">✓</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 1rem;">Strategic Guidance</td>
+                            <td style="padding: 1rem; text-align: center;">-</td>
+                            <td style="padding: 1rem; text-align: center;">-</td>
+                            <td style="padding: 1rem; text-align: center; color: var(--green);">✓</td>
+                            <td style="padding: 1rem; text-align: center;">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Process -->
+        <section class="section">
+            <h2>Our Service Process</h2>
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div style="display: grid; gap: 2rem;">
+                    <div style="display: flex; gap: 2rem; align-items: flex-start;">
+                        <div style="background: var(--cyan); color: var(--primary-dark); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.5rem; flex-shrink: 0;">1</div>
+                        <div>
+                            <h3 style="color: var(--cyan); margin-bottom: 0.5rem;">Consultation</h3>
+                            <p style="color: var(--text-muted);">We understand your organization, environment, and security goals through an in-depth discovery call.</p>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 2rem; align-items: flex-start;">
+                        <div style="background: var(--purple); color: var(--primary-dark); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.5rem; flex-shrink: 0;">2</div>
+                        <div>
+                            <h3 style="color: var(--purple); margin-bottom: 0.5rem;">Planning & Proposal</h3>
+                            <p style="color: var(--text-muted);">We create a customized plan with scope, timeline, and pricing. Full transparency—no hidden fees.</p>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 2rem; align-items: flex-start;">
+                        <div style="background: var(--green); color: var(--primary-dark); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.5rem; flex-shrink: 0;">3</div>
+                        <div>
+                            <h3 style="color: var(--green); margin-bottom: 0.5rem;">Execution</h3>
+                            <p style="color: var(--text-muted);">Our expert team delivers the service with regular updates and communication. We coordinate with your team seamlessly.</p>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 2rem; align-items: flex-start;">
+                        <div style="background: var(--warning); color: var(--primary-dark); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.5rem; flex-shrink: 0;">4</div>
+                        <div>
+                            <h3 style="color: var(--warning); margin-bottom: 0.5rem;">Reporting & Remediation</h3>
+                            <p style="color: var(--text-muted);">Comprehensive reports with findings, risk levels, and actionable remediation steps. Executive summaries included.</p>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 2rem; align-items: flex-start;">
+                        <div style="background: var(--cyan); color: var(--primary-dark); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.5rem; flex-shrink: 0;">5</div>
+                        <div>
+                            <h3 style="color: var(--cyan); margin-bottom: 0.5rem;">Follow-Up & Support</h3>
+                            <p style="color: var(--text-muted);">We provide ongoing support and re-testing to ensure vulnerabilities are resolved and security improves.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section id="assessment" class="section" style="background: linear-gradient(135deg, rgba(0, 229, 255, 0.08), rgba(164, 0, 255, 0.08)); border: 2px solid var(--cyan);">
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <h2 style="margin-bottom: 1.5rem;">Ready to Secure Your Organization?</h2>
+                <p style="color: var(--text-light); margin-bottom: 2rem; font-size: 1.1rem; line-height: 1.8;">Schedule a free 30-minute consultation with our security experts to discuss your needs and find the perfect service for you. <strong style="color: var(--green);">No commitment required.</strong></p>
+                <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="contact.html" class="btn btn-primary" style="font-size: 1rem; padding: 1rem 2.5rem;"> Book Assessment</a>
+                    <a href="contact.html" class="btn btn-secondary" style="font-size: 1rem; padding: 1rem 2.5rem;"> Schedule Call</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Secure Client Portal Teaser -->
+        <section class="section" style="background: linear-gradient(135deg, rgba(0, 255, 136, 0.1) 0%, rgba(0, 229, 255, 0.1) 100%); border: 2px dashed var(--green); border-radius: 20px; padding: 3rem;">
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
+                    <!-- Left Content -->
+                    <div>
+                        <h2 style="color: var(--green); margin-bottom: 1.5rem; font-size: 1.8rem;"> Secure Client Portal</h2>
+                        <p style="color: var(--text-light); margin-bottom: 1.5rem; line-height: 1.8; font-size: 1.05rem;">
+                            <strong>Authorized clients can now access their security assessments, test results, and recommendations in real-time through our secure portal.</strong>
+                        </p>
+                        <ul style="color: var(--text-light); margin-bottom: 2rem; line-height: 2.2; list-style: none;">
+                            <li><strong>✓ View Assessment Reports</strong> - Detailed findings and remediation guidance</li>
+                            <li><strong>✓ Track Remediation Status</strong> - Real-time progress on security fixes</li>
+                            <li><strong>✓ Schedule Re-tests</strong> - Book follow-up assessments easily</li>
+                            <li><strong>✓ Download Certificates</strong> - Compliance & certification documents</li>
+                            <li><strong>✓ Request Support</strong> - Direct access to your security team</li>
+                        </ul>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <a href="contact.html" class="btn btn-primary" style="padding: 0.9rem 1.8rem;"> Request Portal Access</a>
+                            <a href="#" class="btn btn-secondary" style="padding: 0.9rem 1.8rem;"> Learn More</a>
+                        </div>
+                    </div>
+                    <!-- Right Visual -->
+                    <div style="text-align: center;">
+                        <div style="background: rgba(26, 39, 68, 0.9); border: 3px solid var(--green); border-radius: 15px; padding: 2.5rem; box-shadow: 0 0 40px rgba(0, 255, 136, 0.2);">
+                            <div style="font-size: 4rem; margin-bottom: 1rem;"></div>
+                            <h3 style="color: var(--green); margin-bottom: 1rem; font-size: 1.3rem;">Client Portal</h3>
+                            <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem;">
+                                Access your security data anytime, anywhere with bank-level encryption.
+                            </p>
+                            <div style="background: rgba(0, 255, 136, 0.1); border: 1px solid var(--green); border-radius: 10px; padding: 1.5rem; margin-bottom: 1rem;">
+                                <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 0.5rem;">✓ 256-bit AES Encryption</p>
+                                <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 0.5rem;">✓ Multi-factor Authentication</p>
+                                <p style="color: var(--text-light); font-size: 0.9rem;">✓ SOC 2 Type II Compliant</p>
+                            </div>
+                            <p style="color: var(--text-muted); font-size: 0.85rem;">
+                                <strong>Are you a client?</strong> Use your portal credentials to log in.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+     <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>🛡️ CyberGuard</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                    Your trusted resource for cybersecurity education, frameworks, and best practices.
+                </p>
+                <div class="social-links">
+                    <a href="https://github.com/"><img src="./Icons/Github-Logo-PNG-Photo-1.png" alt="GitHub" style="width: 35px; height: 20px; filter: brightness(0) invert(1);"></a>
+                    <a href="https://x.com/" title="Twitter">𝕏</a>
+                    <a href="https://in.linkedin.com/?mcid=6844056167778418689&src=go-pa&trk=sem-ga_campid.14650114788_asid.151761418307_crid.657403558715_kw.linkedin%20login_d.c_tid.kwd-12704335873_n.g_mt.e_geo.9040243&cid=&gclsrc=aw.ds&gad_source=1&gad_campaignid=14650114788&gbraid=0AAAAABKX7wGkDyHEA_MbDu4Zfag0E9xaq&gclid=CjwKCAiAjojLBhAlEiwAcjhrDuzTNnDEosiin0bM5mg-08UJ9raSASZWTRJl8L8twDVKIXPAUDeXWhoC9oIQAvD_BwE" title="LinkedIn">in</a>
+                    <a href="https://mail.google.com/mail/u/0/#inbox" title="Email">✉️</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="threats.html">Threats & Vulnerabilities</a></li>
+                    <li><a href="frameworks.html">Security Frameworks</a></li>
+                    <li><a href="learning.html">Learning Resources</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="tools.html">Tools & Utilities</a></li>
+                    <li><a href="blog.html">Blog & Updates</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-of-service.html">Terms & Conditions</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 CyberGuard - Cybersecurity Education Platform. All rights reserved. | Made with  for a secure digital world</p>
+        </div>
+    </footer>
+
+
+    <!-- Exit Intent Pop-up for Free Security Scan -->
+    <div id="exitIntentModal" class="exit-intent-modal">
+        <div class="exit-intent-content">
+            <button id="closeExitIntent" class="exit-intent-close">✕</button>
+            <h2> Wait! Get a Free Security Scan</h2>
+            <p>Before you go, discover your organization's security vulnerabilities with our <span class="highlight">complimentary security assessment</span>—no credit card required.</p>
+            <div class="exit-intent-buttons">
+                <button id="startScanBtn" class="exit-intent-btn exit-intent-btn-primary"> Start Free Scan</button>
+                <button onclick="document.getElementById('exitIntentModal').style.display='none';" class="exit-intent-btn exit-intent-btn-secondary">I'll think about it</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Banner for GDPR/CCPA Compliance -->
+    <div id="cookieBanner" class="cookie-banner">
+        <div class="cookie-banner-content">
+            <h3> Cookie Consent</h3>
+            <p>We use cookies to enhance your experience, analyze site traffic, and serve personalized content. By continuing to use this site, you consent to our <a href="#privacy">Privacy Policy</a> and <a href="#cookies">Cookie Policy</a>. You can change your consent preferences at any time.</p>
+        </div>
+        <div class="cookie-banner-buttons">
+            <button id="rejectCookies" class="cookie-btn cookie-btn-reject">Reject</button>
+            <button id="acceptCookies" class="cookie-btn cookie-btn-accept">Accept All</button>
+        </div>
+    </div>
+
+    <!-- JSON-LD Schema Markup for Services -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://cyberguard.com"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Services",
+                "item": "https://cyberguard.com/services.html"
+            }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "CyberGuard Professional Security Services",
+        "description": "Expert-led cybersecurity solutions including penetration testing, MDR, vCISO, and security training.",
+        "url": "https://cyberguard.com/services.html",
+        "image": "https://cyberguard.com/logo.png",
+        "priceRange": "Contact for pricing",
+        "areaServed": "Worldwide",
+        "availableChannel": {
+            "@type": "ServiceChannel",
+            "serviceUrl": "https://cyberguard.com/services.html",
+            "availableLanguage": ["en"]
+        },
+        "serviceType": [
+            "Penetration Testing",
+            "Managed Detection & Response (MDR)",
+            "Virtual CISO (vCISO)",
+            "Security Awareness Training",
+            "Incident Response",
+            "Vulnerability Assessment"
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    [
+        {
+            "@context": "https://schema.org/",
+            "@type": "Service",
+            "name": "Penetration Testing",
+            "description": "Expert-led penetration testing services to identify vulnerabilities in your systems and applications before attackers do.",
+            "provider": {
+                "@type": "Organization",
+                "name": "CyberGuard",
+                "url": "https://cyberguard.com"
+            },
+            "areaServed": "Worldwide",
+            "availableChannel": {
+                "@type": "ServiceChannel",
+                "serviceUrl": "https://cyberguard.com/services.html#penetration"
+            }
+        },
+        {
+            "@context": "https://schema.org/",
+            "@type": "Service",
+            "name": "Managed Detection & Response (MDR)",
+            "description": "24/7 monitoring, detection, and rapid response to cyber threats with our managed security operations center.",
+            "provider": {
+                "@type": "Organization",
+                "name": "CyberGuard",
+                "url": "https://cyberguard.com"
+            },
+            "areaServed": "Worldwide",
+            "availableChannel": {
+                "@type": "ServiceChannel",
+                "serviceUrl": "https://cyberguard.com/services.html#mdr"
+            }
+        },
+        {
+            "@context": "https://schema.org/",
+            "@type": "Service",
+            "name": "Virtual CISO (vCISO)",
+            "description": "Strategic cybersecurity leadership and governance consulting from experienced Chief Information Security Officers.",
+            "provider": {
+                "@type": "Organization",
+                "name": "CyberGuard",
+                "url": "https://cyberguard.com"
+            },
+            "areaServed": "Worldwide",
+            "availableChannel": {
+                "@type": "ServiceChannel",
+                "serviceUrl": "https://cyberguard.com/services.html#vciso"
+            }
+        },
+        {
+            "@context": "https://schema.org/",
+            "@type": "Service",
+            "name": "Incident Response",
+            "description": "Expert incident response teams to rapidly contain, investigate, and remediate security incidents.",
+            "provider": {
+                "@type": "Organization",
+                "name": "CyberGuard",
+                "url": "https://cyberguard.com"
+            },
+            "areaServed": "Worldwide",
+            "availableChannel": {
+                "@type": "ServiceChannel",
+                "serviceUrl": "https://cyberguard.com/services.html#incident"
+            }
+        },
+        {
+            "@context": "https://schema.org/",
+            "@type": "Service",
+            "name": "Security Awareness Training",
+            "description": "Comprehensive security awareness and phishing training programs for your workforce.",
+            "provider": {
+                "@type": "Organization",
+                "name": "CyberGuard",
+                "url": "https://cyberguard.com"
+            },
+            "areaServed": "Worldwide",
+            "availableChannel": {
+                "@type": "ServiceChannel",
+                "serviceUrl": "https://cyberguard.com/services.html#training"
+            }
+        }
+    ]
+    </script>
+
+    <script src="script.js?v=3.0"></script>
+    <script src="cyber-background.js?v=3.0"></script>
+    
+    <!-- Service Worker Registration for PWA -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => {
+                        console.log('Service Worker registered:', registration);
+                    })
+                    .catch(error => {
+                        console.log('Service Worker registration failed:', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,412 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact CyberGuard - Get in touch for consulting, services, partnerships, or questions.">
+    <title>Contact Us - CyberGuard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/azonix" rel="stylesheet">
+    <style>
+        .hero h1 {
+            font-family: 'Azonix', sans-serif;
+            font-size: 3.5rem;
+            line-height: 1.5;
+            color: #ffffff;
+            text-shadow: 0 0 10px #00e6e6, 0 0 20px #00e6e6;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Cyber Background -->
+    <div id="bg-container" class="bg-container">
+        <canvas id="cyber-canvas"></canvas>
+        <div class="cyber-grid-overlay"></div>
+        <div class="cyber-glow-effect"></div>
+    </div>
+    
+    <!-- Navigation -->
+        <nav>
+        <div class="navbar">
+            <div class="logo">🛡️ CyberGuard</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="threats.html">Threats</a></li>
+                <li><a href="threat-map.html">Threat Map</a></li>
+                <li><a href="frameworks.html">Frameworks</a></li>
+                <li><a href="learning.html">Learn</a></li>
+                <li><a href="tools.html">Tools</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="chatbot.html">AI Chat</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="navbar-right">
+                <button id="theme-toggle" class="theme-toggle-btn" title="Toggle theme">🌙</button>
+                <button id="hamburger-btn" class="hamburger-btn" title="Menu" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hamburger Menu -->
+    <div id="hamburger-overlay" class="hamburger-overlay"></div>
+    <div id="hamburger-menu" class="hamburger-menu">
+        <button id="hamburger-close" class="hamburger-close">✕</button>
+        <ul class="hamburger-menu-list">
+            <li><a href="index.html" class="hamburger-link">Home</a></li>
+            <li><a href="about.html" class="hamburger-link">About Us</a></li>
+            <li><a href="case-studies.html" class="hamburger-link">Case Studies</a></li>
+            <li><a href="community.html" class="hamburger-link">Community</a></li>
+            <li><a href="privacy-policy.html" class="hamburger-link">Privacy Policy</a></li>
+            <li><a href="terms-of-service.html" class="hamburger-link">Terms of Service</a></li>
+        </ul>
+    </div>
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="cyber-grid"></div>
+        <div class="hero-content">
+            <h1>Get In Touch</h1>
+            <p>We're here to help with your cybersecurity needs</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Contact Info + Form Grid -->
+        <section class="section">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; max-width: 1200px; margin: 0 auto;">
+                
+                <!-- Left Side: Contact Info -->
+                <div>
+                    <h2 style="margin-bottom: 2rem;">Contact Information</h2>
+                    
+                    <!-- Email -->
+                    <div style="background: rgba(26, 39, 68, 0.6); border: 1px solid var(--cyan); border-radius: 15px; padding: 2rem; margin-bottom: 1.5rem;">
+                        <div style="font-size: 2rem; margin-bottom: 1rem;"></div>
+                        <h3 style="color: var(--cyan); margin-bottom: 0.5rem;">Email</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 0.8rem;">General inquiries:</p>
+                        <a href="mailto:hello@cyberguard.io" style="color: var(--cyan); font-weight: 600; text-decoration: none;">hello@cyberguard.io</a>
+                        <p style="color: var(--text-muted); margin-top: 1rem; margin-bottom: 0.8rem;">Sales & Services:</p>
+                        <a href="mailto:sales@cyberguard.io" style="color: var(--cyan); font-weight: 600; text-decoration: none;">sales@cyberguard.io</a>
+                        <p style="color: var(--text-muted); margin-top: 1rem; margin-bottom: 0.8rem;">Security Issues:</p>
+                        <a href="mailto:security@cyberguard.io" style="color: var(--cyan); font-weight: 600; text-decoration: none;">security@cyberguard.io</a>
+                    </div>
+
+                    <!-- Phone -->
+                    <div style="background: rgba(26, 39, 68, 0.6); border: 1px solid var(--purple); border-radius: 15px; padding: 2rem; margin-bottom: 1.5rem;">
+                        <div style="font-size: 2rem; margin-bottom: 1rem;"></div>
+                        <h3 style="color: var(--purple); margin-bottom: 0.5rem;">Phone</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 0.8rem;">Business Hours (Mon-Fri 9AM-6PM EST):</p>
+                        <a href="tel:+1-800-CYBER-01" style="color: var(--cyan); font-weight: 600; text-decoration: none; font-size: 1.1rem;">+1 (800) CYBER-01</a>
+                        <p style="color: var(--text-muted); margin-top: 1rem; margin-bottom: 0.8rem;">Emergency Hotline (24/7):</p>
+                        <a href="tel:+1-800-CYBER-911" style="color: var(--warning); font-weight: 600; text-decoration: none; font-size: 1.1rem;">+1 (800) CYBER-911</a>
+                    </div>
+
+                    <!-- Address -->
+                    <div style="background: rgba(26, 39, 68, 0.6); border: 1px solid var(--green); border-radius: 15px; padding: 2rem;">
+                        <div style="font-size: 2rem; margin-bottom: 1rem;"></div>
+                        <h3 style="color: var(--green); margin-bottom: 1rem;">Headquarters</h3>
+                        <p style="color: var(--text-light); line-height: 1.8;">
+                            <strong>CyberGuard Inc.</strong><br>
+                            123 Security Boulevard<br>
+                            San Francisco, CA 94105<br>
+                            United States
+                        </p>
+                        <p style="color: var(--text-muted); margin-top: 1rem; font-size: 0.9rem;">
+                            We also have offices in New York, London, Singapore, and Austin.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right Side: Contact Form -->
+                <div>
+                    <h2 style="margin-bottom: 2rem;">Send us a Message</h2>
+                    <form style="background: rgba(26, 39, 68, 0.6); border: 1px solid var(--cyan); border-radius: 15px; padding: 2.5rem;" onsubmit="handleContactSubmit(event)">
+                        
+                        <div style="margin-bottom: 1.5rem;">
+                            <label style="display: block; color: var(--text-light); margin-bottom: 0.5rem; font-weight: 600;">Your Name *</label>
+                            <input type="text" name="name" required style="width: 100%; padding: 0.8rem; background: rgba(10, 15, 31, 0.8); border: 1px solid var(--cyan); border-radius: 8px; color: var(--text-light); font-size: 1rem;" placeholder="John Doe">
+                        </div>
+
+                        <div style="margin-bottom: 1.5rem;">
+                            <label style="display: block; color: var(--text-light); margin-bottom: 0.5rem; font-weight: 600;">Email Address *</label>
+                            <input type="email" name="email" required style="width: 100%; padding: 0.8rem; background: rgba(10, 15, 31, 0.8); border: 1px solid var(--cyan); border-radius: 8px; color: var(--text-light); font-size: 1rem;" placeholder="john@example.com">
+                        </div>
+
+                        <div style="margin-bottom: 1.5rem;">
+                            <label style="display: block; color: var(--text-light); margin-bottom: 0.5rem; font-weight: 600;">Company</label>
+                            <input type="text" name="company" style="width: 100%; padding: 0.8rem; background: rgba(10, 15, 31, 0.8); border: 1px solid var(--cyan); border-radius: 8px; color: var(--text-light); font-size: 1rem;" placeholder="Your Company">
+                        </div>
+
+                        <div style="margin-bottom: 1.5rem;">
+                            <label style="display: block; color: var(--text-light); margin-bottom: 0.5rem; font-weight: 600;">Subject *</label>
+                            <select name="subject" required style="width: 100%; padding: 0.8rem; background: rgba(10, 15, 31, 0.8); border: 1px solid var(--cyan); border-radius: 8px; color: var(--text-light); font-size: 1rem;">
+                                <option value="">Select a subject...</option>
+                                <option value="services">Security Services Inquiry</option>
+                                <option value="penetration">Penetration Testing Request</option>
+                                <option value="training">Training & Certification</option>
+                                <option value="partnership">Partnership Opportunity</option>
+                                <option value="support">Technical Support</option>
+                                <option value="feedback">Feedback & Suggestions</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div style="margin-bottom: 1.5rem;">
+                            <label style="display: block; color: var(--text-light); margin-bottom: 0.5rem; font-weight: 600;">Message *</label>
+                            <textarea name="message" required style="width: 100%; padding: 0.8rem; background: rgba(10, 15, 31, 0.8); border: 1px solid var(--cyan); border-radius: 8px; color: var(--text-light); font-size: 1rem; resize: vertical; min-height: 150px;" placeholder="Tell us how we can help..."></textarea>
+                        </div>
+
+                        <div style="margin-bottom: 1.5rem;">
+                            <input type="checkbox" name="privacy" required style="margin-right: 0.5rem;">
+                            <label style="color: var(--text-muted); font-size: 0.9rem;">I agree to the <a href="privacy-policy.html" style="color: var(--cyan); text-decoration: none;">Privacy Policy</a> and <a href="terms-of-service.html" style="color: var(--cyan); text-decoration: none;">Terms of Service</a></label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1rem; padding: 1rem;">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Calendar - Book a Call -->
+        <section class="section">
+            <h2 style="text-align: center; margin-bottom: 1rem;">Schedule a Call</h2>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+                Book a free 30-minute consultation with our security experts. We'll discuss your needs and recommend the best solutions.
+            </p>
+            
+            <div style="background: rgba(26, 39, 68, 0.6); border: 2px solid var(--cyan); border-radius: 20px; padding: 3rem; max-width: 900px; margin: 0 auto;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+                    <!-- Calendly Embed Placeholder -->
+                    <div style="background: rgba(0, 229, 255, 0.05); border: 1px dashed var(--cyan); border-radius: 15px; padding: 2rem; text-align: center;">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;"></div>
+                        <h3 style="color: var(--cyan); margin-bottom: 1rem;">General Consultation</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.9rem;">Discuss your security needs with our team</p>
+                        <p style="color: var(--text-light); font-size: 0.85rem; margin-bottom: 1.5rem;">
+                            <strong>Duration:</strong> 30 minutes<br>
+                            <strong>Type:</strong> Video Call (Zoom)<br>
+                            <strong>Cost:</strong> Free
+                        </p>
+                        <a href="services.html" class="btn btn-primary">Book Now</a>
+                        <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 1rem;">Powered by Calendly</p>
+                    </div>
+
+                    <!-- Sales Call -->
+                    <div style="background: rgba(0, 229, 255, 0.05); border: 1px dashed var(--cyan); border-radius: 15px; padding: 2rem; text-align: center;">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;"></div>
+                        <h3 style="color: var(--cyan); margin-bottom: 1rem;">Services Demo</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.9rem;">See our penetration testing and MDR services</p>
+                        <p style="color: var(--text-light); font-size: 0.85rem; margin-bottom: 1.5rem;">
+                            <strong>Duration:</strong> 45 minutes<br>
+                            <strong>Type:</strong> Video Call (Zoom)<br>
+                            <strong>Cost:</strong> Free
+                        </p>
+                        <a href="services.html" class="btn btn-primary">Book Now</a>
+                        <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 1rem;">Powered by Calendly</p>
+                    </div>
+
+                    <!-- Emergency Support -->
+                    <div style="background: rgba(255, 107, 0, 0.05); border: 1px dashed var(--warning); border-radius: 15px; padding: 2rem; text-align: center;">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;"></div>
+                        <h3 style="color: var(--warning); margin-bottom: 1rem;">Emergency Response</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.9rem;">Immediate incident response support</p>
+                        <p style="color: var(--text-light); font-size: 0.85rem; margin-bottom: 1.5rem;">
+                            <strong>Available:</strong> 24/7<br>
+                            <strong>Response:</strong> < 1 hour<br>
+                            <strong>Contact:</strong> Call hotline
+                        </p>
+                        <a href="tel:+1-800-CYBER-911" class="btn btn-primary">Call Emergency Line</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="section">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Frequently Asked Questions</h2>
+            
+            <div style="max-width: 900px; margin: 0 auto;">
+                <details style="background: rgba(26, 39, 68, 0.6); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 15px; padding: 1.5rem; margin-bottom: 1rem; cursor: pointer;">
+                    <summary style="color: var(--cyan); font-weight: 600; font-size: 1.05rem;">How quickly can you respond to security incidents?</summary>
+                    <p style="color: var(--text-muted); margin-top: 1rem; line-height: 1.7;">
+                        Our emergency hotline is available 24/7 with response times under 1 hour for critical incidents. MDR clients have dedicated contact channels with even faster escalation.
+                    </p>
+                </details>
+
+                <details style="background: rgba(26, 39, 68, 0.6); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 15px; padding: 1.5rem; margin-bottom: 1rem; cursor: pointer;">
+                    <summary style="color: var(--cyan); font-weight: 600; font-size: 1.05rem;">Do you offer services for small businesses?</summary>
+                    <p style="color: var(--text-muted); margin-top: 1rem; line-height: 1.7;">
+                        Yes! We have scalable solutions for small businesses including affordable penetration testing, security training, and vCISO services tailored to smaller budgets.
+                    </p>
+                </details>
+
+                <details style="background: rgba(26, 39, 68, 0.6); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 15px; padding: 1.5rem; margin-bottom: 1rem; cursor: pointer;">
+                    <summary style="color: var(--cyan); font-weight: 600; font-size: 1.05rem;">What's included in the free consultation?</summary>
+                    <p style="color: var(--text-muted); margin-top: 1rem; line-height: 1.7;">
+                        The 30-minute consultation covers your security goals, current challenges, and a preliminary recommendation for services. You'll receive a custom proposal with no obligation.
+                    </p>
+                </details>
+
+                <details style="background: rgba(26, 39, 68, 0.6); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 15px; padding: 1.5rem; margin-bottom: 1rem; cursor: pointer;">
+                    <summary style="color: var(--cyan); font-weight: 600; font-size: 1.05rem;">How do you ensure confidentiality during assessments?</summary>
+                    <p style="color: var(--text-muted); margin-top: 1rem; line-height: 1.7;">
+                        All assessments are covered by NDA and our team signs confidentiality agreements. We follow industry standards for data protection and never share findings without authorization.
+                    </p>
+                </details>
+
+                <details style="background: rgba(26, 39, 68, 0.6); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 15px; padding: 1.5rem;">
+                    <summary style="color: var(--cyan); font-weight: 600; font-size: 1.05rem;">Can we discuss pricing before scheduling a call?</summary>
+                    <p style="color: var(--text-muted); margin-top: 1rem; line-height: 1.7;">
+                        Pricing varies based on scope and organization size. Email sales@cyberguard.io with details about your needs and we'll provide a preliminary estimate before your call.
+                    </p>
+                </details>
+            </div>
+        </section>
+
+        <!-- Response Time Info -->
+        <section class="section">
+            <div style="background: rgba(0, 229, 255, 0.05); border-left: 4px solid var(--cyan); border-radius: 15px; padding: 2.5rem; max-width: 900px; margin: 0 auto;">
+                <h3 style="color: var(--cyan); margin-bottom: 1.5rem;">Response Time Commitments</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; color: var(--green); margin-bottom: 0.5rem; font-weight: 700;">< 1 hour</div>
+                        <p style="color: var(--text-muted);">Emergency hotline response</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; color: var(--cyan); margin-bottom: 0.5rem; font-weight: 700;">2 hours</div>
+                        <p style="color: var(--text-muted);">Sales inquiries</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; color: var(--purple); margin-bottom: 0.5rem; font-weight: 700;">4 hours</div>
+                        <p style="color: var(--text-muted);">General email support</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; color: var(--warning); margin-bottom: 0.5rem; font-weight: 700;">24 hours</div>
+                        <p style="color: var(--text-muted);">Feedback & suggestions</p>
+                        </div>
+                           <div style="text-align: center;">
+                        <div style="font-size: 2rem; color: var(--warning); margin-bottom: 0.5rem; font-weight: 700;">24 hours</div>
+                        <p style="color: var(--text-muted);">Vulnerability Assessment</p>
+                        </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+     <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>🛡️ CyberGuard</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                    Your trusted resource for cybersecurity education, frameworks, and best practices.
+                </p>
+                 <div class="social-links">
+                    <a href="https://github.com/"><img src="./Icons/Github-Logo-PNG-Photo-1.png" alt="GitHub" style="width: 35px; height: 20px; filter: brightness(0) invert(1);"></a>
+                    <a href="https://x.com/" title="Twitter">𝕏</a>
+                    <a href="https://in.linkedin.com/?mcid=6844056167778418689&src=go-pa&trk=sem-ga_campid.14650114788_asid.151761418307_crid.657403558715_kw.linkedin%20login_d.c_tid.kwd-12704335873_n.g_mt.e_geo.9040243&cid=&gclsrc=aw.ds&gad_source=1&gad_campaignid=14650114788&gbraid=0AAAAABKX7wGkDyHEA_MbDu4Zfag0E9xaq&gclid=CjwKCAiAjojLBhAlEiwAcjhrDuzTNnDEosiin0bM5mg-08UJ9raSASZWTRJl8L8twDVKIXPAUDeXWhoC9oIQAvD_BwE" title="LinkedIn">in</a>
+                    <a href="https://mail.google.com/mail/u/0/#inbox" title="Email">✉️</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="threats.html">Threats & Vulnerabilities</a></li>
+                    <li><a href="frameworks.html">Security Frameworks</a></li>
+                    <li><a href="learning.html">Learning Resources</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="tools.html">Tools & Utilities</a></li>
+                    <li><a href="blog.html">Blog & Updates</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-of-service.html">Terms & Conditions</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 CyberGuard - Cybersecurity Education Platform. All rights reserved. | Made with  for a secure digital world</p>
+        </div>
+    </footer>
+
+
+    <!-- Exit Intent Pop-up for Free Security Scan -->
+    <div id="exitIntentModal" class="exit-intent-modal">
+        <div class="exit-intent-content">
+            <button id="closeExitIntent" class="exit-intent-close">✕</button>
+            <h2> Wait! Get a Free Security Scan</h2>
+            <p>Before you go, discover your organization's security vulnerabilities with our <span class="highlight">complimentary security assessment</span>—no credit card required.</p>
+            <div class="exit-intent-buttons">
+                <button id="startScanBtn" class="exit-intent-btn exit-intent-btn-primary"> Start Free Scan</button>
+                <button onclick="document.getElementById('exitIntentModal').style.display='none';" class="exit-intent-btn exit-intent-btn-secondary">I'll think about it</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Banner for GDPR/CCPA Compliance -->
+    <div id="cookieBanner" class="cookie-banner">
+        <div class="cookie-banner-content">
+            <h3> Cookie Consent</h3>
+            <p>We use cookies to enhance your experience, analyze site traffic, and serve personalized content. By continuing to use this site, you consent to our <a href="#privacy">Privacy Policy</a> and <a href="#cookies">Cookie Policy</a>. You can change your consent preferences at any time.</p>
+        </div>
+        <div class="cookie-banner-buttons">
+            <button id="rejectCookies" class="cookie-btn cookie-btn-reject">Reject</button>
+            <button id="acceptCookies" class="cookie-btn cookie-btn-accept">Accept All</button>
+        </div>
+    </div>
+
+    <!-- JSON-LD Schema Markup for Contact -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        "name": "Contact CyberGuard",
+        "url": "https://cyberguard.com/contact.html",
+        "description": "Get in touch with CyberGuard for consulting, services, partnerships, or questions.",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "Customer Service",
+            "telephone": "+1-800-CYBER-GUARD",
+            "email": "support@cyberguard.com",
+            "areaServed": "Worldwide",
+            "availableLanguage": "English"
+        }
+    }
+    </script>
+
+    <script src="script.js"></script>
+    <script src="cyber-background.js"></script>
+    <script>
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            alert('Thank you for your message! We will get back to you shortly.');
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>

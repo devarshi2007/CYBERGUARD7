@@ -1,0 +1,412 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog & Updates - CyberGuard</title>
+    <link rel="stylesheet" href="style.css?v=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <link href="https://fonts.cdnfonts.com/css/hacked" rel="stylesheet">
+    <!-- Plausible Analytics for Privacy-Respecting Usage Tracking -->      
+    <script defer data-domain="cyberguard.local" src="https://plausible.io/js/script.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/azonix" rel="stylesheet">
+    <style>
+        .hero h1 {
+            font-family: 'Azonix', sans-serif;
+            font-size: 3.5rem;
+            line-height: 1.5;
+            color: #ffffff;
+            text-shadow: 0 0 10px #00e6e6, 0 0 20px #00e6e6;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Cyber Background -->
+    <div id="bg-container" class="bg-container">
+        <canvas id="cyber-canvas"></canvas>
+        <div class="cyber-grid-overlay"></div>
+        <div class="cyber-glow-effect"></div>
+    </div>
+    
+    <!-- Navigation -->
+        <nav>
+        <div class="navbar">
+            <div class="logo">🛡️ CyberGuard</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="threats.html">Threats</a></li>
+                <li><a href="threat-map.html">Threat Map</a></li>
+                <li><a href="frameworks.html">Frameworks</a></li>
+                <li><a href="learning.html">Learn</a></li>
+                <li><a href="tools.html">Tools</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="chatbot.html">AI Chat</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="navbar-right">
+                <button id="theme-toggle" class="theme-toggle-btn" title="Toggle theme">🌙</button>
+                <button id="hamburger-btn" class="hamburger-btn" title="Menu" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hamburger Menu -->
+    <div id="hamburger-overlay" class="hamburger-overlay"></div>
+    <div id="hamburger-menu" class="hamburger-menu">
+        <button id="hamburger-close" class="hamburger-close">✕</button>
+        <ul class="hamburger-menu-list">
+            <li><a href="index.html" class="hamburger-link">Home</a></li>
+            <li><a href="about.html" class="hamburger-link">About Us</a></li>
+            <li><a href="case-studies.html" class="hamburger-link">Case Studies</a></li>
+            <li><a href="community.html" class="hamburger-link">Community</a></li>
+            <li><a href="privacy-policy.html" class="hamburger-link">Privacy Policy</a></li>
+            <li><a href="terms-of-service.html" class="hamburger-link">Terms of Service</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="cyber-grid"></div>
+        <div class="hero-content">
+            <h1> Blog & Updates</h1>
+            <p>Latest cybersecurity news, vulnerability reports, security tips, and industry research trends.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- 2025 Annual Threat Report Lead Magnet -->
+        <section class="section" style="background: linear-gradient(135deg, rgba(0, 229, 255, 0.1) 0%, rgba(164, 0, 255, 0.1) 100%); border: 2px solid rgba(0, 229, 255, 0.3); border-radius: 20px; padding: 3rem;">
+            <div style="max-width: 1000px; margin: 0 auto;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
+                    <!-- Left Content -->
+                    <div>
+                        <h2 style="color: var(--cyan); margin-bottom: 1rem; font-size: 2rem;"> 2025 Annual Cyber Threats Report</h2>
+                        <p style="color: var(--text-light); margin-bottom: 1.5rem; line-height: 1.8; font-size: 1.1rem;">
+                            Download our comprehensive 2025 Cybersecurity Threat Report covering:
+                        </p>
+                        <ul style="color: var(--text-light); margin-bottom: 2rem; line-height: 2;">
+                            <li>✓ AI-Powered Attacks & GenAI Threats</li>
+                            <li>✓ Ransomware Evolution & Mitigation</li>
+                            <li>✓ Zero Trust Implementation Guide</li>
+                            <li>✓ Supply Chain Attack Vectors</li>
+                            <li>✓ Nation-State Threat Landscape</li>
+                            <li>✓ Incident Response Best Practices</li>
+                        </ul>
+                        <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 0.9rem;">
+                            <strong>Free PDF Report</strong> - 25+ pages of actionable intelligence for 2025 security planning
+                        </p>
+                        <button onclick="downloadThreatReport()" class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2rem; width: 100%; max-width: 300px;">
+                             Download Free Report (PDF)
+                        </button>
+                    </div>
+                    <!-- Right Visual -->
+                    <div style="text-align: center;">
+                        <div style="background: rgba(26, 39, 68, 0.8); border: 3px solid var(--cyan); border-radius: 15px; padding: 2rem; box-shadow: 0 0 30px rgba(0, 229, 255, 0.2);">
+                            <div style="font-size: 5rem; margin-bottom: 1rem;"></div>
+                            <h3 style="color: var(--cyan); margin-bottom: 0.5rem;">2025 Threat Report</h3>
+                            <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem;">Curated by CyberGuard Security Team</p>
+                            <p style="color: var(--text-light); font-size: 0.85rem;">Based on:</p>
+                            <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem;">
+                                IBM, SentinelOne, Gartner, JP Morgan<br>Chase, CISA, and industry leaders
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section cyber-news-section">
+            <h2>Cyber News Pulse</h2>
+            <div class="cyber-news-panel">
+                <div class="cyber-news-header">
+                    <div>
+                        <p>Live curated cybersecurity headlines keep your Cyber Assistant talking points fresh.</p>
+                        <span class="cyber-news-source" id="cyberNewsSource">Listening for trusted signals...</span>
+                    </div>
+                    <button type="button" class="btn btn-secondary" id="cyberNewsRefresh">Refresh Feed</button>
+                </div>
+                <div class="cyber-news-status" id="cyberNewsStatus">Syncing live feed...</div>
+                <div class="cyber-news-list" id="cyberNewsList"></div>
+            </div>
+        </section>
+
+
+        <!-- Newsletter Signup -->
+        <section class="section">
+            <div class="card" style="border-color: var(--green);">
+                <h3 style="color: var(--green);"> Subscribe to Our Newsletter</h3>
+                <p style="margin-bottom: 1.5rem;">Get the latest cybersecurity articles, tips, and industry updates delivered to your inbox every week.</p>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <input type="email" class="tool-input" placeholder="Enter your email..." style="flex: 1; min-width: 250px;">
+                    <button class="btn btn-primary">Subscribe</button>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 1rem;">We respect your privacy. Unsubscribe at any time.</p>
+            </div>
+        </section>
+
+        <!-- Featured Blog Post: AlienVault OTX -->
+        <section class="section" id="otx">
+            <article class="card" style="border: 2px solid var(--purple); background: linear-gradient(135deg, rgba(164, 0, 255, 0.05), rgba(0, 229, 255, 0.05));">
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                    
+                </div>
+                
+                <h2 style="color: var(--purple); margin-bottom: 1rem; font-size: 2rem;">AlienVault OTX: The World's First Open Threat Intelligence Community</h2>
+                
+                <p style="color: var(--text-light); line-height: 1.8; font-size: 1.1rem; margin-bottom: 2rem;">
+                    In the ever-evolving landscape of cybersecurity, staying ahead of emerging threats requires access to timely and actionable threat intelligence. AlienVault Open Threat Exchange (OTX) has revolutionized how security professionals collaborate and share threat data globally.
+                </p>
+
+                <h3 style="color: var(--cyan); margin-top: 2rem; margin-bottom: 1rem;"> What is AlienVault OTX?</h3>
+                <p style="color: var(--text-light); line-height: 1.8; margin-bottom: 1.5rem;">
+                    AlienVault Open Threat Exchange (OTX) is the world's first truly open threat intelligence community that enables collaborative defense against cyber threats. It's a free, community-driven platform where security researchers, threat analysts, and organizations worldwide share actionable threat data in real-time.
+                </p>
+
+                <div style="background: rgba(0, 229, 255, 0.1); border-left: 4px solid var(--cyan); padding: 1.5rem; margin-bottom: 2rem; border-radius: 8px;">
+                    <h4 style="color: var(--cyan); margin-bottom: 0.75rem;"> Key Statistics</h4>
+                    <ul style="color: var(--text-light); line-height: 2;">
+                        <li><strong>130,000+</strong> security researchers and practitioners worldwide</li>
+                        <li><strong>19 million+</strong> threat indicators shared daily</li>
+                        <li><strong>180+</strong> countries represented in the community</li>
+                        <li><strong>Real-time</strong> threat data accessible via API and web interface</li>
+                    </ul>
+                </div>
+
+                <h3 style="color: var(--cyan); margin-top: 2rem; margin-bottom: 1rem;"> How OTX Enhances Security</h3>
+                <p style="color: var(--text-light); line-height: 1.8; margin-bottom: 1.5rem;">
+                    OTX provides security teams with critical intelligence to proactively defend their infrastructure. Security professionals share threat data including:
+                </p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                    <div style="background: rgba(26, 39, 68, 0.6); padding: 1.5rem; border: 1px solid var(--cyan); border-radius: 12px;">
+                        <h4 style="color: var(--cyan); margin-bottom: 0.5rem;"> IP Addresses</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Malicious IPs associated with C2 servers, botnets, and attack infrastructure</p>
+                    </div>
+                    <div style="background: rgba(26, 39, 68, 0.6); padding: 1.5rem; border: 1px solid var(--cyan); border-radius: 12px;">
+                        <h4 style="color: var(--cyan); margin-bottom: 0.5rem;"> Domains & URLs</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Phishing sites, malware distribution points, and suspicious domains</p>
+                    </div>
+                    <div style="background: rgba(26, 39, 68, 0.6); padding: 1.5rem; border: 1px solid var(--cyan); border-radius: 12px;">
+                        <h4 style="color: var(--cyan); margin-bottom: 0.5rem;"> File Hashes</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">MD5, SHA1, SHA256 hashes of known malware and malicious files</p>
+                    </div>
+                    <div style="background: rgba(26, 39, 68, 0.6); padding: 1.5rem; border: 1px solid var(--cyan); border-radius: 12px;">
+                        <h4 style="color: var(--cyan); margin-bottom: 0.5rem;"> Attack Patterns</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Tactics, techniques, and procedures (TTPs) used by threat actors</p>
+                    </div>
+                </div>
+
+                <h3 style="color: var(--cyan); margin-top: 2rem; margin-bottom: 1rem;"> Real-World Applications</h3>
+                <div style="background: rgba(164, 0, 255, 0.1); padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem;">
+                    <p style="color: var(--text-light); line-height: 1.8; margin-bottom: 1rem;">
+                        Organizations integrate OTX threat intelligence into their security operations through:
+                    </p>
+                    <ul style="color: var(--text-light); line-height: 2;">
+                        <li><strong>SIEM Integration:</strong> Enrich security events with threat context for faster incident response</li>
+                        <li><strong>Firewall Rules:</strong> Automatically block malicious IPs and domains at the perimeter</li>
+                        <li><strong>Threat Hunting:</strong> Proactively search for indicators of compromise (IOCs) in your environment</li>
+                        <li><strong>Vulnerability Management:</strong> Prioritize patching based on active exploitation in the wild</li>
+                        <li><strong>Incident Response:</strong> Correlate alerts with known threat actor campaigns</li>
+                    </ul>
+                </div>
+
+                <h3 style="color: var(--cyan); margin-top: 2rem; margin-bottom: 1rem;"> Key Features</h3>
+                <div style="display: grid; gap: 1rem; margin-bottom: 2rem;">
+                    <div style="border-left: 4px solid var(--green); padding-left: 1rem;">
+                        <h4 style="color: var(--green); margin-bottom: 0.5rem;"> Free & Open Access</h4>
+                        <p style="color: var(--text-light);">No cost barriers—accessible to organizations of all sizes</p>
+                    </div>
+                    <div style="border-left: 4px solid var(--green); padding-left: 1rem;">
+                        <h4 style="color: var(--green); margin-bottom: 0.5rem;"> REST API</h4>
+                        <p style="color: var(--text-light);">Programmatic access for automation and integration with security tools</p>
+                    </div>
+                    <div style="border-left: 4px solid var(--green); padding-left: 1rem;">
+                        <h4 style="color: var(--green); margin-bottom: 0.5rem;"> Pulse Subscriptions</h4>
+                        <p style="color: var(--text-light);">Subscribe to threat feeds from trusted researchers and organizations</p>
+                    </div>
+                    <div style="border-left: 4px solid var(--green); padding-left: 1rem;">
+                        <h4 style="color: var(--green); margin-bottom: 0.5rem;"> Collaborative Defense</h4>
+                        <p style="color: var(--text-light);">Share your own threat intelligence to strengthen the community</p>
+                    </div>
+                </div>
+
+                <h3 style="color: var(--cyan); margin-top: 2rem; margin-bottom: 1rem;"> Getting Started with OTX</h3>
+                <p style="color: var(--text-light); line-height: 1.8; margin-bottom: 1rem;">
+                    Getting started with AlienVault OTX is straightforward:
+                </p>
+                <ol style="color: var(--text-light); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                    <li><strong>Create a Free Account:</strong> Sign up at otx.alienvault.com</li>
+                    <li><strong>Explore Pulses:</strong> Browse threat intelligence feeds from the community</li>
+                    <li><strong>Subscribe to Feeds:</strong> Follow researchers and organizations relevant to your industry</li>
+                    <li><strong>Integrate via API:</strong> Connect OTX to your SIEM, firewall, or security tools</li>
+                    <li><strong>Contribute Back:</strong> Share your threat findings to help the community</li>
+                </ol>
+
+                <div style="background: rgba(0, 229, 255, 0.05); border: 2px solid var(--cyan); border-radius: 15px; padding: 2rem; margin-bottom: 2rem;">
+                    <h3 style="color: var(--cyan); margin-bottom: 1rem;"> Useful Resources</h3>
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                        <a href="https://otx.alienvault.com/" target="_blank" rel="noopener" style="color: var(--cyan); text-decoration: none;">→ AlienVault OTX Platform</a>
+                        <a href="https://otx.alienvault.com/api" target="_blank" rel="noopener" style="color: var(--cyan); text-decoration: none;">→ OTX API Documentation</a>
+                        <a href="https://cybersecurity.att.com/products/ossim" target="_blank" rel="noopener" style="color: var(--cyan); text-decoration: none;">→ AlienVault OSSIM (Open Source SIEM)</a>
+                        <a href="threat-map.html" style="color: var(--purple); text-decoration: none;">→ View Our Threat Map with OTX Integration</a>
+                    </div>
+                </div>
+
+                <h3 style="color: var(--cyan); margin-top: 2rem; margin-bottom: 1rem;"> Final Thoughts</h3>
+                <p style="color: var(--text-light); line-height: 1.8; margin-bottom: 1.5rem;">
+                    In an era where cyber threats evolve daily, access to real-time, community-driven threat intelligence is no longer optional—it's essential. AlienVault OTX democratizes threat intelligence by making it freely accessible to security professionals worldwide, leveling the playing field between large enterprises and smaller organizations.
+                </p>
+                <p style="color: var(--text-light); line-height: 1.8; margin-bottom: 2rem;">
+                    Whether you're a SOC analyst, incident responder, or security researcher, OTX provides the collaborative intelligence framework needed to stay ahead of emerging threats. By participating in this global community, you're not just protecting your organization—you're contributing to a safer digital ecosystem for everyone.
+                </p>
+
+                <div style="background: rgba(164, 0, 255, 0.1); border-radius: 12px; padding: 1.5rem; text-align: center;">
+                    <p style="color: var(--text-light); margin-bottom: 1rem; font-size: 1.1rem;"><strong>Ready to leverage threat intelligence for your organization?</strong></p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <a href="https://otx.alienvault.com/" target="_blank" rel="noopener" class="btn btn-primary">Visit AlienVault OTX →</a>
+                        <a href="threat-map.html" class="btn btn-secondary">View Threat Map →</a>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(0, 229, 255, 0.2);">
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">
+                        <strong>Tags:</strong> <span class="badge">Threat Intelligence</span> <span class="badge">OTX</span> <span class="badge">AlienVault</span> <span class="badge">Security Tools</span> <span class="badge">Community</span>
+                    </p>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 1rem;">
+                        <em>Author: CyberGuard Security Team | Published: January 2, 2025 | Last Updated: January 2, 2025</em>
+                    </p>
+                </div>
+            </article>
+        </section>
+
+         <p style="text-align: center; color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px;">Featured In Leading Industry Publications</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1.5rem; align-items: center;">
+                <!-- Forbes -->
+                <a href="https://www.forbes.com" target="_blank" rel="noopener noreferrer" style="text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem; border-radius: 10px; transition: all 0.3s; border: 1px solid transparent;" onmouseover="this.style.borderColor='var(--cyan)'; this.style.backgroundColor='rgba(0, 229, 255, 0.1)'" onmouseout="this.style.borderColor='transparent'; this.style.backgroundColor='transparent'">
+                    <span style="font-size: 1.5rem;"></span>
+                    <span style="color: var(--text-light); font-weight: 600; font-size: 0.95rem;">Forbes</span>
+                </a>
+
+                <!-- TechCrunch -->
+                <a href="https://www.techcrunch.com" target="_blank" rel="noopener noreferrer" style="text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem; border-radius: 10px; transition: all 0.3s; border: 1px solid transparent;" onmouseover="this.style.borderColor='var(--purple)'; this.style.backgroundColor='rgba(164, 0, 255, 0.1)'" onmouseout="this.style.borderColor='transparent'; this.style.backgroundColor='transparent'">
+                    <span style="font-size: 1.5rem;"></span>
+                    <span style="color: var(--text-light); font-weight: 600; font-size: 0.95rem;">TechCrunch</span>
+                </a>
+
+                <!-- Dark Reading -->
+                <a href="https://www.darkreading.com" target="_blank" rel="noopener noreferrer" style="text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem; border-radius: 10px; transition: all 0.3s; border: 1px solid transparent;" onmouseover="this.style.borderColor='var(--green)'; this.style.backgroundColor='rgba(0, 255, 136, 0.1)'" onmouseout="this.style.borderColor='transparent'; this.style.backgroundColor='transparent'">
+                    <span style="font-size: 1.5rem;"></span>
+                    <span style="color: var(--text-light); font-weight: 600; font-size: 0.95rem;">Dark Reading</span>
+                </a>
+
+                <!-- CSO Online -->
+                <a href="https://www.csoonline.com" target="_blank" rel="noopener noreferrer" style="text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem; border-radius: 10px; transition: all 0.3s; border: 1px solid transparent;" onmouseover="this.style.borderColor='var(--cyan)'; this.style.backgroundColor='rgba(0, 229, 255, 0.1)'" onmouseout="this.style.borderColor='transparent'; this.style.backgroundColor='transparent'">
+                    <span style="font-size: 1.5rem;"></span>
+                    <span style="color: var(--text-light); font-weight: 600; font-size: 0.95rem;">CSO Online</span>
+                </a>
+
+                <!-- InfoSec Magazine -->
+                <a href="https://www.infosecurity-magazine.com" target="_blank" rel="noopener noreferrer" style="text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem; border-radius: 10px; transition: all 0.3s; border: 1px solid transparent;" onmouseover="this.style.borderColor='var(--warning)'; this.style.backgroundColor='rgba(255, 107, 0, 0.1)'" onmouseout="this.style.borderColor='transparent'; this.style.backgroundColor='transparent'">
+                    <span style="font-size: 1.5rem;"></span>
+                    <span style="color: var(--text-light); font-weight: 600; font-size: 0.95rem;">InfoSec Magazine</span>
+                </a>
+
+                <!-- Security Magazine -->
+                <a href="https://www.securitymagazine.com" target="_blank" rel="noopener noreferrer" style="text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem; border-radius: 10px; transition: all 0.3s; border: 1px solid transparent;" onmouseover="this.style.borderColor='var(--purple)'; this.style.backgroundColor='rgba(164, 0, 255, 0.1)'" onmouseout="this.style.borderColor='transparent'; this.style.backgroundColor='transparent'">
+                    <span style="font-size: 1.5rem;"></span>
+                    <span style="color: var(--text-light); font-weight: 600; font-size: 0.95rem;">Security Magazine</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+        <!-- Blog Categories -->
+        <section class="section">
+            <h2>Browse by Category</h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+                <span class="badge"> Vulnerability (24)</span>
+                <span class="badge"> Security Tips (18)</span>
+                <span class="badge"> Industry News (31)</span>
+                <span class="badge"> Research (12)</span>
+                <span class="badge"> Career (8)</span>
+                <span class="badge"> Tools & Techniques (16)</span>
+                <span class="badge"> Incident Response (10)</span>
+                <span class="badge"> Privacy & Data Protection (9)</span>
+                <span class="badge"> Emerging Technologies (7)</span>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>🛡️ CyberGuard</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                    Your trusted resource for cybersecurity education, frameworks, and best practices.
+                </p>
+                 <div class="social-links">
+                    <a href="https://github.com/"><img src="./Icons/Github-Logo-PNG-Photo-1.png" alt="GitHub" style="width: 35px; height: 20px; filter: brightness(0) invert(1);"></a>
+                    <a href="https://x.com/" title="Twitter">𝕏</a>
+                    <a href="https://in.linkedin.com/?mcid=6844056167778418689&src=go-pa&trk=sem-ga_campid.14650114788_asid.151761418307_crid.657403558715_kw.linkedin%20login_d.c_tid.kwd-12704335873_n.g_mt.e_geo.9040243&cid=&gclsrc=aw.ds&gad_source=1&gad_campaignid=14650114788&gbraid=0AAAAABKX7wGkDyHEA_MbDu4Zfag0E9xaq&gclid=CjwKCAiAjojLBhAlEiwAcjhrDuzTNnDEosiin0bM5mg-08UJ9raSASZWTRJl8L8twDVKIXPAUDeXWhoC9oIQAvD_BwE" title="LinkedIn">in</a>
+                    <a href="https://mail.google.com/mail/u/0/#inbox" title="Email">✉️</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="threats.html">Threats & Vulnerabilities</a></li>
+                    <li><a href="frameworks.html">Security Frameworks</a></li>
+                    <li><a href="learning.html">Learning Resources</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="tools.html">Tools & Utilities</a></li>
+                    <li><a href="blog.html">Blog & Updates</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-of-service.html">Terms & Conditions</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 CyberGuard - Cybersecurity Education Platform. All rights reserved. | Made with  for a secure digital world</p>
+        </div>
+    </footer>
+
+    <script src="script.js?v=1.0"></script>
+    <script src="cyber-background.js?v=1.0"></script>
+</body>
+</html>

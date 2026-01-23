@@ -1,0 +1,629 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Comprehensive cybersecurity education platform offering tools, frameworks, learning resources, and AI-powered threat explanations to protect against digital threats.">
+    <meta name="theme-color" content="#00E5FF">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>CyberGuard - Cyber Security & Education Platform</title>
+    <link rel="stylesheet" href="style.css?v=1.0">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <!-- Plausible Analytics for Privacy-Respecting Usage Tracking -->
+    <script defer data-domain="cyberguard.local" src="https://plausible.io/js/script.js"></script>
+    <!-- Font Preconnects and Links -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/azonix" rel="stylesheet">
+    <!-- Notification Blocker -->
+    <script>
+        const MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.addedNodes.length) {
+                    mutation.addedNodes.forEach((node) => {
+                        if (node.nodeType === 1) {
+                            if (node.className && (node.className.includes('notification') || node.className.includes('update') || node.className.includes('modal'))) {
+                                node.remove();
+                            }
+                        }
+                    });
+                }
+            });
+        });
+        observer.observe(document.body || document.documentElement, { childList: true, subtree: true });
+    </script>
+    <!-- Crisp Chat Widget for AI Support - DISABLED -->
+    <style>
+        .hero h1 {
+            /* "Azonix" is the closest match to the image */
+            font-family: 'Azonix', sans-serif;
+            font-size: 3.5rem;
+            line-height: 1.5;
+            
+            /* Adds the neon glow effect seen in the image */
+            color: #ffffff;
+            text-shadow: 0 0 10px #00e6e6, 0 0 20px #00e6e6;
+            
+            /* Ensures text is uppercase (Azonix is an all-caps font) */
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- ============================================
+         ANIMATED CYBERSECURITY BACKGROUND SYSTEM
+         - Particle network animation
+         - Cyber grid overlay
+         - Neon glow effects
+         - Runs on all pages
+         ============================================ -->
+    
+    <!-- Fixed background container -->
+    <div id="bg-container" class="bg-container">
+        <!-- Canvas for particle network animation -->
+        <canvas id="cyber-canvas"></canvas>
+        
+        <!-- Animated cyber grid overlay -->
+        <div class="cyber-grid-overlay"></div>
+        
+        <!-- Soft neon glow effect -->
+        <div class="cyber-glow-effect"></div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav>
+        <div class="navbar">
+            <div class="logo">🛡️ CyberGuard</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="threats.html">Threats</a></li>
+                <li><a href="threat-map.html">Threat Map</a></li>
+                <li><a href="frameworks.html">Frameworks</a></li>
+                <li><a href="learning.html">Learn</a></li>
+                <li><a href="tools.html">Tools</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="chatbot.html">AI Chat</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="navbar-right">
+                <button id="theme-toggle" class="theme-toggle-btn" title="Toggle theme">🌙</button>
+                <button id="hamburger-btn" class="hamburger-btn" title="Menu" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hamburger Menu -->
+    <div id="hamburger-overlay" class="hamburger-overlay"></div>
+    <div id="hamburger-menu" class="hamburger-menu">
+        <button id="hamburger-close" class="hamburger-close">✕</button>
+        <ul class="hamburger-menu-list">
+            <li><a href="index.html" class="hamburger-link">Home</a></li>
+            <li><a href="about.html" class="hamburger-link">About Us</a></li>
+            <li><a href="case-studies.html" class="hamburger-link">Case Studies</a></li>
+            <li><a href="community.html" class="hamburger-link">Community</a></li>
+            <li><a href="privacy-policy.html" class="hamburger-link">Privacy Policy</a></li>
+            <li><a href="terms-of-service.html" class="hamburger-link">Terms of Service</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="cyber-grid"></div>
+        <div class="hero-content">
+            <h1> Secure Your Digital World</h1>
+            <p>Comprehensive cybersecurity education, frameworks, and tools to protect yourself and your organization from evolving digital threats.</p>
+            <div class="hero-buttons">
+                <a href="learning.html" class="btn btn-primary"> Start Learning</a>
+                <a href="tools.html" class="btn btn-secondary"> Explore Tools</a>
+                <a href="chatbot.html" class="btn btn-secondary"> AI Chat</a>
+                <a href="frameworks.html" class="btn btn-secondary"> Frameworks</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hero Image Section -->
+    <section class="hero-image-section">
+        <div class="container">
+            <svg class="hero-illustration" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CyberGuard security illustration with shield and padlock network">
+                <title>Security Shield with Network Nodes</title>
+                <!-- Background gradient -->
+                <defs>
+                    <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#00E5FF;stop-opacity:0.2" />
+                        <stop offset="100%" style="stop-color:#A400FF;stop-opacity:0.2" />
+                    </linearGradient>
+                    <radialGradient id="glowGradient" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:#00E5FF;stop-opacity:0.4" />
+                        <stop offset="100%" style="stop-color:#00E5FF;stop-opacity:0" />
+                    </radialGradient>
+                </defs>
+
+                <!-- Central Shield -->
+                <g class="shield-group">
+                    <circle cx="400" cy="200" r="150" fill="url(#glowGradient)" opacity="0.6"/>
+                    <path d="M 400 80 L 480 140 L 480 240 Q 400 300 400 300 Q 320 300 320 240 L 320 140 Z" fill="none" stroke="#00E5FF" stroke-width="3" opacity="0.8"/>
+                    <path d="M 400 100 L 470 150 L 470 240 Q 400 285 400 285 Q 330 285 330 240 L 330 150 Z" fill="rgba(0, 229, 255, 0.1)" stroke="#00E5FF" stroke-width="2"/>
+                </g>
+
+                <!-- Padlock inside shield -->
+                <g class="padlock-group" transform="translate(400, 180)">
+                    <rect x="-20" y="-5" width="40" height="35" rx="3" fill="none" stroke="#A400FF" stroke-width="2"/>
+                    <circle cx="-12" cy="-8" r="8" fill="none" stroke="#A400FF" stroke-width="2"/>
+                    <circle cx="12" cy="-8" r="8" fill="none" stroke="#A400FF" stroke-width="2"/>
+                    <line x1="-12" y1="0" x2="12" y2="0" stroke="#A400FF" stroke-width="2"/>
+                    <circle cx="0" cy="18" r="3" fill="#A400FF"/>
+                </g>
+
+                <!-- Surrounding network nodes -->
+                <circle cx="150" cy="100" r="12" fill="#00E5FF" opacity="0.7"/>
+                <circle cx="650" cy="100" r="12" fill="#00E5FF" opacity="0.7"/>
+                <circle cx="150" cy="300" r="12" fill="#00E5FF" opacity="0.7"/>
+                <circle cx="650" cy="300" r="12" fill="#00E5FF" opacity="0.7"/>
+                <circle cx="200" cy="50" r="8" fill="#A400FF" opacity="0.6"/>
+                <circle cx="600" cy="50" r="8" fill="#A400FF" opacity="0.6"/>
+                <circle cx="200" cy="350" r="8" fill="#A400FF" opacity="0.6"/>
+                <circle cx="600" cy="350" r="8" fill="#A400FF" opacity="0.6"/>
+
+                <!-- Connecting lines (network) -->
+                <line x1="150" y1="100" x2="400" y2="200" stroke="#00E5FF" stroke-width="1.5" opacity="0.4" stroke-dasharray="5,5"/>
+                <line x1="650" y1="100" x2="400" y2="200" stroke="#00E5FF" stroke-width="1.5" opacity="0.4" stroke-dasharray="5,5"/>
+                <line x1="150" y1="300" x2="400" y2="200" stroke="#00E5FF" stroke-width="1.5" opacity="0.4" stroke-dasharray="5,5"/>
+                <line x1="650" y1="300" x2="400" y2="200" stroke="#00E5FF" stroke-width="1.5" opacity="0.4" stroke-dasharray="5,5"/>
+                <line x1="200" y1="50" x2="150" y2="100" stroke="#A400FF" stroke-width="1" opacity="0.3"/>
+                <line x1="600" y1="50" x2="650" y2="100" stroke="#A400FF" stroke-width="1" opacity="0.3"/>
+                <line x1="200" y1="350" x2="150" y2="300" stroke="#A400FF" stroke-width="1" opacity="0.3"/>
+                <line x1="600" y1="350" x2="650" y2="300" stroke="#A400FF" stroke-width="1" opacity="0.3"/>
+
+                <!-- Checkmark for security -->
+                <g class="checkmark-group" transform="translate(420, 210)">
+                    <path d="M 0 8 L 5 13 L 15 3" fill="none" stroke="#00ff1e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+                </g>
+
+                <!-- Animated pulse circles -->
+                <circle cx="400" cy="200" r="100" fill="none" stroke="#00E5FF" stroke-width="1" opacity="0.2"/>
+                <circle cx="400" cy="200" r="120" fill="none" stroke="#A400FF" stroke-width="1" opacity="0.15"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Feature Cards -->
+    <div class="features">
+        <div class="feature-card">
+            <span class="feature-icon"></span>
+            <h3>Cyber Threats Explained</h3>
+            <p>Deep dive into common cyber threats, attack vectors, and real-world scenarios. Learn how threats evolve and impact your security posture.</p>
+            <a href="threats.html" class="btn btn-secondary" style="width: 100%; text-align: center;">Learn More</a>
+        </div>
+        <div class="feature-card">
+            <span class="feature-icon"></span>
+            <h3>Security Frameworks</h3>
+            <p>Explore industry-standard frameworks like OWASP Top 10, NIST, ISO 27001, and Zero Trust Architecture for comprehensive security guidance.</p>
+            <a href="frameworks.html" class="btn btn-secondary" style="width: 100%; text-align: center;">Explore</a>
+        </div>
+
+        <div class="feature-card">
+            <span class="feature-icon"></span>
+            <h3>Developer Best Practices</h3>
+            <p>Build secure applications from the ground up with secure coding practices, authentication patterns, and vulnerability prevention techniques.</p>
+            <a href="learning.html" class="btn btn-secondary" style="width: 100%; text-align: center;">Discover</a>
+        </div>
+    </div>
+
+    <!-- Search Bar -->
+    <section class="container" style="padding: 3rem 0 2rem;">
+        <div style="background: rgba(26, 39, 68, 0.6); backdrop-filter: blur(10px); border: 2px solid var(--cyan); border-radius: 20px; padding: 2rem; box-shadow: 0 0 30px rgba(0, 229, 255, 0.1);">
+            <h2 style="text-align: center; margin-bottom: 1.5rem;"> Ask a Cybersecurity Question</h2>
+            <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+                <input type="text" id="cyberSearchInput" class="tool-input" placeholder="e.g., Virus vs Worm? HTTP vs HTTPS? Explain the CIA Triad? How does OAuth 2.0 secure APIs?" style="flex: 1; min-width: 200px;">
+                <button class="btn btn-primary" onclick="searchCyberKnowledge()" style="white-space: nowrap;">Search</button>
+            </div>
+            <div id="searchResults" style="display: none;">
+                <div style="background: rgba(0, 229, 255, 0.05); border-left: 4px solid var(--cyan); padding: 1.5rem; border-radius: 10px;">
+                    <h3 id="resultTitle" style="color: var(--cyan); margin-bottom: 1rem;"></h3>
+                    <p id="resultAnswer" style="color: var(--text-light); line-height: 1.8; margin-bottom: 1rem;"></p>
+                    <div id="resultRelated" style="margin-top: 1rem;"></div>
+                </div>
+            </div>
+            <div id="searchHints" style="margin-top: 1rem; text-align: center; color: var(--text-muted); font-size: 0.85rem;">
+                <p style="margin-bottom: 0.5rem;"> <strong>Try searching:</strong></p>
+                <p style="line-height: 1.6;">
+                    <strong>Fundamentals:</strong> cybersecurity • network security fundamentals • virus vs worm • CIA triad • authentication vs authorization<br>
+                    <strong>Basics:</strong> password • encryption • brute force attack • botnet • data breach • VPN • 2FA • firewall<br>
+                    <strong>Attacks:</strong> phishing • SQL injection • XSS • MITM • ARP spoofing • session hijacking • buffer overflow • DDoS<br>
+                    <strong>Advanced:</strong> ransomware kill chain • PTES lifecycle • APT • Kerberoasting • side-channel attack • hypervisor escape • memory forensics<br>
+                    <strong>Architecture:</strong> PKI • OAuth 2.0 • micro-segmentation • zero trust • network segmentation • SIEM • sandboxing<br>
+                    <strong>Risk & Response:</strong> risk assessment • NIST incident response • CVE/CVSS • anomaly detection • supply-chain attacks • OSINT • digital forensics
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Main Content -->
+    <div class="container">
+
+        <!-- Quick Access -->
+        <section class="section">
+            <h2>Quick Access Guides</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3> Getting Started</h3>
+                    <p>New to cybersecurity? Start with our beginner's guide covering fundamentals, terminology, and essential concepts.</p>
+                    <a href="learning.html" class="blog-read-more">Start Now →</a>
+                </div>
+                <div class="card">
+                    <h3> Understanding Threats</h3>
+                    <p>Explore detailed explanations of common vulnerabilities including XSS, SQL Injection, CSRF, and social engineering tactics.</p>
+                    <a href="threats.html" class="blog-read-more">View Threats →</a>
+                </div>
+                <div class="card">
+                    <h3> Security Tools</h3>
+                    <p>Discover safe, educational tools including password checkers, SSL validators, hashing demos, and data breach checkers.</p>
+                    <a href="tools.html" class="blog-read-more">Try Tools →</a>
+                </div>
+                <div class="card">
+                    <h3> Industry Standards</h3>
+                    <p>Learn about OWASP, NIST, and ISO standards that guide organizations in building secure and resilient systems.</p>
+                    <a href="frameworks.html" class="blog-read-more">Explore Frameworks →</a>
+                </div>
+                <div class="card">
+                    <h3> Latest Updates</h3>
+                    <p>Stay informed with our blog covering latest vulnerabilities, security tips, industry news, and research trends.</p>
+                    <a href="blog.html" class="blog-read-more">Read Blog →</a>
+                </div>
+                <div class="card">
+                    <h3> Join Community</h3>
+                    <p>Contribute to cybersecurity education, follow responsible disclosure practices, and participate in our open-source initiatives.</p>
+                    <a href="community.html" class="blog-read-more">Join Us →</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section attack-mapper-section">
+            <h2>Visual Attack Path Mapper</h2>
+            <div class="attack-mapper">
+                <div class="attack-controls">
+                    <p>Select an attack to see how adversaries move and where to intervene.</p>
+                    <div class="attack-chip-group">
+                        <button type="button" class="attack-chip active" data-attack="sqlInjection">SQL Injection</button>
+                        <button type="button" class="attack-chip" data-attack="xss">XSS</button>
+                        <button type="button" class="attack-chip" data-attack="ransomware">Ransomware</button>
+                    </div>
+                </div>
+                <div class="attack-diagram">
+                    <div class="attack-path" id="attackFlow"></div>
+                    <div class="attack-summary-panel">
+                        <h3 id="attackTitle"></h3>
+                        <p id="attackDescription"></p>
+                        <h4>Break the chain</h4>
+                        <ul class="attack-defense-list" id="attackDefenseList"></ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section behavior-simulator-section">
+            <h2>Secure Behavior Simulator</h2>
+            <div class="behavior-sim">
+                <div class="behavior-scenario-selector">
+                    <button type="button" class="behavior-chip active" data-scenario="suspiciousEmail">Suspicious Email</button>
+                    <button type="button" class="behavior-chip" data-scenario="fakeLogin">Fake Login Page</button>
+                    <button type="button" class="behavior-chip" data-scenario="publicWifi">Public Wi-Fi Risk</button>
+                </div>
+                <div class="behavior-dashboard">
+                    <div class="behavior-primary">
+                        <h3 id="behaviorScenarioTitle"></h3>
+                        <p id="behaviorScenarioDesc"></p>
+                    </div>
+                    <div class="behavior-action-grid">
+                        <div class="behavior-card good">
+                            <h4>Right Action</h4>
+                            <p id="behaviorRightAction"></p>
+                        </div>
+                        <div class="behavior-card risk">
+                            <h4>Wrong Move</h4>
+                            <p id="behaviorWrongAction"></p>
+                        </div>
+                        <div class="behavior-card impact">
+                            <h4>What Happens</h4>
+                            <p id="behaviorOutcome"></p>
+                        </div>
+                        <div class="behavior-card plan">
+                            <h4>Stay Safe</h4>
+                            <ul id="behaviorSafePlan" class="behavior-safe-list"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section - Book Assessment -->
+        <section class="section" style="background: linear-gradient(135deg, rgba(0, 229, 255, 0.08), rgba(164, 0, 255, 0.08)); border: 2px solid var(--cyan);">
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <h2 style="font-size: 2.2rem; margin-bottom: 1rem;">Ready to Secure Your Organization?</h2>
+                <p style="color: var(--text-light); font-size: 1.1rem; margin-bottom: 2rem; line-height: 1.8;">
+                    Get expert security assessments, penetration testing, and threat monitoring from certified security professionals. <strong style="color: var(--green);">No credit card required.</strong>
+                </p>
+                <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="services.html#assessment" class="btn btn-primary" style="padding: 1rem 2.5rem; font-size: 1rem;"> Book Security Assessment</a>
+                    <a href="contact.html" class="btn btn-secondary" style="padding: 1rem 2.5rem; font-size: 1rem;"> Get in Touch</a>
+                </div>
+                <p style="color: var(--text-muted); margin-top: 2rem; font-size: 0.9rem;">✓ 24/7 Support  ✓ ISO Compliant  ✓ 98% Client Satisfaction</p>
+            </div>
+        </section>
+
+        <!-- Trusted by Leading Organizations -->
+        <section class="section">
+            <h2>Trusted by Industry Leaders</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1.5rem; max-width: 1000px; margin: 0 auto; align-items: center;">
+                <div style="background: rgba(26, 39, 68, 0.6); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 12px; padding: 1.5rem; text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;"></div>
+                    <p style="color: var(--text-light); font-weight: 600; font-size: 0.9rem;">Tech Startups</p>
+                </div>
+                <div style="background: rgba(26, 39, 68, 0.6); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 12px; padding: 1.5rem; text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;"></div>
+                    <p style="color: var(--text-light); font-weight: 600; font-size: 0.9rem;">Healthcare</p>
+                </div>
+                <div style="background: rgba(26, 39, 68, 0.6); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 12px; padding: 1.5rem; text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;"></div>
+                    <p style="color: var(--text-light); font-weight: 600; font-size: 0.9rem;">Financial</p>
+                </div>
+                <div style="background: rgba(26, 39, 68, 0.6); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 12px; padding: 1.5rem; text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;"></div>
+                    <p style="color: var(--text-light); font-weight: 600; font-size: 0.9rem;">Manufacturing</p>
+                </div>
+                <div style="background: rgba(26, 39, 68, 0.6); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 12px; padding: 1.5rem; text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;"></div>
+                    <p style="color: var(--text-light); font-weight: 600; font-size: 0.9rem;">Education</p>
+                </div>
+                <div style="background: rgba(26, 39, 68, 0.6); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 12px; padding: 1.5rem; text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;"></div>
+                    <p style="color: var(--text-light); font-weight: 600; font-size: 0.9rem;">Government</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Trust Stats -->
+        <section class="section">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; max-width: 1000px; margin: 0 auto;">
+                <div style="background: rgba(26, 39, 68, 0.6); border: 1px solid var(--green); border-radius: 15px; padding: 2rem; text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 700; color: var(--green); margin-bottom: 0.5rem;" data-counter-id="attacks-blocked-counter">847K+</div>
+                    <p style="color: var(--text-muted);">Attacks Blocked</p>
+                    <p style="color: var(--text-light); font-size: 0.85rem;">Real-time by our community</p>
+                </div>
+                <div style="background: rgba(26, 39, 68, 0.6); border: 1px solid var(--cyan); border-radius: 15px; padding: 2rem; text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 700; color: var(--cyan); margin-bottom: 0.5rem;" data-counter-id="incidents-prevented-counter">562</div>
+                    <p style="color: var(--text-muted);">Incidents Prevented</p>
+                    <p style="color: var(--text-light); font-size: 0.85rem;">This month through detection</p>
+                </div>
+                <div style="background: rgba(26, 39, 68, 0.6); border: 1px solid var(--purple); border-radius: 15px; padding: 2rem; text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 700; color: var(--purple); margin-bottom: 0.5rem;" data-counter-id="damages-prevented-counter">$2.3B+</div>
+                    <p style="color: var(--text-muted);">Damages Prevented</p>
+                    <p style="color: var(--text-light); font-size: 0.85rem;">Cumulative for our clients</p>
+                </div>
+                <div style="background: rgba(26, 39, 68, 0.6); border: 1px solid var(--warning); border-radius: 15px; padding: 2rem; text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 700; color: var(--warning); margin-bottom: 0.5rem;" data-counter-id="threat-detection-counter">98.7%</div>
+                    <p style="color: var(--text-muted);">Threat Detection Rate</p>
+                    <p style="color: var(--text-light); font-size: 0.85rem;">Faster than industry average</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mission Statement -->
+        <section class="section">
+            <div class="card" style="border-color: var(--green); text-align: center;">
+                <h2 style="color: var(--green); text-shadow: 0 0 10px var(--green);">Our Mission</h2>
+                <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+                    We believe cybersecurity education should be accessible, practical, and empowering. Our mission is to equip individuals and organizations with the knowledge and tools needed to defend against cyber threats while promoting ethical practices and responsible security disclosure.
+                </p>
+                <p style="color: var(--text-muted);">
+                     Global |  Secure |  Educational |  Community-Driven
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>🛡️ CyberGuard</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                    Your trusted resource for cybersecurity education, frameworks, and best practices.
+                </p>
+                 <div class="social-links">
+                    <a href="https://github.com/"><img src="./Icons/Github-Logo-PNG-Photo-1.png" alt="GitHub" style="width: 35px; height: 20px; filter: brightness(0) invert(1);"></a>
+                    <a href="https://x.com/" title="Twitter">𝕏</a>
+                    <a href="https://in.linkedin.com/?mcid=6844056167778418689&src=go-pa&trk=sem-ga_campid.14650114788_asid.151761418307_crid.657403558715_kw.linkedin%20login_d.c_tid.kwd-12704335873_n.g_mt.e_geo.9040243&cid=&gclsrc=aw.ds&gad_source=1&gad_campaignid=14650114788&gbraid=0AAAAABKX7wGkDyHEA_MbDu4Zfag0E9xaq&gclid=CjwKCAiAjojLBhAlEiwAcjhrDuzTNnDEosiin0bM5mg-08UJ9raSASZWTRJl8L8twDVKIXPAUDeXWhoC9oIQAvD_BwE" title="LinkedIn">in</a>
+                    <a href="https://mail.google.com/mail/u/0/#inbox" title="Email">✉️</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="threats.html">Threats & Vulnerabilities</a></li>
+                    <li><a href="frameworks.html">Security Frameworks</a></li>
+                    <li><a href="learning.html">Learning Resources</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="tools.html">Tools & Utilities</a></li>
+                    <li><a href="blog.html">Blog & Updates</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-of-service.html">Terms & Conditions</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 CyberGuard - Cybersecurity Education Platform. All rights reserved. | Made with  for a secure digital world</p>
+        </div>
+    </footer>
+
+    <!-- Exit Intent Pop-up for Free Security Scan -->
+    <div id="exitIntentModal" class="exit-intent-modal">
+        <div class="exit-intent-content">
+            <button id="closeExitIntent" class="exit-intent-close">✕</button>
+            <h2> Wait! Get a Free Security Scan</h2>
+            <p>Before you go, discover your organization's security vulnerabilities with our <span class="highlight">complimentary security assessment</span>—no credit card required.</p>
+            <div class="exit-intent-buttons">
+                <button id="startScanBtn" class="exit-intent-btn exit-intent-btn-primary"> Start Free Scan</button>
+                <button onclick="document.getElementById('exitIntentModal').style.display='none';" class="exit-intent-btn exit-intent-btn-secondary">I'll think about it</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Banner for GDPR/CCPA Compliance -->
+    <div id="cookieBanner" class="cookie-banner">
+        <div class="cookie-banner-content">
+            <h3> Cookie Consent</h3>
+            <p>We use cookies to enhance your experience, analyze site traffic, and serve personalized content. By continuing to use this site, you consent to our <a href="privacy-policy.html">Privacy Policy</a> and <a href="privacy-policy.html#cookies">Cookie Policy</a>. You can change your consent preferences at any time.</p>
+        </div>
+        <div class="cookie-banner-buttons">
+            <button id="rejectCookies" class="cookie-btn cookie-btn-reject">Reject</button>
+            <button id="acceptCookies" class="cookie-btn cookie-btn-accept">Accept All</button>
+        </div>
+    </div>
+
+    <!-- JSON-LD Schema Markup for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "CyberGuard",
+        "url": "https://cyberguard.com",
+        "logo": "https://cyberguard.com/logo.png",
+        "description": "Comprehensive cybersecurity education platform offering tools, frameworks, learning resources, and AI-powered threat explanations to protect against digital threats.",
+        "sameAs": [
+            "https://facebook.com/cyberguard",
+            "https://twitter.com/cyberguard",
+            "https://linkedin.com/company/cyberguard"
+        ],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "Customer Service",
+            "email": "support@cyberguard.com"
+        }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Cybersecurity Education & Training",
+        "description": "Professional cybersecurity education, frameworks, tools, and threat analysis platform.",
+        "provider": {
+            "@type": "Organization",
+            "name": "CyberGuard"
+        },
+        "areaServed": "Worldwide",
+        "serviceType": [
+            "Security Training",
+            "Penetration Testing",
+            "Threat Analysis",
+            "Security Frameworks",
+            "Vulnerability Assessment"
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is cybersecurity?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Cybersecurity is the practice of protecting systems, networks, software, and data from digital attacks, unauthorized access, and disruption."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is phishing?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Phishing is a cyberattack method where attackers send fraudulent emails or create fake websites to trick people into revealing sensitive information."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is the difference between HTTP and HTTPS?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "HTTP transmits data in plain text, while HTTPS wraps HTTP inside TLS/SSL encryption to protect confidentiality and integrity."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <script src="api.js"></script>
+    <script src="app.js"></script>
+    <script src="script.js"></script>
+    <!-- Animated Background System -->
+    <script src="cyber-background.js"></script>
+    <!-- Service Worker Registration for PWA -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => {
+                        console.log('Service Worker registered:', registration);
+                    })
+                    .catch(error => {
+                        console.log('Service Worker registration failed:', error);
+                    });
+            });
+        }
+    </script>
+    <!-- Auto-reload script for development -->
+    <script>
+        let lastModified = null;
+        setInterval(async () => {
+            try {
+                const response = await fetch(window.location.href, { 
+                    method: 'HEAD',
+                    cache: 'no-cache'
+                });
+                const modified = response.headers.get('Last-Modified');
+                if (lastModified === null) {
+                    lastModified = modified;
+                } else if (lastModified !== modified) {
+                    window.location.reload(true);
+                }
+            } catch (e) {
+                console.log('Auto-reload check failed:', e);
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

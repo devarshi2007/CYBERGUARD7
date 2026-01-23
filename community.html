@@ -1,0 +1,835 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CyberGuard Community & Contribution - Join our open-source community and help us build a safer digital world.">
+    <meta name="theme-color" content="#00E5FF">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Community & Contribution - CyberGuard</title>
+    <link rel="stylesheet" href="style.css?v=1.0">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <!-- Plausible Analytics for Privacy-Respecting Usage Tracking -->
+    <script defer data-domain="cyberguard.local" src="https://plausible.io/js/script.js"></script>
+    <!-- Notification Blocker -->
+    <script>
+        const MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.addedNodes.length) {
+                    mutation.addedNodes.forEach((node) => {
+                        if (node.nodeType === 1) {
+                            if (node.className && (node.className.includes('notification') || node.className.includes('update') || node.className.includes('modal'))) {
+                                node.remove();
+                            }
+                        }
+                    });
+                }
+            });
+        });
+        observer.observe(document.body || document.documentElement, { childList: true, subtree: true });
+    </script>
+    <!-- Crisp Chat Widget for AI Support - DISABLED -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/azonix" rel="stylesheet">
+    <style>
+        .hero h1 {
+            font-family: 'Azonix', sans-serif;
+            font-size: 3.5rem;
+            line-height: 1.5;
+            color: #ffffff;
+            text-shadow: 0 0 10px #00e6e6, 0 0 20px #00e6e6;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Cyber Background -->
+    <div id="bg-container" class="bg-container">
+        <canvas id="cyber-canvas"></canvas>
+        <div class="cyber-grid-overlay"></div>
+        <div class="cyber-glow-effect"></div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav>
+        <div class="navbar">
+            <div class="logo">🛡️ CyberGuard</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="threats.html">Threats</a></li>
+                <li><a href="threat-map.html">Threat Map</a></li>
+                <li><a href="frameworks.html">Frameworks</a></li>
+                <li><a href="learning.html">Learn</a></li>
+                <li><a href="tools.html">Tools</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="chatbot.html">AI Chat</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="navbar-right">
+                <button id="theme-toggle" class="theme-toggle-btn" title="Toggle theme">🌙</button>
+                <button id="hamburger-btn" class="hamburger-btn" title="Menu" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hamburger Menu -->
+    <div id="hamburger-overlay" class="hamburger-overlay"></div>
+    <div id="hamburger-menu" class="hamburger-menu">
+        <button id="hamburger-close" class="hamburger-close">✕</button>
+        <ul class="hamburger-menu-list">
+            <li><a href="index.html" class="hamburger-link">Home</a></li>
+            <li><a href="about.html" class="hamburger-link">About Us</a></li>
+            <li><a href="case-studies.html" class="hamburger-link">Case Studies</a></li>
+            <li><a href="community.html" class="hamburger-link">Community</a></li>
+            <li><a href="privacy-policy.html" class="hamburger-link">Privacy Policy</a></li>
+            <li><a href="terms-of-service.html" class="hamburger-link">Terms of Service</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="cyber-grid"></div>
+        <div class="hero-content">
+            <h1> Community & Contribution</h1>
+            <p>Join our open-source community and help us build a safer digital world. Your contributions matter!</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Contribution Guidelines -->
+        <section class="section">
+            <h2>How to Contribute</h2>
+            
+            <div class="contribution-box">
+                <h3> Getting Started</h3>
+                <p>
+                    CyberGuard is an open-source project. We welcome contributions from developers, security researchers, content creators, and enthusiasts of all levels. Here's how you can get involved:
+                </p>
+                <div style="margin-top: 1.5rem;">
+                    <h4 style="color: var(--green); margin-bottom: 1rem;">Step 1: Fork & Clone the Repository</h4>
+                    <div class="tool-output" style="text-align: left; font-family: monospace; font-size: 0.9rem;">
+                        git clone https://github.com/cyberguard/cyberguard.git<br>
+                        cd cyberguard<br>
+                        git checkout -b feature/your-feature-name
+                    </div>
+                </div>
+                <div style="margin-top: 1.5rem;">
+                    <h4 style="color: var(--green); margin-bottom: 1rem;">Step 2: Make Your Changes</h4>
+                    <p style="color: var(--text-muted);">
+                        Make meaningful changes following our coding standards and guidelines. Keep commits atomic and messages descriptive.
+                    </p>
+                </div>
+                <div style="margin-top: 1.5rem;">
+                    <h4 style="color: var(--green); margin-bottom: 1rem;">Step 3: Submit a Pull Request</h4>
+                    <p style="color: var(--text-muted);">
+                        Push your branch and create a Pull Request with a clear description of your changes. Our team will review and provide feedback.
+                    </p>
+                </div>
+            </div>
+
+            <div class="contribution-box">
+                <h3> Types of Contributions</h3>
+                <div style="margin-top: 1.5rem;">
+                    <div class="card" style="margin-bottom: 1rem; border-color: var(--cyan);">
+                        <h4 style="color: var(--cyan);"> Content & Documentation</h4>
+                        <ul style="list-style-position: inside; color: var(--text-muted); margin-top: 0.5rem;">
+                            <li>Add security articles and tutorials</li>
+                            <li>Improve documentation and guides</li>
+                            <li>Create educational content</li>
+                            <li>Translate content to other languages</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" style="margin-bottom: 1rem; border-color: var(--purple);">
+                        <h4 style="color: var(--purple);"> Code Contributions</h4>
+                        <ul style="list-style-position: inside; color: var(--text-muted); margin-top: 0.5rem;">
+                            <li>Bug fixes and improvements</li>
+                            <li>New features and tools</li>
+                            <li>Performance optimizations</li>
+                            <li>Security enhancements</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" style="margin-bottom: 1rem; border-color: var(--green);">
+                        <h4 style="color: var(--green);"> Design & UX</h4>
+                        <ul style="list-style-position: inside; color: var(--text-muted); margin-top: 0.5rem;">
+                            <li>UI/UX improvements</li>
+                            <li>Design assets and icons</li>
+                            <li>Accessibility enhancements</li>
+                            <li>Visual design feedback</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" style="border-color: #FF6B00;">
+                        <h4 style="color: #FF6B00;"> Security Research</h4>
+                        <ul style="list-style-position: inside; color: var(--text-muted); margin-top: 0.5rem;">
+                            <li>Vulnerability reporting</li>
+                            <li>Security audits</li>
+                            <li>Threat research articles</li>
+                            <li>Best practice guidelines</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Responsible Disclosure -->
+        <section class="section">
+            <h2> Responsible Disclosure Policy</h2>
+            
+            <div class="card">
+                <h3>Reporting Security Vulnerabilities</h3>
+                <p style="margin: 1rem 0;">
+                    We take security seriously. If you discover a vulnerability in CyberGuard, please report it responsibly to help us fix it before it's exploited.
+                </p>
+                <div style="background: rgba(0, 229, 255, 0.05); border-left: 4px solid var(--cyan); padding: 1.5rem; border-radius: 5px; margin: 1.5rem 0;">
+                    <h4 style="color: var(--cyan); margin-bottom: 1rem;">How to Report</h4>
+                    <ul style="list-style-position: inside; color: var(--text-muted);">
+                        <li> Email: security@cyberguard.org</li>
+                        <li> Include: description, steps to reproduce, impact assessment</li>
+                        <li> Do NOT: publicly disclose until we've issued a patch</li>
+                        <li>✓ DO: give us reasonable time to respond (typically 30 days)</li>
+                    </ul>
+                </div>
+
+                <h4 style="color: var(--cyan); margin-top: 2rem; margin-bottom: 1rem;">What We Promise</h4>
+                <ul style="list-style-position: inside; color: var(--text-muted);">
+                    <li>✓ We will acknowledge your report within 48 hours</li>
+                    <li>✓ We will work to fix confirmed vulnerabilities promptly</li>
+                    <li>✓ We will credit you for the discovery (unless you prefer anonymity)</li>
+                    <li>✓ We will keep you updated on our progress</li>
+                    <li>✓ We will coordinate disclosure timing with you</li>
+                </ul>
+
+                <h4 style="color: var(--purple); margin-top: 2rem; margin-bottom: 1rem;">What We Expect</h4>
+                <ul style="list-style-position: inside; color: var(--text-muted);">
+                    <li>✓ Give us time to fix before public disclosure</li>
+                    <li>✓ Don't access other users' data or systems</li>
+                    <li>✓ Don't disrupt service availability</li>
+                    <li>✓ Don't modify data</li>
+                    <li>✓ Avoid privacy violations</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Community & Badges -->
+        <section class="section">
+            <h2> Community Badges & Recognition</h2>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">
+                Contributors to CyberGuard receive recognition badges on their profiles. These badges highlight your contributions to cybersecurity education.
+            </p>
+
+            <div class="cards-grid">
+                <div class="card" style="text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;"></div>
+                    <h3>Code Contributor</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">
+                        Contributed code improvements and features to the project
+                    </p>
+                </div>
+
+                <div class="card" style="text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;"></div>
+                    <h3>Content Creator</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">
+                        Created educational content and security articles
+                    </p>
+                </div>
+
+                <div class="card" style="text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;"></div>
+                    <h3>Bug Finder</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">
+                        Discovered and reported security or functionality issues
+                    </p>
+                </div>
+
+                <div class="card" style="text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;"></div>
+                    <h3>Design Contributor</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">
+                        Improved UI/UX design and accessibility
+                    </p>
+                </div>
+
+                <div class="card" style="text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;"></div>
+                    <h3>Researcher</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">
+                        Contributed security research and threat analysis
+                    </p>
+                </div>
+
+                <div class="card" style="text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;"></div>
+                    <h3>Community Champion</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">
+                        Active in community engagement and mentorship
+                    </p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Roadmap -->
+        <section class="section">
+            <h2> Project Roadmap</h2>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">
+                Here's where CyberGuard is heading. We welcome contributions towards these goals!
+            </p>
+
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3> Completed (Q1-Q2 2024)</h3>
+                    <span class="accordion-toggle"></span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <ul style="list-style-position: inside;">
+                            <li>✓ Launch core website with 8 main pages</li>
+                            <li>✓ Create OWASP Top 10 educational content</li>
+                            <li>✓ Implement interactive security tools</li>
+                            <li>✓ Design dark theme with neon accents</li>
+                            <li>✓ Set up community guidelines</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3> In Progress (Q3 2024)</h3>
+                    <span class="accordion-toggle"></span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <ul style="list-style-position: inside;">
+                            <li> Develop interactive CTF (Capture The Flag) challenges</li>
+                            <li> Create video tutorials and webinars</li>
+                            <li> Build community forum platform</li>
+                            <li> Implement user authentication system</li>
+                            <li> Add certification preparation content</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3> Upcoming (Q4 2024 - Q2 2025)</h3>
+                    <span class="accordion-toggle"></span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <ul style="list-style-position: inside;">
+                            <li> Launch mobile application (iOS & Android)</li>
+                            <li> Create advanced penetration testing guides</li>
+                            <li> Develop machine learning-based threat detection tool</li>
+                            <li> Build API security testing playground</li>
+                            <li> Create blockchain security content</li>
+                            <li> Establish bug bounty program</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3> Future Vision (2025+)</h3>
+                    <span class="accordion-toggle"></span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <ul style="list-style-position: inside;">
+                            <li> Global security certification program</li>
+                            <li> AI-powered personalized learning paths</li>
+                            <li> Corporate training platform</li>
+                            <li> Integration with major cybersecurity tools</li>
+                            <li> Global community chapters and events</li>
+                            <li> Open-source threat intelligence platform</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Code of Conduct -->
+        <section class="section">
+            <h2> Code of Conduct</h2>
+            
+            <div class="card">
+                <h3>Our Community Standards</h3>
+                <p style="margin: 1rem 0;">
+                    CyberGuard is committed to providing a welcoming and inclusive community for everyone. We expect all members to:
+                </p>
+
+                <h4 style="color: var(--green); margin-top: 1.5rem; margin-bottom: 1rem;">✓ DO</h4>
+                <ul style="list-style-position: inside; color: var(--text-muted);">
+                    <li>Be respectful and inclusive</li>
+                    <li>Welcome diverse perspectives</li>
+                    <li>Give credit to others' work</li>
+                    <li>Focus on what's best for the community</li>
+                    <li>Show empathy and understanding</li>
+                </ul>
+
+                <h4 style="color: #FF6B00; margin-top: 1.5rem; margin-bottom: 1rem;">✗ DON'T</h4>
+                <ul style="list-style-position: inside; color: var(--text-muted);">
+                    <li>Discriminate or harass anyone</li>
+                    <li>Use derogatory language</li>
+                    <li>Make personal attacks</li>
+                    <li>Share malicious code or exploits</li>
+                    <li>Violate privacy or confidentiality</li>
+                </ul>
+
+                <p style="color: var(--text-muted); margin-top: 1.5rem; font-size: 0.9rem;">
+                    Violations will be taken seriously and may result in removal from the community.
+                </p>
+            </div>
+        </section>
+
+        <!-- Community Forums -->
+        <section class="section">
+            <h2> Community Forums</h2>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">
+                Join discussions with security professionals, researchers, and enthusiasts. Share knowledge, ask questions, and collaborate on cybersecurity challenges.
+            </p>
+
+            <!-- Forum Categories -->
+            <div class="cards-grid" style="margin-bottom: 2rem;">
+                <div class="card" style="cursor: pointer; transition: all 0.3s ease; border-color: var(--cyan);" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--cyan)'; this.style.boxShadow='0 8px 20px rgba(0, 229, 255, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 10px rgba(0, 0, 0, 0.3)'">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <span style="font-size: 2.5rem;"></span>
+                        <div>
+                            <h3 style="margin: 0; color: var(--cyan);">General Security</h3>
+                            <p style="margin: 0.25rem 0 0; font-size: 0.85rem; color: var(--text-muted);">1,234 threads • 8,567 posts</p>
+                        </div>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 0.75rem;">
+                        General cybersecurity discussions, news, and best practices for all skill levels.
+                    </p>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <span style="background: rgba(0, 229, 255, 0.1); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.8rem; color: var(--cyan);">Beginner Friendly</span>
+                        <span style="background: rgba(0, 229, 255, 0.1); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.8rem; color: var(--cyan);">Active</span>
+                    </div>
+                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(0, 229, 255, 0.2);">
+                        <strong style="font-size: 0.85rem; color: var(--text-muted);">Latest:</strong>
+                        <div style="font-size: 0.85rem; color: var(--text-light); margin-top: 0.5rem;">
+                            "Best practices for securing home networks" by @SecurityPro • 2h ago
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="cursor: pointer; transition: all 0.3s ease; border-color: #9D4EDD;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#9D4EDD'; this.style.boxShadow='0 8px 20px rgba(157, 78, 221, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 10px rgba(0, 0, 0, 0.3)'">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <span style="font-size: 2.5rem;"></span>
+                        <div>
+                            <h3 style="margin: 0; color: #9D4EDD;">Threat Analysis</h3>
+                            <p style="margin: 0.25rem 0 0; font-size: 0.85rem; color: var(--text-muted);">856 threads • 5,432 posts</p>
+                        </div>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 0.75rem;">
+                        Analyze emerging threats, malware, APTs, and attack techniques. Share threat intelligence.
+                    </p>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <span style="background: rgba(157, 78, 221, 0.1); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.8rem; color: #9D4EDD;">Advanced</span>
+                        <span style="background: rgba(157, 78, 221, 0.1); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.8rem; color: #9D4EDD;">Technical</span>
+                    </div>
+                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(157, 78, 221, 0.2);">
+                        <strong style="font-size: 0.85rem; color: var(--text-muted);">Latest:</strong>
+                        <div style="font-size: 0.85rem; color: var(--text-light); margin-top: 0.5rem;">
+                            "Analysis of new ransomware variant targeting healthcare" by @ThreatHunter • 5h ago
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="cursor: pointer; transition: all 0.3s ease; border-color: var(--green);" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--green)'; this.style.boxShadow='0 8px 20px rgba(0, 255, 136, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 10px rgba(0, 0, 0, 0.3)'">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <span style="font-size: 2.5rem;"></span>
+                        <div>
+                            <h3 style="margin: 0; color: var(--green);">Penetration Testing</h3>
+                            <p style="margin: 0.25rem 0 0; font-size: 0.85rem; color: var(--text-muted);">743 threads • 4,128 posts</p>
+                        </div>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 0.75rem;">
+                        Ethical hacking, pentesting methodologies, tools, and authorized security testing discussions.
+                    </p>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <span style="background: rgba(0, 255, 136, 0.1); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.8rem; color: var(--green);">Hands-on</span>
+                        <span style="background: rgba(0, 255, 136, 0.1); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.8rem; color: var(--green);">Ethical</span>
+                    </div>
+                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(0, 255, 136, 0.2);">
+                        <strong style="font-size: 0.85rem; color: var(--text-muted);">Latest:</strong>
+                        <div style="font-size: 0.85rem; color: var(--text-light); margin-top: 0.5rem;">
+                            "OSCP exam preparation tips and resources" by @RedTeamer • 3h ago
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="cursor: pointer; transition: all 0.3s ease; border-color: #FF6B00;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#FF6B00'; this.style.boxShadow='0 8px 20px rgba(255, 107, 0, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 10px rgba(0, 0, 0, 0.3)'">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <span style="font-size: 2.5rem;"></span>
+                        <div>
+                            <h3 style="margin: 0; color: #FF6B00;">Incident Response</h3>
+                            <p style="margin: 0.25rem 0 0; font-size: 0.85rem; color: var(--text-muted);">592 threads • 3,267 posts</p>
+                        </div>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 0.75rem;">
+                        Discuss incident handling, forensics, containment strategies, and post-incident analysis.
+                    </p>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <span style="background: rgba(255, 107, 0, 0.1); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.8rem; color: #FF6B00;">Critical</span>
+                        <span style="background: rgba(255, 107, 0, 0.1); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.8rem; color: #FF6B00;">Professional</span>
+                    </div>
+                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255, 107, 0, 0.2);">
+                        <strong style="font-size: 0.85rem; color: var(--text-muted);">Latest:</strong>
+                        <div style="font-size: 0.85rem; color: var(--text-light); margin-top: 0.5rem;">
+                            "Lessons learned from recent supply chain attack" by @IRTeam • 1h ago
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="cursor: pointer; transition: all 0.3s ease; border-color: #FFD700;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#FFD700'; this.style.boxShadow='0 8px 20px rgba(255, 215, 0, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 10px rgba(0, 0, 0, 0.3)'">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <span style="font-size: 2.5rem;"></span>
+                        <div>
+                            <h3 style="margin: 0; color: #FFD700;">Application Security</h3>
+                            <p style="margin: 0.25rem 0 0; font-size: 0.85rem; color: var(--text-muted);">921 threads • 6,453 posts</p>
+                        </div>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 0.75rem;">
+                        Web security, API security, secure coding, OWASP Top 10, and application vulnerabilities.
+                    </p>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <span style="background: rgba(255, 215, 0, 0.1); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.8rem; color: #FFD700;">Popular</span>
+                        <span style="background: rgba(255, 215, 0, 0.1); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.8rem; color: #FFD700;">Dev-Friendly</span>
+                    </div>
+                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255, 215, 0, 0.2);">
+                        <strong style="font-size: 0.85rem; color: var(--text-muted);">Latest:</strong>
+                        <div style="font-size: 0.85rem; color: var(--text-light); margin-top: 0.5rem;">
+                            "Preventing SQL injection in modern frameworks" by @DevSecOps • 4h ago
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="cursor: pointer; transition: all 0.3s ease; border-color: var(--purple);" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--purple)'; this.style.boxShadow='0 8px 20px rgba(138, 43, 226, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 10px rgba(0, 0, 0, 0.3)'">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <span style="font-size: 2.5rem;"></span>
+                        <div>
+                            <h3 style="margin: 0; color: var(--purple);">AI Security</h3>
+                            <p style="margin: 0.25rem 0 0; font-size: 0.85rem; color: var(--text-muted);">387 threads • 2,134 posts</p>
+                        </div>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 0.75rem;">
+                        AI/ML security, adversarial attacks, prompt injection, model security, and AI red teaming.
+                    </p>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <span style="background: rgba(138, 43, 226, 0.1); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.8rem; color: var(--purple);">Emerging</span>
+                        <span style="background: rgba(138, 43, 226, 0.1); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.8rem; color: var(--purple);">Hot Topic</span>
+                    </div>
+                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(138, 43, 226, 0.2);">
+                        <strong style="font-size: 0.85rem; color: var(--text-muted);">Latest:</strong>
+                        <div style="font-size: 0.85rem; color: var(--text-light); margin-top: 0.5rem;">
+                            "Defending against LLM prompt injection attacks" by @AISecResearcher • 6h ago
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Forum Features -->
+            <div class="card" style="background: linear-gradient(135deg, rgba(0, 229, 255, 0.05), rgba(157, 78, 221, 0.05)); border: 2px solid var(--cyan);">
+                <h3 style="color: var(--cyan); margin-bottom: 1.5rem;"> Forum Features & Guidelines</h3>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                    <div>
+                        <h4 style="color: var(--green); margin-bottom: 0.75rem;">✓ Upvoting System</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">
+                            Vote on the most helpful posts and answers. Build reputation by contributing quality content.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h4 style="color: var(--purple); margin-bottom: 0.75rem;"> Reputation & Badges</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">
+                            Earn reputation points and unlock badges by helping others and sharing expertise.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h4 style="color: #FF6B00; margin-bottom: 0.75rem;"> Advanced Search</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">
+                            Find answers quickly with powerful search filters, tags, and category navigation.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h4 style="color: #FFD700; margin-bottom: 0.75rem;"> Mobile App</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">
+                            Stay connected on the go with our mobile-friendly interface and push notifications.
+                        </p>
+                    </div>
+                </div>
+
+                <div style="background: rgba(0, 229, 255, 0.05); border-left: 3px solid var(--cyan); padding: 1.25rem; border-radius: 5px; margin-top: 1.5rem;">
+                    <h4 style="color: var(--cyan); margin-bottom: 1rem;"> Community Guidelines</h4>
+                    <ul style="margin-left: 1.5rem; line-height: 2; color: var(--text-light);">
+                        <li><strong>Be respectful:</strong> Treat all members with courtesy and professionalism</li>
+                        <li><strong>Stay on topic:</strong> Keep discussions relevant to cybersecurity</li>
+                        <li><strong>No illegal content:</strong> Discuss techniques for authorized testing only</li>
+                        <li><strong>Share responsibly:</strong> Follow responsible disclosure practices</li>
+                        <li><strong>Give credit:</strong> Cite sources and respect intellectual property</li>
+                        <li><strong>Help others:</strong> Answer questions and mentor newcomers</li>
+                    </ul>
+                </div>
+
+                <div style="margin-top: 1.5rem; text-align: center;">
+                    <button class="btn btn-primary" style="padding: 1rem 2.5rem; font-size: 1.1rem; margin-right: 1rem;">
+                         Join Forums
+                    </button>
+                    <button class="btn btn-secondary" style="padding: 1rem 2.5rem; font-size: 1.1rem;">
+                         View All Categories
+                    </button>
+                </div>
+            </div>
+
+            <!-- Popular Discussions -->
+            <div style="margin-top: 2rem;">
+                <h3 style="color: var(--cyan); margin-bottom: 1.5rem;"> Trending Discussions</h3>
+                
+                <div class="card" style="margin-bottom: 1rem;">
+                    <div style="display: flex; gap: 1rem; align-items: start;">
+                        <div style="flex: 1;">
+                            <h4 style="margin: 0 0 0.5rem; color: var(--text-light);">
+                                How to prepare for the CISSP exam in 2025?
+                            </h4>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+                                Started by @SecurityStudent in General Security • 45 replies • 2.3k views
+                            </p>
+                            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                                <span style="background: rgba(0, 229, 255, 0.1); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.75rem; color: var(--cyan);">certification</span>
+                                <span style="background: rgba(0, 229, 255, 0.1); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.75rem; color: var(--cyan);">study-tips</span>
+                                <span style="background: rgba(0, 229, 255, 0.1); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.75rem; color: var(--cyan);">cissp</span>
+                            </div>
+                        </div>
+                        <div style="text-align: right; white-space: nowrap;">
+                            <div style="font-size: 1.2rem; color: var(--green);">↑ 156</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">upvotes</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-bottom: 1rem;">
+                    <div style="display: flex; gap: 1rem; align-items: start;">
+                        <div style="flex: 1;">
+                            <h4 style="margin: 0 0 0.5rem; color: var(--text-light);">
+                                Zero-day vulnerability discovered in popular IoT devices
+                            </h4>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+                                Started by @VulnResearcher in Threat Analysis • 78 replies • 5.8k views
+                            </p>
+                            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                                <span style="background: rgba(255, 107, 0, 0.1); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.75rem; color: #FF6B00;">zero-day</span>
+                                <span style="background: rgba(255, 107, 0, 0.1); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.75rem; color: #FF6B00;">iot</span>
+                                <span style="background: rgba(255, 107, 0, 0.1); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.75rem; color: #FF6B00;">urgent</span>
+                            </div>
+                        </div>
+                        <div style="text-align: right; white-space: nowrap;">
+                            <div style="font-size: 1.2rem; color: var(--green);">↑ 243</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">upvotes</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div style="display: flex; gap: 1rem; align-items: start;">
+                        <div style="flex: 1;">
+                            <h4 style="margin: 0 0 0.5rem; color: var(--text-light);">
+                                Best practices for securing Kubernetes clusters in production
+                            </h4>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+                                Started by @CloudSecEngineer in Application Security • 32 replies • 1.9k views
+                            </p>
+                            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                                <span style="background: rgba(0, 255, 136, 0.1); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.75rem; color: var(--green);">kubernetes</span>
+                                <span style="background: rgba(0, 255, 136, 0.1); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.75rem; color: var(--green);">cloud-security</span>
+                                <span style="background: rgba(0, 255, 136, 0.1); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.75rem; color: var(--green);">best-practices</span>
+                            </div>
+                        </div>
+                        <div style="text-align: right; white-space: nowrap;">
+                            <div style="font-size: 1.2rem; color: var(--green);">↑ 189</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">upvotes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>🛡️ CyberGuard</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                    Your trusted resource for cybersecurity education, frameworks, and best practices.
+                </p>
+                 <div class="social-links">
+                    <a href="https://github.com/"><img src="./Icons/Github-Logo-PNG-Photo-1.png" alt="GitHub" style="width: 35px; height: 20px; filter: brightness(0) invert(1);"></a>
+                    <a href="https://x.com/" title="Twitter">𝕏</a>
+                    <a href="https://in.linkedin.com/?mcid=6844056167778418689&src=go-pa&trk=sem-ga_campid.14650114788_asid.151761418307_crid.657403558715_kw.linkedin%20login_d.c_tid.kwd-12704335873_n.g_mt.e_geo.9040243&cid=&gclsrc=aw.ds&gad_source=1&gad_campaignid=14650114788&gbraid=0AAAAABKX7wGkDyHEA_MbDu4Zfag0E9xaq&gclid=CjwKCAiAjojLBhAlEiwAcjhrDuzTNnDEosiin0bM5mg-08UJ9raSASZWTRJl8L8twDVKIXPAUDeXWhoC9oIQAvD_BwE" title="LinkedIn">in</a>
+                    <a href="https://mail.google.com/mail/u/0/#inbox" title="Email">✉️</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="threats.html">Threats & Vulnerabilities</a></li>
+                    <li><a href="frameworks.html">Security Frameworks</a></li>
+                    <li><a href="learning.html">Learning Resources</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="tools.html">Tools & Utilities</a></li>
+                    <li><a href="blog.html">Blog & Updates</a></li>
+                    <li><a href="community.html">Community</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-of-service.html">Terms & Conditions</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 CyberGuard - Cybersecurity Education Platform. All rights reserved. | Made with  for a secure digital world</p>
+        </div>
+    </footer>
+
+    <script>
+    window.cyberKnowledgeBase = {
+        "fundamentals": [
+            {
+                "keyword": "cybersecurity",
+                "title": "What is Cybersecurity?",
+                "answer": "Cybersecurity is the practice of protecting systems, networks, and data from digital attacks and unauthorized access. It involves implementing technical, operational, and management practices to defend against threats like malware, ransomware, phishing, and data breaches.",
+                "relatedTopics": ["network security", "data protection", "encryption", "authentication"]
+            },
+            {
+                "keyword": "network security fundamentals",
+                "title": "Network Security Fundamentals",
+                "answer": "Network security involves securing data in transit and at rest across networks. Key components include firewalls, intrusion detection/prevention systems, VPNs, segmentation, and monitoring. Defense-in-depth strategies use multiple layers of security controls.",
+                "relatedTopics": ["firewall", "VPN", "segmentation", "monitoring"]
+            },
+            {
+                "keyword": "virus vs worm",
+                "title": "Difference Between Virus and Worm",
+                "answer": "A virus requires user action to spread (like opening a file), while a worm spreads automatically across networks without user intervention. Both are malware designed to damage systems, but worms are more dangerous because they can propagate rapidly.",
+                "relatedTopics": ["malware", "ransomware", "trojan"]
+            },
+            {
+                "keyword": "CIA triad",
+                "title": "CIA Triad (Confidentiality, Integrity, Availability)",
+                "answer": "The CIA Triad is the foundational model of cybersecurity: Confidentiality (data privacy), Integrity (data accuracy/authenticity), and Availability (data accessibility). All security controls aim to maintain these three principles.",
+                "relatedTopics": ["encryption", "authentication", "access control", "backup"]
+            },
+            {
+                "keyword": "authentication vs authorization",
+                "title": "Authentication vs Authorization",
+                "answer": "Authentication verifies who you are (proving identity), while authorization determines what you can access (permissions). Authentication uses passwords, biometrics, or MFA; authorization uses roles, policies, and access control lists.",
+                "relatedTopics": ["MFA", "OAuth", "RBAC", "access control"]
+            }
+        ],
+        "basics": [
+            {"keyword": "password", "title": "Password Security Best Practices", "answer": "Use 12+ characters with mixed case, numbers, and symbols. Never reuse passwords. Use a password manager. Enable MFA. Change passwords if compromised.", "relatedTopics": ["MFA", "password manager"]},
+            {"keyword": "encryption", "title": "What is Encryption?", "answer": "Encryption converts readable data (plaintext) into unreadable code (ciphertext) using algorithms and keys. Only those with the decryption key can read it. AES-256 and RSA are common encryption standards.", "relatedTopics": ["cryptography", "SSL/TLS", "key management"]},
+            {"keyword": "brute force attack", "title": "Brute Force Attack", "answer": "An attack that tries all possible password combinations until finding the correct one. Defenses include rate limiting, account lockouts, strong passwords, and MFA.", "relatedTopics": ["dictionary attack", "rainbow table", "MFA"]},
+            {"keyword": "botnet", "title": "What is a Botnet?", "answer": "A network of infected computers (bots) controlled by an attacker. Used for DDoS attacks, spam, data theft, and cryptocurrency mining. Spread through malware and unpatched vulnerabilities.", "relatedTopics": ["malware", "DDoS", "command and control"]},
+            {"keyword": "data breach", "title": "Understanding Data Breaches", "answer": "Unauthorized access and theft of sensitive data. Can result from weak security, phishing, ransomware, or insider threats. Impacts: stolen identities, financial loss, compliance penalties.", "relatedTopics": ["incident response", "GDPR", "breach notification"]},
+            {"keyword": "VPN", "title": "Virtual Private Network (VPN)", "answer": "Encrypts all internet traffic and masks your IP address by routing through a secure tunnel. Protects privacy on public WiFi and prevents ISP tracking.", "relatedTopics": ["encryption", "proxy", "Tor"]},
+            {"keyword": "2FA", "title": "Two-Factor Authentication (2FA)", "answer": "Requires two forms of verification: something you know (password) and something you have (phone, app, hardware key). Significantly improves account security.", "relatedTopics": ["MFA", "authentication", "TOTP"]},
+            {"keyword": "firewall", "title": "What is a Firewall?", "answer": "Network security device that monitors and controls incoming/outgoing traffic based on rules. Blocks unauthorized access while allowing legitimate traffic. First line of defense.", "relatedTopics": ["network security", "IDS/IPS", "WAF"]}
+        ],
+        "attacks": [
+            {"keyword": "phishing", "title": "Phishing Attacks", "answer": "Fraudulent emails or messages tricking users into revealing credentials or clicking malicious links. Prevention: verify senders, avoid clicking unknown links, enable email filtering.", "relatedTopics": ["spear phishing", "whaling", "social engineering"]},
+            {"keyword": "SQL injection", "title": "SQL Injection Attack", "answer": "Attackers insert malicious SQL code into input fields to manipulate database queries. Can expose, modify, or delete data. Prevention: use parameterized queries and input validation.", "relatedTopics": ["web security", "OWASP Top 10", "prepared statements"]},
+            {"keyword": "XSS", "title": "Cross-Site Scripting (XSS)", "answer": "Injecting malicious scripts into web pages viewed by other users. Steals cookies, sessions, or credentials. Types: stored, reflected, DOM-based. Prevention: input/output encoding.", "relatedTopics": ["web security", "OWASP Top 10", "CSP"]},
+            {"keyword": "MITM", "title": "Man-in-the-Middle Attack", "answer": "Attacker intercepts communication between two parties. Can eavesdrop, modify, or inject malicious data. Prevention: use HTTPS/TLS encryption and verify certificates.", "relatedTopics": ["encryption", "SSL/TLS", "certificate pinning"]},
+            {"keyword": "ARP spoofing", "title": "ARP Spoofing Attack", "answer": "Attacker sends forged ARP messages to associate their MAC address with a legitimate IP. Enables MITM attacks and traffic redirection.", "relatedTopics": ["network attack", "MITM", "MAC spoofing"]},
+            {"keyword": "session hijacking", "title": "Session Hijacking", "answer": "Attacker steals a user's session token/cookie to impersonate them. Prevention: use secure cookies (HTTPS only), short expiration times, re-authentication.", "relatedTopics": ["web security", "CSRF", "token management"]},
+            {"keyword": "buffer overflow", "title": "Buffer Overflow Attack", "answer": "Attacker writes data beyond a buffer's boundary, overwriting adjacent memory. Can execute malicious code. Prevention: input validation, safe functions, ASLR/DEP.", "relatedTopics": ["memory safety", "code injection", "fuzzing"]},
+            {"keyword": "DDoS", "title": "Distributed Denial of Service (DDoS)", "answer": "Overwhelming a service with traffic from many sources to make it unavailable. Amplification, volumetric, protocol, and application-layer attacks exist. Mitigation: rate limiting, WAF, CDN.", "relatedTopics": ["DoS", "botnet", "traffic analysis"]}
+        ],
+        "advanced": [
+            {"keyword": "ransomware kill chain", "title": "Ransomware Kill Chain", "answer": "1) Initial Access: phishing, exploits; 2) Persistence: backdoors; 3) Reconnaissance: discovering assets; 4) Lateral Movement: spreading; 5) Encryption: deploying malware; 6) Extortion: demanding ransom.", "relatedTopics": ["incident response", "threat hunting", "indicators of compromise"]},
+            {"keyword": "PTES lifecycle", "title": "Penetration Testing Execution Standard (PTES)", "answer": "7-phase framework: Pre-engagement, Reconnaissance, Scanning, Enumeration, Vulnerability Analysis, Exploitation, Reporting. Provides structured approach to authorized security testing.", "relatedTopics": ["penetration testing", "methodology", "NIST"]},
+            {"keyword": "APT", "title": "Advanced Persistent Threat (APT)", "answer": "Sophisticated, long-term cyberattack against specific targets (governments, enterprises). Characteristics: stealth, persistence, advanced techniques, nation-state backing.", "relatedTopics": ["threat actors", "attribution", "threat intelligence"]},
+            {"keyword": "Kerberoasting", "title": "Kerberoasting Attack", "answer": "Extracting and cracking service account password hashes from Kerberos TGS tickets. Effective against Active Directory. Mitigation: strong service account passwords, monitoring.", "relatedTopics": ["Active Directory", "Kerberos", "credential theft"]},
+            {"keyword": "side-channel attack", "title": "Side-Channel Attack", "answer": "Exploiting physical phenomena (timing, power consumption, electromagnetic radiation) rather than algorithm weaknesses. Examples: timing attacks, power analysis, cache attacks.", "relatedTopics": ["cryptanalysis", "hardware security", "differential power analysis"]},
+            {"keyword": "hypervisor escape", "title": "Hypervisor Escape", "answer": "Breaking out of a virtual machine to access the host hypervisor and other VMs. Critical for cloud security. Requires exploiting hypervisor vulnerabilities.", "relatedTopics": ["virtualization", "container escape", "cloud security"]},
+            {"keyword": "memory forensics", "title": "Memory Forensics", "answer": "Analyzing RAM to find malware, credentials, and evidence of attacks. Tools extract processes, network connections, file system data before systems are shut down.", "relatedTopics": ["digital forensics", "incident response", "malware analysis"]}
+        ],
+        "architecture": [
+            {"keyword": "PKI", "title": "Public Key Infrastructure (PKI)", "answer": "Framework for creating, managing, and distributing digital certificates and keys. Enables encryption, authentication, and digital signatures. Based on Certificate Authorities (CAs).", "relatedTopics": ["encryption", "digital certificates", "CA"]},
+            {"keyword": "OAuth 2.0", "title": "OAuth 2.0 Authorization Framework", "answer": "Standard for delegated authorization. Allows users to grant apps access to accounts without sharing passwords. Uses tokens instead of credentials. Widely adopted for SSO.", "relatedTopics": ["authentication", "SSO", "OpenID Connect"]},
+            {"keyword": "micro-segmentation", "title": "Micro-Segmentation", "answer": "Dividing networks into small, isolated segments with strict access controls. Each segment requires authentication. Limits lateral movement after breach.", "relatedTopics": ["network security", "zero trust", "segmentation"]},
+            {"keyword": "zero trust", "title": "Zero Trust Architecture", "answer": "Never trust, always verify. All users, devices, and traffic treated as untrusted. Requires authentication, authorization, and encryption for every access attempt.", "relatedTopics": ["security model", "micro-segmentation", "CASA"]},
+            {"keyword": "network segmentation", "title": "Network Segmentation", "answer": "Dividing network into subnets with access controls between segments. Prevents lateral movement, limits breach impact, and improves monitoring.", "relatedTopics": ["firewalls", "VLANs", "micro-segmentation"]},
+            {"keyword": "SIEM", "title": "Security Information and Event Management (SIEM)", "answer": "Collects, analyzes, and correlates logs from all systems. Detects anomalies, threat indicators, and compliance violations. Essential for threat detection and response.", "relatedTopics": ["log management", "threat detection", "incident response"]},
+            {"keyword": "sandboxing", "title": "Sandboxing", "answer": "Isolated environment for executing untrusted code or files. Prevents malware from accessing the main system. Used in browsers, email, and endpoint security.", "relatedTopics": ["malware analysis", "containerization", "virtualization"]}
+        ],
+        "risk-response": [
+            {"keyword": "risk assessment", "title": "Risk Assessment Process", "answer": "Identifying assets, threats, vulnerabilities, likelihood, and impact. Risk = Probability × Impact. Prioritizes which risks to mitigate first.", "relatedTopics": ["CVSS", "threat modeling", "risk management"]},
+            {"keyword": "NIST incident response", "title": "NIST Incident Response Lifecycle", "answer": "4 phases: Preparation, Detection & Analysis, Containment, Eradication, Recovery, Post-Incident Activities. Structured approach to handling security incidents.", "relatedTopics": ["incident handling", "forensics", "playbooks"]},
+            {"keyword": "CVE/CVSS", "title": "CVE & CVSS Scores", "answer": "CVE: Common Vulnerabilities and Exposures database ID. CVSS: Common Vulnerability Scoring System (0-10 scale) measuring severity. Helps prioritize patching.", "relatedTopics": ["vulnerability management", "patch management", "threat intelligence"]},
+            {"keyword": "anomaly detection", "title": "Anomaly Detection in Security", "answer": "Identifying unusual patterns or behaviors that deviate from baseline. Uses ML/AI. Detects insider threats, compromise, and advanced attacks.", "relatedTopics": ["machine learning", "UEBA", "behavioral analytics"]},
+            {"keyword": "supply-chain attacks", "title": "Supply Chain Attacks", "answer": "Compromising software, hardware, or services to breach downstream customers. Examples: SolarWinds, 3CX. Prevention: vendor assessment, code review, monitoring.", "relatedTopics": ["third-party risk", "software security", "threat intelligence"]},
+            {"keyword": "OSINT", "title": "Open Source Intelligence (OSINT)", "answer": "Gathering intelligence from publicly available sources. Identifies exposed data, vulnerable systems, attacker infrastructure. Used for reconnaissance and threat hunting.", "relatedTopics": ["threat intelligence", "reconnaissance", "data leaks"]},
+            {"keyword": "digital forensics", "title": "Digital Forensics", "answer": "Collecting, analyzing, and preserving digital evidence for investigations. Maintains chain of custody. Determines what happened during an incident.", "relatedTopics": ["incident response", "memory forensics", "log analysis"]}
+        ]
+    };
+    </script>
+
+    <script src="api.js?v=1.0"></script>
+    <script src="app.js?v=1.0"></script>
+    <script src="script.js?v=1.0"></script>
+    <!-- Animated Background System -->
+    <script src="cyber-background.js?v=1.0"></script>
+    <!-- Service Worker Registration for PWA -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => {
+                        console.log('Service Worker registered:', registration);
+                    })
+                    .catch(error => {
+                        console.log('Service Worker registration failed:', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

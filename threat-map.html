@@ -1,0 +1,860 @@
+﻿<html lang="en" data-theme="dark"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Real-time global cybersecurity threat map visualization showing attack origins, threat types, and live incident data.">
+    <title>Live Threat Map - CyberGuard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/azonix" rel="stylesheet">
+    <style>
+        .hero h1 {
+            font-family: 'Azonix', sans-serif;
+            font-size: 3.5rem;
+            line-height: 1.5;
+            color: #ffffff;
+            text-shadow: 0 0 10px #00e6e6, 0 0 20px #00e6e6;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Cyber Background -->
+    <div id="bg-container" class="bg-container">
+        <canvas id="cyber-canvas" width="982" height="730"></canvas>
+        <div class="cyber-grid-overlay"></div>
+        <div class="cyber-glow-effect"></div>
+    </div>
+    
+    <!-- Navigation -->
+        <nav>
+        <div class="navbar">
+            <div class="logo">🛡️ CyberGuard</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="threats.html">Threats</a></li>
+                <li><a href="threat-map.html">Threat Map</a></li>
+                <li><a href="frameworks.html">Frameworks</a></li>
+                <li><a href="learning.html">Learn</a></li>
+                <li><a href="tools.html">Tools</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="chatbot.html">AI Chat</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="navbar-right">
+                <button id="theme-toggle" class="theme-toggle-btn" title="Switch to light mode">🌙</button>
+                <button id="hamburger-btn" class="hamburger-btn" title="Menu" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hamburger Menu -->
+    <div id="hamburger-overlay" class="hamburger-overlay"></div>
+    <div id="hamburger-menu" class="hamburger-menu">
+        <button id="hamburger-close" class="hamburger-close">✕</button>
+        <ul class="hamburger-menu-list">
+            <li><a href="index.html" class="hamburger-link">Home</a></li>
+            <li><a href="about.html" class="hamburger-link">About Us</a></li>
+            <li><a href="case-studies.html" class="hamburger-link">Case Studies</a></li>
+            <li><a href="community.html" class="hamburger-link">Community</a></li>
+            <li><a href="privacy-policy.html" class="hamburger-link">Privacy Policy</a></li>
+            <li><a href="terms-of-service.html" class="hamburger-link">Terms of Service</a></li>
+        </ul>
+    </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="cyber-grid"></div>
+        <div class="hero-content">
+            <h1> Live Global Threat Map</h1>
+            <p>Real-time visualization of cyber threats and attack patterns across the globe</p>
+        </div>
+    </section>
+
+    <div class="container">
+        
+
+        <!-- Map Section -->
+        <section class="section">
+            <div style="margin-bottom: 2rem;">
+                <h2 style="margin-bottom: 1rem;"> Interactive Global Threat Map</h2>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">Real-time cyber threats visualization powered by Leaflet.js. Hover over markers for incident details. Zoom and pan to explore regions.</p>
+            </div>
+            
+            <div class="threat-map-wrapper" style="position: relative; height: 600px; border: 2px solid var(--cyan); border-radius: 15px; overflow: hidden; margin-bottom: 2rem;">
+                <div id="leafletMap" style="width: 100%; height: 100%; border-radius: 15px; position: relative;" class="leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0"><div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);"><div class="leaflet-pane leaflet-tile-pane"><div class="leaflet-layer leaflet-tile-light" style="z-index: 1; opacity: 1;"><div class="leaflet-tile-container leaflet-zoom-animated" style="z-index: 19; transform: translate3d(0px, 0px, 0px) scale(1);"><img alt="" src="https://c.tile.openstreetmap.org/2/1/1.png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(177px, 101px, 0px); opacity: 1;"><img alt="" src="https://a.tile.openstreetmap.org/2/2/1.png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(433px, 101px, 0px); opacity: 1;"><img alt="" src="https://b.tile.openstreetmap.org/2/1/0.png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(177px, -155px, 0px); opacity: 1;"><img alt="" src="https://c.tile.openstreetmap.org/2/2/0.png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(433px, -155px, 0px); opacity: 1;"><img alt="" src="https://a.tile.openstreetmap.org/2/1/2.png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(177px, 357px, 0px); opacity: 1;"><img alt="" src="https://b.tile.openstreetmap.org/2/2/2.png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(433px, 357px, 0px); opacity: 1;"><img alt="" src="https://b.tile.openstreetmap.org/2/0/1.png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-79px, 101px, 0px); opacity: 1;"><img alt="" src="https://b.tile.openstreetmap.org/2/3/1.png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(689px, 101px, 0px); opacity: 1;"><img alt="" src="https://a.tile.openstreetmap.org/2/0/0.png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-79px, -155px, 0px); opacity: 1;"><img alt="" src="https://a.tile.openstreetmap.org/2/3/0.png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(689px, -155px, 0px); opacity: 1;"><img alt="" src="https://c.tile.openstreetmap.org/2/0/2.png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-79px, 357px, 0px); opacity: 1;"><img alt="" src="https://c.tile.openstreetmap.org/2/3/2.png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(689px, 357px, 0px); opacity: 1;"></div></div></div><div class="leaflet-pane leaflet-overlay-pane"><svg pointer-events="none" class="leaflet-zoom-animated" width="1040" height="716" viewBox="-87 -60 1040 716" style="transform: translate3d(-87px, -60px, 0px);"><g><path class="leaflet-interactive" stroke="#FF0000" stroke-opacity="0.8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="#FF0000" fill-opacity="0.6" fill-rule="evenodd" d="M146,211a17,17 0 1,0 34,0 a17,17 0 1,0 -34,0 "></path><path class="leaflet-interactive" stroke="#FF0000" stroke-opacity="0.8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="#FF0000" fill-opacity="0.6" fill-rule="evenodd" d="M460,174a16,16 0 1,0 32,0 a16,16 0 1,0 -32,0 "></path><path class="leaflet-interactive" stroke="#FF6600" stroke-opacity="0.8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="#FF6600" fill-opacity="0.6" fill-rule="evenodd" d="M702,254a15,15 0 1,0 30,0 a15,15 0 1,0 -30,0 "></path><path class="leaflet-interactive" stroke="#FF6600" stroke-opacity="0.8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="#FF6600" fill-opacity="0.6" fill-rule="evenodd" d="M250,400a12,12 0 1,0 24,0 a12,12 0 1,0 -24,0 "></path><path class="leaflet-interactive" stroke="#FF6600" stroke-opacity="0.8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="#FF6600" fill-opacity="0.6" fill-rule="evenodd" d="M534,299a13,13 0 1,0 26,0 a13,13 0 1,0 -26,0 "></path><path class="leaflet-interactive" stroke="#FFCC00" stroke-opacity="0.8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="#FFCC00" fill-opacity="0.6" fill-rule="evenodd" d="M482,386a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0 "></path><path class="leaflet-interactive" stroke="#FFCC00" stroke-opacity="0.8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="#FFCC00" fill-opacity="0.6" fill-rule="evenodd" d="M804,437a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 "></path></g></svg></div><div class="leaflet-pane leaflet-shadow-pane"></div><div class="leaflet-pane leaflet-marker-pane"></div><div class="leaflet-pane leaflet-tooltip-pane"></div><div class="leaflet-pane leaflet-popup-pane"></div><div class="leaflet-proxy leaflet-zoom-animated" style="transform: translate3d(512px, 453.919px, 0px) scale(2);"></div></div><div class="leaflet-control-container"><div class="leaflet-top leaflet-left"><div class="leaflet-control-zoom leaflet-bar leaflet-control"><a class="leaflet-control-zoom-in" href="#" title="Zoom in" role="button" aria-label="Zoom in" aria-disabled="false"><span aria-hidden="true">+</span></a><a class="leaflet-control-zoom-out" href="#" title="Zoom out" role="button" aria-label="Zoom out" aria-disabled="false"><span aria-hidden="true">−</span></a></div><div class="info leaflet-control" style="background: rgba(26, 39, 68, 0.95); border: 2px solid var(--cyan); border-radius: 15px; padding: 1rem; color: var(--text-light); font-family: Inter, sans-serif;"><div style="text-align: center;">
+            <p style="margin: 0 0 0.5rem 0; font-weight: 600;">Global Threat Index</p>
+            <p style="margin: 0; font-size: 1.5rem; color: var(--cyan);">↑ 23%</p>
+            <p style="margin: 0.3rem 0 0 0; font-size: 0.85rem; color: var(--text-muted);">vs last week</p>
+        </div></div></div><div class="leaflet-top leaflet-right"></div><div class="leaflet-bottom leaflet-left"></div><div class="leaflet-bottom leaflet-right"><div class="leaflet-control-attribution leaflet-control"><a href="https://leafletjs.com" title="A JavaScript library for interactive maps"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8" class="leaflet-attribution-flag"><path fill="#4C7BE1" d="M0 0h12v4H0z"></path><path fill="#FFD500" d="M0 4h12v3H0z"></path><path fill="#E0BC00" d="M0 7h12v1H0z"></path></svg> Leaflet</a> <span aria-hidden="true">|</span> © OpenStreetMap contributors</div></div></div></div>
+                <div class="threat-map-overlay" style="position: absolute; top: 15px; right: 15px; background: rgba(26, 39, 68, 0.95); backdrop-filter: blur(10px); border: 2px solid var(--cyan); border-radius: 15px; padding: 1.5rem; z-index: 1000; max-width: 250px;">
+                    <div class="map-legend">
+                        <h3 style="color: var(--cyan); margin-top: 0;"> Threat Legend</h3>
+                        <div class="legend-item" style="margin-bottom: 0.8rem;">
+                            <div class="legend-color" style="background: #FF0000; display: inline-block; width: 16px; height: 16px; border-radius: 50%; margin-right: 0.5rem; vertical-align: middle;"></div>
+                            <span style="color: var(--text-light); font-size: 0.9rem;">Critical (20+)</span>
+                        </div>
+                        <div class="legend-item" style="margin-bottom: 0.8rem;">
+                            <div class="legend-color" style="background: #FF6600; display: inline-block; width: 16px; height: 16px; border-radius: 50%; margin-right: 0.5rem; vertical-align: middle;"></div>
+                            <span style="color: var(--text-light); font-size: 0.9rem;">High (10-19)</span>
+                        </div>
+                        <div class="legend-item" style="margin-bottom: 0.8rem;">
+                            <div class="legend-color" style="background: #FFCC00; display: inline-block; width: 16px; height: 16px; border-radius: 50%; margin-right: 0.5rem; vertical-align: middle;"></div>
+                            <span style="color: var(--text-light); font-size: 0.9rem;">Medium (5-9)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #00FF00; display: inline-block; width: 16px; height: 16px; border-radius: 50%; margin-right: 0.5rem; vertical-align: middle;"></div>
+                            <span style="color: var(--text-light); font-size: 0.9rem;">Low (1-4)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Real-time Statistics -->
+        <section class="section">
+            <h2> Live Statistics</h2>
+            <div class="threat-stats-grid">
+                <div class="threat-stat-card">
+                    <h3>Total Attacks (24h)</h3>
+                    <div class="stat-number" id="totalAttacks">7863</div>
+                    <p class="stat-change" id="attacksChange">+0% from previous hour</p>
+                </div>
+                <div class="threat-stat-card">
+                    <h3>Critical Incidents</h3>
+                    <div class="stat-number critical" id="criticalIncidents">9</div>
+                    <p class="stat-description">Requiring immediate action</p>
+                </div>
+                <div class="threat-stat-card">
+                    <h3>Countries Affected</h3>
+                    <div class="stat-number" id="countriesAffected">9</div>
+                    <p class="stat-description">Geographic spread of threats</p>
+                </div>
+                <div class="threat-stat-card">
+                    <h3>Attack Types</h3>
+                    <div class="stat-number" id="attackTypes">5</div>
+                    <p class="stat-description">Unique threat categories detected</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Attack Types Distribution -->
+        <section class="section">
+            <h2> Attack Types Distribution</h2>
+            <div class="threat-chart-grid">
+                <div class="chart-container">
+                    <canvas id="attackTypesDistribution" width="1006" height="375" style="display: block; box-sizing: border-box; height: 300px; width: 804.8px;"></canvas>
+                </div>
+                <div class="threat-types-list">
+                    <h3>Active Threat Categories</h3>
+                    <div id="threatTypesList">
+                        <!-- Populated by JavaScript -->
+                        <div class="threat-type-item">
+                            <span class="threat-type-name">Ransomware</span>
+                            <span class="threat-type-count">234</span>
+                        </div>
+                        
+                        <div class="threat-type-item">
+                            <span class="threat-type-name">Phishing</span>
+                            <span class="threat-type-count">189</span>
+                        </div>
+                        
+                        <div class="threat-type-item">
+                            <span class="threat-type-name">DDoS</span>
+                            <span class="threat-type-count">145</span>
+                        </div>
+                        
+                        <div class="threat-type-item">
+                            <span class="threat-type-name">Malware</span>
+                            <span class="threat-type-count">98</span>
+                        </div>
+                        
+                        <div class="threat-type-item">
+                            <span class="threat-type-name">Zero-Day</span>
+                            <span class="threat-type-count">23</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+       
+
+        <!-- AlienVault OTX Threat Intelligence -->
+        <section class="section" style="background: linear-gradient(135deg, rgba(164, 0, 255, 0.1), rgba(0, 229, 255, 0.1)); border: 2px solid var(--purple); border-radius: 20px; padding: 3rem;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+                <div>
+                    <h2 style="margin: 0;"> Live Threat Intelligence Feed</h2>
+                    <p style="color: var(--text-muted); margin: 0.5rem 0 0 0;">Powered by AlienVault OTX - Real-time global threat data</p>
+                </div>
+                <button id="refreshOTX" class="btn btn-primary" style="padding: 0.75rem 1.5rem;"> Refresh Feed</button>
+            </div>
+
+            <div id="otxFeedContainer" style="display: grid; gap: 1.5rem;">
+                    <div style="background: rgba(255, 0, 0, 0.1); border: 2px solid #FF0000; border-radius: 15px; padding: 2rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+                            <div style="flex: 1; min-width: 250px;">
+                                <h3 style="color: var(--text-light); margin: 0 0 0.5rem 0;">Ransomware Infrastructure: LockBit 3.0 C2 Servers</h3>
+                                <div style="display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.85rem; color: var(--text-muted);">
+                                    <span> 1/1/2026</span>
+                                    <span> AlienVault Labs</span>
+                                </div>
+                            </div>
+                            <div style="padding: 0.5rem 1rem; background: rgba(255, 0, 0, 0.1); border: 2px solid #FF0000; border-radius: 20px; font-weight: bold; color: #FF0000; text-transform: uppercase; font-size: 0.8rem;">
+                                critical
+                            </div>
+                        </div>
+                        
+                        <p style="color: var(--text-light); line-height: 1.7; margin: 1rem 0;">Command and Control infrastructure associated with LockBit 3.0 ransomware operations targeting financial institutions.</p>
+                        
+                        <div style="margin: 1.5rem 0;">
+                            <strong style="color: var(--cyan);"> Adversary:</strong>
+                            <span style="color: var(--text-light); margin-left: 0.5rem;">LockBit Group</span>
+                        </div>
+                        
+                        <div style="margin: 1rem 0;">
+                            <strong style="color: var(--cyan);"> MITRE ATT&amp;CK Techniques:</strong>
+                            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
+                                
+                                    <span style="background: rgba(0, 229, 255, 0.1); border: 1px solid var(--cyan); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--cyan); font-family: monospace;">T1486</span>
+                                
+                                    <span style="background: rgba(0, 229, 255, 0.1); border: 1px solid var(--cyan); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--cyan); font-family: monospace;">T1490</span>
+                                
+                                    <span style="background: rgba(0, 229, 255, 0.1); border: 1px solid var(--cyan); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--cyan); font-family: monospace;">T1059</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div style="margin: 1rem 0;">
+                            <strong style="color: var(--cyan);"> Indicators of Compromise (IOCs):</strong>
+                            <div style="margin-top: 0.5rem; background: rgba(0, 0, 0, 0.3); padding: 1rem; border-radius: 8px; font-family: monospace; font-size: 0.9rem; color: var(--green); line-height: 1.8; overflow-x: auto;">
+                                <div>• 45.142.212.61</div><div>• 185.220.101.34</div><div>• lockbit3xc2pqxv.onion</div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 1rem;">
+                            <strong style="color: var(--cyan);"> Tags:</strong>
+                            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
+                                
+                                    <span style="background: rgba(164, 0, 255, 0.1); border: 1px solid var(--purple); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--purple);">#ransomware</span>
+                                
+                                    <span style="background: rgba(164, 0, 255, 0.1); border: 1px solid var(--purple); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--purple);">#lockbit</span>
+                                
+                                    <span style="background: rgba(164, 0, 255, 0.1); border: 1px solid var(--purple); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--purple);">#c2</span>
+                                
+                                    <span style="background: rgba(164, 0, 255, 0.1); border: 1px solid var(--purple); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--purple);">#financial</span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div style="background: rgba(255, 107, 0, 0.1); border: 2px solid #FF6B00; border-radius: 15px; padding: 2rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+                            <div style="flex: 1; min-width: 250px;">
+                                <h3 style="color: var(--text-light); margin: 0 0 0.5rem 0;">APT29 Phishing Campaign - Government Targets</h3>
+                                <div style="display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.85rem; color: var(--text-muted);">
+                                    <span> 1/1/2026</span>
+                                    <span> MITRE ATT&amp;CK</span>
+                                </div>
+                            </div>
+                            <div style="padding: 0.5rem 1rem; background: rgba(255, 107, 0, 0.1); border: 2px solid #FF6B00; border-radius: 20px; font-weight: bold; color: #FF6B00; text-transform: uppercase; font-size: 0.8rem;">
+                                high
+                            </div>
+                        </div>
+                        
+                        <p style="color: var(--text-light); line-height: 1.7; margin: 1rem 0;">Sophisticated spear-phishing campaign attributed to APT29 (Cozy Bear) targeting government entities with credential harvesting.</p>
+                        
+                        <div style="margin: 1.5rem 0;">
+                            <strong style="color: var(--cyan);"> Adversary:</strong>
+                            <span style="color: var(--text-light); margin-left: 0.5rem;">APT29 / Cozy Bear</span>
+                        </div>
+                        
+                        <div style="margin: 1rem 0;">
+                            <strong style="color: var(--cyan);"> MITRE ATT&amp;CK Techniques:</strong>
+                            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
+                                
+                                    <span style="background: rgba(0, 229, 255, 0.1); border: 1px solid var(--cyan); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--cyan); font-family: monospace;">T1566.001</span>
+                                
+                                    <span style="background: rgba(0, 229, 255, 0.1); border: 1px solid var(--cyan); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--cyan); font-family: monospace;">T1078</span>
+                                
+                                    <span style="background: rgba(0, 229, 255, 0.1); border: 1px solid var(--cyan); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--cyan); font-family: monospace;">T1071.001</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div style="margin: 1rem 0;">
+                            <strong style="color: var(--cyan);"> Indicators of Compromise (IOCs):</strong>
+                            <div style="margin-top: 0.5rem; background: rgba(0, 0, 0, 0.3); padding: 1rem; border-radius: 8px; font-family: monospace; font-size: 0.9rem; color: var(--green); line-height: 1.8; overflow-x: auto;">
+                                <div>• gov-login-portal[.]com</div><div>• 198.51.100.42</div><div>• secure-auth-gov[.]net</div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 1rem;">
+                            <strong style="color: var(--cyan);"> Tags:</strong>
+                            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
+                                
+                                    <span style="background: rgba(164, 0, 255, 0.1); border: 1px solid var(--purple); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--purple);">#apt29</span>
+                                
+                                    <span style="background: rgba(164, 0, 255, 0.1); border: 1px solid var(--purple); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--purple);">#phishing</span>
+                                
+                                    <span style="background: rgba(164, 0, 255, 0.1); border: 1px solid var(--purple); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--purple);">#government</span>
+                                
+                                    <span style="background: rgba(164, 0, 255, 0.1); border: 1px solid var(--purple); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--purple);">#credential-theft</span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div style="background: rgba(255, 107, 0, 0.1); border: 2px solid #FF6B00; border-radius: 15px; padding: 2rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+                            <div style="flex: 1; min-width: 250px;">
+                                <h3 style="color: var(--text-light); margin: 0 0 0.5rem 0;">Emotet Botnet Resurface - Spam Campaign</h3>
+                                <div style="display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.85rem; color: var(--text-muted);">
+                                    <span> 1/1/2026</span>
+                                    <span> Team Cymru</span>
+                                </div>
+                            </div>
+                            <div style="padding: 0.5rem 1rem; background: rgba(255, 107, 0, 0.1); border: 2px solid #FF6B00; border-radius: 20px; font-weight: bold; color: #FF6B00; text-transform: uppercase; font-size: 0.8rem;">
+                                high
+                            </div>
+                        </div>
+                        
+                        <p style="color: var(--text-light); line-height: 1.7; margin: 1rem 0;">Emotet botnet infrastructure detected distributing banking trojans via malicious Office documents in widespread spam campaign.</p>
+                        
+                        <div style="margin: 1.5rem 0;">
+                            <strong style="color: var(--cyan);"> Adversary:</strong>
+                            <span style="color: var(--text-light); margin-left: 0.5rem;">Emotet Group</span>
+                        </div>
+                        
+                        <div style="margin: 1rem 0;">
+                            <strong style="color: var(--cyan);"> MITRE ATT&amp;CK Techniques:</strong>
+                            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
+                                
+                                    <span style="background: rgba(0, 229, 255, 0.1); border: 1px solid var(--cyan); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--cyan); font-family: monospace;">T1566.001</span>
+                                
+                                    <span style="background: rgba(0, 229, 255, 0.1); border: 1px solid var(--cyan); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--cyan); font-family: monospace;">T1204.002</span>
+                                
+                                    <span style="background: rgba(0, 229, 255, 0.1); border: 1px solid var(--cyan); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--cyan); font-family: monospace;">T1027</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div style="margin: 1rem 0;">
+                            <strong style="color: var(--cyan);"> Indicators of Compromise (IOCs):</strong>
+                            <div style="margin-top: 0.5rem; background: rgba(0, 0, 0, 0.3); padding: 1rem; border-radius: 8px; font-family: monospace; font-size: 0.9rem; color: var(--green); line-height: 1.8; overflow-x: auto;">
+                                <div>• 203.0.113.88</div><div>• 198.51.100.123</div><div>• invoice_2026.docm</div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 1rem;">
+                            <strong style="color: var(--cyan);"> Tags:</strong>
+                            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
+                                
+                                    <span style="background: rgba(164, 0, 255, 0.1); border: 1px solid var(--purple); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--purple);">#emotet</span>
+                                
+                                    <span style="background: rgba(164, 0, 255, 0.1); border: 1px solid var(--purple); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--purple);">#botnet</span>
+                                
+                                    <span style="background: rgba(164, 0, 255, 0.1); border: 1px solid var(--purple); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--purple);">#spam</span>
+                                
+                                    <span style="background: rgba(164, 0, 255, 0.1); border: 1px solid var(--purple); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--purple);">#banking-trojan</span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div style="background: rgba(255, 193, 0, 0.1); border: 2px solid #FFC100; border-radius: 15px; padding: 2rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+                            <div style="flex: 1; min-width: 250px;">
+                                <h3 style="color: var(--text-light); margin: 0 0 0.5rem 0;">Crypto Mining Malware on Cloud Infrastructure</h3>
+                                <div style="display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.85rem; color: var(--text-muted);">
+                                    <span> 1/1/2026</span>
+                                    <span> Aqua Security</span>
+                                </div>
+                            </div>
+                            <div style="padding: 0.5rem 1rem; background: rgba(255, 193, 0, 0.1); border: 2px solid #FFC100; border-radius: 20px; font-weight: bold; color: #FFC100; text-transform: uppercase; font-size: 0.8rem;">
+                                medium
+                            </div>
+                        </div>
+                        
+                        <p style="color: var(--text-light); line-height: 1.7; margin: 1rem 0;">Widespread cryptomining malware targeting misconfigured Docker and Kubernetes instances in cloud environments.</p>
+                        
+                        <div style="margin: 1.5rem 0;">
+                            <strong style="color: var(--cyan);"> Adversary:</strong>
+                            <span style="color: var(--text-light); margin-left: 0.5rem;">TeamTNT</span>
+                        </div>
+                        
+                        <div style="margin: 1rem 0;">
+                            <strong style="color: var(--cyan);"> MITRE ATT&amp;CK Techniques:</strong>
+                            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
+                                
+                                    <span style="background: rgba(0, 229, 255, 0.1); border: 1px solid var(--cyan); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--cyan); font-family: monospace;">T1496</span>
+                                
+                                    <span style="background: rgba(0, 229, 255, 0.1); border: 1px solid var(--cyan); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--cyan); font-family: monospace;">T1610</span>
+                                
+                                    <span style="background: rgba(0, 229, 255, 0.1); border: 1px solid var(--cyan); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--cyan); font-family: monospace;">T1552.007</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div style="margin: 1rem 0;">
+                            <strong style="color: var(--cyan);"> Indicators of Compromise (IOCs):</strong>
+                            <div style="margin-top: 0.5rem; background: rgba(0, 0, 0, 0.3); padding: 1rem; border-radius: 8px; font-family: monospace; font-size: 0.9rem; color: var(--green); line-height: 1.8; overflow-x: auto;">
+                                <div>• xmr-pool[.]mining-cloud[.]xyz</div><div>• 45.33.12.77</div><div>• kinsing.bin</div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 1rem;">
+                            <strong style="color: var(--cyan);"> Tags:</strong>
+                            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
+                                
+                                    <span style="background: rgba(164, 0, 255, 0.1); border: 1px solid var(--purple); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--purple);">#cryptomining</span>
+                                
+                                    <span style="background: rgba(164, 0, 255, 0.1); border: 1px solid var(--purple); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--purple);">#cloud</span>
+                                
+                                    <span style="background: rgba(164, 0, 255, 0.1); border: 1px solid var(--purple); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--purple);">#docker</span>
+                                
+                                    <span style="background: rgba(164, 0, 255, 0.1); border: 1px solid var(--purple); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--purple);">#kubernetes</span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div style="background: rgba(255, 0, 0, 0.1); border: 2px solid #FF0000; border-radius: 15px; padding: 2rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+                            <div style="flex: 1; min-width: 250px;">
+                                <h3 style="color: var(--text-light); margin: 0 0 0.5rem 0;">Zero-Day Exploitation: CVE-2025-XXXX in Popular VPN</h3>
+                                <div style="display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.85rem; color: var(--text-muted);">
+                                    <span> 1/1/2026</span>
+                                    <span> Cybersecurity and Infrastructure Security Agency (CISA)</span>
+                                </div>
+                            </div>
+                            <div style="padding: 0.5rem 1rem; background: rgba(255, 0, 0, 0.1); border: 2px solid #FF0000; border-radius: 20px; font-weight: bold; color: #FF0000; text-transform: uppercase; font-size: 0.8rem;">
+                                critical
+                            </div>
+                        </div>
+                        
+                        <p style="color: var(--text-light); line-height: 1.7; margin: 1rem 0;">Active exploitation of critical authentication bypass vulnerability in enterprise VPN solutions. Immediate patching required.</p>
+                        
+                        <div style="margin: 1.5rem 0;">
+                            <strong style="color: var(--cyan);"> Adversary:</strong>
+                            <span style="color: var(--text-light); margin-left: 0.5rem;">Multiple APT Groups</span>
+                        </div>
+                        
+                        <div style="margin: 1rem 0;">
+                            <strong style="color: var(--cyan);"> MITRE ATT&amp;CK Techniques:</strong>
+                            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
+                                
+                                    <span style="background: rgba(0, 229, 255, 0.1); border: 1px solid var(--cyan); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--cyan); font-family: monospace;">T1190</span>
+                                
+                                    <span style="background: rgba(0, 229, 255, 0.1); border: 1px solid var(--cyan); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--cyan); font-family: monospace;">T1133</span>
+                                
+                                    <span style="background: rgba(0, 229, 255, 0.1); border: 1px solid var(--cyan); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--cyan); font-family: monospace;">T1078.004</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div style="margin: 1rem 0;">
+                            <strong style="color: var(--cyan);"> Indicators of Compromise (IOCs):</strong>
+                            <div style="margin-top: 0.5rem; background: rgba(0, 0, 0, 0.3); padding: 1rem; border-radius: 8px; font-family: monospace; font-size: 0.9rem; color: var(--green); line-height: 1.8; overflow-x: auto;">
+                                <div>• exploit-cve2025.py</div><div>• /vpn/auth/bypass.cgi</div><div>• 185.220.101.67</div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 1rem;">
+                            <strong style="color: var(--cyan);"> Tags:</strong>
+                            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
+                                
+                                    <span style="background: rgba(164, 0, 255, 0.1); border: 1px solid var(--purple); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--purple);">#zero-day</span>
+                                
+                                    <span style="background: rgba(164, 0, 255, 0.1); border: 1px solid var(--purple); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--purple);">#vpn</span>
+                                
+                                    <span style="background: rgba(164, 0, 255, 0.1); border: 1px solid var(--purple); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--purple);">#authentication-bypass</span>
+                                
+                                    <span style="background: rgba(164, 0, 255, 0.1); border: 1px solid var(--purple); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--purple);">#cve</span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div style="background: rgba(255, 107, 0, 0.1); border: 2px solid #FF6B00; border-radius: 15px; padding: 2rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+                            <div style="flex: 1; min-width: 250px;">
+                                <h3 style="color: var(--text-light); margin: 0 0 0.5rem 0;">Supply Chain Attack: Compromised NPM Package</h3>
+                                <div style="display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.85rem; color: var(--text-muted);">
+                                    <span> 1/1/2026</span>
+                                    <span> GitHub Security Lab</span>
+                                </div>
+                            </div>
+                            <div style="padding: 0.5rem 1rem; background: rgba(255, 107, 0, 0.1); border: 2px solid #FF6B00; border-radius: 20px; font-weight: bold; color: #FF6B00; text-transform: uppercase; font-size: 0.8rem;">
+                                high
+                            </div>
+                        </div>
+                        
+                        <p style="color: var(--text-light); line-height: 1.7; margin: 1rem 0;">Malicious code discovered in popular NPM package "color-utils-pro" with 500k+ weekly downloads. Backdoor enables remote code execution.</p>
+                        
+                        <div style="margin: 1.5rem 0;">
+                            <strong style="color: var(--cyan);"> Adversary:</strong>
+                            <span style="color: var(--text-light); margin-left: 0.5rem;">Unknown</span>
+                        </div>
+                        
+                        <div style="margin: 1rem 0;">
+                            <strong style="color: var(--cyan);"> MITRE ATT&amp;CK Techniques:</strong>
+                            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
+                                
+                                    <span style="background: rgba(0, 229, 255, 0.1); border: 1px solid var(--cyan); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--cyan); font-family: monospace;">T1195.002</span>
+                                
+                                    <span style="background: rgba(0, 229, 255, 0.1); border: 1px solid var(--cyan); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--cyan); font-family: monospace;">T1059.007</span>
+                                
+                                    <span style="background: rgba(0, 229, 255, 0.1); border: 1px solid var(--cyan); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--cyan); font-family: monospace;">T1071.001</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div style="margin: 1rem 0;">
+                            <strong style="color: var(--cyan);"> Indicators of Compromise (IOCs):</strong>
+                            <div style="margin-top: 0.5rem; background: rgba(0, 0, 0, 0.3); padding: 1rem; border-radius: 8px; font-family: monospace; font-size: 0.9rem; color: var(--green); line-height: 1.8; overflow-x: auto;">
+                                <div>• color-utils-pro@3.2.1</div><div>• c2-npm-backdoor[.]com</div><div>• SHA256:a3f4...</div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 1rem;">
+                            <strong style="color: var(--cyan);"> Tags:</strong>
+                            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
+                                
+                                    <span style="background: rgba(164, 0, 255, 0.1); border: 1px solid var(--purple); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--purple);">#supply-chain</span>
+                                
+                                    <span style="background: rgba(164, 0, 255, 0.1); border: 1px solid var(--purple); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--purple);">#npm</span>
+                                
+                                    <span style="background: rgba(164, 0, 255, 0.1); border: 1px solid var(--purple); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--purple);">#open-source</span>
+                                
+                                    <span style="background: rgba(164, 0, 255, 0.1); border: 1px solid var(--purple); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--purple);">#backdoor</span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(0, 229, 255, 0.05); border: 2px solid var(--cyan); border-radius: 15px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 300px;">
+                       
+                    </div>
+                   
+
+
+        <!-- CTA Section -->
+        <section class="section" style="background: linear-gradient(135deg, rgba(0, 229, 255, 0.08), rgba(164, 0, 255, 0.08)); border: 2px solid var(--cyan); text-align: center;">
+            <h2>Ready to Protect Your Organization?</h2>
+            <p style="color: var(--text-light); margin-bottom: 2rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+                Use CyberGuard's threat intelligence and security services to defend against real-world attacks shown on this map.
+            </p>
+            <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                <a href="services.html" class="btn btn-primary" style="font-size: 1rem; padding: 1rem 2.5rem;"> View Services</a>
+                <a href="contact.html" class="btn btn-secondary" style="font-size: 1rem; padding: 1rem 2.5rem;"> Schedule Consultation</a>
+            </div>
+        </section>
+    </div>
+
+
+     <!-- Footer -->
+    
+
+    <!-- Exit Intent Pop-up for Free Security Scan -->
+    <div id="exitIntentModal" class="exit-intent-modal">
+        <div class="exit-intent-content">
+            <button id="closeExitIntent" class="exit-intent-close">✕</button>
+            <h2> Wait! Get a Free Security Scan</h2>
+            <p>Before you go, discover your organization's security vulnerabilities with our <span class="highlight">complimentary security assessment</span>—no credit card required.</p>
+            <div class="exit-intent-buttons">
+                <button id="startScanBtn" class="exit-intent-btn exit-intent-btn-primary"> Start Free Scan</button>
+                <button onclick="document.getElementById('exitIntentModal').style.display='none';" class="exit-intent-btn exit-intent-btn-secondary">I'll think about it</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Cookie Banner -->
+    <div id="cookieBanner" class="cookie-banner" style="display: none;">
+        <div class="cookie-banner-content">
+            <h3> Cookie Consent</h3>
+            <p>We use cookies to enhance your experience, analyze site traffic, and serve personalized content. By continuing to use this site, you consent to our <a href="#privacy">Privacy Policy</a> and <a href="#cookies">Cookie Policy</a>.</p>
+        </div>
+        <div class="cookie-banner-buttons">
+            <button id="rejectCookies" class="cookie-btn cookie-btn-reject">Reject</button>
+            <button id="acceptCookies" class="cookie-btn cookie-btn-accept">Accept All</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="script.js"></script>
+    <script src="cyber-background.js"></script>
+    
+    <!-- AlienVault OTX Integration -->
+    <script>
+        const simulatedOTXData = [
+            {
+                name: 'Ransomware Infrastructure: LockBit 3.0 C2 Servers',
+                modified: '2026-01-01T08:30:00',
+                description: 'Command and Control infrastructure associated with LockBit 3.0 ransomware operations targeting financial institutions.',
+                pulse_source: 'AlienVault Labs',
+                adversary: 'LockBit Group',
+                attack_ids: ['T1486', 'T1490', 'T1059'],
+                indicators: ['45.142.212.61', '185.220.101.34', 'lockbit3xc2pqxv.onion'],
+                tags: ['ransomware', 'lockbit', 'c2', 'financial'],
+                threat_level: 'critical'
+            },
+            {
+                name: 'APT29 Phishing Campaign - Government Targets',
+                modified: '2026-01-01T07:15:00',
+                description: 'Sophisticated spear-phishing campaign attributed to APT29 (Cozy Bear) targeting government entities with credential harvesting.',
+                pulse_source: 'MITRE ATT&CK',
+                adversary: 'APT29 / Cozy Bear',
+                attack_ids: ['T1566.001', 'T1078', 'T1071.001'],
+                indicators: ['gov-login-portal[.]com', '198.51.100.42', 'secure-auth-gov[.]net'],
+                tags: ['apt29', 'phishing', 'government', 'credential-theft'],
+                threat_level: 'high'
+            },
+            {
+                name: 'Emotet Botnet Resurface - Spam Campaign',
+                modified: '2026-01-01T06:00:00',
+                description: 'Emotet botnet infrastructure detected distributing banking trojans via malicious Office documents in widespread spam campaign.',
+                pulse_source: 'Team Cymru',
+                adversary: 'Emotet Group',
+                attack_ids: ['T1566.001', 'T1204.002', 'T1027'],
+                indicators: ['203.0.113.88', '198.51.100.123', 'invoice_2026.docm'],
+                tags: ['emotet', 'botnet', 'spam', 'banking-trojan'],
+                threat_level: 'high'
+            },
+            {
+                name: 'Crypto Mining Malware on Cloud Infrastructure',
+                modified: '2026-01-01T04:45:00',
+                description: 'Widespread cryptomining malware targeting misconfigured Docker and Kubernetes instances in cloud environments.',
+                pulse_source: 'Aqua Security',
+                adversary: 'TeamTNT',
+                attack_ids: ['T1496', 'T1610', 'T1552.007'],
+                indicators: ['xmr-pool[.]mining-cloud[.]xyz', '45.33.12.77', 'kinsing.bin'],
+                tags: ['cryptomining', 'cloud', 'docker', 'kubernetes'],
+                threat_level: 'medium'
+            },
+            {
+                name: 'Zero-Day Exploitation: CVE-2025-XXXX in Popular VPN',
+                modified: '2026-01-01T03:20:00',
+                description: 'Active exploitation of critical authentication bypass vulnerability in enterprise VPN solutions. Immediate patching required.',
+                pulse_source: 'Cybersecurity and Infrastructure Security Agency (CISA)',
+                adversary: 'Multiple APT Groups',
+                attack_ids: ['T1190', 'T1133', 'T1078.004'],
+                indicators: ['exploit-cve2025.py', '/vpn/auth/bypass.cgi', '185.220.101.67'],
+                tags: ['zero-day', 'vpn', 'authentication-bypass', 'cve'],
+                threat_level: 'critical'
+            },
+            {
+                name: 'Supply Chain Attack: Compromised NPM Package',
+                modified: '2026-01-01T01:00:00',
+                description: 'Malicious code discovered in popular NPM package "color-utils-pro" with 500k+ weekly downloads. Backdoor enables remote code execution.',
+                pulse_source: 'GitHub Security Lab',
+                adversary: 'Unknown',
+                attack_ids: ['T1195.002', 'T1059.007', 'T1071.001'],
+                indicators: ['color-utils-pro@3.2.1', 'c2-npm-backdoor[.]com', 'SHA256:a3f4...'],
+                tags: ['supply-chain', 'npm', 'open-source', 'backdoor'],
+                threat_level: 'high'
+            }
+        ];
+
+        function renderOTXFeed() {
+            const container = document.getElementById('otxFeedContainer');
+            
+            let html = '';
+            
+            simulatedOTXData.forEach((pulse, index) => {
+                const levelColors = {
+                    critical: { bg: 'rgba(255, 0, 0, 0.1)', border: '#FF0000', text: '#FF0000' },
+                    high: { bg: 'rgba(255, 107, 0, 0.1)', border: '#FF6B00', text: '#FF6B00' },
+                    medium: { bg: 'rgba(255, 193, 0, 0.1)', border: '#FFC100', text: '#FFC100' }
+                };
+                
+                const colors = levelColors[pulse.threat_level] || levelColors.medium;
+                const timeAgo = getTimeAgo(pulse.modified);
+                
+                html += `
+                    <div style="background: ${colors.bg}; border: 2px solid ${colors.border}; border-radius: 15px; padding: 2rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+                            <div style="flex: 1; min-width: 250px;">
+                                <h3 style="color: var(--text-light); margin: 0 0 0.5rem 0;">${pulse.name}</h3>
+                                <div style="display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.85rem; color: var(--text-muted);">
+                                    <span> ${timeAgo}</span>
+                                    <span> ${pulse.pulse_source}</span>
+                                </div>
+                            </div>
+                            <div style="padding: 0.5rem 1rem; background: ${colors.bg}; border: 2px solid ${colors.border}; border-radius: 20px; font-weight: bold; color: ${colors.text}; text-transform: uppercase; font-size: 0.8rem;">
+                                ${pulse.threat_level}
+                            </div>
+                        </div>
+                        
+                        <p style="color: var(--text-light); line-height: 1.7; margin: 1rem 0;">${pulse.description}</p>
+                        
+                        <div style="margin: 1.5rem 0;">
+                            <strong style="color: var(--cyan);"> Adversary:</strong>
+                            <span style="color: var(--text-light); margin-left: 0.5rem;">${pulse.adversary}</span>
+                        </div>
+                        
+                        <div style="margin: 1rem 0;">
+                            <strong style="color: var(--cyan);"> MITRE ATT&CK Techniques:</strong>
+                            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
+                                ${pulse.attack_ids.map(id => `
+                                    <span style="background: rgba(0, 229, 255, 0.1); border: 1px solid var(--cyan); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--cyan); font-family: monospace;">${id}</span>
+                                `).join('')}
+                            </div>
+                        </div>
+                        
+                        <div style="margin: 1rem 0;">
+                            <strong style="color: var(--cyan);"> Indicators of Compromise (IOCs):</strong>
+                            <div style="margin-top: 0.5rem; background: rgba(0, 0, 0, 0.3); padding: 1rem; border-radius: 8px; font-family: monospace; font-size: 0.9rem; color: var(--green); line-height: 1.8; overflow-x: auto;">
+                                ${pulse.indicators.map(ioc => `<div>• ${ioc}</div>`).join('')}
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 1rem;">
+                            <strong style="color: var(--cyan);"> Tags:</strong>
+                            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
+                                ${pulse.tags.map(tag => `
+                                    <span style="background: rgba(164, 0, 255, 0.1); border: 1px solid var(--purple); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; color: var(--purple);">#${tag}</span>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function getTimeAgo(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffMs = now - date;
+            const diffMins = Math.floor(diffMs / 60000);
+            const diffHours = Math.floor(diffMs / 3600000);
+            
+            if (diffMins < 60) return `${diffMins} minutes ago`;
+            if (diffHours < 24) return `${diffHours} hours ago`;
+            return date.toLocaleDateString();
+        }
+
+        document.getElementById('refreshOTX').addEventListener('click', () => {
+            const container = document.getElementById('otxFeedContainer');
+            container.innerHTML = '<div style="text-align: center; padding: 2rem; color: var(--text-muted);"><div style="font-size: 3rem; margin-bottom: 1rem;"></div><p>Refreshing threat intelligence feed...</p></div>';
+            
+            setTimeout(() => {
+                renderOTXFeed();
+            }, 1000);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                renderOTXFeed();
+            }, 1500);
+        });
+    </script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+
+
+
+</div></section></div>
+
+<footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>🛡️ CyberGuard</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                    Your trusted resource for cybersecurity education, frameworks, and best practices.
+                </p>
+                 <div class="social-links">
+                    <a href="https://github.com/"><img src="./Icons/Github-Logo-PNG-Photo-1.png" alt="GitHub" style="width: 35px; height: 20px; filter: brightness(0) invert(1);"></a>
+                    <a href="https://x.com/" title="Twitter">𝕏</a>
+                    <a href="https://in.linkedin.com/?mcid=6844056167778418689&src=go-pa&trk=sem-ga_campid.14650114788_asid.151761418307_crid.657403558715_kw.linkedin%20login_d.c_tid.kwd-12704335873_n.g_mt.e_geo.9040243&cid=&gclsrc=aw.ds&gad_source=1&gad_campaignid=14650114788&gbraid=0AAAAABKX7wGkDyHEA_MbDu4Zfag0E9xaq&gclid=CjwKCAiAjojLBhAlEiwAcjhrDuzTNnDEosiin0bM5mg-08UJ9raSASZWTRJl8L8twDVKIXPAUDeXWhoC9oIQAvD_BwE" title="LinkedIn">in</a>
+                    <a href="https://mail.google.com/mail/u/0/#inbox" title="Email">✉️</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="threats.html">Threats & Vulnerabilities</a></li>
+                    <li><a href="frameworks.html">Security Frameworks</a></li>
+                    <li><a href="learning.html">Learning Resources</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="tools.html">Tools & Utilities</a></li>
+                    <li><a href="blog.html">Blog & Updates</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-of-service.html">Terms & Conditions</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 CyberGuard - Cybersecurity Education Platform. All rights reserved. | Made with  for a secure digital world</p>
+        </div>
+    </footer>
+</body></html>

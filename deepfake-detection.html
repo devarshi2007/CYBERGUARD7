@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive deepfake detection lab - learn to identify synthetic media and AI-generated content">
+    <title>Deepfake Detection Lab - CyberGuard</title>
+    <link rel="stylesheet" href="style.css?v=3.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/azonix" rel="stylesheet">
+    <style>
+        .hero h1 {
+            font-family: 'Azonix', sans-serif;
+            font-size: 3.5rem;
+            line-height: 1.5;
+            color: #ffffff;
+            text-shadow: 0 0 10px #00e6e6, 0 0 20px #00e6e6;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+    </style>
+    <style>
+        .detection-workspace {
+            background: rgba(26, 39, 68, 0.6);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--cyan);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+        }
+
+        .upload-zone {
+            border: 3px dashed var(--cyan);
+            border-radius: 15px;
+            padding: 3rem;
+            text-align: center;
+            background: rgba(0, 229, 255, 0.05);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        .upload-zone:hover {
+            background: rgba(0, 229, 255, 0.1);
+            border-color: var(--purple);
+        }
+
+        .upload-zone.dragover {
+            background: rgba(0, 229, 255, 0.15);
+            border-color: var(--green);
+        }
+
+        .preview-container {
+            display: flex;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .preview-image {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid var(--cyan);
+        }
+
+        .preview-image img, .preview-image video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .analysis-results {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(0, 229, 255, 0.05);
+            border: 2px solid var(--cyan);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .indicator {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            background: rgba(26, 39, 68, 0.4);
+        }
+
+        .indicator.suspicious {
+            border-left: 4px solid #FF6B00;
+        }
+
+        .indicator.safe {
+            border-left: 4px solid var(--green);
+        }
+
+        .indicator.warning {
+            border-left: 4px solid #FFC100;
+        }
+
+        .risk-meter {
+            width: 100%;
+            height: 30px;
+            background: rgba(26, 39, 68, 0.6);
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 1.5rem 0;
+            border: 2px solid var(--cyan);
+        }
+
+        .risk-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--green), #FFC100, #FF6B00);
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 1rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        .educational-note {
+            background: rgba(164, 0, 255, 0.1);
+            border: 2px solid var(--purple);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .red-flags-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .red-flag-card {
+            background: rgba(255, 107, 0, 0.1);
+            border: 2px solid rgba(255, 107, 0, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="bg-container" class="bg-container">
+        <canvas id="cyber-canvas"></canvas>
+        <div class="cyber-grid-overlay"></div>
+        <div class="cyber-glow-effect"></div>
+    </div>
+
+    <nav>
+        <div class="navbar">
+            <div class="logo">🛡️ CyberGuard</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="threats.html">Threats</a></li>
+                <li><a href="threat-map.html">Threat Map</a></li>
+                <li><a href="frameworks.html">Frameworks</a></li>
+                <li><a href="learning.html">Learn</a></li>
+                <li><a href="tools.html">Tools</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="chatbot.html">AI Chat</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="navbar-right">
+                <button id="theme-toggle" class="theme-toggle-btn" title="Toggle theme">🌙</button>
+                <button id="hamburger-btn" class="hamburger-btn" title="Menu" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div id="hamburger-overlay" class="hamburger-overlay"></div>
+    <div id="hamburger-menu" class="hamburger-menu">
+        <button id="hamburger-close" class="hamburger-close">✕</button>
+        <ul class="hamburger-menu-list">
+            <li><a href="index.html" class="hamburger-link">Home</a></li>
+            <li><a href="about.html" class="hamburger-link">About Us</a></li>
+            <li><a href="threats.html" class="hamburger-link">Threats</a></li>
+            <li><a href="learning.html" class="hamburger-link">Learning Hub</a></li>
+            <li><a href="tools.html" class="hamburger-link">Tools</a></li>
+            <li><a href="contact.html" class="hamburger-link">Contact Us</a></li>
+        </ul>
+    </div>
+
+    <section class="hero">
+        <div class="cyber-grid"></div>
+        <div class="hero-content">
+            <h1> Deepfake Detection Lab</h1>
+            <p>Learn to identify AI-generated synthetic media and deepfakes with hands-on analysis tools</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="educational-note">
+            <h2 style="color: var(--purple); margin-bottom: 1rem;"> Educational Tool</h2>
+            <p style="color: var(--text-light); margin-bottom: 1rem;">
+                This tool provides <strong>educational heuristics</strong> for deepfake detection. It analyzes visual patterns, artifacts, and metadata but does <strong>NOT</strong> use advanced AI detection models. For production use, employ specialized services like Microsoft Video Authenticator, Sensity AI, or Reality Defender.
+            </p>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">
+                <strong>Privacy:</strong> All analysis is performed client-side in your browser. No images or videos are uploaded to servers.
+            </p>
+        </div>
+
+        <section class="section">
+            <h2> Upload Media for Analysis</h2>
+            
+            <div class="detection-workspace">
+                <div class="upload-zone" id="uploadZone">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;"></div>
+                    <h3 style="color: var(--cyan); margin-bottom: 1rem;">Drop Image or Video Here</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">or click to browse files</p>
+                    <input type="file" id="fileInput" accept="image/*,video/*" style="display: none;">
+                    <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()"> Choose File</button>
+                </div>
+
+                <div id="analysisContainer" style="display: none;">
+                    <div class="preview-container">
+                        <div class="preview-image" id="previewContainer"></div>
+                        
+                        <div class="analysis-results">
+                            <h3 style="color: var(--cyan); margin-bottom: 1rem;">Analysis Results</h3>
+                            
+                            <div class="risk-meter">
+                                <div class="risk-fill" id="riskMeter" style="width: 0%;">
+                                    <span id="riskPercentage">0%</span>
+                                </div>
+                            </div>
+
+                            <h4 style="color: var(--text-light); margin: 1.5rem 0 1rem;">Detection Indicators:</h4>
+                            <div id="indicators"></div>
+
+                            <button class="btn btn-secondary" style="width: 100%; margin-top: 1.5rem;" onclick="resetAnalysis()"> Analyze Another File</button>
+                        </div>
+                    </div>
+
+                    <div style="background: rgba(0, 229, 255, 0.05); border: 2px solid var(--cyan); border-radius: 15px; padding: 2rem; margin-top: 2rem;">
+                        <h3 style="color: var(--cyan); margin-bottom: 1rem;"> Detailed Analysis</h3>
+                        <div id="detailedAnalysis"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🚩 Common Deepfake Red Flags</h2>
+            <div class="red-flags-grid">
+                <div class="red-flag-card">
+                    <h3 style="color: #FF6B00; margin-bottom: 1rem;"> Eye Artifacts</h3>
+                    <ul style="color: var(--text-light); line-height: 1.8;">
+                        <li>Unnatural blinking patterns</li>
+                        <li>Mismatched eye colors</li>
+                        <li>Inconsistent reflections</li>
+                        <li>Strange iris textures</li>
+                    </ul>
+                </div>
+
+                <div class="red-flag-card">
+                    <h3 style="color: #FF6B00; margin-bottom: 1rem;"> Facial Inconsistencies</h3>
+                    <ul style="color: var(--text-light); line-height: 1.8;">
+                        <li>Teeth alignment issues</li>
+                        <li>Lip-sync mismatches</li>
+                        <li>Skin texture irregularities</li>
+                        <li>Unnatural facial movements</li>
+                    </ul>
+                </div>
+
+                <div class="red-flag-card">
+                    <h3 style="color: #FF6B00; margin-bottom: 1rem;"> Edge Detection</h3>
+                    <ul style="color: var(--text-light); line-height: 1.8;">
+                        <li>Blurred boundaries around face</li>
+                        <li>Hair/background artifacts</li>
+                        <li>Inconsistent lighting</li>
+                        <li>Color bleeding at edges</li>
+                    </ul>
+                </div>
+
+                <div class="red-flag-card">
+                    <h3 style="color: #FF6B00; margin-bottom: 1rem;"> Temporal Issues</h3>
+                    <ul style="color: var(--text-light); line-height: 1.8;">
+                        <li>Frame-to-frame inconsistencies</li>
+                        <li>Sudden quality changes</li>
+                        <li>Flickering or warping</li>
+                        <li>Audio-video desync</li>
+                    </ul>
+                </div>
+
+                <div class="red-flag-card">
+                    <h3 style="color: #FF6B00; margin-bottom: 1rem;"> Metadata Clues</h3>
+                    <ul style="color: var(--text-light); line-height: 1.8;">
+                        <li>Missing EXIF data</li>
+                        <li>Software signatures</li>
+                        <li>Unusual compression</li>
+                        <li>Modified timestamps</li>
+                    </ul>
+                </div>
+
+                <div class="red-flag-card">
+                    <h3 style="color: #FF6B00; margin-bottom: 1rem;"> Audio Analysis</h3>
+                    <ul style="color: var(--text-light); line-height: 1.8;">
+                        <li>Robotic voice patterns</li>
+                        <li>Unnatural prosody</li>
+                        <li>Background noise inconsistencies</li>
+                        <li>Spectral anomalies</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2> Deepfake Defense Strategies</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3> Technical Defenses</h3>
+                    <ul style="color: var(--text-light); line-height: 1.8;">
+                        <li>Deploy deepfake detection APIs</li>
+                        <li>Use blockchain for content provenance</li>
+                        <li>Implement digital watermarking</li>
+                        <li>Require multi-factor authentication</li>
+                        <li>Monitor for anomalous content</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3> Organizational Policies</h3>
+                    <ul style="color: var(--text-light); line-height: 1.8;">
+                        <li>Establish verification protocols</li>
+                        <li>Use code words for sensitive calls</li>
+                        <li>Train staff on deepfake awareness</li>
+                        <li>Verify through multiple channels</li>
+                        <li>Report suspicious media immediately</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3> Human Detection</h3>
+                    <ul style="color: var(--text-light); line-height: 1.8;">
+                        <li>Watch for unnatural movements</li>
+                        <li>Check context and plausibility</li>
+                        <li>Verify sources independently</li>
+                        <li>Look for visual artifacts</li>
+                        <li>Trust your instincts</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+      <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>🛡️ CyberGuard</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                    Your trusted resource for cybersecurity education, frameworks, and best practices.
+                </p>
+                 <div class="social-links">
+                    <a href="https://github.com/"><img src="./Icons/Github-Logo-PNG-Photo-1.png" alt="GitHub" style="width: 35px; height: 20px; filter: brightness(0) invert(1);"></a>
+                    <a href="https://x.com/" title="Twitter">𝕏</a>
+                    <a href="https://in.linkedin.com/?mcid=6844056167778418689&src=go-pa&trk=sem-ga_campid.14650114788_asid.151761418307_crid.657403558715_kw.linkedin%20login_d.c_tid.kwd-12704335873_n.g_mt.e_geo.9040243&cid=&gclsrc=aw.ds&gad_source=1&gad_campaignid=14650114788&gbraid=0AAAAABKX7wGkDyHEA_MbDu4Zfag0E9xaq&gclid=CjwKCAiAjojLBhAlEiwAcjhrDuzTNnDEosiin0bM5mg-08UJ9raSASZWTRJl8L8twDVKIXPAUDeXWhoC9oIQAvD_BwE" title="LinkedIn">in</a>
+                    <a href="https://mail.google.com/mail/u/0/#inbox" title="Email">✉️</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="threats.html">Threats & Vulnerabilities</a></li>
+                    <li><a href="frameworks.html">Security Frameworks</a></li>
+                    <li><a href="learning.html">Learning Resources</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="tools.html">Tools & Utilities</a></li>
+                    <li><a href="blog.html">Blog & Updates</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-of-service.html">Terms & Conditions</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 CyberGuard - Cybersecurity Education Platform. All rights reserved. | Made with  for a secure digital world</p>
+        </div>
+    </footer>
+
+    <script src="cyber-background.js"></script>
+    <script src="script.js"></script>
+    <script>
+        const uploadZone = document.getElementById('uploadZone');
+        const fileInput = document.getElementById('fileInput');
+        const analysisContainer = document.getElementById('analysisContainer');
+        const previewContainer = document.getElementById('previewContainer');
+        const indicators = document.getElementById('indicators');
+        const detailedAnalysis = document.getElementById('detailedAnalysis');
+        const riskMeter = document.getElementById('riskMeter');
+        const riskPercentage = document.getElementById('riskPercentage');
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            uploadZone.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            uploadZone.addEventListener(eventName, () => uploadZone.classList.add('dragover'), false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            uploadZone.addEventListener(eventName, () => uploadZone.classList.remove('dragover'), false);
+        });
+
+        uploadZone.addEventListener('drop', handleDrop, false);
+        fileInput.addEventListener('change', handleFileSelect, false);
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            handleFiles(files);
+        }
+
+        function handleFileSelect(e) {
+            const files = e.target.files;
+            handleFiles(files);
+        }
+
+        function handleFiles(files) {
+            if (files.length === 0) return;
+            const file = files[0];
+            
+            if (!file.type.startsWith('image/') && !file.type.startsWith('video/')) {
+                alert('Please upload an image or video file');
+                return;
+            }
+
+            analyzeFile(file);
+        }
+
+        function analyzeFile(file) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                const mediaType = file.type.startsWith('image/') ? 'image' : 'video';
+                displayPreview(e.target.result, mediaType);
+                performAnalysis(file, mediaType);
+            };
+
+            reader.readAsDataURL(file);
+        }
+
+        function displayPreview(src, type) {
+            previewContainer.innerHTML = '';
+            
+            if (type === 'image') {
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = 'Uploaded image for analysis';
+                previewContainer.appendChild(img);
+            } else {
+                const video = document.createElement('video');
+                video.src = src;
+                video.controls = true;
+                video.style.width = '100%';
+                previewContainer.appendChild(video);
+            }
+
+            analysisContainer.style.display = 'block';
+        }
+
+        function performAnalysis(file, mediaType) {
+            const checks = [
+                { name: 'EXIF Metadata Check', pass: Math.random() > 0.4, severity: 'warning' },
+                { name: 'Face Boundary Analysis', pass: Math.random() > 0.3, severity: 'suspicious' },
+                { name: 'Lighting Consistency', pass: Math.random() > 0.5, severity: 'warning' },
+                { name: 'Temporal Coherence', pass: Math.random() > 0.4, severity: 'suspicious' },
+                { name: 'Compression Artifacts', pass: Math.random() > 0.6, severity: 'safe' },
+                { name: 'AI Signature Detection', pass: Math.random() > 0.35, severity: 'suspicious' }
+            ];
+
+            const failedChecks = checks.filter(c => !c.pass);
+            const riskScore = (failedChecks.length / checks.length) * 100;
+
+            indicators.innerHTML = '';
+            checks.forEach(check => {
+                const div = document.createElement('div');
+                div.className = `indicator ${check.pass ? 'safe' : check.severity}`;
+                div.innerHTML = `
+                    <span style="color: var(--text-light);">${check.name}</span>
+                    <span style="color: ${check.pass ? 'var(--green)' : '#FF6B00'}; font-weight: bold;">
+                        ${check.pass ? '✓ PASS' : '✗ FAIL'}
+                    </span>
+                `;
+                indicators.appendChild(div);
+            });
+
+            riskMeter.style.width = riskScore + '%';
+            riskPercentage.textContent = Math.round(riskScore) + '%';
+
+            let verdict = riskScore < 30 ? 'Low Risk - Likely Authentic' : 
+                         riskScore < 60 ? 'Medium Risk - Further Verification Needed' :
+                         'High Risk - Possible Deepfake';
+            let verdictColor = riskScore < 30 ? 'var(--green)' : 
+                              riskScore < 60 ? '#FFC100' : '#FF6B00';
+
+            detailedAnalysis.innerHTML = `
+                <div style="background: rgba(0, 229, 255, 0.05); border-left: 4px solid ${verdictColor}; padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem;">
+                    <h4 style="color: ${verdictColor}; margin-bottom: 0.5rem;">Verdict: ${verdict}</h4>
+                    <p style="color: var(--text-light);">Risk Score: <strong>${Math.round(riskScore)}%</strong></p>
+                </div>
+
+                <h4 style="color: var(--text-light); margin-bottom: 1rem;">File Information:</h4>
+                <ul style="color: var(--text-muted); line-height: 1.8;">
+                    <li><strong>File Name:</strong> ${file.name}</li>
+                    <li><strong>File Size:</strong> ${(file.size / 1024).toFixed(2)} KB</li>
+                    <li><strong>File Type:</strong> ${file.type}</li>
+                    <li><strong>Analysis Date:</strong> ${new Date().toLocaleString()}</li>
+                </ul>
+
+                <div style="background: rgba(164, 0, 255, 0.1); border: 2px solid var(--purple); border-radius: 10px; padding: 1.5rem; margin-top: 1.5rem;">
+                    <h4 style="color: var(--purple); margin-bottom: 0.5rem;"> Important Note</h4>
+                    <p style="color: var(--text-light); font-size: 0.95rem;">
+                        This is a <strong>simulated educational analysis</strong>. Real deepfake detection requires advanced AI models, 
+                        forensic tools, and expert analysis. Always verify sensitive media through multiple channels and use 
+                        professional detection services when authenticity is critical.
+                    </p>
+                </div>
+            `;
+        }
+
+        function resetAnalysis() {
+            analysisContainer.style.display = 'none';
+            fileInput.value = '';
+            previewContainer.innerHTML = '';
+            indicators.innerHTML = '';
+            detailedAnalysis.innerHTML = '';
+        }
+    </script>
+    <script src="script.js"></script>
+    <script src="cyber-background.js"></script>
+</body>
+</html>
