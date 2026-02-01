@@ -2213,7 +2213,8 @@ function generateAttackFeed() {
     `).join('');
 }
 
-function updateThreatData() {
+function updateThreatMapData() {
+    if (typeof threatMapData === 'undefined' || !threatMapData || !threatMapData.regions) return;
     threatMapData.regions.forEach(region => {
         region.attacks += Math.floor(Math.random() * 20) - 5;
         if (region.attacks < 0) region.attacks = 0;

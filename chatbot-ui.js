@@ -344,10 +344,10 @@ async function sendMessage() {
         
         if (error.message.includes('429') || error.message.includes('Rate limit')) {
             contentDiv.innerHTML = `
-                <div style="color: #EF4444; margin-bottom: 0.5rem;">⚠️ <strong>Rate Limit Exceeded</strong></div>
-                <div style="color: #F59E0B; margin-bottom: 0.5rem;">Too many requests. The proxy limits 30 requests per minute.</div>
+                <div style="color: #EF4444; margin-bottom: 0.5rem;">⚠️ <strong>Request Failed</strong></div>
+                <div style="color: #F59E0B; margin-bottom: 0.5rem;">An error occurred while processing your request.</div>
                 <div style="color: #94A3B8; font-size: 0.9rem;">
-                    Please wait 60 seconds and try again.
+                    Please try again.
                 </div>
             `;
         } else {

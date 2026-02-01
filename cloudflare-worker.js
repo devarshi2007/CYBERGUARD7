@@ -23,12 +23,13 @@ async function handleRequest(request) {
 
   const clientIP = request.headers.get('CF-Connecting-IP') || 'unknown';
   
-  if (!checkRateLimit(clientIP)) {
-    return jsonResponse({ 
-      error: 'Rate limit exceeded',
-      message: 'Maximum 30 requests per minute. Please try again later.'
-    }, 429);
-  }
+  // Rate limiting disabled
+  // if (!checkRateLimit(clientIP)) {
+  //   return jsonResponse({ 
+  //     error: 'Rate limit exceeded',
+  //     message: 'Maximum 30 requests per minute. Please try again later.'
+  //   }, 429);
+  // }
 
   try {
     const body = await request.json();
@@ -213,7 +214,6 @@ function handleLandingPage() {
         <div class="info-box">
             <strong>🔒 Security Features:</strong><br>
             • API key stored securely as a secret<br>
-            • Rate limiting (30 requests/minute)<br>
             • CORS enabled for authorized domains<br>
             • Request validation
         </div>

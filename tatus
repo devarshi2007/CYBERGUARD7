@@ -1,0 +1,85 @@
+warning: in the working copy of 'about.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'blog.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'case-studies.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'chatbot-ui-updated.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'chatbot-ui.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'chatbot.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'chatbot.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'cloudflare-worker.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'community.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'contact.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'footer.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'frameworks.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'index.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'learning.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'pricing.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'privacy-policy.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'script.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'search.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'services.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'terms-of-service.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'threat-map.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'threats.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tools.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'zero-trust.html', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/Icons/OIP.jpg b/Icons/OIP.jpg[m
+[1mindex c203c9f..e3183e4 100644[m
+Binary files a/Icons/OIP.jpg and b/Icons/OIP.jpg differ
+[1mdiff --git a/about.html b/about.html[m
+[1mindex 9fd88cf..af388a2 100644[m
+[1m--- a/about.html[m
+[1m+++ b/about.html[m
+[36m@@ -473,10 +473,16 @@[m
+                     Your trusted resource for cybersecurity education, frameworks, and best practices.[m
+                 </p>[m
+                  <div class="social-links">[m
+[31m-                    <a href="https://github.com/"><img src="./Icons/Github-Logo-PNG-Photo-1.png" alt="GitHub" style="width: 35px; height: 20px; filter: brightness(0) invert(1);"></a>[m
+[31m-                    <a href="https://x.com/" title="Twitter">𝕏</a>[m
+[31m-                    <a href="https://in.linkedin.com/?mcid=6844056167778418689&src=go-pa&trk=sem-ga_campid.14650114788_asid.151761418307_crid.657403558715_kw.linkedin%20login_d.c_tid.kwd-12704335873_n.g_mt.e_geo.9040243&cid=&gclsrc=aw.ds&gad_source=1&gad_campaignid=14650114788&gbraid=0AAAAABKX7wGkDyHEA_MbDu4Zfag0E9xaq&gclid=CjwKCAiAjojLBhAlEiwAcjhrDuzTNnDEosiin0bM5mg-08UJ9raSASZWTRJl8L8twDVKIXPAUDeXWhoC9oIQAvD_BwE" title="LinkedIn">in</a>[m
+[31m-                    <a href="https://mail.google.com/mail/u/0/#inbox" title="Email">✉️</a>[m
+[32m+[m[32m                    <a href=https://github.com/devarshi2007><img src="./Icons/Github-Logo-PNG-Photo-1.png" alt="GitHub" style="width: 35px; height: 20px; filter: brightness(0) invert(1);"></a>[m
+[32m+[m[32m                    <a href="https://x.com/CyberGuard404" title="Twitter">𝕏</a>[m
+[32m+[m[32m                    <a href="https://www.linkedin.com/in/cyber-guard-335a413a9/" title="LinkedIn">in</a>[m
+[32m+[m[32m<a href="https://mail.google.com/mail/?view=cm&fs=1&to=hellocyberguard.io@gmail.com&su=Inquiry%20from%20CyberGuard%20Website&body=Hi%20CyberGuard%20team,%0A%0AI%20would%20like%20to%20discuss..."[m
+[32m+[m[32m   target="_blank"[m
+[32m+[m[32m   rel="noopener noreferrer"[m
+[32m+[m[32m   title="Email us on Gmail"[m
+[32m+[m[32m   style="text-decoration: none; color: inherit;">[m
+[32m+[m[32m    <span style="font-size: 1.5rem;">✉️</span></a>[m[41m     [m
+[32m+[m[32m    <a href ="https://www.instagram.com/cyberguard_404/"><img src="https://th.bing.com/th/id/R.735dda68880a385ce8cc5be4f3c5fcd6?rik=qSxRw2lCZYy9Mw&riu=http%3a%2f%2fpngimg.com%2fuploads%2finstagram%2finstagram_PNG11.png&ehk=QVCbfkCKi8pJLF08bRkS%2fLeMqLTnJQf402WRaIdN6jE%3d&risl=&pid=ImgRaw&r=0" height="25px" width="25px"></a>[m[41m       [m
+                 </div>[m
+             </div>[m
+             <div class="footer-section">[m
+[1mdiff --git a/blog.html b/blog.html[m
+[1mindex 957ac25..4fb9b16 100644[m
+[1m--- a/blog.html[m
+[1m+++ b/blog.html[m
+[36m@@ -367,11 +367,17 @@[m
+                 <p style="color: var(--text-muted); margin-bottom: 1rem;">[m
+                     Your trusted resource for cybersecurity education, frameworks, and best practices.[m
+                 </p>[m
+[31m-                 <div class="social-links">[m
+[31m-                    <a href="https://github.com/"><img src="./Icons/Github-Logo-PNG-Photo-1.png" alt="GitHub" style="width: 35px; height: 20px; filter: brightness(0) invert(1);"></a>[m
+[31m-                    <a href="https://x.com/" title="Twitter">𝕏</a>[m
+[31m-                    <a href="https://in.linkedin.com/?mcid=6844056167778418689&src=go-pa&trk=sem-ga_campid.14650114788_asid.151761418307_crid.657403558715_kw.linkedin%20login_d.c_tid.kwd-12704335873_n.g_mt.e_geo.9040243&cid=&gclsrc=aw.ds&gad_source=1&gad_campaignid=14650114788&gbraid=0AAAAABKX7wGkDyHEA_MbDu4Zfag0E9xaq&gclid=CjwKCAiAjojLBhAlEiwAcjhrDuzTNnDEosiin0bM5mg-08UJ9raSASZWTRJl8L8twDVKIXPAUDeXWhoC9oIQAvD_BwE" title="LinkedIn">in</a>[m
+[31m-                    <a href="https://mail.google.com/mail/u/0/#inbox" title="Email">✉️</a>[m
+[32m+[m[32m                  <div class="social-links">[m
+[32m+[m[32m                    <a href=https://github.com/devarshi2007><img src="./Icons/Github-Logo-PNG-Photo-1.png" alt="GitHub" style="width: 35px; height: 20px; filter: brightness(0) invert(1);"></a>[m
+[32m+[m[32m                    <a href="https://x.com/CyberGuard404" title="Twitter">𝕏</a>[m
+[32m+[m[32m                    <a href="https://www.linkedin.com/in/cyber-guard-335a413a9/" title="LinkedIn">in</a>[m
+[32m+[m[32m<a href="https://mail.google.com/mail/?view=cm&fs=1&to=hellocyberguard.io@gmail.com&su=Inquiry%20from%20CyberGuard%20Website&body=Hi%20CyberGuard%20team,%0A%0AI%20would%20like%20to%20discuss..."[m
+[32m+[m[32m   target="_blank"[m
+[32m+[m[32m   rel="noopener noreferrer"[m
+[32m+[m[32m   title="Email us on Gmail"[m
+[32m+[m[32m   style="text-decoration: none; color: inherit;">[m
+[32m+[m[32m    <span style="font-size: 1.5rem;">✉️</span></a>[m[41m     [m
+[32m+[m[32m    <a href ="https://www.instagram.com/cyberguard_404/"><img src="https://th.bing.com/th/id/R.735dda68880a385ce8cc5be4f3c5fcd6?rik=qSxRw2lCZYy9Mw&riu=http%3a%2f%2fpngimg.com%2fuploads%2finstagram%2finstagram_PNG11.png&ehk=QVCbfkCKi8pJLF08bRkS%2fLeMqLTnJQf402WRaIdN6jE%3d&risl=&pid=ImgRaw&r=0" height="25px" width="25px"></a>[m[41m       [m
+                 </div>[m
+             </div>[m
+             <div class="footer-section">[m
+[1mdiff --git a/case-studies.html b/case-studies.html[m
+[1mindex c3b4fe5..47b972c 100644[m
+[1m--- a/case-studies.html[m
+[1m+++ b/case-studies.html[m
+[36m@@ -322,11 +322,17 @@[m
+                 <p style="color: var(--text-muted); margin-bottom: 1rem;">
