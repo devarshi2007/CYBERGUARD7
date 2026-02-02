@@ -1,5 +1,5 @@
 import { db } from './lib/firebase.js';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, setDoc } from "firebase/firestore";
 import { auth } from './lib/firebase.js';
 
 export async function saveQuizScore(score, quizType = 'risk-assessment') {

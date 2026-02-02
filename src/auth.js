@@ -5,7 +5,7 @@ import {
   signOut,
   onAuthStateChanged,
   sendPasswordResetEmail 
-} from 'firebase/auth';
+} from "firebase/auth";
 
 function initAuth() {
   const loginForm = document.getElementById('login-form');
