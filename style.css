@@ -1,10 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
     --primary-dark: #0A0F1F;
@@ -309,7 +309,6 @@ nav {
     top: 0;
     z-index: 1000;
     box-shadow: 0 0 20px rgba(0, 229, 255, 0.1);
-    position: relative;
 }
 
 .navbar {
@@ -380,6 +379,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 1;
 }
 
 /* Hero Image Section */
@@ -492,6 +492,7 @@ nav {
 
 .hero-content {
     text-align: center;
+    position: relative;
     z-index: 2;
     max-width: 800px;
     padding: 2rem;
@@ -667,6 +668,8 @@ nav {
     display: block;
     width: 100%;
     box-sizing: border-box;
+    position: relative;
+    z-index: 1;
 }
 
 .container .section {
@@ -685,6 +688,8 @@ nav {
     display: block;
     width: 100%;
     box-sizing: border-box;
+    position: relative;
+    z-index: 1;
 }
 
 .section h2 {
@@ -1720,6 +1725,8 @@ footer {
     border-top: 2px solid var(--purple);
     padding: 3rem 0 1rem;
     margin-top: 5rem;
+    position: relative;
+    z-index: 1;
 }
 
 .footer-content {

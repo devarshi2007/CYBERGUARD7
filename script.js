@@ -2642,6 +2642,12 @@ function calculateRiskScore() {
             </div>
         `;
         resultsDiv.style.display = 'block';
+        
+        if (typeof window.saveQuizScore === 'function') {
+            window.saveQuizScore(percentage, 'risk-assessment').catch(err => {
+                console.log('Could not save quiz score:', err);
+            });
+        }
     }
 }
 
