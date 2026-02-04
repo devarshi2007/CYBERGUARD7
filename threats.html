@@ -138,6 +138,39 @@
             </div>
         </section>
 
+        <!-- Real-Time CISA KEV Feed -->
+        <section class="section" style="background: linear-gradient(135deg, rgba(220, 0, 70, 0.08) 0%, rgba(0, 0, 0, 0.3) 100%); border: 2px solid rgba(220, 0, 70, 0.2); border-radius: 20px; padding: 2.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h2 style="margin: 0;"> Live Threat Feed - Known Exploited Vulnerabilities</h2>
+                <div style="display: flex; gap: 15px; align-items: center;">
+                    <span id="feed-last-update" style="font-size: 0.85rem; color: var(--text-muted);">Loading...</span>
+                    <button id="refresh-feed" style="padding: 8px 20px; background: linear-gradient(135deg, #DC0046, #FF6B35); border: none; border-radius: 8px; color: white; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(220, 0, 70, 0.3);">
+                         Refresh
+                    </button>
+                </div>
+            </div>
+            
+            <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 0.95rem;">
+                Real-time feed from <strong>CISA's Known Exploited Vulnerabilities Catalog</strong> - actively exploited CVEs that pose significant risk to organizations
+            </p>
+
+            <div id="threat-feed-container" style="display: grid; gap: 1rem;">
+                <!-- Threat cards will be inserted here by JavaScript -->
+                <div style="text-align: center; padding: 3rem; color: var(--text-muted);">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🔄</div>
+                    <div>Loading latest threats...</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1rem; background: rgba(0, 229, 255, 0.05); border-left: 3px solid var(--cyan); border-radius: 8px;">
+                <p style="font-size: 0.9rem; margin: 0; color: var(--text-muted);">
+                    📊 <strong>Data Source:</strong> US Cybersecurity & Infrastructure Security Agency (CISA) | 
+                    🔄 <strong>Auto-refresh:</strong> Every 10 minutes | 
+                    📅 <strong>Showing:</strong> Latest 15 vulnerabilities
+                </p>
+            </div>
+        </section>
+
         <section class="section">
             <h2>Common Cybersecurity Threats</h2>
             
@@ -741,6 +774,9 @@
         updateThreatStats();
         setInterval(updateThreatStats, 60000);
     </script>
+
+    <!-- Threat Feed Script -->
+    <script type="module" src="./src/threat-feed.js"></script>
     
     <!-- Service Worker Registration for PWA -->
     <script>

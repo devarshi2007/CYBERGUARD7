@@ -29,7 +29,7 @@
                 if (mutation.addedNodes.length) {
                     mutation.addedNodes.forEach((node) => {
                         if (node.nodeType === 1) {
-                            if (node.className && (node.className.includes('notification') || node.className.includes('update') || node.className.includes('modal'))) {
+                            if (node.classList?.contains('notification') || node.classList?.contains('update') || node.classList?.contains('modal')) {
                                 node.remove();
                             }
                         }

@@ -19,7 +19,8 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         search: resolve(__dirname, 'search.html'),
-        tools: resolve(__dirname, 'tools.html')
+        tools: resolve(__dirname, 'tools.html'),
+        dashboard: resolve(__dirname, 'dashboard.html')
       },
       output: {
         manualChunks: {

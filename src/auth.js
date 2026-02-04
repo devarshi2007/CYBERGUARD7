@@ -4,7 +4,8 @@ import {
   signInWithEmailAndPassword, 
   signOut,
   onAuthStateChanged,
-  sendPasswordResetEmail 
+  sendPasswordResetEmail,
+  sendEmailVerification 
 } from 'firebase/auth';
 
 function initAuth() {
@@ -77,8 +78,9 @@ function initAuth() {
     const password = document.getElementById('signup-password').value;
 
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      alert('Account created! You can now log in.');
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      await sendEmailVerification(userCredential.user);
+      alert('Account created! Verification email sent. Please check your inbox and verify your email.');
       signupForm.style.display = 'none';
       hideOverlay();
       document.getElementById('signup-form-element').reset();
@@ -120,6 +122,7 @@ function initAuth() {
 
   onAuthStateChanged(auth, (user) => {
     const statusEl = document.getElementById('user-status');
+    const verificationBanner = document.getElementById('verification-banner');
     
     if (user) {
       statusEl.innerHTML = `Welcome, ${user.email}`;
@@ -129,6 +132,14 @@ function initAuth() {
         await signOut(auth);
         location.reload();
       };
+
+      if (verificationBanner) {
+        if (!user.emailVerified) {
+          verificationBanner.style.display = 'block';
+        } else {
+          verificationBanner.style.display = 'none';
+        }
+      }
     } else {
       statusEl.innerHTML = 'Not logged in';
       btnShowLogin.style.display = 'inline-block';
@@ -138,8 +149,27 @@ function initAuth() {
         loginForm.style.display = 'none';
         showOverlay();
       };
+
+      if (verificationBanner) {
+        verificationBanner.style.display = 'none';
+      }
     }
   });
+
+  const resendVerificationBtn = document.getElementById('resend-verification');
+  if (resendVerificationBtn) {
+    resendVerificationBtn.onclick = async () => {
+      const user = auth.currentUser;
+      if (user && !user.emailVerified) {
+        try {
+          await sendEmailVerification(user);
+          alert('Verification email sent! Please check your inbox.');
+        } catch (error) {
+          alert('Error: ' + error.message);
+        }
+      }
+    };
+  }
 }
 
 if (document.readyState === 'loading') {
