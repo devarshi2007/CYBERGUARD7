@@ -6,7 +6,7 @@ import {
   onAuthStateChanged,
   sendPasswordResetEmail,
   sendEmailVerification 
-} from 'firebase/auth';
+} from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
 
 function initAuth() {
   const loginForm = document.getElementById('login-form');
