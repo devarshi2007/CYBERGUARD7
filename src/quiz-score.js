@@ -1,8 +1,12 @@
-import { db } from './lib/firebase.js';
+import { db, auth } from './lib/firebase.js';
 import { doc, setDoc } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
 import { auth } from './lib/firebase.js';
-
 export async function saveQuizScore(score, quizType = 'risk-assessment') {
+  if (!db) {
+    console.log('Firebase not initialized, skipping score save');
+    return;
+  }
+
   const user = auth.currentUser;
   if (!user) {
     console.log('No user logged in, skipping score save');
