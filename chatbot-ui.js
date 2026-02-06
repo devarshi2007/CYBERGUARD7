@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const API_KEY = 'AIzaSyCHN6UVBTh6hgleliNb3-7k1YlJzHJlYEU';
+const API_KEY = 'AIzaSyB_v9RY1yMcPBPGq2jjKSG5ABV3kVsIwL8';
 
 if (!window.ChatbotConfig) {
     console.error('❌ ChatbotConfig not found! Make sure config.js is loaded before chatbot-ui.js');
