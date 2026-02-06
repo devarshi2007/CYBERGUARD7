@@ -4,11 +4,13 @@ const rateLimitStore = new Map();
 const RATE_LIMIT_WINDOW_MS = 60000;
 const MAX_REQUESTS_PER_WINDOW = 30;
 
-addEventListener('fetch', event => {
-  event.respondWith(handleRequest(event.request));
-});
+export default {
+  async fetch(request, env, ctx) {
+    return handleRequest(request, env);
+  }
+};
 
-async function handleRequest(request) {
+async function handleRequest(request, env) {
   if (request.method === 'OPTIONS') {
     return handleCORS();
   }
@@ -34,7 +36,7 @@ async function handleRequest(request) {
   try {
     const body = await request.json();
     
-    const apiKey = GEMINI_API_KEY;
+    const apiKey = env.GEMINI_API_KEY;
     if (!apiKey) {
       console.error('GEMINI_API_KEY not configured');
       return jsonResponse({ error: 'Server configuration error' }, 500);
