@@ -1,4 +1,6 @@
-const PROXY_URL = 'https://gemini-proxy.devarshithakur2007.workers.dev';
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+const API_KEY = 'AIzaSyCHN6UVBTh6hgleliNb3-7k1YlJzHJlYEU';
 
 if (!window.ChatbotConfig) {
     console.error('❌ ChatbotConfig not found! Make sure config.js is loaded before chatbot-ui.js');
@@ -7,6 +9,8 @@ if (!window.ChatbotConfig) {
 
 const config = window.ChatbotConfig;
 const MODEL_NAME = config.api.modelName;
+
+const genAI = new GoogleGenerativeAI(API_KEY);
 
 console.log('🚀 Cyber AI Chatbot initialized');
 console.log('📡 Using model:', MODEL_NAME);
@@ -298,34 +302,20 @@ async function sendMessage() {
     }
 
     try {
-        console.log('🔄 Sending to proxy...');
+        console.log('🔄 Sending to Gemini API...');
         
-        const response = await fetch(PROXY_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                model: MODEL_NAME,
-                contents: chatHistoryMessages,
-                systemInstruction: {
-                    parts: [{ text: config.systemInstruction }]
-                }
-            })
+        const model = genAI.getGenerativeModel({ 
+            model: MODEL_NAME,
+            systemInstruction: config.systemInstruction
         });
 
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error || `HTTP ${response.status}`);
-        }
+        const chat = model.startChat({
+            history: chatHistoryMessages.slice(0, -1)
+        });
 
-        const data = await response.json();
+        const result = await chat.sendMessage(message);
+        const aiResponse = result.response.text();
         
-        if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
-            throw new Error('Invalid response format from API');
-        }
-
-        const aiResponse = data.candidates[0].content.parts[0].text;
         contentDiv.innerHTML = formatMessage(aiResponse);
         
         chatHistoryMessages.push({
