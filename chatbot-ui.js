@@ -1,10 +1,10 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+const API_KEY = 'AIzaSyDby0XoBs2dJZlJ8YsT9jw3GF9yPFmmVVk';
 
 if (!API_KEY) {
-    console.error('❌ VITE_GEMINI_API_KEY not found in environment variables');
-    throw new Error('Gemini API key is required. Please set VITE_GEMINI_API_KEY in your environment.');
+    console.error('❌ Gemini API key not configured');
+    throw new Error('Gemini API key is required.');
 }
 
 if (!window.ChatbotConfig) {
