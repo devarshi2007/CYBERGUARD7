@@ -309,7 +309,9 @@ async function sendMessage() {
             body: JSON.stringify({
                 model: MODEL_NAME,
                 contents: chatHistoryMessages,
-                systemInstruction: config.systemInstruction
+                systemInstruction: {
+                    parts: [{ text: config.systemInstruction }]
+                }
             })
         });
 
