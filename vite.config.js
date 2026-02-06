@@ -4,6 +4,7 @@ import { resolve } from 'path';
 export default defineConfig({
   root: '.',
   build: {
+    target: 'es2022',
     outDir: 'dist',
     emptyOutDir: true,
     sourcemap: false,
@@ -44,6 +45,7 @@ export default defineConfig({
     include: ['@google/generative-ai']
   },
   esbuild: {
+    target: 'es2022',
     drop: ['console', 'debugger'],
     legalComments: 'none'
   }
