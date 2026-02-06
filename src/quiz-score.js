@@ -1,6 +1,6 @@
 import { db, auth } from './lib/firebase.js';
 import { doc, setDoc } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
-import { auth } from './lib/firebase.js';
+
 export async function saveQuizScore(score, quizType = 'risk-assessment') {
   if (!db) {
     console.log('Firebase not initialized, skipping score save');
