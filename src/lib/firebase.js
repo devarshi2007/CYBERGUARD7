@@ -1,10 +1,10 @@
 export const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID
+  apiKey: "AIzaSyCMnAW2U0FFkDAUIedgQpY6qzbKZsMRRbs",
+  authDomain: "cyberguard-edu-4978e.firebaseapp.com",
+  projectId: "cyberguard-edu-4978e",
+  storageBucket: "cyberguard-edu-4978e.firebasestorage.app",
+  messagingSenderId: "801815484714",
+  appId: "1:801815484714:web:59603c4f4bf865e76e2653"
 };
 
 let app, auth, db;
