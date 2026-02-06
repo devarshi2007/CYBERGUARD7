@@ -1,9 +1,10 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+const API_KEY = import.meta.env?.VITE_GEMINI_API_KEY;
 
 if (!API_KEY) {
     console.error('❌ Gemini API key not configured');
+    console.error('Make sure .env file exists with VITE_GEMINI_API_KEY and restart dev server');
     throw new Error('Gemini API key is required.');
 }
 
