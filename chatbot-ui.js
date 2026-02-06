@@ -1,12 +1,4 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
-
-const API_KEY = import.meta.env?.VITE_GEMINI_API_KEY;
-
-if (!API_KEY) {
-    console.error('❌ Gemini API key not configured');
-    console.error('Make sure .env file exists with VITE_GEMINI_API_KEY and restart dev server');
-    throw new Error('Gemini API key is required.');
-}
+const PROXY_URL = import.meta.env?.VITE_PROXY_URL || 'https://gemini-proxy.devarshithakur2007.workers.dev';
 
 if (!window.ChatbotConfig) {
     console.error('❌ ChatbotConfig not found! Make sure config.js is loaded before chatbot-ui.js');
@@ -16,11 +8,10 @@ if (!window.ChatbotConfig) {
 const config = window.ChatbotConfig;
 const MODEL_NAME = config.api.modelName;
 
-const genAI = new GoogleGenerativeAI(API_KEY);
-
 console.log('🚀 Cyber AI Chatbot initialized');
 console.log('📡 Using model:', MODEL_NAME);
 console.log('🔒 Using secure proxy (API key hidden)');
+console.log('🌐 Proxy URL:', PROXY_URL);
 console.log('⚙️ Config loaded: Success');
 
 let menuToggle, sidebar, chatInput, sendBtn, chatMessages, newChatBtn;
@@ -308,19 +299,27 @@ async function sendMessage() {
     }
 
     try {
-        console.log('🔄 Sending to Gemini API...');
+        console.log('🔄 Sending to proxy...');
         
-        const model = genAI.getGenerativeModel({ 
-            model: MODEL_NAME,
-            systemInstruction: config.systemInstruction
+        const response = await fetch(PROXY_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                model: MODEL_NAME,
+                contents: chatHistoryMessages,
+                systemInstruction: config.systemInstruction
+            })
         });
 
-        const chat = model.startChat({
-            history: chatHistoryMessages.slice(0, -1)
-        });
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.error || `HTTP ${response.status}: ${response.statusText}`);
+        }
 
-        const result = await chat.sendMessage(message);
-        const aiResponse = result.response.text();
+        const data = await response.json();
+        const aiResponse = data.candidates?.[0]?.content?.parts?.[0]?.text || 'No response received';
         
         contentDiv.innerHTML = formatMessage(aiResponse);
         
