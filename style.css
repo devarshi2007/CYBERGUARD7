@@ -4239,3 +4239,13 @@ footer {
 .update-banner {
     display: none !important;
 }
+
+#login-form,
+#signup-form,
+#reset-password-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -1%);     /* ← changed from -50% to -45% */
+    z-index: 10000;
+}
