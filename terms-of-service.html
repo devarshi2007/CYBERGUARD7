@@ -22,8 +22,9 @@
             mutations.forEach((mutation) => {
                 if (mutation.addedNodes.length) {
                     mutation.addedNodes.forEach((node) => {
-                        if (node.nodeType === 1) {
-                            if (node.classList?.contains('notification') || node.classList?.contains('update') || node.classList?.contains('modal')) {
+                        if (node.nodeType === 1 && node.classList) {
+                            const isAuthElement = node.id && (node.id.includes('login-form') || node.id.includes('signup-form') || node.id.includes('auth-overlay'));
+                            if (!isAuthElement && (node.classList.contains('notification') || node.classList.contains('update'))) {
                                 node.remove();
                             }
                         }
@@ -31,7 +32,13 @@
                 }
             });
         });
-        observer.observe(document.body || document.documentElement, { childList: true, subtree: true });
+        if (document.body) {
+            observer.observe(document.body, { childList: true, subtree: true });
+        } else {
+            document.addEventListener('DOMContentLoaded', () => {
+                observer.observe(document.body, { childList: true, subtree: true });
+            });
+        }
     </script>
     <!-- Crisp Chat Widget for AI Support - DISABLED -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
