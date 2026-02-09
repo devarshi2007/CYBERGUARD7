@@ -20,18 +20,24 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        search: resolve(__dirname, 'search.html'),
-        tools: resolve(__dirname, 'tools.html'),
-        threats: resolve(__dirname, 'threats.html'),
-        threatMap: resolve(__dirname, 'threat-map.html'),
-        learning: resolve(__dirname, 'learning.html'),
-        frameworks: resolve(__dirname, 'frameworks.html'),
-        chatbot: resolve(__dirname, 'chatbot.html'),
-        contact: resolve(__dirname, 'contact.html'),
         about: resolve(__dirname, 'about.html'),
+        blog: resolve(__dirname, 'blog.html'),
+        caseStudies: resolve(__dirname, 'case-studies.html'),
+        chatbot: resolve(__dirname, 'chatbot.html'),
         community: resolve(__dirname, 'community.html'),
+        contact: resolve(__dirname, 'contact.html'),
+        frameworks: resolve(__dirname, 'frameworks.html'),
+        hackerSimulation: resolve(__dirname, 'hacker-simulation.html'),
+        learning: resolve(__dirname, 'learning.html'),
+        pricing: resolve(__dirname, 'pricing.html'),
         privacy: resolve(__dirname, 'privacy-policy.html'),
-        terms: resolve(__dirname, 'terms-of-service.html')
+        search: resolve(__dirname, 'search.html'),
+        services: resolve(__dirname, 'services.html'),
+        terms: resolve(__dirname, 'terms-of-service.html'),
+        threatMap: resolve(__dirname, 'threat-map.html'),
+        threats: resolve(__dirname, 'threats.html'),
+        tools: resolve(__dirname, 'tools.html'),
+        zeroTrust: resolve(__dirname, 'zero-trust.html')
       },
       output: {
         chunkFileNames: 'assets/js/[name]-[hash].js',
