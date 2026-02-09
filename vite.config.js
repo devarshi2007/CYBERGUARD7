@@ -1,8 +1,10 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
+import { copyFileSync, mkdirSync } from 'fs';
 
 export default defineConfig({
   root: '.',
+  publicDir: 'public',
   build: {
     target: 'es2022',
     outDir: 'dist',
@@ -34,15 +36,26 @@ export default defineConfig({
       output: {
         chunkFileNames: 'assets/js/[name]-[hash].js',
         entryFileNames: 'assets/js/[name]-[hash].js',
-        assetFileNames: 'assets/[ext]/[name]-[hash].[ext]'
+        assetFileNames: (assetInfo) => {
+          const name = assetInfo.name || '';
+          if (name.endsWith('.js')) {
+            return '[name].[ext]';
+          }
+          return 'assets/[ext]/[name]-[hash].[ext]';
+        }
       }
     },
+    assetsInlineLimit: 0,
+    copyPublicDir: true,
     chunkSizeWarningLimit: 1000
   },
   server: {
     port: 3000,
     open: true,
-    cors: true
+    cors: true,
+    hmr: {
+      overlay: false
+    }
   },
   optimizeDeps: {
     include: ['@google/generative-ai']
