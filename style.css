@@ -4246,6 +4246,6 @@ footer {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -1%);     /* ← changed from -50% to -45% */
+    transform: translate(-50%, -10%);     /* ← changed from -50% to -45% */
     z-index: 10000;
 }
