@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Join the CyberGuard community - connect with cybersecurity professionals, share knowledge, and stay updated.">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Community - CyberGuard</title>
+    <link rel="stylesheet" href="style.css?v=3.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/azonix" rel="stylesheet">
+    <style>
+        .hero h1 {
+            font-family: 'Azonix', sans-serif;
+            font-size: 3.5rem;
+            line-height: 1.5;
+            color: #ffffff;
+            text-shadow: 0 0 10px #00e6e6, 0 0 20px #00e6e6;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Cyber Background -->
+    <div id="bg-container" class="bg-container">
+        <canvas id="cyber-canvas"></canvas>
+        <div class="cyber-grid-overlay"></div>
+        <div class="cyber-glow-effect"></div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav>
+        <div class="navbar">
+            <div class="logo">🛡️ CyberGuard</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="threats.html">Threats</a></li>
+                <li><a href="threat-map.html">Threat Map</a></li>
+                <li><a href="frameworks.html">Frameworks</a></li>
+                <li><a href="learning.html">Learn</a></li>
+                <li><a href="tools.html">Tools</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="chatbot.html">AI Chat</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="navbar-right">
+                <button id="theme-toggle" class="theme-toggle-btn" title="Toggle theme">🌙</button>
+                <button id="hamburger-btn" class="hamburger-btn" title="Menu" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hamburger Menu -->
+    <div id="hamburger-overlay" class="hamburger-overlay"></div>
+    <div id="hamburger-menu" class="hamburger-menu">
+        <button id="hamburger-close" class="hamburger-close">✕</button>
+        <ul class="hamburger-menu-list">
+            <li><a href="index.html" class="hamburger-link">Home</a></li>
+            <li><a href="about.html" class="hamburger-link">About Us</a></li>
+            <li><a href="case-studies.html" class="hamburger-link">Case Studies</a></li>
+            <li><a href="community.html" class="hamburger-link">Community</a></li>
+            <li><a href="privacy-policy.html" class="hamburger-link">Privacy Policy</a></li>
+            <li><a href="terms-of-service.html" class="hamburger-link">Terms of Service</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="cyber-grid"></div>
+        <div class="hero-content">
+            <h1>🌐 Community</h1>
+            <p>Join our growing community of cybersecurity professionals, enthusiasts, and learners</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <section class="section">
+            <h2>Connect With Us</h2>
+            
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>💬 Discord Community</h3>
+                    <p>Join our Discord server to chat with fellow cybersecurity enthusiasts, ask questions, and share knowledge in real-time.</p>
+                    <a href="#" class="btn btn-primary">Join Discord</a>
+                </div>
+
+                <div class="card">
+                    <h3>🐦 Twitter</h3>
+                    <p>Follow us on Twitter for the latest cybersecurity news, updates, and tips.</p>
+                    <a href="https://x.com/CyberGuard404" target="_blank" class="btn btn-primary">Follow on Twitter</a>
+                </div>
+
+                <div class="card">
+                    <h3>💼 LinkedIn</h3>
+                    <p>Connect with us professionally and stay updated with industry insights.</p>
+                    <a href="https://www.linkedin.com/in/cyber-guard-335a413a9/" target="_blank" class="btn btn-primary">Connect on LinkedIn</a>
+                </div>
+
+                <div class="card">
+                    <h3>📧 Newsletter</h3>
+                    <p>Subscribe to our newsletter for weekly cybersecurity updates and exclusive content.</p>
+                    <a href="contact.html" class="btn btn-primary">Subscribe</a>
+                </div>
+
+                <div class="card">
+                    <h3>💻 GitHub</h3>
+                    <p>Check out our open-source projects and contribute to the community.</p>
+                    <a href="https://github.com/devarshi2007" target="_blank" class="btn btn-primary">View on GitHub</a>
+                </div>
+
+                <div class="card">
+                    <h3>📸 Instagram</h3>
+                    <p>Follow us for visual content, infographics, and cybersecurity tips.</p>
+                    <a href="https://www.instagram.com/cyberguard_404/" target="_blank" class="btn btn-primary">Follow on Instagram</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Community Guidelines</h2>
+            <div class="card">
+                <h3>🤝 Our Values</h3>
+                <ul style="list-style-position: inside; color: var(--text-muted); margin-top: 1rem; line-height: 2;">
+                    <li>✓ Be respectful and inclusive</li>
+                    <li>✓ Share knowledge freely</li>
+                    <li>✓ Practice ethical cybersecurity</li>
+                    <li>✓ Help others learn and grow</li>
+                    <li>✓ Stay curious and keep learning</li>
+                    <li>✓ Report security issues responsibly</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Contribute</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>📝 Write Articles</h3>
+                    <p>Share your expertise by writing guest articles for our blog.</p>
+                    <a href="contact.html" class="btn btn-secondary">Submit Article</a>
+                </div>
+
+                <div class="card">
+                    <h3>🎓 Create Tutorials</h3>
+                    <p>Help others learn by creating educational tutorials and guides.</p>
+                    <a href="contact.html" class="btn btn-secondary">Submit Tutorial</a>
+                </div>
+
+                <div class="card">
+                    <h3>🐛 Report Issues</h3>
+                    <p>Found a bug or have a suggestion? Let us know!</p>
+                    <a href="contact.html" class="btn btn-secondary">Report Issue</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>🛡️ CyberGuard</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                    Your trusted resource for cybersecurity education, frameworks, and best practices.
+                </p>
+                <div class="social-links">
+                    <a href="https://github.com/devarshi2007"><img src="./Icons/Github-Logo-PNG-Photo-1.png" alt="GitHub" style="width: 35px; height: 20px; filter: brightness(0) invert(1);"></a>
+                    <a href="https://x.com/CyberGuard404" title="Twitter">𝕏</a>
+                    <a href="https://www.linkedin.com/in/cyber-guard-335a413a9/" title="LinkedIn">in</a>
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=hellocyberguard.io@gmail.com&su=Inquiry%20from%20CyberGuard%20Website&body=Hi%20CyberGuard%20team,%0A%0AI%20would%20like%20to%20discuss..." target="_blank" rel="noopener noreferrer" title="Email us on Gmail">
+                        <span style="font-size: 1.5rem;">✉️</span>
+                    </a>
+                    <a href="https://www.instagram.com/cyberguard_404/"><img src="https://th.bing.com/th/id/R.735dda68880a385ce8cc5be4f3c5fcd6?rik=qSxRw2lCZYy9Mw&riu=http%3a%2f%2fpngimg.com%2fuploads%2finstagram%2finstagram_PNG11.png&ehk=QVCbfkCKi8pJLF08bRkS%2fLeMqLTnJQf402WRaIdN6jE%3d&risl=&pid=ImgRaw&r=0" height="25px" width="25px"></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="threats.html">Threats & Vulnerabilities</a></li>
+                    <li><a href="frameworks.html">Security Frameworks</a></li>
+                    <li><a href="learning.html">Learning Resources</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="tools.html">Tools & Utilities</a></li>
+                    <li><a href="blog.html">Blog & Updates</a></li>
+                    <li><a href="community.html">Community</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-of-service.html">Terms & Conditions</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 CyberGuard - Cybersecurity Education Platform. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js?v=3.0"></script>
+    <script src="cyber-background.js?v=3.0"></script>
+</body>
+</html>
