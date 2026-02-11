@@ -2808,3 +2808,17 @@ document.addEventListener('DOMContentLoaded', () => {
     initLeadMagnetForm();
     initRiskCalculatorQuiz();
 });
+
+window.checkPasswordStrength = checkPasswordStrength;
+window.generateHash = generateHash;
+window.copyToClipboard = copyToClipboard;
+window.encodeBase64 = encodeBase64;
+window.decodeBase64 = decodeBase64;
+window.simulateSSLCheck = simulateSSLCheck;
+window.simulateBreachCheck = simulateBreachCheck;
+window.generateGUID = generateGUID;
+window.convertColor = convertColor;
+window.convertTimestamp = convertTimestamp;
+window.getCurrentTimestamp = getCurrentTimestamp;
+window.validateJSON = validateJSON;
+window.runBrowserSecurityScan = runBrowserSecurityScan;

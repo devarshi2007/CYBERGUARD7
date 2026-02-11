@@ -96,19 +96,14 @@
     </div>
     
     <!-- Navigation -->
-       <nav>
+      <nav>
         <div class="navbar">
             <div class="logo">🛡️ CyberGuard</div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="threats.html">Threats</a></li>
-                <li><a href="threat-map.html">Threat Map</a></li>
-                <li><a href="frameworks.html">Frameworks</a></li>
                 <li><a href="learning.html">Learn</a></li>
-                <li><a href="tools.html">Tools</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="pricing.html">Pricing</a></li>
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="chatbot.html">AI Chat</a></li>
                 <li><a href="contact.html">Contact</a></li>
@@ -121,7 +116,59 @@
                     <span></span>
                 </button>
             </div>
+            
+            <!-- Auth Container -->
+            <div id="auth-container" style="display: flex; align-items: center; gap: 10px; margin-left: 20px;">
+                <div id="user-status" style="color: #00E5FF;">Not logged in</div>
+                <button id="btn-show-login" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.9rem;">Login</button>
+                <button id="btn-show-signup" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.9rem;">Sign Up</button>
+            </div>
         </div>
+
+        <!-- Login Form -->
+        <div id="login-form" style="display: none; background: rgba(26, 39, 68, 0.95); padding: 2rem; border-radius: 15px; border: 2px solid #00E5FF; box-shadow: 0 0 30px rgba(0, 229, 255, 0.3); z-index: 10000; min-width: 350px;">
+            <h3 style="color: #00E5FF; margin-bottom: 1.5rem; text-align: center;">Login</h3>
+            <form id="login-form-element">
+                <input type="email" id="login-email" placeholder="Email" required style="width: 100%; padding: 12px; margin-bottom: 1rem; border-radius: 8px; border: 1px solid #00E5FF; background: rgba(0, 0, 0, 0.3); color: white;" />
+                <input type="password" id="login-password" placeholder="Password" required style="width: 100%; padding: 12px; margin-bottom: 0.5rem; border-radius: 8px; border: 1px solid #00E5FF; background: rgba(0, 0, 0, 0.3); color: white;" />
+                <div style="text-align: right; margin-bottom: 1.5rem;">
+                    <button type="button" id="btn-forgot-password" style="background: none; border: none; color: #00E5FF; cursor: pointer; font-size: 0.85rem; text-decoration: underline;">Forgot Password?</button>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">Login</button>
+                    <button type="button" id="btn-hide-login" class="btn btn-secondary" style="flex: 1;">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Signup Form -->
+        <div id="signup-form" style="display: none; background: rgba(26, 39, 68, 0.95); padding: 2rem; border-radius: 15px; border: 2px solid #00E5FF; box-shadow: 0 0 30px rgba(0, 229, 255, 0.3); z-index: 10000; min-width: 350px;">
+            <h3 style="color: #00E5FF; margin-bottom: 1.5rem; text-align: center;">Sign Up</h3>
+            <form id="signup-form-element">
+                <input type="email" id="signup-email" placeholder="Email" required style="width: 100%; padding: 12px; margin-bottom: 1rem; border-radius: 8px; border: 1px solid #00E5FF; background: rgba(0, 0, 0, 0.3); color: white;" />
+                <input type="password" id="signup-password" placeholder="Password" required style="width: 100%; padding: 12px; margin-bottom: 1.5rem; border-radius: 8px; border: 1px solid #00E5FF; background: rgba(0, 0, 0, 0.3); color: white;" />
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">Create account</button>
+                    <button type="button" id="btn-hide-signup" class="btn btn-secondary" style="flex: 1;">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Password Reset Form -->
+        <div id="reset-password-form" style="display: none; background: rgba(26, 39, 68, 0.95); padding: 2rem; border-radius: 15px; border: 2px solid #00E5FF; box-shadow: 0 0 30px rgba(0, 229, 255, 0.3); z-index: 10000; min-width: 350px;">
+            <h3 style="color: #00E5FF; margin-bottom: 1rem; text-align: center;">Reset Password</h3>
+            <p style="color: #B0BEC5; font-size: 0.9rem; margin-bottom: 1.5rem; text-align: center;">Enter your email to receive a password reset link</p>
+            <form id="reset-password-form-element">
+                <input type="email" id="reset-email" placeholder="Email" required style="width: 100%; padding: 12px; margin-bottom: 1.5rem; border-radius: 8px; border: 1px solid #00E5FF; background: rgba(0, 0, 0, 0.3); color: white;" />
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">Send Reset Link</button>
+                    <button type="button" id="btn-hide-reset" class="btn btn-secondary" style="flex: 1;">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Modal Overlay -->
+        <div id="auth-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 9999;"></div>
     </nav>
 
     <!-- Hamburger Menu -->
@@ -129,12 +176,11 @@
     <div id="hamburger-menu" class="hamburger-menu">
         <button id="hamburger-close" class="hamburger-close">✕</button>
         <ul class="hamburger-menu-list">
-            <li><a href="index.html" class="hamburger-link">Home</a></li>
-            <li><a href="about.html" class="hamburger-link">About Us</a></li>
-            <li><a href="case-studies.html" class="hamburger-link">Case Studies</a></li>
-            <li><a href="community.html" class="hamburger-link">Community</a></li>
+            <li><a href="frameworks.html" class="hamburger-link">Frameworks</a></li>
+            <li><a href="tools.html" class="hamburger-link">Tools</a></li>
+             <li><a href="services.html" class="hamburger-link">Services</a></li>
             <li><a href="privacy-policy.html" class="hamburger-link">Privacy Policy</a></li>
-            <li><a href="terms-of-service.html" class="hamburger-link">Terms of Service</a></li>
+            <li><a href="terms-&-condition.html" class="hamburger-link">Terms & Condition</a></li>
         </ul>
     </div>
 
@@ -211,16 +257,6 @@
                     </div>
                 </div>
 
-                <!-- Breach Checker -->
-                <div class="tool-card" role="region" aria-labelledby="breach-title">
-                    <span class="tool-icon" aria-hidden="true"></span>
-                    <h3 id="breach-title">Data Breach Awareness</h3>
-                    <p>Check if email appears in public data breaches (no data is sent). Go to haveibeenpwned.com for real checking.</p>
-                    <label for="breachEmail" class="sr-only">Enter email address to check for breaches</label>
-                    <input type="email" class="tool-input" placeholder="Enter email address..." id="breachEmail" oninput="simulateBreachCheck()" aria-describedby="breachResult">
-                    <div id="breachResult" role="status" aria-live="polite"></div>
-                </div>
-
                 <!-- GUID Generator -->
                 <div class="tool-card" role="region" aria-labelledby="guid-title">
                     <span class="tool-icon" aria-hidden="true"></span>
@@ -242,16 +278,6 @@
                     <div style="width: 100%; height: 80px; border-radius: 10px; margin-top: 1rem; border: 2px solid var(--cyan);" id="colorPreview" role="img" aria-label="Color preview"></div>
                 </div>
 
-                <!-- Timestamp Converter -->
-                <div class="tool-card" role="region" aria-labelledby="timestamp-title">
-                    <span class="tool-icon" aria-hidden="true"></span>
-                    <h3 id="timestamp-title">Unix Timestamp Converter</h3>
-                    <p>Convert between Unix timestamps and human-readable dates. Used in logs and security events.</p>
-                    <label for="timestampInput" class="sr-only">Enter Unix timestamp to convert</label>
-                    <input type="number" class="tool-input" id="timestampInput" placeholder="Enter Unix timestamp..." oninput="convertTimestamp()" aria-describedby="timestampOutput">
-                    <div class="tool-output" id="timestampOutput" role="status" aria-live="polite">Conversion will appear here</div>
-                    <button class="btn btn-secondary" onclick="getCurrentTimestamp()" style="width: 100%; margin-top: 1rem;" aria-label="Get current Unix timestamp">Get Current Timestamp</button>
-                </div>
 
                 <!-- JSON Formatter -->
                 <div class="tool-card" role="region" aria-labelledby="json-title">
@@ -263,15 +289,7 @@
                     <div id="jsonResult" role="status" aria-live="polite"></div>
                 </div>
 
-                <!-- Browser Security Scanner -->
-                <div class="tool-card" role="region" aria-labelledby="browser-scanner-title">
-                    <span class="tool-icon" aria-hidden="true"></span>
-                    <h3 id="browser-scanner-title">Browser Security Scanner</h3>
-                    <p>Scan your browser for security features and potential vulnerabilities. Detects outdated browser, missing protections, and 2025 threat exposure.</p>
-                    <button class="btn btn-primary" onclick="runBrowserSecurityScan()" style="width: 100%; margin-bottom: 1rem;" aria-label="Start browser security scan"> Scan My Browser</button>
-                    <div id="browserScanResults" class="tool-output" style="display: none; text-align: left;" role="status" aria-live="polite" aria-label="Browser scan results"></div>
-                </div>
-
+               
                 <!-- Post-Quantum Cryptography Demo -->
                 <div class="tool-card" role="region" aria-labelledby="pqc-demo-title" style="border: 2px solid #9D4EDD;">
                     <span class="tool-icon" aria-hidden="true"></span>

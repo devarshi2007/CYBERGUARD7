@@ -1252,6 +1252,144 @@ function simulateSSLCheck() {
     `;
 }
 
+function simulatePQC() {
+    const algorithm = document.getElementById('pqcAlgorithm').value;
+    const resultsDiv = document.getElementById('pqcResults');
+    
+    const algorithms = {
+        kyber: {
+            name: 'Kyber',
+            type: 'Key Encapsulation Mechanism (KEM)',
+            security: 'NIST Level 3 (AES-192 equivalent)',
+            keySize: '1568 bytes (public key)',
+            description: 'Lattice-based cryptography using Module Learning With Errors (Module-LWE)'
+        },
+        dilithium: {
+            name: 'Dilithium',
+            type: 'Digital Signature Algorithm',
+            security: 'NIST Level 3 (AES-192 equivalent)',
+            keySize: '1952 bytes (public key)',
+            description: 'Lattice-based signatures using CRYSTALS framework'
+        },
+        falcon: {
+            name: 'FALCON',
+            type: 'Digital Signature Algorithm',
+            security: 'NIST Level 5 (AES-256 equivalent)',
+            keySize: '897 bytes (public key)',
+            description: 'Fast Fourier lattice-based compact signatures'
+        },
+        sphincs: {
+            name: 'SPHINCS+',
+            type: 'Digital Signature Algorithm',
+            security: 'NIST Level 3-5',
+            keySize: '32-64 bytes (public key)',
+            description: 'Hash-based signatures, stateless and quantum-resistant'
+        }
+    };
+    
+    const algo = algorithms[algorithm];
+    const simulatedTime = (Math.random() * 5 + 2).toFixed(2);
+    
+    resultsDiv.style.display = 'block';
+    resultsDiv.innerHTML = `
+        <div style="background: rgba(157, 78, 221, 0.1); border: 2px solid #9D4EDD; border-radius: 10px; padding: 1.5rem;">
+            <h4 style="color: #9D4EDD; margin-top: 0;">🔐 ${algo.name} Encryption Simulation</h4>
+            <div style="margin: 1rem 0;">
+                <strong>Algorithm Type:</strong> ${algo.type}<br>
+                <strong>Security Level:</strong> ${algo.security}<br>
+                <strong>Key Size:</strong> ${algo.keySize}<br>
+                <strong>Description:</strong> ${algo.description}
+            </div>
+            <div style="background: rgba(0, 0, 0, 0.3); padding: 1rem; border-radius: 8px; margin: 1rem 0; font-family: monospace; font-size: 0.85rem;">
+                <div style="color: #00FF88;">✓ Generating key pair...</div>
+                <div style="color: #00FF88;">✓ Encrypting message with ${algo.name}...</div>
+                <div style="color: #00FF88;">✓ Encryption completed in ${simulatedTime}ms</div>
+                <div style="margin-top: 0.5rem; color: #00E5FF;">Encrypted Output: ${generateRandomHex(64)}</div>
+            </div>
+            <div style="padding: 1rem; background: rgba(0, 229, 255, 0.1); border-radius: 8px; border-left: 3px solid #00E5FF;">
+                <strong style="color: #00E5FF;">Why Post-Quantum?</strong><br>
+                <span style="font-size: 0.9rem;">Traditional RSA and ECC algorithms can be broken by quantum computers using Shor's algorithm. ${algo.name} is designed to resist quantum attacks, ensuring long-term security.</span>
+            </div>
+        </div>
+    `;
+}
+
+function comparePQC() {
+    const resultsDiv = document.getElementById('pqcResults');
+    
+    resultsDiv.style.display = 'block';
+    resultsDiv.innerHTML = `
+        <div style="background: rgba(157, 78, 221, 0.1); border: 2px solid #9D4EDD; border-radius: 10px; padding: 1.5rem;">
+            <h4 style="color: #9D4EDD; margin-top: 0;">⚖️ PQC vs Traditional Cryptography</h4>
+            <table style="width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem;">
+                <thead>
+                    <tr style="background: rgba(157, 78, 221, 0.2);">
+                        <th style="padding: 10px; text-align: left; border-bottom: 2px solid #9D4EDD;">Feature</th>
+                        <th style="padding: 10px; text-align: left; border-bottom: 2px solid #9D4EDD;">RSA/ECC</th>
+                        <th style="padding: 10px; text-align: left; border-bottom: 2px solid #9D4EDD;">Post-Quantum</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: rgba(0, 0, 0, 0.2);">
+                        <td style="padding: 10px;"><strong>Quantum Resistance</strong></td>
+                        <td style="padding: 10px; color: #FF6B00;">❌ Vulnerable</td>
+                        <td style="padding: 10px; color: #00FF88;">✅ Resistant</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px;"><strong>Key Size</strong></td>
+                        <td style="padding: 10px;">2048-4096 bits</td>
+                        <td style="padding: 10px;">1000-8000+ bytes</td>
+                    </tr>
+                    <tr style="background: rgba(0, 0, 0, 0.2);">
+                        <td style="padding: 10px;"><strong>Performance</strong></td>
+                        <td style="padding: 10px;">Fast (mature)</td>
+                        <td style="padding: 10px;">Moderate (improving)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px;"><strong>Mathematical Basis</strong></td>
+                        <td style="padding: 10px;">Factoring, Discrete Log</td>
+                        <td style="padding: 10px;">Lattices, Hashes</td>
+                    </tr>
+                    <tr style="background: rgba(0, 0, 0, 0.2);">
+                        <td style="padding: 10px;"><strong>Standardization</strong></td>
+                        <td style="padding: 10px;">Established (NIST)</td>
+                        <td style="padding: 10px;">In Progress (NIST)</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="margin-top: 1rem; padding: 1rem; background: rgba(255, 193, 0, 0.1); border-radius: 8px; border-left: 3px solid #FFC100;">
+                <strong style="color: #FFC100;">⚠️ Migration Timeline:</strong><br>
+                <span style="font-size: 0.9rem;">Experts estimate quantum computers capable of breaking RSA/ECC could emerge within 10-20 years. Organizations should begin transitioning to post-quantum cryptography now to ensure "harvest now, decrypt later" attacks are prevented.</span>
+            </div>
+        </div>
+    `;
+}
+
+function generateRandomHex(length) {
+    let result = '';
+    const characters = '0123456789abcdef';
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const pqcAlgorithm = document.getElementById('pqcAlgorithm');
+    if (pqcAlgorithm) {
+        pqcAlgorithm.addEventListener('change', function() {
+            const descriptions = {
+                kyber: 'Kyber uses lattice-based cryptography with Module Learning With Errors (Module-LWE) problem. Selected by NIST for standardization. Excellent balance of security, key size, and performance.',
+                dilithium: 'Dilithium is a lattice-based signature scheme from the CRYSTALS suite. Provides strong security guarantees with reasonable signature and key sizes. NIST selected for standardization.',
+                falcon: 'FALCON uses Fast Fourier lattice-based signatures with very compact signatures and keys. Provides high security level (NIST Level 5) with excellent efficiency.',
+                sphincs: 'SPHINCS+ is a stateless hash-based signature scheme. Conservative choice with minimal security assumptions, resistant to all known quantum attacks. Larger signatures but excellent long-term security.'
+            };
+            
+            document.getElementById('pqcDescription').textContent = descriptions[this.value];
+        });
+    }
+});
+
 function includeHTML() {
     var z, i, elmnt, file, xhttp;
     /* Loop through a collection of all HTML elements: */
@@ -2808,3 +2946,17 @@ document.addEventListener('DOMContentLoaded', () => {
     initLeadMagnetForm();
     initRiskCalculatorQuiz();
 });
+
+window.checkPasswordStrength = checkPasswordStrength;
+window.generateHash = generateHash;
+window.copyToClipboard = copyToClipboard;
+window.encodeBase64 = encodeBase64;
+window.decodeBase64 = decodeBase64;
+window.simulateSSLCheck = simulateSSLCheck;
+window.simulateBreachCheck = simulateBreachCheck;
+window.generateGUID = generateGUID;
+window.convertColor = convertColor;
+window.convertTimestamp = convertTimestamp;
+window.getCurrentTimestamp = getCurrentTimestamp;
+window.validateJSON = validateJSON;
+window.runBrowserSecurityScan = runBrowserSecurityScan;
