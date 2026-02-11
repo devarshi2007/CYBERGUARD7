@@ -1,5 +1,17 @@
 const PROXY_URL = import.meta.env?.VITE_PROXY_URL || 'https://gemini-proxy.devarshithakur2007.workers.dev';
 
+// Rate limiting configuration
+const RATE_LIMIT = {
+    maxRequests: 3,
+    timeWindow: 60000,
+    retryAfter: 60000,
+    maxRetries: 3
+};
+
+let requestHistory = [];
+let isRateLimited = false;
+let rateLimitEndTime = 0;
+
 if (!window.ChatbotConfig) {
     console.error('❌ ChatbotConfig not found! Make sure config.js is loaded before chatbot-ui.js');
     throw new Error('ChatbotConfig is required');
@@ -224,6 +236,75 @@ if (document.readyState === 'loading') {
     }
 }
 
+function checkRateLimit() {
+    const now = Date.now();
+    
+    // Check if currently rate limited
+    if (isRateLimited && now < rateLimitEndTime) {
+        const remainingSeconds = Math.ceil((rateLimitEndTime - now) / 1000);
+        return {
+            allowed: false,
+            remainingSeconds
+        };
+    }
+    
+    // Reset rate limit if expired
+    if (isRateLimited && now >= rateLimitEndTime) {
+        isRateLimited = false;
+        requestHistory = [];
+    }
+    
+    // Clean up old requests outside time window
+    requestHistory = requestHistory.filter(timestamp => now - timestamp < RATE_LIMIT.timeWindow);
+    
+    // Check if limit exceeded
+    if (requestHistory.length >= RATE_LIMIT.maxRequests) {
+        isRateLimited = true;
+        rateLimitEndTime = now + RATE_LIMIT.retryAfter;
+        const remainingSeconds = Math.ceil(RATE_LIMIT.retryAfter / 1000);
+        return {
+            allowed: false,
+            remainingSeconds
+        };
+    }
+    
+    // Add current request to history
+    requestHistory.push(now);
+    return { allowed: true };
+}
+
+async function fetchWithRetry(url, options, retries = RATE_LIMIT.maxRetries) {
+    for (let attempt = 0; attempt < retries; attempt++) {
+        try {
+            const response = await fetch(url, options);
+            
+            // If rate limited by API, apply exponential backoff
+            if (response.status === 429) {
+                if (attempt < retries - 1) {
+                    const backoffTime = Math.pow(2, attempt) * 2000; // 2s, 4s, 8s
+                    console.log(`⏳ Rate limited by API. Retrying in ${backoffTime/1000}s... (Attempt ${attempt + 1}/${retries})`);
+                    await new Promise(resolve => setTimeout(resolve, backoffTime));
+                    continue;
+                } else {
+                    // Set client-side rate limit
+                    isRateLimited = true;
+                    rateLimitEndTime = Date.now() + RATE_LIMIT.retryAfter;
+                    throw new Error('RATE_LIMIT_EXCEEDED');
+                }
+            }
+            
+            return response;
+        } catch (error) {
+            if (attempt === retries - 1) throw error;
+            
+            // Exponential backoff for network errors
+            const backoffTime = Math.pow(2, attempt) * 1000;
+            console.log(`⚠️ Request failed. Retrying in ${backoffTime/1000}s... (Attempt ${attempt + 1}/${retries})`);
+            await new Promise(resolve => setTimeout(resolve, backoffTime));
+        }
+    }
+}
+
 function handleDemoCommand(message, contentDiv) {
     const command = message.substring(6).trim();
     
@@ -258,6 +339,41 @@ async function sendMessage() {
     
     if (isProcessing) {
         console.log('⚠️ Already processing, ignoring');
+        return;
+    }
+
+    // Check rate limit before proceeding
+    const rateLimitCheck = checkRateLimit();
+    if (!rateLimitCheck.allowed) {
+        const minutes = Math.floor(rateLimitCheck.remainingSeconds / 60);
+        const seconds = rateLimitCheck.remainingSeconds % 60;
+        const timeString = minutes > 0 
+            ? `${minutes}m ${seconds}s` 
+            : `${seconds}s`;
+        
+        addMessage(message, 'user');
+        chatInput.value = '';
+        
+        const botMessageDiv = createBotMessage('');
+        const contentDiv = botMessageDiv.querySelector('.message-content');
+        contentDiv.innerHTML = `
+            <div style="background: linear-gradient(135deg, #FEF3C7 0%, #FCA5A5 100%); border-left: 4px solid #F59E0B; padding: 1rem; border-radius: 8px;">
+                <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                    <span style="font-size: 1.5rem; margin-right: 0.5rem;">⏳</span>
+                    <strong style="color: #92400E;">Rate Limit Reached</strong>
+                </div>
+                <div style="color: #78350F; margin-bottom: 0.5rem;">
+                    You've reached the maximum number of requests (${RATE_LIMIT.maxRequests} per minute).
+                </div>
+                <div style="color: #92400E; font-size: 0.9rem;">
+                    Please wait <strong>${timeString}</strong> before sending another message.
+                </div>
+                <div style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid rgba(146, 64, 14, 0.2); color: #78350F; font-size: 0.85rem;">
+                    💡 <em>Tip: This helps prevent overwhelming the AI service and ensures quality responses for everyone.</em>
+                </div>
+            </div>
+        `;
+        chatMessages.scrollTop = chatMessages.scrollHeight;
         return;
     }
 
@@ -301,7 +417,7 @@ async function sendMessage() {
     try {
         console.log('🔄 Sending to proxy...');
         
-        const response = await fetch(PROXY_URL, {
+        const response = await fetchWithRetry(PROXY_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -339,17 +455,48 @@ async function sendMessage() {
     } catch (error) {
         console.error('❌ Error:', error);
         
-        if (error.message.includes('429') || error.message.includes('Rate limit')) {
+        if (error.message === 'RATE_LIMIT_EXCEEDED') {
+            const minutes = Math.floor(RATE_LIMIT.retryAfter / 60000);
             contentDiv.innerHTML = `
-                <div style="color: #EF4444; margin-bottom: 0.5rem;">⚠️ <strong>Request Failed</strong></div>
-                <div style="color: #F59E0B; margin-bottom: 0.5rem;">An error occurred while processing your request.</div>
-                <div style="color: #94A3B8; font-size: 0.9rem;">
-                    Please try again.
+                <div style="background: linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%); border-left: 4px solid #DC2626; padding: 1rem; border-radius: 8px;">
+                    <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                        <span style="font-size: 1.5rem; margin-right: 0.5rem;">🚫</span>
+                        <strong style="color: #991B1B;">Service Temporarily Unavailable</strong>
+                    </div>
+                    <div style="color: #7F1D1D; margin-bottom: 0.5rem;">
+                        The AI service is currently experiencing high demand and has reached its rate limit.
+                    </div>
+                    <div style="color: #991B1B; font-size: 0.9rem; margin-bottom: 0.5rem;">
+                        Please try again in approximately <strong>${minutes} minute${minutes !== 1 ? 's' : ''}</strong>.
+                    </div>
+                    <div style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid rgba(153, 27, 27, 0.2); color: #7F1D1D; font-size: 0.85rem;">
+                        💡 <em>Alternative: Try asking a different question or simplifying your request.</em>
+                    </div>
+                </div>
+            `;
+        } else if (error.message.includes('429') || error.message.includes('Rate limit')) {
+            contentDiv.innerHTML = `
+                <div style="background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%); border-left: 4px solid #F59E0B; padding: 1rem; border-radius: 8px;">
+                    <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                        <span style="font-size: 1.5rem; margin-right: 0.5rem;">⚠️</span>
+                        <strong style="color: #92400E;">Rate Limit Warning</strong>
+                    </div>
+                    <div style="color: #78350F; margin-bottom: 0.5rem;">
+                        The service is busy. Your request couldn't be completed.
+                    </div>
+                    <div style="color: #92400E; font-size: 0.9rem;">
+                        Please wait a moment and try again.
+                    </div>
                 </div>
             `;
         } else {
             const errorMessage = error.message || 'An unexpected error occurred';
-            contentDiv.innerHTML = `<span style="color: #EF4444;">Error: ${errorMessage}</span>`;
+            contentDiv.innerHTML = `
+                <div style="background: #FEE2E2; border-left: 4px solid #DC2626; padding: 1rem; border-radius: 8px;">
+                    <strong style="color: #991B1B;">❌ Error</strong>
+                    <div style="color: #7F1D1D; margin-top: 0.5rem;">${errorMessage}</div>
+                </div>
+            `;
         }
         
         chatHistoryMessages.pop();
