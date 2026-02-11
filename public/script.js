@@ -1288,10 +1288,19 @@ function registerServiceWorker() {
                 .then((registration) => {
                     console.log('[PWA] Service Worker registered successfully:', registration.scope);
 
-                    // Update notifications disabled
+                    // Check for updates
+                    registration.addEventListener('updatefound', () => {
+                        const newWorker = registration.installing;
+                        newWorker.addEventListener('statechange', () => {
+                            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                console.log('[PWA] New service worker available');
+                            }
+                        });
+                    });
                 })
                 .catch((error) => {
-                    console.error('[PWA] Service Worker registration failed:', error);
+                    // Fail silently - PWA features are optional
+                    console.warn('[PWA] Service Worker not available:', error.message);
                 });
         });
     }
