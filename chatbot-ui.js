@@ -100,6 +100,33 @@ function loadChat(chatId) {
     }
 }
 
+function deleteChat(chatId, event) {
+    event.stopPropagation();
+    
+    if (confirm('Are you sure you want to delete this chat?')) {
+        chatHistory = chatHistory.filter(c => c.id !== chatId);
+        saveChatHistory();
+        updateChatHistorySidebar();
+        
+        if (currentChatId === chatId) {
+            initChat();
+            chatMessages.innerHTML = `
+                <div class="welcome-screen">
+                    <div class="sparkle-icon">
+                        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                            <circle cx="40" cy="40" r="40" fill="#E8E8FF" opacity="0.3"/>
+                            <path d="M40 20L42.5 37.5L60 40L42.5 42.5L40 60L37.5 42.5L20 40L37.5 37.5L40 20Z" fill="#8B8BF6"/>
+                            <path d="M52 28L53.5 34.5L60 36L53.5 37.5L52 44L50.5 37.5L44 36L50.5 34.5L52 28Z" fill="#8B8BF6"/>
+                        </svg>
+                    </div>
+                    <h2 class="welcome-title">${config.prompts.welcome.title}</h2>
+                    <p class="welcome-subtitle">${config.prompts.welcome.subtitle}</p>
+                </div>
+            `;
+        }
+    }
+}
+
 function updateChatHistorySidebar() {
     const historySection = document.querySelector('.chat-history-section');
     
@@ -118,8 +145,15 @@ function updateChatHistorySidebar() {
         const dateStr = date.toLocaleDateString('en-GB');
         historyHTML += `
             <div class="chat-history-item" data-chat-id="${chat.id}">
-                <div class="chat-title">${escapeHtml(chat.title)}</div>
-                <div class="chat-date">${dateStr}</div>
+                <div class="chat-info">
+                    <div class="chat-title">${escapeHtml(chat.title)}</div>
+                    <div class="chat-date">${dateStr}</div>
+                </div>
+                <button class="delete-chat-btn" data-chat-id="${chat.id}" title="Delete chat">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M2 4h12M5.333 4V2.667a1.333 1.333 0 0 1 1.334-1.334h2.666a1.333 1.333 0 0 1 1.334 1.334V4m2 0v9.333a1.333 1.333 0 0 1-1.334 1.334H4.667a1.333 1.333 0 0 1-1.334-1.334V4h9.334Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
             </div>
         `;
     });
@@ -128,10 +162,20 @@ function updateChatHistorySidebar() {
     historySection.innerHTML = historyHTML;
 
     document.querySelectorAll('.chat-history-item').forEach(item => {
-        item.addEventListener('click', () => {
-            const chatId = parseInt(item.getAttribute('data-chat-id'));
-            loadChat(chatId);
+        const chatId = parseInt(item.getAttribute('data-chat-id'));
+        
+        item.addEventListener('click', (e) => {
+            if (!e.target.closest('.delete-chat-btn')) {
+                loadChat(chatId);
+            }
         });
+        
+        const deleteBtn = item.querySelector('.delete-chat-btn');
+        if (deleteBtn) {
+            deleteBtn.addEventListener('click', (e) => {
+                deleteChat(chatId, e);
+            });
+        }
     });
 }
 

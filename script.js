@@ -2954,7 +2954,24 @@ document.addEventListener('DOMContentLoaded', () => {
     initLiveCounters();
     initLeadMagnetForm();
     initRiskCalculatorQuiz();
+    expandOwaspAccordions();
 });
+
+function expandOwaspAccordions() {
+    if (window.location.pathname.includes('frameworks.html')) {
+        setTimeout(() => {
+            const accordions = document.querySelectorAll('.accordion');
+            accordions.forEach((accordion) => {
+                const header = accordion.querySelector('.accordion-header');
+                const content = accordion.querySelector('.accordion-content');
+                if (header && content) {
+                    accordion.classList.add('active');
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                }
+            });
+        }, 100);
+    }
+}
 
 window.checkPasswordStrength = checkPasswordStrength;
 window.generateHash = generateHash;

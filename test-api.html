@@ -19,7 +19,7 @@
     <script type="module">
         import { GoogleGenerativeAI } from "@google/generative-ai";
 
-        const API_KEY = 'AIzaSyCHN6UVBTh6hgleliNb3-7k1YlJzHJlYEU';
+        const API_KEY = 'AIzaSyAQw_ufyIN1-f7SD8AV7b2-RfWu4RxVXGc';
         
         document.getElementById('test-btn').addEventListener('click', async () => {
             const resultDiv = document.getElementById('result');
@@ -30,11 +30,10 @@
                 
                 // Try different model names
                 const modelsToTest = [
-                    'gemini-1.5-pro',
-                    'gemini-1.5-flash',
-                    'gemini-pro',
-                    'models/gemini-1.5-pro',
-                    'models/gemini-1.5-flash'
+                    'gemini-2.5-pro',
+                    'gemini-2.5-flash',
+                    'models/gemini-2.5-pro',
+                    'models/gemini-2.5-flash'
                 ];
                 
                 for (const modelName of modelsToTest) {

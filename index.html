@@ -277,35 +277,6 @@
         </div>
     </div>
 
-    <!-- Search Bar -->
-    <section class="container" style="padding: 3rem 0 2rem;">
-        <div style="background: rgba(26, 39, 68, 0.6); backdrop-filter: blur(10px); border: 2px solid var(--cyan); border-radius: 20px; padding: 2rem; box-shadow: 0 0 30px rgba(0, 229, 255, 0.1);">
-            <h2 style="text-align: center; margin-bottom: 1.5rem;"> Ask a Cybersecurity Question</h2>
-            <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
-                <input type="text" id="cyberSearchInput" class="tool-input" placeholder="e.g., Virus vs Worm? HTTP vs HTTPS? Explain the CIA Triad? How does OAuth 2.0 secure APIs?" style="flex: 1; min-width: 200px;">
-                <button class="btn btn-primary" onclick="searchCyberKnowledge()" style="white-space: nowrap;">Search</button>
-            </div>
-            <div id="searchResults" style="display: none;">
-                <div style="background: rgba(0, 229, 255, 0.05); border-left: 4px solid var(--cyan); padding: 1.5rem; border-radius: 10px;">
-                    <h3 id="resultTitle" style="color: var(--cyan); margin-bottom: 1rem;"></h3>
-                    <p id="resultAnswer" style="color: var(--text-light); line-height: 1.8; margin-bottom: 1rem;"></p>
-                    <div id="resultRelated" style="margin-top: 1rem;"></div>
-                </div>
-            </div>
-            <div id="searchHints" style="margin-top: 1rem; text-align: center; color: var(--text-muted); font-size: 0.85rem;">
-                <p style="margin-bottom: 0.5rem;"> <strong>Try searching:</strong></p>
-                <p style="line-height: 1.6;">
-                    <strong>Fundamentals:</strong> cybersecurity • network security fundamentals • virus vs worm • CIA triad • authentication vs authorization<br>
-                    <strong>Basics:</strong> password • encryption • brute force attack • botnet • data breach • VPN • 2FA • firewall<br>
-                    <strong>Attacks:</strong> phishing • SQL injection • XSS • MITM • ARP spoofing • session hijacking • buffer overflow • DDoS<br>
-                    <strong>Advanced:</strong> ransomware kill chain • PTES lifecycle • APT • Kerberoasting • side-channel attack • hypervisor escape • memory forensics<br>
-                    <strong>Architecture:</strong> PKI • OAuth 2.0 • micro-segmentation • zero trust • network segmentation • SIEM • sandboxing<br>
-                    <strong>Risk & Response:</strong> risk assessment • NIST incident response • CVE/CVSS • anomaly detection • supply-chain attacks • OSINT • digital forensics
-                </p>
-            </div>
-        </div>
-    </section>
-
 
     <!-- Main Content -->
     <div class="container">
@@ -420,62 +391,10 @@
             </div>
         </section>
 
-        <!-- Trusted by Leading Organizations -->
-        <section class="section">
-            <h2>Trusted by Industry Leaders</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1.5rem; max-width: 1000px; margin: 0 auto; align-items: center;">
-                <div style="background: rgba(26, 39, 68, 0.6); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 12px; padding: 1.5rem; text-align: center;">
-                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;"></div>
-                    <p style="color: var(--text-light); font-weight: 600; font-size: 0.9rem;">Tech Startups</p>
-                </div>
-                <div style="background: rgba(26, 39, 68, 0.6); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 12px; padding: 1.5rem; text-align: center;">
-                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;"></div>
-                    <p style="color: var(--text-light); font-weight: 600; font-size: 0.9rem;">Healthcare</p>
-                </div>
-                <div style="background: rgba(26, 39, 68, 0.6); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 12px; padding: 1.5rem; text-align: center;">
-                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;"></div>
-                    <p style="color: var(--text-light); font-weight: 600; font-size: 0.9rem;">Financial</p>
-                </div>
-                <div style="background: rgba(26, 39, 68, 0.6); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 12px; padding: 1.5rem; text-align: center;">
-                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;"></div>
-                    <p style="color: var(--text-light); font-weight: 600; font-size: 0.9rem;">Manufacturing</p>
-                </div>
-                <div style="background: rgba(26, 39, 68, 0.6); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 12px; padding: 1.5rem; text-align: center;">
-                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;"></div>
-                    <p style="color: var(--text-light); font-weight: 600; font-size: 0.9rem;">Education</p>
-                </div>
-                <div style="background: rgba(26, 39, 68, 0.6); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 12px; padding: 1.5rem; text-align: center;">
-                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;"></div>
-                    <p style="color: var(--text-light); font-weight: 600; font-size: 0.9rem;">Government</p>
-                </div>
-            </div>
-        </section>
+        
+        
 
-        <!-- Quick Trust Stats -->
-        <section class="section">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; max-width: 1000px; margin: 0 auto;">
-                <div style="background: rgba(26, 39, 68, 0.6); border: 1px solid var(--green); border-radius: 15px; padding: 2rem; text-align: center;">
-                    <div style="font-size: 2.5rem; font-weight: 700; color: var(--green); margin-bottom: 0.5rem;" data-counter-id="attacks-blocked-counter">847K+</div>
-                    <p style="color: var(--text-muted);">Attacks Blocked</p>
-                    <p style="color: var(--text-light); font-size: 0.85rem;">Real-time by our community</p>
-                </div>
-                <div style="background: rgba(26, 39, 68, 0.6); border: 1px solid var(--cyan); border-radius: 15px; padding: 2rem; text-align: center;">
-                    <div style="font-size: 2.5rem; font-weight: 700; color: var(--cyan); margin-bottom: 0.5rem;" data-counter-id="incidents-prevented-counter">562</div>
-                    <p style="color: var(--text-muted);">Incidents Prevented</p>
-                    <p style="color: var(--text-light); font-size: 0.85rem;">This month through detection</p>
-                </div>
-                <div style="background: rgba(26, 39, 68, 0.6); border: 1px solid var(--purple); border-radius: 15px; padding: 2rem; text-align: center;">
-                    <div style="font-size: 2.5rem; font-weight: 700; color: var(--purple); margin-bottom: 0.5rem;" data-counter-id="damages-prevented-counter">$2.3B+</div>
-                    <p style="color: var(--text-muted);">Damages Prevented</p>
-                    <p style="color: var(--text-light); font-size: 0.85rem;">Cumulative for our clients</p>
-                </div>
-                <div style="background: rgba(26, 39, 68, 0.6); border: 1px solid var(--warning); border-radius: 15px; padding: 2rem; text-align: center;">
-                    <div style="font-size: 2.5rem; font-weight: 700; color: var(--warning); margin-bottom: 0.5rem;" data-counter-id="threat-detection-counter">98.7%</div>
-                    <p style="color: var(--text-muted);">Threat Detection Rate</p>
-                    <p style="color: var(--text-light); font-size: 0.85rem;">Faster than industry average</p>
-                </div>
-            </div>
-        </section>
+       
 
         <!-- Mission Statement -->
         <section class="section">
@@ -655,12 +574,12 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
+                navigator.serviceWorker.register('sw.js')
                     .then(registration => {
-                        console.log('[PWA] Service Worker registered:', registration);
+                        console.log('Service Worker registered:', registration);
                     })
                     .catch(error => {
-                        console.warn('[PWA] Service Worker not available:', error.message);
+                        console.log('Service Worker registration failed:', error);
                     });
             });
         }
