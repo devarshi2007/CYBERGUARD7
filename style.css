@@ -516,7 +516,7 @@ nav {
 
 .hero-content p {
     font-size: 1.2rem;
-    color: var(--text-muted);
+    color: #B0BEC5;
     margin-bottom: 2rem;
 }
 
@@ -657,7 +657,7 @@ nav {
 }
 
 .feature-card p {
-    color: var(--text-muted);
+    color: #B0BEC5;
     margin-bottom: 1.5rem;
 }
 
@@ -755,7 +755,7 @@ nav {
 }
 
 .assistant-brief p {
-    color: var(--text-muted);
+    color: #B0BEC5;
     margin-bottom: 1.5rem;
 }
 
@@ -782,7 +782,7 @@ nav {
 }
 
 .assistant-checklist li {
-    color: var(--text-muted);
+    color: #B0BEC5;
     padding-left: 1.5rem;
     position: relative;
     margin-bottom: 0.5rem;
@@ -810,7 +810,7 @@ nav {
 
 .assistant-stat-label {
     display: block;
-    color: var(--text-muted);
+    color: #B0BEC5;
     font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -858,7 +858,7 @@ nav {
 }
 
 .assistant-tagline {
-    color: var(--text-muted);
+    color: #B0BEC5;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 0.85rem;
@@ -947,7 +947,7 @@ nav {
     font-size: 0.8rem;
     letter-spacing: 0.5px;
     text-transform: uppercase;
-    color: var(--text-muted);
+    color: #B0BEC5;
     margin-bottom: 0.4rem;
 }
 
@@ -999,7 +999,7 @@ nav {
 .assistant-hint {
     margin-top: -0.5rem;
     font-size: 0.85rem;
-    color: var(--text-muted);
+    color: #B0BEC5;
     text-align: center;
 }
 
@@ -1025,7 +1025,7 @@ nav {
 }
 
 .cyber-news-header p {
-    color: var(--text-muted);
+    color: #B0BEC5;
 }
 
 .cyber-news-source {
@@ -1078,7 +1078,7 @@ nav {
 }
 
 .news-content p {
-    color: var(--text-muted);
+    color: #B0BEC5;
     font-size: 0.9rem;
 }
 
@@ -1087,7 +1087,7 @@ nav {
     display: flex;
     justify-content: space-between;
     font-size: 0.8rem;
-    color: var(--text-muted);
+    color: #B0BEC5;
 }
 
 .attack-mapper-section {
@@ -1103,7 +1103,7 @@ nav {
 }
 
 .attack-controls p {
-    color: var(--text-muted);
+    color: #B0BEC5;
     margin-bottom: 1rem;
 }
 
@@ -1173,7 +1173,7 @@ nav {
 }
 
 .attack-node p {
-    color: var(--text-muted);
+    color: #B0BEC5;
     font-size: 0.9rem;
 }
 
@@ -1197,7 +1197,7 @@ nav {
 }
 
 .attack-summary-panel p {
-    color: var(--text-muted);
+    color: #B0BEC5;
     margin-bottom: 1rem;
 }
 
@@ -1206,7 +1206,7 @@ nav {
 }
 
 .attack-defense-list li {
-    color: var(--text-light);
+    color: #B0BEC5;
     margin-bottom: 0.6rem;
     padding-left: 1rem;
     position: relative;
@@ -1280,7 +1280,7 @@ nav {
 }
 
 .behavior-primary p {
-    color: var(--text-muted);
+    color: #B0BEC5;
 }
 
 .behavior-action-grid {
@@ -1319,7 +1319,7 @@ nav {
 }
 
 .behavior-card p {
-    color: var(--text-light);
+    color: #B0BEC5;
     font-size: 0.95rem;
 }
 
@@ -1328,7 +1328,7 @@ nav {
 }
 
 .behavior-safe-list li {
-    color: var(--text-light);
+    color: #B0BEC5;
     font-size: 0.9rem;
     margin-bottom: 0.4rem;
     padding-left: 1rem;
@@ -1391,6 +1391,11 @@ nav {
     font-size: 1.3rem;
 }
 
+.card p {
+    color: #B0BEC5;
+    line-height: 1.6;
+}
+
 .card .impact-level {
     display: inline-block;
     padding: 0.5rem 1rem;
@@ -1438,7 +1443,7 @@ nav {
 }
 
 .prevention-tips li {
-    color: var(--text-muted);
+    color: #B0BEC5;
     padding: 0.3rem 0;
     padding-left: 1.5rem;
     position: relative;
@@ -1502,7 +1507,7 @@ nav {
 
 .accordion-body {
     padding: 1.5rem;
-    color: var(--text-muted);
+    color: #B0BEC5;
     line-height: 1.8;
 }
 
@@ -1635,7 +1640,7 @@ nav {
 }
 
 .blog-body p {
-    color: var(--text-muted);
+    color: #B0BEC5;
     margin-bottom: 1rem;
 }
 
@@ -1691,7 +1696,7 @@ nav {
 }
 
 .checklist-item input[type="checkbox"]:checked + label {
-    color: var(--text-muted);
+    color: #B0BEC5;
     text-decoration: line-through;
 }
 
@@ -1754,7 +1759,7 @@ footer {
 }
 
 .footer-section ul li a {
-    color: var(--text-muted);
+    color: #B0BEC5;
     text-decoration: none;
     transition: all 0.3s ease;
     animation: slideIn 0.5s ease-out forwards;
@@ -1798,7 +1803,7 @@ footer {
     text-align: center;
     padding-top: 2rem;
     border-top: 1px solid rgba(0, 229, 255, 0.1);
-    color: var(--text-muted);
+    color: #B0BEC5;
     max-width: 1400px;
     margin: 0 auto;
     padding-left: 2rem;
@@ -2334,7 +2339,7 @@ footer {
 }
 
 .stat-label {
-    color: var(--text-muted);
+    color: #B0BEC5;
     font-size: 0.9rem;
     text-align: right;
 }
@@ -2784,7 +2789,7 @@ footer {
 
 .path-option li {
     padding: 0.3rem 0;
-    color: var(--text-muted);
+    color: #B0BEC5;
     font-size: 0.9rem;
 }
 
@@ -3222,7 +3227,7 @@ footer {
 }
 
 .threat-stat-card h3 {
-    color: var(--text-muted);
+    color: #B0BEC5;
     font-size: 0.9rem;
     text-transform: uppercase;
     margin-bottom: 0.75rem;
@@ -3249,7 +3254,7 @@ footer {
 }
 
 .stat-description {
-    color: var(--text-muted);
+    color: #B0BEC5;
     font-size: 0.85rem;
     margin-top: 0.5rem;
 }
@@ -3412,7 +3417,7 @@ footer {
 
 .attack-time {
     font-size: 0.8rem;
-    color: var(--text-muted);
+    color: #B0BEC5;
     margin-bottom: 0.3rem;
     font-family: 'Courier New', monospace;
 }
@@ -3641,7 +3646,7 @@ footer {
     justify-content: space-between;
     width: 100%;
     padding: 1.25rem 1.5rem;
-    color: var(--text-light);
+    color: #B0BEC5;
     text-decoration: none;
     font-size: 1rem;
     font-weight: 500;
@@ -3699,7 +3704,7 @@ footer {
 .hamburger-submenu .hamburger-link {
     padding: 1rem 1.5rem 1rem 2.5rem;
     font-size: 0.95rem;
-    color: var(--text-muted);
+    color: #B0BEC5;
 }
 
 .hamburger-submenu .hamburger-link:hover {
@@ -3822,7 +3827,7 @@ footer {
 
 .dashboard-label {
     font-size: 0.95rem;
-    color: var(--text-muted);
+    color: #B0BEC5;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.5px;
