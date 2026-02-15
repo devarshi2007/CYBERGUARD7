@@ -1095,7 +1095,7 @@ nav {
 }
 
 .attack-mapper {
-    background: rgba(0, 0, 0, 0.85);
+    background: var(--card-bg-solid);
     border: 1px solid rgba(164, 0, 255, 0.3);
     border-radius: 24px;
     padding: 2.5rem;
@@ -1103,7 +1103,7 @@ nav {
 }
 
 .attack-controls p {
-    color: #B0BEC5;
+    color: var(--text-muted);
     margin-bottom: 1rem;
 }
 
@@ -1173,7 +1173,7 @@ nav {
 }
 
 .attack-node p {
-    color: #B0BEC5;
+    color: var(--text-muted);
     font-size: 0.9rem;
 }
 
@@ -1186,7 +1186,7 @@ nav {
 }
 
 .attack-summary-panel {
-    background: rgba(10, 10, 10, 0.7);
+    background: var(--card-bg);
     border: 1px solid rgba(164, 0, 255, 0.2);
     border-radius: 18px;
     padding: 1.5rem;
@@ -1197,7 +1197,7 @@ nav {
 }
 
 .attack-summary-panel p {
-    color: #B0BEC5;
+    color: var(--text-muted);
     margin-bottom: 1rem;
 }
 
@@ -1206,7 +1206,7 @@ nav {
 }
 
 .attack-defense-list li {
-    color: #B0BEC5;
+    color: var(--text-muted);
     margin-bottom: 0.6rem;
     padding-left: 1rem;
     position: relative;
@@ -1236,7 +1236,7 @@ nav {
 }
 
 .behavior-sim {
-    background: rgba(0, 0, 0, 0.85);
+    background: var(--card-bg-solid);
     border-radius: 24px;
     border: 1px solid rgba(0, 229, 255, 0.3);
     padding: 2.5rem;
@@ -1280,7 +1280,7 @@ nav {
 }
 
 .behavior-primary p {
-    color: #B0BEC5;
+    color: var(--text-muted);
 }
 
 .behavior-action-grid {
@@ -1290,7 +1290,7 @@ nav {
 }
 
 .behavior-card {
-    background: rgba(10, 10, 10, 0.7);
+    background: var(--card-bg);
     border-radius: 16px;
     padding: 1.2rem;
     border: 1px solid rgba(0, 229, 255, 0.2);
@@ -1319,7 +1319,7 @@ nav {
 }
 
 .behavior-card p {
-    color: #B0BEC5;
+    color: var(--text-muted);
     font-size: 0.95rem;
 }
 
@@ -1328,7 +1328,7 @@ nav {
 }
 
 .behavior-safe-list li {
-    color: #B0BEC5;
+    color: var(--text-muted);
     font-size: 0.9rem;
     margin-bottom: 0.4rem;
     padding-left: 1rem;
@@ -1351,7 +1351,7 @@ nav {
 }
 
 .card {
-    background: rgba(10, 10, 10, 0.7);
+    background: var(--card-bg);
     backdrop-filter: blur(15px);
     border: 2px solid rgba(0, 229, 255, 0.3);
     border-radius: 20px;
@@ -1382,7 +1382,7 @@ nav {
     border-color: var(--purple);
     box-shadow: 0 12px 48px rgba(164, 0, 255, 0.3);
     transform: translateY(-8px) scale(1.02);
-    background: rgba(10, 10, 10, 0.85);
+    background: var(--card-bg-solid);
 }
 
 .card h3 {
@@ -1392,7 +1392,7 @@ nav {
 }
 
 .card p {
-    color: #B0BEC5;
+    color: var(--text-muted);
     line-height: 1.6;
 }
 
@@ -1469,7 +1469,7 @@ nav {
 
 .accordion-header {
     padding: 1.5rem;
-    background: rgba(10, 10, 10, 0.8);
+    background:var(--card-bg);
     border-bottom: 1px solid rgba(0, 229, 255, 0.2);
     cursor: pointer;
     display: flex;
