@@ -1008,7 +1008,7 @@ nav {
 }
 
 .cyber-news-panel {
-    background: rgba(0, 0, 0, 0.85);
+    background: var(--card-bg);
     border: 1px solid rgba(0, 229, 255, 0.3);
     border-radius: 24px;
     padding: 2rem;
@@ -1049,7 +1049,7 @@ nav {
 }
 
 .news-card {
-    background: rgba(10, 10, 10, 0.7);
+    background: (var(--card-bg));
     border: 1px solid rgba(0, 229, 255, 0.2);
     border-radius: 18px;
     padding: 1.2rem;
@@ -1459,7 +1459,7 @@ nav {
 
 /* Accordion */
 .accordion {
-    background: rgba(10, 10, 10, 0.6);
+    background: var(--card-bg);
     backdrop-filter: blur(10px);
     border: 1px solid var(--cyan);
     border-radius: 15px;
@@ -1469,7 +1469,7 @@ nav {
 
 .accordion-header {
     padding: 1.5rem;
-    background:var(--card-bg);
+    background: var(--card-bg-solid);
     border-bottom: 1px solid rgba(0, 229, 255, 0.2);
     cursor: pointer;
     display: flex;
@@ -1507,7 +1507,7 @@ nav {
 
 .accordion-body {
     padding: 1.5rem;
-    color: #B0BEC5;
+    color: var(--text-muted);
     line-height: 1.8;
 }
 
@@ -1657,7 +1657,7 @@ nav {
 
 /* Checklist */
 .checklist {
-    background: rgba(10, 10, 10, 0.6);
+    background: var(--card-bg);
     backdrop-filter: blur(10px);
     border: 1px solid var(--cyan);
     border-radius: 15px;
@@ -2346,7 +2346,7 @@ footer {
 
 /* Phishing Lab Styles */
 .phishing-lab {
-    background: rgba(10, 10, 10, 0.6);
+    background: var(--card-bg);
     backdrop-filter: blur(10px);
     border: 1px solid var(--cyan);
     border-radius: 20px;
@@ -2442,7 +2442,7 @@ footer {
 
 /* Checklist Styles */
 .checklist {
-    background: rgba(10, 10, 10, 0.6);
+    background: var(--card-bg);
     backdrop-filter: blur(10px);
     border: 1px solid var(--cyan);
     border-radius: 15px;
@@ -2610,7 +2610,7 @@ footer {
 
 /* Milestone Cards */
 .milestone-card {
-    background: rgba(10, 10, 10, 0.9);
+    background: transparent;
     border: 2px solid rgba(0, 229, 255, 0.3);
     border-radius: 15px;
     padding: 2rem;
@@ -2753,7 +2753,7 @@ footer {
 }
 
 .path-option {
-    background: rgba(0, 0, 0, 0.3);
+    background: transparent;
     padding: 1.5rem;
     border-radius: 10px;
     border-left: 4px solid;

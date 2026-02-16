@@ -98,7 +98,7 @@
     <!-- Navigation -->
       <nav>
         <div class="navbar">
-            <div class="logo">🛡️ CyberGuard</div>
+            <div class="logo"><img src="Icons/none (9).gif" alt="CyberGuard Logo" style="height: 50px; vertical-align: middle; margin-right: 10px; opacity: 0.9;"> CyberGuard</div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
@@ -357,7 +357,7 @@
         </section>
 
         <!-- Hacker Types Simulation -->
-        <section class="section" style="background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(123, 47, 247, 0.1)); border: 2px solid var(--cyan); border-radius: 20px; padding: 3rem; margin-top: 3rem;">
+        <section class="section" style="background: var(--card-bg); border: 2px solid var(--cyan); border-radius: 20px; padding: 3rem; margin-top: 3rem;">
             <div style="text-align: center; margin-bottom: 2rem;">
                 <h2 style="color: var(--cyan);"> Hacker Types Simulation & Comparison</h2>
                 <p style="color: var(--text-light); max-width: 800px; margin: 1rem auto 0;">
@@ -365,13 +365,13 @@
                 </p>
             </div>
 
-            <div style="background: rgba(26, 39, 68, 0.6); border: 2px solid var(--cyan); border-radius: 15px; padding: 2rem; margin-bottom: 2rem;">
+            <div style="background: var(--card-bg); border: 2px solid var(--cyan); border-radius: 15px; padding: 2rem; margin-bottom: 2rem;">
                 <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin-bottom: 2rem;">
                     <button id="hacker-resetBtn" class="btn btn-secondary" style="padding: 12px 25px;"> Reset Simulation</button>
                     <button id="hacker-runAllBtn" class="btn btn-primary" style="padding: 12px 25px;"> Run All Hackers</button>
                 </div>
 
-                <div style="background: rgba(0, 0, 0, 0.3); padding: 25px; border-radius: 10px; margin-bottom: 2rem;">
+                <div style="background: var(--card-bg); padding: 25px; border-radius: 10px; margin-bottom: 2rem;">
                     <h3 style="color: var(--cyan); margin-bottom: 1.5rem;"> Target System Status</h3>
                     <div id="hacker-system-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px;">
                         <div class="hacker-system-component" data-component="database">
@@ -432,24 +432,24 @@
                             <h3 style="font-size: 1.3em; color: #ff0844;">⚫ Black Hat Hacker</h3>
                             <button class="btn hacker-simulate-btn" data-type="blackhat" style="padding: 8px 15px; background: linear-gradient(45deg, #ff0844, #ff4500); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">Attack</button>
                         </div>
-                        <div style="background: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 8px; margin-bottom: 15px; font-size: 0.9em; line-height: 1.6;">
+                        <div style="background:  var(--card-bg); padding: 15px; border-radius: 8px; margin-bottom: 15px; font-size: 0.9em; line-height: 1.6;">
                             <strong>Characteristics:</strong> Malicious intent, unauthorized access, data theft, system destruction
                         </div>
                         <div style="margin-bottom: 15px;">
-                            <div style="display: flex; justify-content: space-between; padding: 10px; background: rgba(0, 0, 0, 0.2); margin-bottom: 8px; border-radius: 5px;">
+                            <div style="display: flex; justify-content: space-between; padding: 10px; background:  var(--card-bg); margin-bottom: 8px; border-radius: 5px;">
                                 <span style="font-weight: 600;">Attacks Launched:</span>
                                 <span id="hacker-blackhat-attacks" style="color: var(--cyan); font-weight: bold;">0</span>
                             </div>
-                            <div style="display: flex; justify-content: space-between; padding: 10px; background: rgba(0, 0, 0, 0.2); margin-bottom: 8px; border-radius: 5px;">
+                            <div style="display: flex; justify-content: space-between; padding: 10px; background:  var(--card-bg); margin-bottom: 8px; border-radius: 5px;">
                                 <span style="font-weight: 600;">Systems Compromised:</span>
                                 <span id="hacker-blackhat-compromised" style="color: var(--cyan); font-weight: bold;">0</span>
                             </div>
-                            <div style="display: flex; justify-content: space-between; padding: 10px; background: rgba(0, 0, 0, 0.2); margin-bottom: 8px; border-radius: 5px;">
+                            <div style="display: flex; justify-content: space-between; padding: 10px; background:  var(--card-bg); margin-bottom: 8px; border-radius: 5px;">
                                 <span style="font-weight: 600;">Data Stolen:</span>
                                 <span id="hacker-blackhat-data" style="color: var(--cyan); font-weight: bold;">0 MB</span>
                             </div>
                         </div>
-                        <div id="hacker-blackhat-log" class="hacker-activity-log" style="background: rgba(0, 0, 0, 0.4); padding: 15px; border-radius: 8px; max-height: 300px; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 0.85em; min-height: 150px;"></div>
+                        <div id="hacker-blackhat-log" class="hacker-activity-log" style="background:  var(--card-bg); padding: 15px; border-radius: 8px; max-height: 300px; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 0.85em; min-height: 150px;"></div>
                     </div>
 
                     <!-- White Hat -->
@@ -458,24 +458,24 @@
                             <h3 style="font-size: 1.3em; color: #56ab2f;">⚪ White Hat Hacker</h3>
                             <button class="btn hacker-simulate-btn" data-type="whitehat" style="padding: 8px 15px; background: linear-gradient(45deg, #56ab2f, #a8e063); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">Test Security</button>
                         </div>
-                        <div style="background: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 8px; margin-bottom: 15px; font-size: 0.9em; line-height: 1.6;">
+                        <div style="background:  var(--card-bg); padding: 15px; border-radius: 8px; margin-bottom: 15px; font-size: 0.9em; line-height: 1.6;">
                             <strong>Characteristics:</strong> Ethical, authorized testing, vulnerability reporting, system improvement
                         </div>
                         <div style="margin-bottom: 15px;">
-                            <div style="display: flex; justify-content: space-between; padding: 10px; background: rgba(0, 0, 0, 0.2); margin-bottom: 8px; border-radius: 5px;">
+                            <div style="display: flex; justify-content: space-between; padding: 10px; background:  var(--card-bg); margin-bottom: 8px; border-radius: 5px;">
                                 <span style="font-weight: 600;">Tests Conducted:</span>
                                 <span id="hacker-whitehat-tests" style="color: var(--cyan); font-weight: bold;">0</span>
                             </div>
-                            <div style="display: flex; justify-content: space-between; padding: 10px; background: rgba(0, 0, 0, 0.2); margin-bottom: 8px; border-radius: 5px;">
+                            <div style="display: flex; justify-content: space-between; padding: 10px; background:  var(--card-bg); margin-bottom: 8px; border-radius: 5px;">
                                 <span style="font-weight: 600;">Vulnerabilities Found:</span>
                                 <span id="hacker-whitehat-vulns" style="color: var(--cyan); font-weight: bold;">0</span>
                             </div>
-                            <div style="display: flex; justify-content: space-between; padding: 10px; background: rgba(0, 0, 0, 0.2); margin-bottom: 8px; border-radius: 5px;">
+                            <div style="display: flex; justify-content: space-between; padding: 10px; background:  var(--card-bg); margin-bottom: 8px; border-radius: 5px;">
                                 <span style="font-weight: 600;">Systems Secured:</span>
                                 <span id="hacker-whitehat-secured" style="color: var(--cyan); font-weight: bold;">0</span>
                             </div>
                         </div>
-                        <div id="hacker-whitehat-log" class="hacker-activity-log" style="background: rgba(0, 0, 0, 0.4); padding: 15px; border-radius: 8px; max-height: 300px; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 0.85em; min-height: 150px;"></div>
+                        <div id="hacker-whitehat-log" class="hacker-activity-log" style="background:  var(--card-bg); padding: 15px; border-radius: 8px; max-height: 300px; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 0.85em; min-height: 150px;"></div>
                     </div>
 
                     <!-- Grey Hat -->
@@ -484,31 +484,31 @@
                             <h3 style="font-size: 1.3em; color: #ffd200;">🔘 Grey Hat Hacker</h3>
                             <button class="btn hacker-simulate-btn" data-type="greyhat" style="padding: 8px 15px; background: linear-gradient(45deg, #f7971e, #ffd200); color: #333; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">Probe System</button>
                         </div>
-                        <div style="background: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 8px; margin-bottom: 15px; font-size: 0.9em; line-height: 1.6;">
+                        <div style="background:  var(--card-bg); padding: 15px; border-radius: 8px; margin-bottom: 15px; font-size: 0.9em; line-height: 1.6;">
                             <strong>Characteristics:</strong> Unauthorized testing, discovers vulnerabilities, may report issues, questionable ethics
                         </div>
                         <div style="margin-bottom: 15px;">
-                            <div style="display: flex; justify-content: space-between; padding: 10px; background: rgba(0, 0, 0, 0.2); margin-bottom: 8px; border-radius: 5px;">
+                            <div style="display: flex; justify-content: space-between; padding: 10px; background:  var(--card-bg); margin-bottom: 8px; border-radius: 5px;">
                                 <span style="font-weight: 600;">Probes Executed:</span>
                                 <span id="hacker-greyhat-probes" style="color: var(--cyan); font-weight: bold;">0</span>
                             </div>
-                            <div style="display: flex; justify-content: space-between; padding: 10px; background: rgba(0, 0, 0, 0.2); margin-bottom: 8px; border-radius: 5px;">
+                            <div style="display: flex; justify-content: space-between; padding: 10px; background:  var(--card-bg); margin-bottom: 8px; border-radius: 5px;">
                                 <span style="font-weight: 600;">Vulnerabilities Found:</span>
                                 <span id="hacker-greyhat-vulns" style="color: var(--cyan); font-weight: bold;">0</span>
                             </div>
-                            <div style="display: flex; justify-content: space-between; padding: 10px; background: rgba(0, 0, 0, 0.2); margin-bottom: 8px; border-radius: 5px;">
+                            <div style="display: flex; justify-content: space-between; padding: 10px; background:  var(--card-bg); margin-bottom: 8px; border-radius: 5px;">
                                 <span style="font-weight: 600;">Issues Reported:</span>
                                 <span id="hacker-greyhat-reported" style="color: var(--cyan); font-weight: bold;">0</span>
                             </div>
                         </div>
-                        <div id="hacker-greyhat-log" class="hacker-activity-log" style="background: rgba(0, 0, 0, 0.4); padding: 15px; border-radius: 8px; max-height: 300px; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 0.85em; min-height: 150px;"></div>
+                        <div id="hacker-greyhat-log" class="hacker-activity-log" style="background:  var(--card-bg); padding: 15px; border-radius: 8px; max-height: 300px; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 0.85em; min-height: 150px;"></div>
                     </div>
                 </div>
 
                 <div style="background: rgba(0, 229, 255, 0.05); border: 2px solid var(--cyan); border-radius: 15px; padding: 2rem;">
                     <h3 style="color: var(--cyan); margin-bottom: 1.5rem;"> Comparative Analysis</h3>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
-                        <div style="background: rgba(0, 0, 0, 0.3); padding: 20px; border-radius: 10px;">
+                        <div style="background:  var(--card-bg); padding: 20px; border-radius: 10px;">
                             <h4 style="margin-bottom: 15px; font-size: 1.2em; color: var(--cyan);">Legal Status</h4>
                             <div style="padding: 10px; margin-bottom: 10px; background: rgba(255, 255, 255, 0.05); border-radius: 5px; display: flex; justify-content: space-between;">
                                 <span style="font-weight: 600;">Black Hat:</span>
@@ -524,7 +524,7 @@
                             </div>
                         </div>
 
-                        <div style="background: rgba(0, 0, 0, 0.3); padding: 20px; border-radius: 10px;">
+                        <div style="background:  var(--card-bg); padding: 20px; border-radius: 10px;">
                             <h4 style="margin-bottom: 15px; font-size: 1.2em; color: var(--cyan);">Intent</h4>
                             <div style="padding: 10px; margin-bottom: 10px; background: rgba(255, 255, 255, 0.05); border-radius: 5px; display: flex; justify-content: space-between;">
                                 <span style="font-weight: 600;">Black Hat:</span>
@@ -540,7 +540,7 @@
                             </div>
                         </div>
 
-                        <div style="background: rgba(0, 0, 0, 0.3); padding: 20px; border-radius: 10px;">
+                        <div style="background:  var(--card-bg); padding: 20px; border-radius: 10px;">
                             <h4 style="margin-bottom: 15px; font-size: 1.2em; color: var(--cyan);">Authorization</h4>
                             <div style="padding: 10px; margin-bottom: 10px; background: rgba(255, 255, 255, 0.05); border-radius: 5px; display: flex; justify-content: space-between;">
                                 <span style="font-weight: 600;">Black Hat:</span>
@@ -556,7 +556,7 @@
                             </div>
                         </div>
 
-                        <div style="background: rgba(0, 0, 0, 0.3); padding: 20px; border-radius: 10px;">
+                        <div style="background:  var(--card-bg); padding: 20px; border-radius: 10px;">
                             <h4 style="margin-bottom: 15px; font-size: 1.2em; color: var(--cyan);">Typical Actions</h4>
                             <div style="padding: 10px; margin-bottom: 10px; background: rgba(255, 255, 255, 0.05); border-radius: 5px;">
                                 <span style="font-weight: 600;">Black Hat:</span><br>
@@ -2025,7 +2025,7 @@
       <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <h3>🛡️ CyberGuard</h3>
+                <h3><img src="Icons/none (9).gif" alt="CyberGuard Logo" style="height: 30px; vertical-align: middle; margin-right: 8px;"> CyberGuard</h3>
                 <p style="color: var(--text-muted); margin-bottom: 1rem;">
                     Your trusted resource for cybersecurity education, frameworks, and best practices.
                 </p>

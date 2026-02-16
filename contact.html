@@ -34,7 +34,7 @@
     <!-- Navigation -->
          <nav>
         <div class="navbar">
-            <div class="logo">🛡️ CyberGuard</div>
+            <div class="logo"><img src="Icons/none (9).gif" alt="CyberGuard Logo" style="height: 50px; vertical-align: middle; margin-right: 10px; opacity: 0.9;"> CyberGuard</div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
@@ -140,7 +140,7 @@
                     <h2 style="margin-bottom: 2rem;">Contact Information</h2>
                     
                     <!-- Email -->
-                    <div style="background: rgba(26, 39, 68, 0.6); border: 1px solid var(--cyan); border-radius: 15px; padding: 2rem; margin-bottom: 1.5rem;">
+                    <div style="background: var(--card-bg); border: 1px solid var(--cyan); border-radius: 15px; padding: 2rem; margin-bottom: 1.5rem;">
                         <div style="font-size: 2rem; margin-bottom: 1rem;"></div>
                         <h3 style="color: var(--cyan); margin-bottom: 0.5rem;">Email</h3>
                         <p style="color: var(--text-muted); margin-bottom: 0.8rem;">General inquiries:</p>
@@ -152,7 +152,7 @@
                     </div>
 
                     <!-- Phone -->
-                    <div style="background: rgba(26, 39, 68, 0.6); border: 1px solid var(--purple); border-radius: 15px; padding: 2rem; margin-bottom: 1.5rem;">
+                    <div style="background: var(--card-bg); border: 1px solid var(--purple); border-radius: 15px; padding: 2rem; margin-bottom: 1.5rem;">
                         <div style="font-size: 2rem; margin-bottom: 1rem;"></div>
                         <h3 style="color: var(--purple); margin-bottom: 0.5rem;">Phone</h3>
                         <p style="color: var(--text-muted); margin-bottom: 0.8rem;">Business Hours (Mon-Fri 9AM-6PM EST):</p>
@@ -162,7 +162,7 @@
                     </div>
 
                     <!-- Address -->
-                    <div style="background: rgba(26, 39, 68, 0.6); border: 1px solid var(--green); border-radius: 15px; padding: 2rem;">
+                    <div style="background: var(--card-bg); border: 1px solid var(--green); border-radius: 15px; padding: 2rem;">
                         <div style="font-size: 2rem; margin-bottom: 1rem;"></div>
                         <h3 style="color: var(--green); margin-bottom: 1rem;">Headquarters</h3>
                         <p style="color: var(--text-light); line-height: 1.8;">
@@ -180,26 +180,26 @@
                 <!-- Right Side: Contact Form -->
                 <div>
                     <h2 style="margin-bottom: 2rem;">Send us a Message</h2>
-                    <form style="background: rgba(26, 39, 68, 0.6); border: 1px solid var(--cyan); border-radius: 15px; padding: 2.5rem;" onsubmit="handleContactSubmit(event)">
+                    <form style="background: var(--card-bg); border: 1px solid var(--cyan); border-radius: 15px; padding: 2.5rem;" onsubmit="handleContactSubmit(event)">
                         
                         <div style="margin-bottom: 1.5rem;">
                             <label style="display: block; color: var(--text-light); margin-bottom: 0.5rem; font-weight: 600;">Your Name *</label>
-                            <input type="text" name="name" required style="width: 100%; padding: 0.8rem; background: rgba(10, 15, 31, 0.8); border: 1px solid var(--cyan); border-radius: 8px; color: var(--text-light); font-size: 1rem;" placeholder="John Doe">
+                            <input type="text" name="name" required style="width: 100%; padding: 0.8rem; background:  var(--card-bg); border: 1px solid var(--cyan); border-radius: 8px; color: var(--text-light); font-size: 1rem;" placeholder="John Doe">
                         </div>
 
                         <div style="margin-bottom: 1.5rem;">
                             <label style="display: block; color: var(--text-light); margin-bottom: 0.5rem; font-weight: 600;">Email Address *</label>
-                            <input type="email" name="email" required style="width: 100%; padding: 0.8rem; background: rgba(10, 15, 31, 0.8); border: 1px solid var(--cyan); border-radius: 8px; color: var(--text-light); font-size: 1rem;" placeholder="john@example.com">
+                            <input type="email" name="email" required style="width: 100%; padding: 0.8rem; background:  var(--card-bg); border: 1px solid var(--cyan); border-radius: 8px; color: var(--text-light); font-size: 1rem;" placeholder="john@example.com">
                         </div>
 
                         <div style="margin-bottom: 1.5rem;">
                             <label style="display: block; color: var(--text-light); margin-bottom: 0.5rem; font-weight: 600;">Company</label>
-                            <input type="text" name="company" style="width: 100%; padding: 0.8rem; background: rgba(10, 15, 31, 0.8); border: 1px solid var(--cyan); border-radius: 8px; color: var(--text-light); font-size: 1rem;" placeholder="Your Company">
+                            <input type="text" name="company" style="width: 100%; padding: 0.8rem; background:  var(--card-bg); border: 1px solid var(--cyan); border-radius: 8px; color: var(--text-light); font-size: 1rem;" placeholder="Your Company">
                         </div>
 
                         <div style="margin-bottom: 1.5rem;">
                             <label style="display: block; color: var(--text-light); margin-bottom: 0.5rem; font-weight: 600;">Subject *</label>
-                            <select name="subject" required style="width: 100%; padding: 0.8rem; background: rgba(10, 15, 31, 0.8); border: 1px solid var(--cyan); border-radius: 8px; color: var(--text-light); font-size: 1rem;">
+                            <select name="subject" required style="width: 100%; padding: 0.8rem; background:  var(--card-bg); border: 1px solid var(--cyan); border-radius: 8px; color: var(--text-light); font-size: 1rem;">
                                 <option value="">Select a subject...</option>
                                 <option value="services">Security Services Inquiry</option>
                                 <option value="penetration">Penetration Testing Request</option>
@@ -213,7 +213,7 @@
 
                         <div style="margin-bottom: 1.5rem;">
                             <label style="display: block; color: var(--text-light); margin-bottom: 0.5rem; font-weight: 600;">Message *</label>
-                            <textarea name="message" required style="width: 100%; padding: 0.8rem; background: rgba(10, 15, 31, 0.8); border: 1px solid var(--cyan); border-radius: 8px; color: var(--text-light); font-size: 1rem; resize: vertical; min-height: 150px;" placeholder="Tell us how we can help..."></textarea>
+                            <textarea name="message" required style="width: 100%; padding: 0.8rem; background:  var(--card-bg); border: 1px solid var(--cyan); border-radius: 8px; color: var(--text-light); font-size: 1rem; resize: vertical; min-height: 150px;" placeholder="Tell us how we can help..."></textarea>
                         </div>
 
                         <div style="margin-bottom: 1.5rem;">
@@ -234,7 +234,7 @@
                 Book a free 30-minute consultation with our security experts. We'll discuss your needs and recommend the best solutions.
             </p>
             
-            <div style="background: rgba(26, 39, 68, 0.6); border: 2px solid var(--cyan); border-radius: 20px; padding: 3rem; max-width: 900px; margin: 0 auto;">
+            <div style="background: var(--card-bg); border: 2px solid var(--cyan); border-radius: 20px; padding: 3rem; max-width: 900px; margin: 0 auto;">
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
                     <!-- Calendly Embed Placeholder -->
                     <div style="background: rgba(0, 229, 255, 0.05); border: 1px dashed var(--cyan); border-radius: 15px; padding: 2rem; text-align: center;">
@@ -285,35 +285,35 @@
             <h2 style="text-align: center; margin-bottom: 3rem;">Frequently Asked Questions</h2>
             
             <div style="max-width: 900px; margin: 0 auto;">
-                <details style="background: rgba(26, 39, 68, 0.6); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 15px; padding: 1.5rem; margin-bottom: 1rem; cursor: pointer;">
+                <details style="background: var(--card-bg); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 15px; padding: 1.5rem; margin-bottom: 1rem; cursor: pointer;">
                     <summary style="color: var(--cyan); font-weight: 600; font-size: 1.05rem;">How quickly can you respond to security incidents?</summary>
                     <p style="color: var(--text-muted); margin-top: 1rem; line-height: 1.7;">
                         Our emergency hotline is available 24/7 with response times under 1 hour for critical incidents. MDR clients have dedicated contact channels with even faster escalation.
                     </p>
                 </details>
 
-                <details style="background: rgba(26, 39, 68, 0.6); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 15px; padding: 1.5rem; margin-bottom: 1rem; cursor: pointer;">
+                <details style="background: var(--card-bg); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 15px; padding: 1.5rem; margin-bottom: 1rem; cursor: pointer;">
                     <summary style="color: var(--cyan); font-weight: 600; font-size: 1.05rem;">Do you offer services for small businesses?</summary>
                     <p style="color: var(--text-muted); margin-top: 1rem; line-height: 1.7;">
                         Yes! We have scalable solutions for small businesses including affordable penetration testing, security training, and vCISO services tailored to smaller budgets.
                     </p>
                 </details>
 
-                <details style="background: rgba(26, 39, 68, 0.6); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 15px; padding: 1.5rem; margin-bottom: 1rem; cursor: pointer;">
+                <details style="background: var(--card-bg); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 15px; padding: 1.5rem; margin-bottom: 1rem; cursor: pointer;">
                     <summary style="color: var(--cyan); font-weight: 600; font-size: 1.05rem;">What's included in the free consultation?</summary>
                     <p style="color: var(--text-muted); margin-top: 1rem; line-height: 1.7;">
                         The 30-minute consultation covers your security goals, current challenges, and a preliminary recommendation for services. You'll receive a custom proposal with no obligation.
                     </p>
                 </details>
 
-                <details style="background: rgba(26, 39, 68, 0.6); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 15px; padding: 1.5rem; margin-bottom: 1rem; cursor: pointer;">
+                <details style="background: var(--card-bg); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 15px; padding: 1.5rem; margin-bottom: 1rem; cursor: pointer;">
                     <summary style="color: var(--cyan); font-weight: 600; font-size: 1.05rem;">How do you ensure confidentiality during assessments?</summary>
                     <p style="color: var(--text-muted); margin-top: 1rem; line-height: 1.7;">
                         All assessments are covered by NDA and our team signs confidentiality agreements. We follow industry standards for data protection and never share findings without authorization.
                     </p>
                 </details>
 
-                <details style="background: rgba(26, 39, 68, 0.6); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 15px; padding: 1.5rem;">
+                <details style="background: var(--card-bg); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 15px; padding: 1.5rem;">
                     <summary style="color: var(--cyan); font-weight: 600; font-size: 1.05rem;">Can we discuss pricing before scheduling a call?</summary>
                     <p style="color: var(--text-muted); margin-top: 1rem; line-height: 1.7;">
                         Pricing varies based on scope and organization size. Email sales@cyberguard.io with details about your needs and we'll provide a preliminary estimate before your call.
@@ -329,7 +329,7 @@
      <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <h3>🛡️ CyberGuard</h3>
+                <h3><img src="Icons/none (9).gif" alt="CyberGuard Logo" style="height: 30px; vertical-align: middle; margin-right: 8px;"> CyberGuard</h3>
                 <p style="color: var(--text-muted); margin-bottom: 1rem;">
                     Your trusted resource for cybersecurity education, frameworks, and best practices.
                 </p>

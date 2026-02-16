@@ -121,7 +121,7 @@ header h1 {
 }
 
 .system-component {
-    background: rgba(0, 0, 0, 0.3);
+    background: transparent;
     padding: 20px;
     border-radius: 10px;
     text-align: center;
