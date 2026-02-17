@@ -23,7 +23,6 @@ export default defineConfig({
         about: resolve(__dirname, 'about.html'),
         blog: resolve(__dirname, 'blog.html'),
         chatbot: resolve(__dirname, 'chatbot.html'),
-        community: resolve(__dirname, 'community.html'),
         contact: resolve(__dirname, 'contact.html'),
         frameworks: resolve(__dirname, 'frameworks.html'),
         hackerSimulation: resolve(__dirname, 'hacker-simulation.html'),
