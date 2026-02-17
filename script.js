@@ -2296,7 +2296,7 @@ function initAttackTypesChart() {
 
     const ctx = canvas.getContext('2d');
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'pie',
         data: {
             labels: threatMapData.attackTypes.map(t => t.type),
             datasets: [{
@@ -2317,7 +2317,15 @@ function initAttackTypesChart() {
             maintainAspectRatio: true,
             plugins: {
                 legend: {
-                    display: false
+                    display: true,
+                    position: 'bottom',
+                    labels: {
+                        color: '#B0BEC5',
+                        font: {
+                            size: 12
+                        },
+                        padding: 15
+                    }
                 }
             }
         }
@@ -2377,7 +2385,7 @@ function initHamburgerMenu() {
     const hamburgerLinks = document.querySelectorAll('.hamburger-link');
     const dropdownButtons = document.querySelectorAll('.hamburger-dropdown-btn');
 
-    if (!hamburgerBtn) return;
+    if (!hamburgerBtn || !hamburgerMenu || !hamburgerOverlay || !hamburgerClose) return;
 
     hamburgerBtn.addEventListener('click', () => {
         hamburgerBtn.classList.toggle('active');
@@ -2950,6 +2958,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initLiveThreatMonitor();
     initChecklistCertificate();
     initThreatMap();
+    initAttackTypesChart();
     initHamburgerMenu();
     initLiveCounters();
     initLeadMagnetForm();

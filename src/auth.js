@@ -72,53 +72,63 @@ function initAuth() {
     hideOverlay();
   };
 
-  document.getElementById('signup-form-element').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = document.getElementById('signup-email').value;
-    const password = document.getElementById('signup-password').value;
+  const signupFormElement = document.getElementById('signup-form-element');
+  const loginFormElement = document.getElementById('login-form-element');
+  const resetPasswordFormElement = document.getElementById('reset-password-form-element');
 
-    try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      await sendEmailVerification(userCredential.user);
-      alert('Account created! Verification email sent. Please check your inbox and verify your email.');
-      signupForm.style.display = 'none';
-      hideOverlay();
-      document.getElementById('signup-form-element').reset();
-    } catch (error) {
-      alert('Error: ' + error.message);
-    }
-  });
+  if (signupFormElement) {
+    signupFormElement.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-password').value;
 
-  document.getElementById('login-form-element').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = document.getElementById('login-email').value;
-    const password = document.getElementById('login-password').value;
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        await sendEmailVerification(userCredential.user);
+        alert('Account created! Verification email sent. Please check your inbox and verify your email.');
+        signupForm.style.display = 'none';
+        hideOverlay();
+        signupFormElement.reset();
+      } catch (error) {
+        alert('Error: ' + error.message);
+      }
+    });
+  }
 
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      alert('Logged in successfully!');
-      loginForm.style.display = 'none';
-      hideOverlay();
-      document.getElementById('login-form-element').reset();
-    } catch (error) {
-      alert('Error: ' + error.message);
-    }
-  });
+  if (loginFormElement) {
+    loginFormElement.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
 
-  document.getElementById('reset-password-form-element').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = document.getElementById('reset-email').value;
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        alert('Logged in successfully!');
+        loginForm.style.display = 'none';
+        hideOverlay();
+        loginFormElement.reset();
+      } catch (error) {
+        alert('Error: ' + error.message);
+      }
+    });
+  }
 
-    try {
-      await sendPasswordResetEmail(auth, email);
-      alert('Password reset email sent! Check your inbox.');
-      resetPasswordForm.style.display = 'none';
-      hideOverlay();
-      document.getElementById('reset-password-form-element').reset();
-    } catch (error) {
-      alert('Error: ' + error.message);
-    }
-  });
+  if (resetPasswordFormElement) {
+    resetPasswordFormElement.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('reset-email').value;
+
+      try {
+        await sendPasswordResetEmail(auth, email);
+        alert('Password reset email sent! Check your inbox.');
+        resetPasswordForm.style.display = 'none';
+        hideOverlay();
+        resetPasswordFormElement.reset();
+      } catch (error) {
+        alert('Error: ' + error.message);
+      }
+    });
+  }
 
   onAuthStateChanged(auth, (user) => {
     const statusEl = document.getElementById('user-status');

@@ -201,14 +201,14 @@ function initializeUI() {
         return false;
     }
 
-    if (menuToggle) {
+    if (menuToggle && sidebar) {
         menuToggle.addEventListener('click', () => {
             sidebar.classList.toggle('active');
         });
     }
 
     document.addEventListener('click', (e) => {
-        if (sidebar && sidebar.classList.contains('active') && 
+        if (sidebar && menuToggle && sidebar.classList.contains('active') && 
             !sidebar.contains(e.target) && 
             !menuToggle.contains(e.target)) {
             sidebar.classList.remove('active');

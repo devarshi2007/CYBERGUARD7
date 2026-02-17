@@ -3320,6 +3320,7 @@ footer {
 
 .threat-chart-grid {
     display: grid;
+    align-items: center;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
     margin-bottom: 2rem;

@@ -1,7 +1,7 @@
 // Service Worker for CyberGuard PWA
-const CACHE_NAME = 'cyberguard-v1.0.0';
-const STATIC_CACHE = 'cyberguard-static-v1.0.0';
-const DYNAMIC_CACHE = 'cyberguard-dynamic-v1.0.0';
+const CACHE_NAME = 'cyberguard-v1.0.1';
+const STATIC_CACHE = 'cyberguard-static-v1.0.1';
+const DYNAMIC_CACHE = 'cyberguard-dynamic-v1.0.1';
 
 // Files to cache immediately
 const STATIC_ASSETS = [

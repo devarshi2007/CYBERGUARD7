@@ -9,7 +9,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>CyberGuard - Cyber Security & Education Platform</title>
-    <link rel="stylesheet" href="style.css?v=1.0">
+    <link rel="stylesheet" href="style.css?v=1.0.1">
     <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
@@ -189,94 +189,24 @@
         </div>
     </section>
 
-    <!-- Hero Image Section -->
+   <!-- Hero Image Section -->
     <section class="hero-image-section">
         <div class="container">
-            <svg class="hero-illustration" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CyberGuard security illustration with shield and padlock network">
-                <title>Security Shield with Network Nodes</title>
-                <!-- Background gradient -->
-                <defs>
-                    <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#00E5FF;stop-opacity:0.2" />
-                        <stop offset="100%" style="stop-color:#A400FF;stop-opacity:0.2" />
-                    </linearGradient>
-                    <radialGradient id="glowGradient" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" style="stop-color:#00E5FF;stop-opacity:0.4" />
-                        <stop offset="100%" style="stop-color:#00E5FF;stop-opacity:0" />
-                    </radialGradient>
-                </defs>
-
-                <!-- Central Shield -->
-                <g class="shield-group">
-                    <circle cx="400" cy="200" r="150" fill="url(#glowGradient)" opacity="0.6"/>
-                    <path d="M 400 80 L 480 140 L 480 240 Q 400 300 400 300 Q 320 300 320 240 L 320 140 Z" fill="none" stroke="#00E5FF" stroke-width="3" opacity="0.8"/>
-                    <path d="M 400 100 L 470 150 L 470 240 Q 400 285 400 285 Q 330 285 330 240 L 330 150 Z" fill="rgba(0, 229, 255, 0.1)" stroke="#00E5FF" stroke-width="2"/>
-                </g>
-
-                <!-- Padlock inside shield -->
-                <g class="padlock-group" transform="translate(400, 180)">
-                    <rect x="-20" y="-5" width="40" height="35" rx="3" fill="none" stroke="#A400FF" stroke-width="2"/>
-                    <circle cx="-12" cy="-8" r="8" fill="none" stroke="#A400FF" stroke-width="2"/>
-                    <circle cx="12" cy="-8" r="8" fill="none" stroke="#A400FF" stroke-width="2"/>
-                    <line x1="-12" y1="0" x2="12" y2="0" stroke="#A400FF" stroke-width="2"/>
-                    <circle cx="0" cy="18" r="3" fill="#A400FF"/>
-                </g>
-
-                <!-- Surrounding network nodes -->
-                <circle cx="150" cy="100" r="12" fill="#00E5FF" opacity="0.7"/>
-                <circle cx="650" cy="100" r="12" fill="#00E5FF" opacity="0.7"/>
-                <circle cx="150" cy="300" r="12" fill="#00E5FF" opacity="0.7"/>
-                <circle cx="650" cy="300" r="12" fill="#00E5FF" opacity="0.7"/>
-                <circle cx="200" cy="50" r="8" fill="#A400FF" opacity="0.6"/>
-                <circle cx="600" cy="50" r="8" fill="#A400FF" opacity="0.6"/>
-                <circle cx="200" cy="350" r="8" fill="#A400FF" opacity="0.6"/>
-                <circle cx="600" cy="350" r="8" fill="#A400FF" opacity="0.6"/>
-
-                <!-- Connecting lines (network) -->
-                <line x1="150" y1="100" x2="400" y2="200" stroke="#00E5FF" stroke-width="1.5" opacity="0.4" stroke-dasharray="5,5"/>
-                <line x1="650" y1="100" x2="400" y2="200" stroke="#00E5FF" stroke-width="1.5" opacity="0.4" stroke-dasharray="5,5"/>
-                <line x1="150" y1="300" x2="400" y2="200" stroke="#00E5FF" stroke-width="1.5" opacity="0.4" stroke-dasharray="5,5"/>
-                <line x1="650" y1="300" x2="400" y2="200" stroke="#00E5FF" stroke-width="1.5" opacity="0.4" stroke-dasharray="5,5"/>
-                <line x1="200" y1="50" x2="150" y2="100" stroke="#A400FF" stroke-width="1" opacity="0.3"/>
-                <line x1="600" y1="50" x2="650" y2="100" stroke="#A400FF" stroke-width="1" opacity="0.3"/>
-                <line x1="200" y1="350" x2="150" y2="300" stroke="#A400FF" stroke-width="1" opacity="0.3"/>
-                <line x1="600" y1="350" x2="650" y2="300" stroke="#A400FF" stroke-width="1" opacity="0.3"/>
-
-                <!-- Checkmark for security -->
-                <g class="checkmark-group" transform="translate(420, 210)">
-                    <path d="M 0 8 L 5 13 L 15 3" fill="none" stroke="#00ff1e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
-                </g>
-
-                <!-- Animated pulse circles -->
-                <circle cx="400" cy="200" r="100" fill="none" stroke="#00E5FF" stroke-width="1" opacity="0.2"/>
-                <circle cx="400" cy="200" r="120" fill="none" stroke="#A400FF" stroke-width="1" opacity="0.15"/>
-            </svg>
+            <div class="hero-image-container">
+                <img src="Icons/imageinbackground.jpg" alt="CyberGuard cybersecurity platform background" style="width: 100%; height: auto; object-fit: cover; display: block; margin: 0 auto;">
+            </div>
         </div>
     </section>
 
-    <!-- Feature Cards -->
-    <div class="features">
-        <div class="feature-card">
-            <span class="feature-icon"></span>
-            <h3>Cyber Threats Explained</h3>
-            <p>Deep dive into common cyber threats, attack vectors, and real-world scenarios. Learn how threats evolve and impact your security posture.</p>
-            <a href="threats.html" class="btn btn-secondary" style="width: 100%; text-align: center;">Learn More</a>
+    <!-- What is CyberGuard Section -->
+    <section class="section" style="margin: 3rem auto; max-width: 1200px;">
+        <div class="card" style="border-color: var(--cyan); text-align: center;">
+            <h2 style="color: var(--cyan); text-shadow: 0 0 10px var(--cyan); margin-bottom: 1.5rem;">What is CyberGuard?</h2>
+            <p style="font-size: 1.1rem; line-height: 1.8; color: #B0BEC5;">
+                CyberGuard is a comprehensive cybersecurity education platform that empowers individuals and organizations to defend against digital threats. We provide accessible learning resources, security frameworks, professional tools, and AI-powered threat analysis to make cybersecurity education practical and effective. From penetration testing and managed detection services to security training and real-time threat monitoring, CyberGuard delivers the knowledge and tools needed to secure your digital world while promoting ethical practices and responsible security disclosure.
+            </p>
         </div>
-        <div class="feature-card">
-            <span class="feature-icon"></span>
-            <h3>Security Frameworks</h3>
-            <p>Explore industry-standard frameworks like OWASP Top 10, NIST, ISO 27001, and Zero Trust Architecture for comprehensive security guidance.</p>
-            <a href="frameworks.html" class="btn btn-secondary" style="width: 100%; text-align: center;">Explore</a>
-        </div>
-
-        <div class="feature-card">
-            <span class="feature-icon"></span>
-            <h3>Developer Best Practices</h3>
-            <p>Build secure applications from the ground up with secure coding practices, authentication patterns, and vulnerability prevention techniques.</p>
-            <a href="learning.html" class="btn btn-secondary" style="width: 100%; text-align: center;">Discover</a>
-        </div>
-    </div>
-
+    </section>
 
     <!-- Main Content -->
     <div class="container">
@@ -310,11 +240,7 @@
                     <p>Stay informed with our blog covering latest vulnerabilities, security tips, industry news, and research trends.</p>
                     <a href="blog.html" class="blog-read-more">Read Blog →</a>
                 </div>
-                <div class="card">
-                    <h3> Join Community</h3>
-                    <p>Contribute to cybersecurity education, follow responsible disclosure practices, and participate in our open-source initiatives.</p>
-                    <a href="community.html" class="blog-read-more">Join Us →</a>
-                </div>
+               
             </div>
         </section>
 
@@ -336,6 +262,46 @@
                         <p id="attackDescription"></p>
                         <h4>Break the chain</h4>
                         <ul class="attack-defense-list" id="attackDefenseList"></ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Attack Types Distribution -->
+        <section class="section">
+            <h2> Attack Types Distribution</h2>
+            <div class="threat-chart-grid">
+                <div class="chart-container">
+                    <canvas id="attackTypesDistribution" width="1006" height="375" style="display: block; box-sizing: border-box; height: 300px; width: 804.8px;"></canvas>
+                </div>
+                <div class="threat-types-list">
+                    <h3>Active Threat Categories</h3>
+                    <div id="threatTypesList">
+                        <!-- Populated by JavaScript -->
+                        <div class="threat-type-item">
+                            <span class="threat-type-name">Ransomware</span>
+                            <span class="threat-type-count">234</span>
+                        </div>
+                        
+                        <div class="threat-type-item">
+                            <span class="threat-type-name">Phishing</span>
+                            <span class="threat-type-count">189</span>
+                        </div>
+                        
+                        <div class="threat-type-item">
+                            <span class="threat-type-name">DDoS</span>
+                            <span class="threat-type-count">145</span>
+                        </div>
+                        
+                        <div class="threat-type-item">
+                            <span class="threat-type-name">Malware</span>
+                            <span class="threat-type-count">98</span>
+                        </div>
+                        
+                        <div class="threat-type-item">
+                            <span class="threat-type-name">Zero-Day</span>
+                            <span class="threat-type-count">23</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -563,11 +529,11 @@
     }
     </script>
 
-    <script type="module" src="/api.js"></script>
-    <script type="module" src="/app.js"></script>
-    <script type="module" src="/script.js"></script>
+    <script type="module" src="/api.js?v=1.0.1"></script>
+    <script type="module" src="/app.js?v=1.0.1"></script>
+    <script type="module" src="/script.js?v=1.0.1"></script>
     <!-- Animated Background System -->
-    <script type="module" src="/cyber-background.js"></script>
+    <script type="module" src="/cyber-background.js?v=1.0.1"></script>
     <!-- Firebase Authentication Module -->
     <script type="module" src="/src/auth.js"></script>
     <!-- Service Worker Registration for PWA -->

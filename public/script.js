@@ -2152,13 +2152,24 @@ function populateThreatTable() {
     `).join('');
 }
 
+let attackTypesChartInstance = null;
+
 function initAttackTypesChart() {
     const canvas = document.getElementById('attackTypesDistribution');
-    if (!canvas) return;
+    if (!canvas) {
+        console.log('Canvas not found');
+        return;
+    }
+
+    if (attackTypesChartInstance) {
+        attackTypesChartInstance.destroy();
+    }
 
     const ctx = canvas.getContext('2d');
-    new Chart(ctx, {
-        type: 'doughnut',
+    console.log('Creating pie chart with data:', threatMapData.attackTypes);
+    
+    attackTypesChartInstance = new Chart(ctx, {
+        type: 'pie',
         data: {
             labels: threatMapData.attackTypes.map(t => t.type),
             datasets: [{
@@ -2170,8 +2181,8 @@ function initAttackTypesChart() {
                     '#00FF00',
                     '#00FFFF',
                 ],
-                borderColor: 'rgba(26, 39, 68, 0.8)',
-                borderWidth: 2,
+                borderColor: '#1a2744',
+                borderWidth: 3,
             }]
         },
         options: {
@@ -2179,11 +2190,29 @@ function initAttackTypesChart() {
             maintainAspectRatio: true,
             plugins: {
                 legend: {
-                    display: false
+                    display: true,
+                    position: 'bottom',
+                    labels: {
+                        color: '#B0BEC5',
+                        font: {
+                            size: 14
+                        },
+                        padding: 20
+                    }
+                },
+                tooltip: {
+                    enabled: true,
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    titleColor: '#00E5FF',
+                    bodyColor: '#fff',
+                    borderColor: '#00E5FF',
+                    borderWidth: 1
                 }
             }
         }
     });
+
+    console.log('Chart created successfully');
 
     const list = document.getElementById('threatTypesList');
     if (list) {
