@@ -12,7 +12,9 @@
     <link rel="stylesheet" href="style.css?v=1.0.1">
     <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
     <!-- Plausible Analytics for Privacy-Respecting Usage Tracking -->
     <script defer data-domain="cyberguard.local" src="https://plausible.io/js/script.js"></script>
     <!-- Font Preconnects and Links -->
@@ -193,7 +195,7 @@
     <section class="hero-image-section">
         <div class="container">
             <div class="hero-image-container">
-                <img src="Icons/imageinbackground.jpg" alt="CyberGuard cybersecurity platform background" style="width: 100%; height: auto; object-fit: cover; display: block; margin: 0 auto;">
+                <img src="Icons/imageinbackground.jpg" alt="CyberGuard cybersecurity platform background" style="width: 100%; height: auto; display: block; margin: 0 auto;">
             </div>
         </div>
     </section>
@@ -267,41 +269,36 @@
             </div>
         </section>
 
-        <!-- Attack Types Distribution -->
-        <section class="section">
-            <h2> Attack Types Distribution</h2>
-            <div class="threat-chart-grid">
-                <div class="chart-container">
-                    <canvas id="attackTypesDistribution" width="1006" height="375" style="display: block; box-sizing: border-box; height: 300px; width: 804.8px;"></canvas>
+        
+       <section class="section attack-distribution-section">
+            <h2>Attack Types Distribution</h2>
+            <div style="background: rgba(26, 39, 68, 0.6); backdrop-filter: blur(10px); border: 2px solid var(--cyan); border-radius: 20px; padding: 2rem; box-shadow: 0 0 30px rgba(0, 229, 255, 0.1);">
+                <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">
+                    Common cyber attack types detected in real-world scenarios
+                </p>
+                <div style="max-width: 700px; margin: 0 auto; position: relative;">
+                    <div id="attackTypesChart" style="height: 450px;"></div>
                 </div>
-                <div class="threat-types-list">
-                    <h3>Active Threat Categories</h3>
-                    <div id="threatTypesList">
-                        <!-- Populated by JavaScript -->
-                        <div class="threat-type-item">
-                            <span class="threat-type-name">Ransomware</span>
-                            <span class="threat-type-count">234</span>
-                        </div>
-                        
-                        <div class="threat-type-item">
-                            <span class="threat-type-name">Phishing</span>
-                            <span class="threat-type-count">189</span>
-                        </div>
-                        
-                        <div class="threat-type-item">
-                            <span class="threat-type-name">DDoS</span>
-                            <span class="threat-type-count">145</span>
-                        </div>
-                        
-                        <div class="threat-type-item">
-                            <span class="threat-type-name">Malware</span>
-                            <span class="threat-type-count">98</span>
-                        </div>
-                        
-                        <div class="threat-type-item">
-                            <span class="threat-type-name">Zero-Day</span>
-                            <span class="threat-type-count">23</span>
-                        </div>
+                <div id="attackStats" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem;">
+                    <div style="background: rgba(0, 229, 255, 0.05); border-left: 4px solid #FF6384; padding: 1rem; border-radius: 8px;">
+                        <div style="font-size: 1.5rem; font-weight: 700; color: #FF6384;">30%</div>
+                        <div style="color: var(--text-light);">Phishing</div>
+                    </div>
+                    <div style="background: rgba(0, 229, 255, 0.05); border-left: 4px solid #36A2EB; padding: 1rem; border-radius: 8px;">
+                        <div style="font-size: 1.5rem; font-weight: 700; color: #36A2EB;">25%</div>
+                        <div style="color: var(--text-light);">Malware</div>
+                    </div>
+                    <div style="background: rgba(0, 229, 255, 0.05); border-left: 4px solid #FFCE56; padding: 1rem; border-radius: 8px;">
+                        <div style="font-size: 1.5rem; font-weight: 700; color: #FFCE56;">20%</div>
+                        <div style="color: var(--text-light);">Ransomware</div>
+                    </div>
+                    <div style="background: rgba(0, 229, 255, 0.05); border-left: 4px solid #4BC0C0; padding: 1rem; border-radius: 8px;">
+                        <div style="font-size: 1.5rem; font-weight: 700; color: #4BC0C0;">15%</div>
+                        <div style="color: var(--text-light);">DDoS</div>
+                    </div>
+                    <div style="background: rgba(0, 229, 255, 0.05); border-left: 4px solid #9966FF; padding: 1rem; border-radius: 8px;">
+                        <div style="font-size: 1.5rem; font-weight: 700; color: #9966FF;">10%</div>
+                        <div style="color: var(--text-light);">SQL Injection</div>
                     </div>
                 </div>
             </div>
@@ -529,9 +526,99 @@
     }
     </script>
 
-    <script type="module" src="/api.js?v=1.0.1"></script>
-    <script type="module" src="/app.js?v=1.0.1"></script>
-    <script type="module" src="/script.js?v=1.0.1"></script>
+     <!-- Attack Types 3D Pie Chart -->
+    <script>
+        const chartContainer = document.getElementById('attackTypesChart');
+        if (chartContainer) {
+            Highcharts.chart('attackTypesChart', {
+                chart: {
+                    type: 'pie',
+                    backgroundColor: 'transparent',
+                    options3d: {
+                        enabled: true,
+                        alpha: 45,
+                        beta: 0
+                    }
+                },
+                title: {
+                    text: null
+                },
+                credits: {
+                    enabled: false
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                    borderColor: '#00E5FF',
+                    borderWidth: 2,
+                    style: {
+                        color: '#ffffff'
+                    },
+                    pointFormat: '<b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        innerSize: 0,
+                        depth: 45,
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f}%',
+                            style: {
+                                color: '#e0e0e0',
+                                fontSize: '12px',
+                                textOutline: 'none'
+                            },
+                            distance: 10
+                        },
+                        showInLegend: true
+                    }
+                },
+                legend: {
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    layout: 'vertical',
+                    itemStyle: {
+                        color: '#e0e0e0',
+                        fontSize: '14px'
+                    },
+                    itemHoverStyle: {
+                        color: '#00E5FF'
+                    }
+                },
+                series: [{
+                    name: 'Attack Types',
+                    colorByPoint: true,
+                    data: [{
+                        name: 'Phishing',
+                        y: 30,
+                        sliced: true,
+                        selected: true,
+                        color: '#FF6384'
+                    }, {
+                        name: 'Malware',
+                        y: 25,
+                        sliced: true,
+                        color: '#36A2EB'
+                    }, {
+                        name: 'Ransomware',
+                        y: 20,
+                        sliced: true,
+                        color: '#FFCE56'
+                    }, {
+                        name: 'DDoS',
+                        y: 15,
+                        sliced: true,
+                        color: '#4BC0C0'
+                    }, {
+                        name: 'SQL Injection',
+                        y: 10,
+                        color: '#9966FF'
+                    }]
+                }]
+            });
+        }
+    </script>
     <!-- Animated Background System -->
     <script type="module" src="/cyber-background.js?v=1.0.1"></script>
     <!-- Firebase Authentication Module -->

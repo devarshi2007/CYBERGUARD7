@@ -2290,46 +2290,116 @@ function populateThreatTable() {
     `).join('');
 }
 
-function initAttackTypesChart() {
-    const canvas = document.getElementById('attackTypesDistribution');
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: threatMapData.attackTypes.map(t => t.type),
-            datasets: [{
-                data: threatMapData.attackTypes.map(t => t.count),
-                backgroundColor: [
-                    '#FF0000',
-                    '#FF6600',
-                    '#FFCC00',
-                    '#00FF00',
-                    '#00FFFF',
-                ],
-                borderColor: 'rgba(26, 39, 68, 0.8)',
-                borderWidth: 2,
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: true,
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'bottom',
-                    labels: {
-                        color: '#B0BEC5',
-                        font: {
-                            size: 12
-                        },
-                        padding: 15
-                    }
-                }
-            }
+function initAttackTypesChart(retryCount = 0) {
+    const container = document.getElementById('attackTypesChart');
+    if (!container) {
+        console.warn('Chart container attackTypesChart not found');
+        return;
+    }
+    
+    if (typeof Highcharts === 'undefined') {
+        if (retryCount < 50) {
+            setTimeout(() => initAttackTypesChart(retryCount + 1), 100);
+        } else {
+            console.error('Highcharts failed to load after multiple retries');
         }
-    });
+        return;
+    }
+
+    console.log('Initializing 3D Attack Types Chart...');
+    
+    if (!threatMapData || !threatMapData.attackTypes) {
+        console.error('threatMapData.attackTypes not available');
+        return;
+    }
+    
+    console.log('Attack types data:', threatMapData.attackTypes);
+    
+    try {
+        Highcharts.chart('attackTypesChart', {
+            chart: {
+                type: 'pie',
+                backgroundColor: 'transparent',
+                options3d: {
+                    enabled: true,
+                    alpha: 60,
+                    beta: 0,
+                    depth: 100,
+                    viewDistance: 25
+                }
+            },
+            title: {
+                text: null
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b><br/>Count: <b>{point.y}</b>',
+                backgroundColor: 'rgba(26, 39, 68, 0.9)',
+                style: {
+                    color: '#B0BEC5'
+                },
+                borderColor: '#00E5FF',
+                borderRadius: 10
+            },
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    depth: 45,
+                    innerSize: 0,
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.percentage:.0f}%</b>',
+                        style: {
+                            color: '#FFFFFF',
+                            textOutline: '2px #000000',
+                            fontWeight: 'bold',
+                            fontSize: '16px'
+                        },
+                        distance: -40,
+                        connectorWidth: 0
+                    },
+                    showInLegend: true,
+                    slicedOffset: 0,
+                    borderWidth: 2,
+                    borderColor: '#000000'
+                }
+            },
+            legend: {
+                itemStyle: {
+                    color: '#B0BEC5'
+                },
+                itemHoverStyle: {
+                    color: '#00E5FF'
+                }
+            },
+            series: [{
+                name: 'Attacks',
+                colorByPoint: true,
+                data: threatMapData.attackTypes.map((t, index) => ({
+                    name: t.type,
+                    y: t.count,
+                    sliced: index === 0,
+                    selected: index === 0
+                })),
+                colors: [
+                    '#3498db',
+                    '#34495e',
+                    '#e74c3c',
+                    '#27ae60',
+                    '#f39c12'
+                ]
+            }]
+        });
+        console.log('3D Chart created successfully');
+    } catch (error) {
+        console.error('Error creating chart:', error);
+        return;
+    }
 
     const list = document.getElementById('threatTypesList');
     if (list) {
@@ -2958,7 +3028,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initLiveThreatMonitor();
     initChecklistCertificate();
     initThreatMap();
-    initAttackTypesChart();
     initHamburgerMenu();
     initLiveCounters();
     initLeadMagnetForm();
