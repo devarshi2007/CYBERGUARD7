@@ -13,8 +13,14 @@
     <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+    <script src="https://unpkg.com/highcharts@11.2.0/highcharts.js" 
+            onload="console.log('Highcharts core loaded')" 
+            onerror="console.error('Failed to load Highcharts from unpkg')">
+    </script>
+    <script src="https://unpkg.com/highcharts@11.2.0/highcharts-3d.js" 
+            onload="console.log('Highcharts 3D module loaded')" 
+            onerror="console.error('Failed to load Highcharts 3D module')">
+    </script>
     <!-- Plausible Analytics for Privacy-Respecting Usage Tracking -->
     <script defer data-domain="cyberguard.local" src="https://plausible.io/js/script.js"></script>
     <!-- Font Preconnects and Links -->
@@ -272,7 +278,7 @@
         
        <section class="section attack-distribution-section">
             <h2>Attack Types Distribution</h2>
-            <div style="background: rgba(26, 39, 68, 0.6); backdrop-filter: blur(10px); border: 2px solid var(--cyan); border-radius: 20px; padding: 2rem; box-shadow: 0 0 30px rgba(0, 229, 255, 0.1);">
+            <div style="background: var(--card-bg); backdrop-filter: blur(10px); border: 2px solid var(--cyan); border-radius: 20px; padding: 2rem; box-shadow: 0 0 30px rgba(0, 229, 255, 0.1);">
                 <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">
                     Common cyber attack types detected in real-world scenarios
                 </p>
@@ -281,7 +287,7 @@
                 </div>
                 <div id="attackStats" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem;">
                     <div style="background: rgba(0, 229, 255, 0.05); border-left: 4px solid #FF6384; padding: 1rem; border-radius: 8px;">
-                        <div style="font-size: 1.5rem; font-weight: 700; color: #FF6384;">30%</div>
+                        <div style="font-size: 1.5rem; font-weight: 700; color: #ff053b;">30%</div>
                         <div style="color: var(--text-light);">Phishing</div>
                     </div>
                     <div style="background: rgba(0, 229, 255, 0.05); border-left: 4px solid #36A2EB; padding: 1rem; border-radius: 8px;">
@@ -528,96 +534,177 @@
 
      <!-- Attack Types 3D Pie Chart -->
     <script>
-        const chartContainer = document.getElementById('attackTypesChart');
-        if (chartContainer) {
-            Highcharts.chart('attackTypesChart', {
-                chart: {
-                    type: 'pie',
-                    backgroundColor: 'transparent',
-                    options3d: {
-                        enabled: true,
-                        alpha: 45,
-                        beta: 0
-                    }
-                },
-                title: {
-                    text: null
-                },
-                credits: {
-                    enabled: false
-                },
-                tooltip: {
-                    backgroundColor: 'rgba(0, 0, 0, 0.9)',
-                    borderColor: '#00E5FF',
-                    borderWidth: 2,
-                    style: {
-                        color: '#ffffff'
-                    },
-                    pointFormat: '<b>{point.percentage:.1f}%</b>'
-                },
-                plotOptions: {
-                    pie: {
-                        innerSize: 0,
-                        depth: 45,
-                        allowPointSelect: true,
-                        cursor: 'pointer',
-                        dataLabels: {
+        let chartInitRetries = 0;
+        const maxRetries = 10;
+        
+        function initAttackTypesChart() {
+            console.log('Attempting to load 3D pie chart... (Attempt ' + (chartInitRetries + 1) + '/' + maxRetries + ')');
+            const chartContainer = document.getElementById('attackTypesChart');
+            console.log('Chart container found:', chartContainer);
+            console.log('Highcharts available:', typeof Highcharts !== 'undefined');
+            
+            if (!chartContainer) {
+                console.error('Chart container not found!');
+                return;
+            }
+            
+            if (typeof Highcharts === 'undefined') {
+                chartInitRetries++;
+                if (chartInitRetries >= maxRetries) {
+                    console.error('Failed to load Highcharts after ' + maxRetries + ' attempts. Please check your internet connection.');
+                    return;
+                }
+                console.error('Highcharts library not loaded! Retrying in 1000ms...');
+                setTimeout(initAttackTypesChart, 1000);
+                return;
+            }
+            
+            if (typeof Highcharts.chart3d === 'undefined' && !Highcharts.Chart.prototype.is3d) {
+                chartInitRetries++;
+                if (chartInitRetries >= maxRetries) {
+                    console.error('Failed to load Highcharts 3D module after ' + maxRetries + ' attempts.');
+                    return;
+                }
+                console.warn('Highcharts 3D module may not be loaded yet, retrying...');
+                setTimeout(initAttackTypesChart, 1000);
+                return;
+            }
+            
+            console.log('Initializing Highcharts 3D pie chart...');
+            try {
+                Highcharts.chart('attackTypesChart', {
+                    chart: {
+                        type: 'pie',
+                        backgroundColor: 'transparent',
+                        options3d: {
                             enabled: true,
-                            format: '<b>{point.name}</b>: {point.percentage:.1f}%',
-                            style: {
-                                color: '#e0e0e0',
-                                fontSize: '12px',
-                                textOutline: 'none'
-                            },
-                            distance: 10
-                        },
-                        showInLegend: true
-                    }
-                },
-                legend: {
-                    align: 'right',
-                    verticalAlign: 'middle',
-                    layout: 'vertical',
-                    itemStyle: {
-                        color: '#e0e0e0',
-                        fontSize: '14px'
+                            alpha: 55,
+                            beta: 0,
+                            depth: 70,
+                            viewDistance: 25
+                        }
                     },
-                    itemHoverStyle: {
-                        color: '#00E5FF'
-                    }
-                },
-                series: [{
-                    name: 'Attack Types',
-                    colorByPoint: true,
-                    data: [{
-                        name: 'Phishing',
-                        y: 30,
-                        sliced: true,
-                        selected: true,
-                        color: '#FF6384'
-                    }, {
-                        name: 'Malware',
-                        y: 25,
-                        sliced: true,
-                        color: '#36A2EB'
-                    }, {
-                        name: 'Ransomware',
-                        y: 20,
-                        sliced: true,
-                        color: '#FFCE56'
-                    }, {
-                        name: 'DDoS',
-                        y: 15,
-                        sliced: true,
-                        color: '#4BC0C0'
-                    }, {
-                        name: 'SQL Injection',
-                        y: 10,
-                        color: '#9966FF'
+                    title: {
+                        text: null
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                        borderColor: '#00E5FF',
+                        borderWidth: 2,
+                        style: {
+                            color: '#ffffff'
+                        },
+                        pointFormat: '<b>{point.percentage:.1f}%</b>'
+                    },
+                    plotOptions: {
+                        pie: {
+                            innerSize: 0,
+                            depth: 70,
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: false
+                            },
+                            showInLegend: true
+                        }
+                    },
+                    legend: {
+                        align: 'right',
+                        verticalAlign: 'middle',
+                        layout: 'vertical',
+                        itemStyle: {
+                            color: '#e0e0e0',
+                            fontSize: '14px'
+                        },
+                        itemHoverStyle: {
+                            color: '#00E5FF'
+                        }
+                    },
+                    series: [{
+                        name: 'Attack Types',
+                        colorByPoint: true,
+                        data: [{
+                            name: 'Phishing',
+                            y: 30,
+                            sliced: true,
+                            selected: true,
+                            color: {
+                                linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+                                stops: [
+                                    [0, '#FF8A9A'],
+                                    [1, '#FF6384']
+                                ]
+                            }
+                        }, {
+                            name: 'Malware',
+                            y: 25,
+                            sliced: true,
+                            color: {
+                                linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+                                stops: [
+                                    [0, '#5DD5DD'],
+                                    [1, '#4BC0C0']
+                                ]
+                            }
+                        }, {
+                            name: 'Ransomware',
+                            y: 20,
+                            sliced: true,
+                            color: {
+                                linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+                                stops: [
+                                    [0, '#FFE082'],
+                                    [1, '#FFCE56']
+                                ]
+                            }
+                        }, {
+                            name: 'DDoS',
+                            y: 15,
+                            sliced: true,
+                            color: {
+                                linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+                                stops: [
+                                    [0, '#5DD5DD'],
+                                    [1, '#2A9D8F']
+                                ]
+                            }
+                        }, {
+                            name: 'SQL Injection',
+                            y: 10,
+                            color: {
+                                linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+                                stops: [
+                                    [0, '#A988FF'],
+                                    [1, '#8B5CF6']
+                                ]
+                            }
+                        }]
                     }]
-                }]
-            });
+                });
+                console.log('3D pie chart initialized successfully!');
+            } catch (error) {
+                console.error('Error initializing chart:', error);
+            }
         }
+        
+        // Try to initialize immediately if DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initAttackTypesChart);
+        } else {
+            // DOM is already ready
+            initAttackTypesChart();
+        }
+    </script>
+    <!-- Main Application Script -->
+    <script src="script.js"></script>
+    <script>
+        console.log('Script.js loaded successfully');
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM Content Loaded - Page initialized');
+        });
     </script>
     <!-- Animated Background System -->
     <script type="module" src="/cyber-background.js?v=1.0.1"></script>

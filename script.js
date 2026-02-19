@@ -827,9 +827,12 @@ function formatNewsDomain(url) {
 }
 
 function initAttackMapper() {
+    console.log('initAttackMapper called');
     const chips = document.querySelectorAll('.attack-chip');
+    console.log('Attack chips found:', chips.length);
     const defaultChip = chips.length ? chips[0] : null;
     if (!defaultChip) {
+        console.log('No attack chips found');
         return;
     }
     chips.forEach(chip => {
@@ -889,9 +892,12 @@ function renderAttackPath(key) {
 }
 
 function initBehaviorSimulator() {
+    console.log('initBehaviorSimulator called');
     const chips = document.querySelectorAll('.behavior-chip');
+    console.log('Behavior chips found:', chips.length);
     const defaultChip = chips.length ? chips[0] : null;
     if (!defaultChip) {
+        console.log('No behavior chips found');
         return;
     }
     chips.forEach(chip => {
@@ -1513,8 +1519,13 @@ function loadUserProgress() {
 
 // Theme toggle functionality
 function initThemeToggle() {
+    console.log('initThemeToggle called');
     const themeToggle = document.getElementById('theme-toggle');
-    if (!themeToggle) return;
+    console.log('Theme toggle button:', themeToggle);
+    if (!themeToggle) {
+        console.log('Theme toggle button not found');
+        return;
+    }
 
     // Load saved theme
     const savedTheme = loadFromStorage('theme', 'dark');
@@ -2058,6 +2069,7 @@ function initExitIntentPopup() {
     if (!exitIntentModal) return;
 
     const closeExitIntent = document.getElementById('closeExitIntent');
+    const dismissExitIntent = document.getElementById('dismissExitIntent');
     const startScanBtn = document.getElementById('startScanBtn');
 
     if (localStorage.getItem('exitIntentShown')) return;
@@ -2071,6 +2083,12 @@ function initExitIntentPopup() {
 
     if (closeExitIntent) {
         closeExitIntent.addEventListener('click', () => {
+            exitIntentModal.style.display = 'none';
+        });
+    }
+
+    if (dismissExitIntent) {
+        dismissExitIntent.addEventListener('click', () => {
             exitIntentModal.style.display = 'none';
         });
     }
@@ -2315,6 +2333,8 @@ function initAttackTypesChart(retryCount = 0) {
     
     console.log('Attack types data:', threatMapData.attackTypes);
     
+    const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'];
+    
     try {
         Highcharts.chart('attackTypesChart', {
             chart: {
@@ -2322,7 +2342,7 @@ function initAttackTypesChart(retryCount = 0) {
                 backgroundColor: 'transparent',
                 options3d: {
                     enabled: true,
-                    alpha: 60,
+                    alpha: 45,
                     beta: 0,
                     depth: 100,
                     viewDistance: 25
@@ -2330,6 +2350,9 @@ function initAttackTypesChart(retryCount = 0) {
             },
             title: {
                 text: null
+            },
+            credits: {
+                enabled: false
             },
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b><br/>Count: <b>{point.y}</b>',
@@ -2353,25 +2376,30 @@ function initAttackTypesChart(retryCount = 0) {
                     innerSize: 0,
                     dataLabels: {
                         enabled: true,
-                        format: '<b>{point.percentage:.0f}%</b>',
+                        format: '<b>{point.name}</b>: {point.percentage:.1f}%',
                         style: {
-                            color: '#FFFFFF',
-                            textOutline: '2px #000000',
-                            fontWeight: 'bold',
-                            fontSize: '16px'
+                            color: '#e0e0e0',
+                            textOutline: 'none',
+                            fontWeight: 'normal',
+                            fontSize: '12px'
                         },
-                        distance: -40,
-                        connectorWidth: 0
+                        distance: 10,
+                        connectorWidth: 1,
+                        connectorColor: '#e0e0e0'
                     },
                     showInLegend: true,
-                    slicedOffset: 0,
+                    slicedOffset: 15,
                     borderWidth: 2,
-                    borderColor: '#000000'
+                    borderColor: '#1a2744'
                 }
             },
             legend: {
+                align: 'right',
+                verticalAlign: 'middle',
+                layout: 'vertical',
                 itemStyle: {
-                    color: '#B0BEC5'
+                    color: '#e0e0e0',
+                    fontSize: '14px'
                 },
                 itemHoverStyle: {
                     color: '#00E5FF'
@@ -2383,16 +2411,10 @@ function initAttackTypesChart(retryCount = 0) {
                 data: threatMapData.attackTypes.map((t, index) => ({
                     name: t.type,
                     y: t.count,
-                    sliced: index === 0,
-                    selected: index === 0
-                })),
-                colors: [
-                    '#3498db',
-                    '#34495e',
-                    '#e74c3c',
-                    '#27ae60',
-                    '#f39c12'
-                ]
+                    sliced: index < 4,
+                    selected: index === 0,
+                    color: colors[index % colors.length]
+                }))
             }]
         });
         console.log('3D Chart created successfully');
@@ -3020,8 +3042,10 @@ function runBrowserSecurityScan() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('=== DOMContentLoaded Event Fired ===');
     document.querySelectorAll('[class*="notification"], [id*="notification"], [class*="update"], .update-modal, .notification-box').forEach(el => el.remove());
     
+    console.log('Initializing all components...');
     initCookieBanner();
     initLazyLoading();
     initExitIntentPopup();
@@ -3032,7 +3056,14 @@ document.addEventListener('DOMContentLoaded', () => {
     initLiveCounters();
     initLeadMagnetForm();
     initRiskCalculatorQuiz();
+    console.log('Calling initThemeToggle...');
+    initThemeToggle();
+    console.log('Calling initAttackMapper...');
+    initAttackMapper();
+    console.log('Calling initBehaviorSimulator...');
+    initBehaviorSimulator();
     expandOwaspAccordions();
+    console.log('=== All Initializations Complete ===');
 });
 
 function expandOwaspAccordions() {
