@@ -1126,9 +1126,9 @@ nav {
 }
 
 .attack-chip.active {
-    background: linear-gradient(135deg, var(--cyan), var(--purple));
+    background: linear-gradient(135deg, var(--cyan), #1E40AF);
     color: var(--primary-dark);
-    box-shadow: 0 0 25px rgba(164, 0, 255, 0.4);
+    box-shadow: 0 0 25px rgba(30, 64, 175, 0.4);
     animation: bounce 0.6s ease-in-out;
 }
 
@@ -4227,6 +4227,18 @@ footer {
 [data-theme="light"] .modal,
 [data-theme="light"] .popup {
     background: rgba(255, 255, 255, 0.95);
+}
+
+[data-theme="light"] .attack-chip {
+    border: 1px solid rgba(13, 110, 253, 0.5);
+    color: #212529;
+}
+
+[data-theme="light"] .attack-chip.active {
+    background: linear-gradient(135deg, #00E5FF, #1E40AF);
+    color: #000000;
+    box-shadow: 0 0 25px rgba(30, 64, 175, 0.4);
+    border: none;
 }
 
 [data-theme="light"] button:not(.btn) {
