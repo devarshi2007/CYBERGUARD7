@@ -57,6 +57,19 @@
             border: 3px solid var(--cyan);
         }
 
+        .node-label {
+            position: absolute;
+            bottom: -28px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            font-size: 0.75rem;
+            color: var(--cyan);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            pointer-events: none;
+        }
+
         .node:hover {
             transform: scale(1.1);
             box-shadow: 0 0 30px var(--cyan);
@@ -303,19 +316,19 @@
                 
                 <div class="network-diagram" id="networkDiagram">
                     <div class="node" id="user" style="left: 50px; top: 180px;" onclick="simulateAccess('user')">👤
-                        
+                        <span class="node-label">User </span>
                     </div>
                     <div class="node" id="device" style="left: 200px; top: 100px;" onclick="simulateAccess('device')">💻
-                        
+                        <span class="node-label">Device </span>
                     </div>
                     <div class="node" id="identity" style="left: 200px; top: 260px;" onclick="simulateAccess('identity')">🔑
-                        
+                        <span class="node-label">Identity </span>
                     </div>
                     <div class="node" id="policy" style="left: 400px; top: 180px;" onclick="simulateAccess('policy')">📋
-                        
+                        <span class="node-label">Policy </span>
                     </div>
                     <div class="node" id="data" style="left: 600px; top: 180px;" onclick="simulateAccess('data')">📁
-                        
+                        <span class="node-label">Data </span>
                     </div>
                 </div>
 
