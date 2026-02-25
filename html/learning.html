@@ -1,0 +1,1636 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning & Awareness - CyberGuard</title>
+    <meta name="description" content="Comprehensive cybersecurity learning resources, checklists, and educational content">
+    <meta name="theme-color" content="#00E5FF">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="../css/style.css?v=5.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/azonix" rel="stylesheet">
+    <style>
+        .hero h1 {
+            font-family: 'Azonix', sans-serif;
+            font-size: 3.5rem;
+            line-height: 1.5;
+            color: #ffffff;
+            text-shadow: 0 0 10px #00e6e6, 0 0 20px #00e6e6;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Cyber Background -->
+    <div id="bg-container" class="bg-container">
+        <canvas id="cyber-canvas"></canvas>
+        <div class="cyber-grid-overlay"></div>
+        <div class="cyber-glow-effect"></div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav>
+        <div class="navbar">
+            <div class="logo"><img src="../assets/Icons/none (9).gif" alt="CyberGuard Logo" style="height: 50px; vertical-align: middle; margin-right: 10px; opacity: 0.9;"> CyberGuard</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="threats.html">Threats</a></li>
+                <li><a href="learning.html">Learn</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="chatbot.html">AI Chat</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="navbar-right">
+                <button id="theme-toggle" class="theme-toggle-btn" title="Toggle theme">🌙</button>
+                <button id="hamburger-btn" class="hamburger-btn" title="Menu" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            
+            <!-- Auth Container -->
+            <div id="auth-container" style="display: flex; align-items: center; gap: 10px; margin-left: 20px;">
+                <div id="user-status" style="color: #00E5FF;">Not logged in</div>
+                <button id="btn-show-login" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.9rem;">Login</button>
+                <button id="btn-show-signup" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.9rem;">Sign Up</button>
+            </div>
+        </div>
+
+        <!-- Login Form -->
+        <div id="login-form" style="display: none; background: rgba(26, 39, 68, 0.95); padding: 2rem; border-radius: 15px; border: 2px solid #00E5FF; box-shadow: 0 0 30px rgba(0, 229, 255, 0.3); z-index: 10000; min-width: 350px;">
+            <h3 style="color: #00E5FF; margin-bottom: 1.5rem; text-align: center;">Login</h3>
+            <form id="login-form-element">
+                <input type="email" id="login-email" placeholder="Email" required style="width: 100%; padding: 12px; margin-bottom: 1rem; border-radius: 8px; border: 1px solid #00E5FF; background: rgba(0, 0, 0, 0.3); color: white;" />
+                <input type="password" id="login-password" placeholder="Password" required style="width: 100%; padding: 12px; margin-bottom: 0.5rem; border-radius: 8px; border: 1px solid #00E5FF; background: rgba(0, 0, 0, 0.3); color: white;" />
+                <div style="text-align: right; margin-bottom: 1.5rem;">
+                    <button type="button" id="btn-forgot-password" style="background: none; border: none; color: #00E5FF; cursor: pointer; font-size: 0.85rem; text-decoration: underline;">Forgot Password?</button>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">Login</button>
+                    <button type="button" id="btn-hide-login" class="btn btn-secondary" style="flex: 1;">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Signup Form -->
+        <div id="signup-form" style="display: none; background: rgba(26, 39, 68, 0.95); padding: 2rem; border-radius: 15px; border: 2px solid #00E5FF; box-shadow: 0 0 30px rgba(0, 229, 255, 0.3); z-index: 10000; min-width: 350px;">
+            <h3 style="color: #00E5FF; margin-bottom: 1.5rem; text-align: center;">Sign Up</h3>
+            <form id="signup-form-element">
+                <input type="email" id="signup-email" placeholder="Email" required style="width: 100%; padding: 12px; margin-bottom: 1rem; border-radius: 8px; border: 1px solid #00E5FF; background: rgba(0, 0, 0, 0.3); color: white;" />
+                <input type="password" id="signup-password" placeholder="Password" required style="width: 100%; padding: 12px; margin-bottom: 1.5rem; border-radius: 8px; border: 1px solid #00E5FF; background: rgba(0, 0, 0, 0.3); color: white;" />
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">Create account</button>
+                    <button type="button" id="btn-hide-signup" class="btn btn-secondary" style="flex: 1;">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Password Reset Form -->
+        <div id="reset-password-form" style="display: none; background: rgba(26, 39, 68, 0.95); padding: 2rem; border-radius: 15px; border: 2px solid #00E5FF; box-shadow: 0 0 30px rgba(0, 229, 255, 0.3); z-index: 10000; min-width: 350px;">
+            <h3 style="color: #00E5FF; margin-bottom: 1rem; text-align: center;">Reset Password</h3>
+            <p style="color: #B0BEC5; font-size: 0.9rem; margin-bottom: 1.5rem; text-align: center;">Enter your email to receive a password reset link</p>
+            <form id="reset-password-form-element">
+                <input type="email" id="reset-email" placeholder="Email" required style="width: 100%; padding: 12px; margin-bottom: 1.5rem; border-radius: 8px; border: 1px solid #00E5FF; background: rgba(0, 0, 0, 0.3); color: white;" />
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">Send Reset Link</button>
+                    <button type="button" id="btn-hide-reset" class="btn btn-secondary" style="flex: 1;">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Modal Overlay -->
+        <div id="auth-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 9999;"></div>
+    </nav>
+
+    <!-- Hamburger Menu -->
+    <div id="hamburger-overlay" class="hamburger-overlay"></div>
+    <div id="hamburger-menu" class="hamburger-menu">
+        <button id="hamburger-close" class="hamburger-close">✕</button>
+        <ul class="hamburger-menu-list">
+            <li><a href="frameworks.html" class="hamburger-link">Frameworks</a></li>
+            <li><a href="tools.html" class="hamburger-link">Tools</a></li>
+             <li><a href="services.html" class="hamburger-link">Services</a></li>
+            <li><a href="privacy-policy.html" class="hamburger-link">Privacy Policy</a></li>
+            <li><a href="terms-&-condition.html" class="hamburger-link">Terms & Condition</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="cyber-grid"></div>
+        <div class="hero-content">
+            <h1> Learning & Awareness</h1>
+            <p>Build your cybersecurity knowledge from the ground up. From basics to advanced concepts, learn how to protect yourself online.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Cyber Hygiene Checklist -->
+        <section class="section">
+            <h2> Personal Cyber Hygiene Checklist</h2>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">
+                Use this checklist to ensure you're following best practices for personal digital security. Check each item as you implement it.
+            </p>
+
+            <div class="checklist">
+                <div class="checklist-item">
+                    <input type="checkbox" id="check1">
+                    <label for="check1"><strong>Strong Passwords:</strong> Using 12+ characters with mix of uppercase, lowercase, numbers, and symbols</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check2">
+                    <label for="check2"><strong>Password Manager:</strong> Using a password manager to store and generate strong passwords</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check3">
+                    <label for="check3"><strong>Multi-Factor Authentication (MFA):</strong> Enabled MFA on all important accounts</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check4">
+                    <label for="check4"><strong>Software Updates:</strong> Keeping all devices and applications up to date</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check5">
+                    <label for="check5"><strong>Antivirus Software:</strong> Running reputable antivirus and anti-malware tools</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check6">
+                    <label for="check6"><strong>Firewall:</strong> Enabled firewall on all devices</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check7">
+                    <label for="check7"><strong>Backups:</strong> Regular backups of important data to secure locations</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check8">
+                    <label for="check8"><strong>Phishing Awareness:</strong> Can identify suspicious emails and phishing attempts</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check9">
+                    <label for="check9"><strong>Public WiFi Safety:</strong> Using VPN on public WiFi networks</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check10">
+                    <label for="check10"><strong>Social Media Privacy:</strong> Configured privacy settings on social media accounts</label>
+                </div>
+            </div>
+
+            <!-- Certificate Button -->
+            <div id="certificateSection" style="display: none; margin-top: 2rem;">
+                <div class="contribution-box">
+                    <h3> Congratulations! You've completed the Cyber Hygiene Checklist</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                        You've demonstrated commitment to cybersecurity best practices. Generate your certificate to showcase your knowledge.
+                    </p>
+                    <button id="generateCertificate" class="btn btn-primary" style="margin-top: 1rem;"> Generate Certificate</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phishing Detective Lab -->
+        <section class="section">
+            <h2> Phishing Detective Lab</h2>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">
+                Test your phishing detection skills with interactive email scenarios. Identify safe vs. suspicious emails to earn your detective badge!
+            </p>
+
+            <div class="phishing-lab">
+                <div class="phishing-header">
+                    <div class="phishing-score">
+                        <span id="scoreDisplay">Score: 0/5</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="scoreBar" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    <button id="startPhishingLab" class="btn btn-primary">Start Investigation</button>
+                </div>
+
+                <div id="phishingGame" class="phishing-game" style="display: none;">
+                    <div class="phishing-email">
+                        <div class="email-header">
+                            <h4 id="emailSubject">Loading email...</h4>
+                            <div class="email-meta">
+                                <span id="emailSender">From: ...</span>
+                                <span id="emailTime">Time: ...</span>
+                            </div>
+                        </div>
+                        <div class="email-body" id="emailBody">
+                            <p>Loading content...</p>
+                        </div>
+                    </div>
+
+                    <div class="phishing-actions">
+                        <button id="safeButton" class="btn btn-secondary"> Mark as Safe</button>
+                        <button id="phishingButton" class="btn btn-primary" style="background: linear-gradient(135deg, #FF6B00, #FF4500);"> Report as Phishing</button>
+                    </div>
+
+                    <div id="feedback" class="phishing-feedback" style="display: none;">
+                        <h4 id="feedbackTitle"></h4>
+                        <p id="feedbackText"></p>
+                        <button id="nextEmail" class="btn btn-primary">Next Email</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Virtual Cyber Range -->
+        <section class="section" style="background: linear-gradient(135deg, rgba(0, 229, 255, 0.1), rgba(164, 0, 255, 0.1)); border: 2px solid var(--cyan); border-radius: 20px; padding: 3rem;">
+            <h2 style="text-align: center; margin-bottom: 1rem;"> Virtual Cyber Range - Hands-On Practice</h2>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 3rem;">
+                Practice real-world attack and defense scenarios in a safe, simulated environment. Learn API security, IoT vulnerabilities, and network defense.
+            </p>
+
+            <!-- Progress Tracker -->
+            <div style="background: rgba(26, 39, 68, 0.6); border: 2px solid var(--purple); border-radius: 15px; padding: 2rem; margin-bottom: 2rem;">
+                <h3 style="color: var(--purple); margin-bottom: 1rem;"> Your Learning Progress</h3>
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                    <div style="flex: 1;">
+                        <div style="background: rgba(26, 39, 68, 0.8); border-radius: 10px; height: 30px; overflow: hidden; border: 2px solid var(--cyan);">
+                            <div id="overallProgress" style="height: 100%; background: linear-gradient(90deg, var(--cyan), var(--purple)); transition: width 0.5s ease; display: flex; align-items: center; justify-content: flex-end; padding-right: 0.5rem; color: white; font-weight: bold; width: 0%;"></div>
+                        </div>
+                    </div>
+                    <div style="color: var(--text-light); font-weight: bold; min-width: 80px; text-align: right;">
+                        <span id="completedLabs">0</span>/<span id="totalLabs">6</span> Labs
+                    </div>
+                </div>
+                <button class="btn btn-secondary" onclick="resetProgress()" style="font-size: 0.9rem; padding: 0.5rem 1rem;"> Reset Progress</button>
+            </div>
+
+            <!-- Lab Scenarios Grid -->
+            <div class="cards-grid">
+                <!-- API Security Lab -->
+                <div class="card lab-card" data-lab-id="api-security">
+                    <div class="lab-status" style="display: inline-block; padding: 0.3rem 0.8rem; border-radius: 20px; background: rgba(255, 193, 0, 0.2); color: #FFC100; font-size: 0.85rem; font-weight: bold; margin-bottom: 1rem;">
+                        <span class="status-text"> Locked</span>
+                    </div>
+                    <h3>API Security Exploitation</h3>
+                    <p>Learn to identify and exploit common API vulnerabilities: broken authentication, excessive data exposure, lack of rate limiting, and injection attacks.</p>
+                    <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(0, 229, 255, 0.05); border-left: 3px solid var(--cyan); border-radius: 5px;">
+                        <strong style="color: var(--cyan);">Learning Objectives:</strong>
+                        <ul style="color: var(--text-muted); margin-top: 0.5rem; font-size: 0.9rem;">
+                            <li>Identify OWASP API Security Top 10 risks</li>
+                            <li>Test authentication and authorization flaws</li>
+                            <li>Exploit rate limiting vulnerabilities</li>
+                            <li>Understand API security best practices</li>
+                        </ul>
+                    </div>
+                    <button class="btn btn-primary lab-start-btn" onclick="startLab('api-security')" style="width: 100%;"> Start Lab</button>
+                </div>
+
+                <!-- IoT Device Hacking -->
+                <div class="card lab-card" data-lab-id="iot-hacking">
+                    <div class="lab-status" style="display: inline-block; padding: 0.3rem 0.8rem; border-radius: 20px; background: rgba(255, 193, 0, 0.2); color: #FFC100; font-size: 0.85rem; font-weight: bold; margin-bottom: 1rem;">
+                        <span class="status-text"> Locked</span>
+                    </div>
+                    <h3>IoT Device Exploitation</h3>
+                    <p>Discover IoT vulnerabilities: insecure firmware, default credentials, unencrypted communications, and lack of physical security.</p>
+                    <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(0, 229, 255, 0.05); border-left: 3px solid var(--cyan); border-radius: 5px;">
+                        <strong style="color: var(--cyan);">Learning Objectives:</strong>
+                        <ul style="color: var(--text-muted); margin-top: 0.5rem; font-size: 0.9rem;">
+                            <li>Analyze IoT device communications</li>
+                            <li>Extract and analyze firmware</li>
+                            <li>Exploit weak authentication</li>
+                            <li>Secure IoT deployments</li>
+                        </ul>
+                    </div>
+                    <button class="btn btn-primary lab-start-btn" onclick="startLab('iot-hacking')" style="width: 100%;"> Start Lab</button>
+                </div>
+
+                <!-- Network Defense -->
+                <div class="card lab-card" data-lab-id="network-defense">
+                    <div class="lab-status" style="display: inline-block; padding: 0.3rem 0.8rem; border-radius: 20px; background: rgba(255, 193, 0, 0.2); color: #FFC100; font-size: 0.85rem; font-weight: bold; margin-bottom: 1rem;">
+                        <span class="status-text"> Locked</span>
+                    </div>
+                    <h3> Network Defense Simulation</h3>
+                    <p>Practice detecting and responding to network attacks: port scanning, DDoS attacks, man-in-the-middle, and lateral movement.</p>
+                    <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(0, 229, 255, 0.05); border-left: 3px solid var(--cyan); border-radius: 5px;">
+                        <strong style="color: var(--cyan);">Learning Objectives:</strong>
+                        <ul style="color: var(--text-muted); margin-top: 0.5rem; font-size: 0.9rem;">
+                            <li>Analyze network traffic patterns</li>
+                            <li>Configure firewall rules</li>
+                            <li>Detect intrusion attempts</li>
+                            <li>Implement network segmentation</li>
+                        </ul>
+                    </div>
+                    <button class="btn btn-primary lab-start-btn" onclick="startLab('network-defense')" style="width: 100%;"> Start Lab</button>
+                </div>
+
+                <!-- Cloud Security -->
+                <div class="card lab-card" data-lab-id="cloud-security">
+                    <div class="lab-status" style="display: inline-block; padding: 0.3rem 0.8rem; border-radius: 20px; background: rgba(255, 193, 0, 0.2); color: #FFC100; font-size: 0.85rem; font-weight: bold; margin-bottom: 1rem;">
+                        <span class="status-text"> Locked</span>
+                    </div>
+                    <h3> Cloud Misconfiguration Hunt</h3>
+                    <p>Identify and exploit cloud misconfigurations: open S3 buckets, overly permissive IAM policies, exposed secrets, and insecure APIs.</p>
+                    <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(0, 229, 255, 0.05); border-left: 3px solid var(--cyan); border-radius: 5px;">
+                        <strong style="color: var(--cyan);">Learning Objectives:</strong>
+                        <ul style="color: var(--text-muted); margin-top: 0.5rem; font-size: 0.9rem;">
+                            <li>Audit cloud resource configurations</li>
+                            <li>Identify IAM privilege escalation</li>
+                            <li>Secure storage and databases</li>
+                            <li>Implement least privilege access</li>
+                        </ul>
+                    </div>
+                    <button class="btn btn-primary lab-start-btn" onclick="startLab('cloud-security')" style="width: 100%;"> Start Lab</button>
+                </div>
+
+                <!-- Web Application Pentesting -->
+                <div class="card lab-card" data-lab-id="web-pentest">
+                    <div class="lab-status" style="display: inline-block; padding: 0.3rem 0.8rem; border-radius: 20px; background: rgba(255, 193, 0, 0.2); color: #FFC100; font-size: 0.85rem; font-weight: bold; margin-bottom: 1rem;">
+                        <span class="status-text"> Locked</span>
+                    </div>
+                    <h3> Web App Penetration Testing</h3>
+                    <p>Master OWASP Top 10 vulnerabilities: SQL injection, XSS, CSRF, insecure deserialization, and broken access control.</p>
+                    <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(0, 229, 255, 0.05); border-left: 3px solid var(--cyan); border-radius: 5px;">
+                        <strong style="color: var(--cyan);">Learning Objectives:</strong>
+                        <ul style="color: var(--text-muted); margin-top: 0.5rem; font-size: 0.9rem;">
+                            <li>Exploit SQL injection vulnerabilities</li>
+                            <li>Execute cross-site scripting attacks</li>
+                            <li>Bypass authentication mechanisms</li>
+                            <li>Understand remediation techniques</li>
+                        </ul>
+                    </div>
+                    <button class="btn btn-primary lab-start-btn" onclick="startLab('web-pentest')" style="width: 100%;"> Start Lab</button>
+                </div>
+
+                <!-- Incident Response -->
+                <div class="card lab-card" data-lab-id="incident-response">
+                    <div class="lab-status" style="display: inline-block; padding: 0.3rem 0.8rem; border-radius: 20px; background: rgba(255, 193, 0, 0.2); color: #FFC100; font-size: 0.85rem; font-weight: bold; margin-bottom: 1rem;">
+                        <span class="status-text"> Locked</span>
+                    </div>
+                    <h3> Incident Response Drill</h3>
+                    <p>Respond to a live ransomware attack: contain the threat, preserve evidence, analyze logs, and recover systems.</p>
+                    <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(0, 229, 255, 0.05); border-left: 3px solid var(--cyan); border-radius: 5px;">
+                        <strong style="color: var(--cyan);">Learning Objectives:</strong>
+                        <ul style="color: var(--text-muted); margin-top: 0.5rem; font-size: 0.9rem;">
+                            <li>Follow IR framework (NIST/SANS)</li>
+                            <li>Contain and eradicate threats</li>
+                            <li>Preserve digital evidence</li>
+                            <li>Document incident timeline</li>
+                        </ul>
+                    </div>
+                    <button class="btn btn-primary lab-start-btn" onclick="startLab('incident-response')" style="width: 100%;"> Start Lab</button>
+                </div>
+            </div>
+
+            <!-- Lab Modal -->
+            <div id="labModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); z-index: 10000; overflow-y: auto;">
+                <div style="max-width: 1200px; margin: 2rem auto; background: rgba(26, 39, 68, 0.98); border: 3px solid var(--cyan); border-radius: 20px; padding: 3rem; position: relative;">
+                    <button onclick="closeLab()" style="position: absolute; top: 1rem; right: 1rem; background: rgba(255, 107, 0, 0.2); border: 2px solid #FF6B00; color: #FF6B00; padding: 0.5rem 1rem; border-radius: 10px; cursor: pointer; font-size: 1.2rem; font-weight: bold;">✕ Close</button>
+                    
+                    <h2 id="labTitle" style="color: var(--cyan); margin-bottom: 1rem;"></h2>
+                    <p id="labDescription" style="color: var(--text-muted); margin-bottom: 2rem;"></p>
+
+                    <!-- Lab Content Container -->
+                    <div id="labContent"></div>
+
+                    <!-- Lab Actions -->
+                    <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center;">
+                        <button id="labCompleteBtn" class="btn btn-primary" onclick="completeLab()" style="padding: 1rem 2rem;"> Complete Lab</button>
+                        <button class="btn btn-secondary" onclick="closeLab()" style="padding: 1rem 2rem;">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Beginner Tutorials -->
+        <section class="section">
+            <h2> Beginner-Friendly Tutorials</h2>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <h3> Creating Strong Passwords</h3>
+                    <p>
+                        A strong password is your first line of defense. Learn how to create passwords that are hard to crack but easy to remember with <span class="highlight">passphrase techniques</span>.
+                    </p>
+                    <div class="prevention-tips">
+                        <h4>✓ Password Best Practices:</h4>
+                        <ul>
+                            <li>At least 12 characters long</li>
+                            <li>Mix of uppercase and lowercase</li>
+                            <li>Include numbers and special characters</li>
+                            <li>Avoid personal information</li>
+                            <li>Use unique passwords for each account</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3> Two-Factor Authentication (2FA)</h3>
+                    <p>
+                        2FA adds an extra layer of security by requiring a second verification method beyond just your password. Even if someone has your password, they can't access your account without the second factor.
+                    </p>
+                    <div class="prevention-tips">
+                        <h4>✓ Types of 2FA:</h4>
+                        <ul>
+                            <li>SMS/Text Message codes</li>
+                            <li>Authenticator apps (Google Auth, Authy)</li>
+                            <li>Security keys (hardware tokens)</li>
+                            <li>Biometric verification</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3> Recognizing Phishing Emails</h3>
+                    <p>
+                        Phishing emails are designed to look legitimate but contain malicious links or requests. Learn the telltale signs to stay safe.
+                    </p>
+                    <div class="prevention-tips">
+                        <h4>✓ Red Flags:</h4>
+                        <ul>
+                            <li>Suspicious sender email address</li>
+                            <li>Urgent or threatening language</li>
+                            <li>Requests for personal information</li>
+                            <li>Unusual links or attachments</li>
+                            <li>Poor grammar and spelling</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3> Public WiFi Safety</h3>
+                    <p>
+                        Public WiFi networks are convenient but risky. Attackers can intercept unencrypted traffic. Learn how to stay safe when using public internet.
+                    </p>
+                    <div class="prevention-tips">
+                        <h4>✓ Safety Tips:</h4>
+                        <ul>
+                            <li>Always use a VPN</li>
+                            <li>Avoid banking/sensitive tasks</li>
+                            <li>Disable file sharing</li>
+                            <li>Use HTTPS websites only</li>
+                            <li>Turn off auto-connect features</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3> Checking Account Security</h3>
+                    <p>
+                        Regularly audit your online accounts to ensure they're secure. Learn how to check if your accounts have been compromised.
+                    </p>
+                    <div class="prevention-tips">
+                        <h4>✓ Action Items:</h4>
+                        <ul>
+                            <li>Review login activity/history</li>
+                            <li>Check connected apps/devices</li>
+                            <li>Use "Have I Been Pwned" to check breaches</li>
+                            <li>Update account recovery info</li>
+                            <li>Remove unknown devices</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3> Data Backup Strategies</h3>
+                    <p>
+                        Regular backups protect you against ransomware and data loss. Learn the 3-2-1 backup strategy recommended by security experts.
+                    </p>
+                    <div class="prevention-tips">
+                        <h4>✓ 3-2-1 Backup Rule:</h4>
+                        <ul>
+                            <li>3 copies of your data</li>
+                            <li>2 different storage media</li>
+                            <li>1 copy offsite/cloud</li>
+                            <li>Test backups regularly</li>
+                            <li>Keep backups disconnected</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Secure Coding Practices -->
+        <section class="section">
+            <h2> Secure Coding Best Practices</h2>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <h3> Input Validation</h3>
+                    <p>
+                        Always validate and sanitize user input. Never trust data coming from users, APIs, or external sources. Implement strict validation rules.
+                    </p>
+                    <div class="prevention-tips">
+                        <h4>✓ Implementation Tips:</h4>
+                        <ul>
+                            <li>Whitelist allowed characters</li>
+                            <li>Check data types and lengths</li>
+                            <li>Use parameterized queries</li>
+                            <li>Escape special characters</li>
+                            <li>Log validation failures</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3> Authentication & Authorization</h3>
+                    <p>
+                        Implement proper authentication mechanisms and enforce principle of least privilege. Users should only have access to what they need.
+                    </p>
+                    <div class="prevention-tips">
+                        <h4>✓ Best Practices:</h4>
+                        <ul>
+                            <li>Use established authentication libraries</li>
+                            <li>Never hardcode credentials</li>
+                            <li>Implement role-based access control</li>
+                            <li>Session management best practices</li>
+                            <li>Token expiration and refresh</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3> Data Protection</h3>
+                    <p>
+                        Encrypt sensitive data both in transit and at rest. Use strong encryption algorithms and secure key management practices.
+                    </p>
+                    <div class="prevention-tips">
+                        <h4>✓ Key Practices:</h4>
+                        <ul>
+                            <li>Use HTTPS/TLS for transit</li>
+                            <li>Encrypt data at rest (AES-256)</li>
+                            <li>Secure key storage</li>
+                            <li>Separate keys from data</li>
+                            <li>Regular key rotation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3> Error Handling</h3>
+                    <p>
+                        Implement proper error handling without revealing sensitive information. Generic error messages prevent information disclosure attacks.
+                    </p>
+                    <div class="prevention-tips">
+                        <h4>✓ Principles:</h4>
+                        <ul>
+                            <li>Show generic error messages to users</li>
+                            <li>Log detailed errors for debugging</li>
+                            <li>Don't expose stack traces</li>
+                            <li>Handle exceptions properly</li>
+                            <li>Fail securely by default</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3> Code Review & Testing</h3>
+                    <p>
+                        Security should be built into your development process. Regular code reviews and security testing catch vulnerabilities early.
+                    </p>
+                    <div class="prevention-tips">
+                        <h4>✓ Testing Approach:</h4>
+                        <ul>
+                            <li>Peer code reviews</li>
+                            <li>Static analysis tools (SAST)</li>
+                            <li>Dynamic analysis (DAST)</li>
+                            <li>Unit tests for security</li>
+                            <li>Regular penetration testing</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3> Dependencies Management</h3>
+                    <p>
+                        Keep track of your dependencies and update them regularly. Vulnerable third-party libraries are a common attack vector.
+                    </p>
+                    <div class="prevention-tips">
+                        <h4>✓ Dependency Security:</h4>
+                        <ul>
+                            <li>Use package manager locks</li>
+                            <li>Regular dependency updates</li>
+                            <li>Scan for vulnerabilities</li>
+                            <li>Review external code</li>
+                            <li>Minimize dependencies</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Network Security -->
+        <section class="section">
+            <h2> Network Security Basics</h2>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <h3> Firewalls Explained</h3>
+                    <p>
+                        Firewalls monitor and control network traffic based on security rules. They form a barrier between trusted internal networks and untrusted external networks.
+                    </p>
+                    <div class="prevention-tips">
+                        <h4>✓ Types:</h4>
+                        <ul>
+                            <li>Stateful firewalls</li>
+                            <li>Stateless firewalls</li>
+                            <li>Application firewalls (WAF)</li>
+                            <li>Next-gen firewalls</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3> VPN (Virtual Private Network)</h3>
+                    <p>
+                        VPNs create encrypted tunnels for your internet traffic, protecting it from eavesdropping and masking your IP address on public networks.
+                    </p>
+                    <div class="prevention-tips">
+                        <h4>✓ Key Benefits:</h4>
+                        <ul>
+                            <li>Encrypts all traffic</li>
+                            <li>Masks real IP address</li>
+                            <li>Safe on public WiFi</li>
+                            <li>Access resources remotely</li>
+                            <li>Choose reputable providers</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3> SSL/TLS Certificates</h3>
+                    <p>
+                        SSL/TLS encrypts data between your browser and websites. Look for HTTPS and the padlock icon to ensure secure connections.
+                    </p>
+                    <div class="prevention-tips">
+                        <h4>✓ Key Points:</h4>
+                        <ul>
+                            <li>HTTPS encrypts data</li>
+                            <li>Check SSL certificate validity</li>
+                            <li>Verify domain names</li>
+                            <li>Beware of self-signed certs</li>
+                            <li>TLS 1.2+ is recommended</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3> Network Segmentation</h3>
+                    <p>
+                        Dividing networks into segments limits the spread of breaches. If one segment is compromised, others remain protected.
+                    </p>
+                    <div class="prevention-tips">
+                        <h4>✓ Segmentation:</h4>
+                        <ul>
+                            <li>Separate critical systems</li>
+                            <li>Guest network isolation</li>
+                            <li>VLAN implementation</li>
+                            <li>Access control lists</li>
+                            <li>Monitor inter-segment traffic</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3> Intrusion Detection Systems</h3>
+                    <p>
+                        IDS monitors network traffic for suspicious patterns and alerts administrators to potential attacks.
+                    </p>
+                    <div class="prevention-tips">
+                        <h4>✓ Detection Methods:</h4>
+                        <ul>
+                            <li>Signature-based detection</li>
+                            <li>Anomaly-based detection</li>
+                            <li>Behavioral analysis</li>
+                            <li>Real-time monitoring</li>
+                            <li>Alert and response</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3> DNS Security</h3>
+                    <p>
+                        DNS (Domain Name System) translates URLs to IP addresses. Protect it to prevent redirects to malicious sites and data exfiltration.
+                    </p>
+                    <div class="prevention-tips">
+                        <h4>✓ DNS Security:</h4>
+                        <ul>
+                            <li>Use reputable DNS providers</li>
+                            <li>DNSSEC validation</li>
+                            <li>DNS filtering for malware</li>
+                            <li>Monitor DNS queries</li>
+                            <li>Private DNS on mobile</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Encryption Basics -->
+        <section class="section">
+            <h2> Encryption Fundamentals</h2>
+
+            <div class="card">
+                <h3>Symmetric vs Asymmetric Encryption</h3>
+                <p style="margin: 1rem 0;"><strong>Symmetric Encryption:</strong> Uses one key for both encryption and decryption. Fast but requires secure key sharing.</p>
+                <p style="margin: 1rem 0;"><strong>Asymmetric Encryption:</strong> Uses public and private keys. Public key encrypts, private key decrypts. Enables secure key exchange and digital signatures.</p>
+                <p style="margin: 1rem 0;"><strong>In Practice:</strong> Often combined - asymmetric encryption secures key exchange, then symmetric encryption for data.</p>
+            </div>
+
+            <div class="cards-grid" style="margin-top: 2rem;">
+                <div class="card">
+                    <h3> AES Encryption</h3>
+                    <p>
+                        Advanced Encryption Standard is widely used for securing data at rest. AES-256 is considered secure against brute force attacks for many years.
+                    </p>
+                    <div class="prevention-tips">
+                        <h4>✓ Details:</h4>
+                        <ul>
+                            <li>Symmetric encryption standard</li>
+                            <li>Block size: 128 bits</li>
+                            <li>Key sizes: 128, 192, or 256 bits</li>
+                            <li>AES-256 recommended</li>
+                            <li>NIST standard since 2001</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3> RSA Encryption</h3>
+                    <p>
+                        RSA is the most common asymmetric algorithm used for key exchange and digital signatures in SSL/TLS and many other applications.
+                    </p>
+                    <div class="prevention-tips">
+                        <h4>✓ Details:</h4>
+                        <ul>
+                            <li>Asymmetric encryption</li>
+                            <li>Based on large primes</li>
+                            <li>2048+ bits recommended</li>
+                            <li>Enables digital signatures</li>
+                            <li>Key exchange protocol</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3> Hashing & Integrity</h3>
+                    <p>
+                        Hashing creates unique fingerprints of data. It's one-way (can't reverse) and used to verify data hasn't been modified.
+                    </p>
+                    <div class="prevention-tips">
+                        <h4> Common Hashes:</h4>
+                        <ul>
+                            <li>MD5 (deprecated)</li>
+                            <li>SHA-1 (deprecated)</li>
+                            <li>SHA-256 (recommended)</li>
+                            <li>SHA-3 (latest)</li>
+                            <li>Bcrypt for passwords</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cybersecurity Career Roadmap -->
+        <section class="section">
+            <h2> Cybersecurity Career Roadmap</h2>
+            <p style="color: var(--text-muted); margin-bottom: 3rem; text-align: center;">
+                Your journey to becoming a cybersecurity professional. Follow this structured path from beginner to expert.
+            </p>
+
+            <div class="career-roadmap">
+                <div class="timeline">
+                    <div class="timeline-line"></div>
+                    
+                    <!-- Phase 1: Prerequisites -->
+                    <div class="milestone milestone-left" data-phase="1">
+                        <div class="milestone-dot">1</div>
+                        <div class="milestone-card">
+                            <div class="milestone-header">
+                                <h3> Phase 1: Prerequisites</h3>
+                                <span class="milestone-duration">2-3 months</span>
+                            </div>
+                            <div class="milestone-content">
+                                <p>Build your foundational knowledge in computing and networking before diving into security.</p>
+                                <div class="milestone-skills">
+                                    <h4>Key Topics:</h4>
+                                    <ul>
+                                        <li><strong>Networking Basics:</strong> TCP/IP, OSI Model, Subnetting</li>
+                                        <li><strong>Linux/OS Fundamentals:</strong> Command line, file systems, processes</li>
+                                        <li><strong>HTTP/HTTPS:</strong> Web protocols, status codes, headers</li>
+                                        <li><strong>Basic Programming:</strong> Logic, algorithms, problem solving</li>
+                                    </ul>
+                                </div>
+                                <div class="milestone-resources">
+                                    <span class="resource-tag">CompTIA A+</span>
+                                    <span class="resource-tag">Network+</span>
+                                    <span class="resource-tag">Linux Academy</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Phase 2: Programming -->
+                    <div class="milestone milestone-right" data-phase="2">
+                        <div class="milestone-dot">2</div>
+                        <div class="milestone-card">
+                            <div class="milestone-header">
+                                <h3> Phase 2: Programming Skills</h3>
+                                <span class="milestone-duration">3-4 months</span>
+                            </div>
+                            <div class="milestone-content">
+                                <p>Develop programming skills essential for security automation, scripting, and understanding vulnerabilities.</p>
+                                <div class="milestone-skills">
+                                    <h4>Key Languages:</h4>
+                                    <ul>
+                                        <li><strong>Python:</strong> Security tools, automation, analysis</li>
+                                        <li><strong>Bash Scripting:</strong> Linux automation, log analysis</li>
+                                        <li><strong>JavaScript:</strong> Web application security testing</li>
+                                        <li><strong>SQL:</strong> Database queries, injection testing</li>
+                                    </ul>
+                                </div>
+                                <div class="milestone-resources">
+                                    <span class="resource-tag">Python.org</span>
+                                    <span class="resource-tag">HackerRank</span>
+                                    <span class="resource-tag">Codecademy</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Phase 3: Security Fundamentals -->
+                    <div class="milestone milestone-left" data-phase="3">
+                        <div class="milestone-dot">3</div>
+                        <div class="milestone-card">
+                            <div class="milestone-header">
+                                <h3> Phase 3: Security Fundamentals</h3>
+                                <span class="milestone-duration">4-6 months</span>
+                            </div>
+                            <div class="milestone-content">
+                                <p>Master the core principles of information security and common vulnerability types.</p>
+                                <div class="milestone-skills">
+                                    <h4>Core Concepts:</h4>
+                                    <ul>
+                                        <li><strong>CIA Triad:</strong> Confidentiality, Integrity, Availability</li>
+                                        <li><strong>OWASP Top 10:</strong> Web application vulnerabilities</li>
+                                        <li><strong>Cryptography:</strong> Encryption, hashing, digital signatures</li>
+                                        <li><strong>Risk Management:</strong> Assessment, mitigation, frameworks</li>
+                                    </ul>
+                                </div>
+                                <div class="milestone-resources">
+                                    <span class="resource-tag">OWASP</span>
+                                    <span class="resource-tag">NIST Framework</span>
+                                    <span class="resource-tag">Security+</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Phase 4: Tools of the Trade -->
+                    <div class="milestone milestone-right" data-phase="4">
+                        <div class="milestone-dot">4</div>
+                        <div class="milestone-card">
+                            <div class="milestone-header">
+                                <h3> Phase 4: Security Tools</h3>
+                                <span class="milestone-duration">3-5 months</span>
+                            </div>
+                            <div class="milestone-content">
+                                <p>Learn to use industry-standard security tools for vulnerability assessment and penetration testing.</p>
+                                <div class="milestone-skills">
+                                    <h4>Essential Tools:</h4>
+                                    <ul>
+                                        <li><strong>Burp Suite:</strong> Web application security testing</li>
+                                        <li><strong>Wireshark:</strong> Network traffic analysis</li>
+                                        <li><strong>Metasploit:</strong> Exploitation framework</li>
+                                        <li><strong>Nmap:</strong> Network discovery and port scanning</li>
+                                    </ul>
+                                </div>
+                                <div class="milestone-resources">
+                                    <span class="resource-tag">Kali Linux</span>
+                                    <span class="resource-tag">TryHackMe</span>
+                                    <span class="resource-tag">HackTheBox</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Phase 5: Certifications -->
+                    <div class="milestone milestone-left" data-phase="5">
+                        <div class="milestone-dot">5</div>
+                        <div class="milestone-card">
+                            <div class="milestone-header">
+                                <h3> Phase 5: Professional Certifications</h3>
+                                <span class="milestone-duration">6-12 months</span>
+                            </div>
+                            <div class="milestone-content">
+                                <p>Validate your skills with industry-recognized certifications that open doors to career opportunities.</p>
+                                <div class="milestone-skills">
+                                    <h4>Certification Path:</h4>
+                                    <ul>
+                                        <li><strong>CompTIA Security+:</strong> Entry-level security concepts</li>
+                                        <li><strong>CEH (Certified Ethical Hacker):</strong> Ethical hacking fundamentals</li>
+                                        <li><strong>OSCP:</strong> Hands-on penetration testing skills</li>
+                                        <li><strong>CISSP:</strong> Advanced security management (5+ years exp.)</li>
+                                    </ul>
+                                </div>
+                                <div class="milestone-resources">
+                                    <span class="resource-tag">CompTIA</span>
+                                    <span class="resource-tag">EC-Council</span>
+                                    <span class="resource-tag">Offensive Security</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Phase 6: Specialization -->
+                    <div class="milestone milestone-right" data-phase="6">
+                        <div class="milestone-dot">6</div>
+                        <div class="milestone-card">
+                            <div class="milestone-header">
+                                <h3> Phase 6: Choose Your Specialization</h3>
+                                <span class="milestone-duration">Ongoing</span>
+                            </div>
+                            <div class="milestone-content">
+                                <p>Specialize in a specific area of cybersecurity based on your interests and career goals.</p>
+                                <div class="specialization-paths">
+                                    <div class="path-option red-team">
+                                        <h4>🔴 Red Team / Penetration Testing</h4>
+                                        <ul>
+                                            <li>Offensive security tactics</li>
+                                            <li>Advanced exploitation techniques</li>
+                                            <li>Social engineering assessments</li>
+                                            <li>Red team operations</li>
+                                        </ul>
+                                        <div class="path-certs">
+                                            <span class="cert-tag">OSCP</span>
+                                            <span class="cert-tag">OSEP</span>
+                                            <span class="cert-tag">CRTP</span>
+                                        </div>
+                                    </div>
+                                    <div class="path-option blue-team">
+                                        <h4>🔵 Blue Team / SOC Analyst</h4>
+                                        background-color: rgba(0, 229, 255, 0.05); border-left: 4px solid var(--cyan); padding: 1rem; border-radius: 10px;">
+                                        <ul>
+                                            <li>Threat detection and analysis</li>
+                                            <li>Incident response procedures</li>
+                                            <li>SIEM management</li>
+                                            <li>Forensics and malware analysis</li>
+                                        </ul>
+                                        <div class="path-certs">
+                                            <span class="cert-tag">GCIH</span>
+                                            <span class="cert-tag">CySA+</span>
+                                            <span class="cert-tag">BTLO</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="milestone-resources">
+                                    <span class="resource-tag">SANS Training</span>
+                                    <span class="resource-tag">Blue Team Labs</span>
+                                    <span class="resource-tag">Cybrary</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2025 Security Risk Calculator Quiz -->
+        <section class="section">
+            <div style="max-width: 900px; margin: 0 auto;">
+                <h2 style="text-align: center; margin-bottom: 1rem;"> 2025 Security Risk Assessment</h2>
+                <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">
+                    Take our interactive quiz to assess your organization's security posture against 2025 threat landscape (ransomware, supply chain attacks, AI threats, and more).
+                </p>
+                
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <button id="startRiskQuiz" class="btn btn-primary" style="padding: 1rem 2.5rem; font-size: 1.1rem;">
+                         Start Risk Assessment (2 min)
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Risk Calculator Modal -->
+        <div id="riskCalculatorModal" class="exit-intent-modal" style="display: none;">
+            <div class="exit-intent-content" style="max-width: 600px;">
+                <button id="closeRiskCalculator" class="exit-intent-close">✕</button>
+                <h2 style="color: var(--cyan); text-align: center; margin-bottom: 2rem;">Security Risk Assessment Quiz</h2>
+                
+                <form id="riskQuizForm" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    <!-- Q1: Multi-Factor Authentication -->
+                    <div style="background: rgba(0, 229, 255, 0.05); border-left: 4px solid var(--cyan); padding: 1.5rem; border-radius: 10px;">
+                        <label style="color: var(--text-light); font-weight: 600; display: block; margin-bottom: 1rem;">1. Do you enforce Multi-Factor Authentication (MFA)?</label>
+                        <select name="mfa" required style="width: 100%; padding: 0.75rem; background: rgba(0, 229, 255, 0.05); border: 1px solid var(--cyan); border-radius: 8px; color: var(--text-light);">
+                            <option value="" style="background: var(--primary-dark);">Select...</option>
+                            <option value="yes" style="background: var(--primary-dark);">Yes, for all users</option>
+                            <option value="partial" style="background: var(--primary-dark);">Partial, for critical accounts</option>
+                            <option value="no" style="background: var(--primary-dark);">No, not implemented</option>
+                        </select>
+                    </div>
+
+                    <!-- Q2: Patch Management -->
+                    <div style="background: rgba(164, 0, 255, 0.05); border-left: 4px solid var(--purple); padding: 1.5rem; border-radius: 10px;">
+                        <label style="color: var(--text-light); font-weight: 600; display: block; margin-bottom: 1rem;">2. How frequently do you patch systems?</label>
+                        <select name="updates" required style="width: 100%; padding: 0.75rem; background: rgba(164, 0, 255, 0.05); border: 1px solid var(--purple); border-radius: 8px; color: var(--text-light);">
+                            <option value="" style="background: var(--primary-dark);">Select...</option>
+                            <option value="monthly" style="background: var(--primary-dark);">Monthly or more frequent</option>
+                            <option value="sometimes" style="background: var(--primary-dark);">Quarterly</option>
+                            <option value="rarely" style="background: var(--primary-dark);">Rarely or ad-hoc</option>
+                        </select>
+                    </div>
+
+                    <!-- Q3: Backups -->
+                    <div style="background: rgba(0, 255, 136, 0.05); border-left: 4px solid var(--green); padding: 1.5rem; border-radius: 10px;">
+                        <label style="color: var(--text-light); font-weight: 600; display: block; margin-bottom: 1rem;">3. What is your backup strategy?</label>
+                        <select name="backup" required style="width: 100%; padding: 0.75rem; background: rgba(0, 255, 136, 0.05); border: 1px solid var(--green); border-radius: 8px; color: var(--text-light);">
+                            <option value="" style="background: var(--primary-dark);">Select...</option>
+                            <option value="automated" style="background: var(--primary-dark);">Automated, tested regularly</option>
+                            <option value="partial" style="background: var(--primary-dark);">Manual or inconsistent</option>
+                            <option value="no" style="background: var(--primary-dark);">No formal backup plan</option>
+                        </select>
+                    </div>
+
+                    <!-- Q4: Security Training -->
+                    <div style="background: rgba(255, 107, 0, 0.05); border-left: 4px solid var(--warning); padding: 1.5rem; border-radius: 10px;">
+                        <label style="color: var(--text-light); font-weight: 600; display: block; margin-bottom: 1rem;">4. Do you provide security awareness training?</label>
+                        <select name="training" required style="width: 100%; padding: 0.75rem; background: rgba(255, 107, 0, 0.05); border: 1px solid var(--warning); border-radius: 8px; color: var(--text-light);">
+                            <option value="" style="background: var(--primary-dark);">Select...</option>
+                            <option value="annual" style="background: var(--primary-dark);">Annual or more frequent</option>
+                            <option value="sometimes" style="background: var(--primary-dark);">Occasionally</option>
+                            <option value="no" style="background: var(--primary-dark);">No formal training</option>
+                        </select>
+                    </div>
+
+                    <!-- Q5: Network Segmentation -->
+                    <div style="background: rgba(0, 229, 255, 0.05); border-left: 4px solid var(--cyan); padding: 1.5rem; border-radius: 10px;">
+                        <label style="color: var(--text-light); font-weight: 600; display: block; margin-bottom: 1rem;">5. Do you implement network segmentation?</label>
+                        <select name="segmentation" required style="width: 100%; padding: 0.75rem; background: rgba(0, 229, 255, 0.05); border: 1px solid var(--cyan); border-radius: 8px; color: var(--text-light);">
+                            <option value="" style="background: var(--primary-dark);">Select...</option>
+                            <option value="full" style="background: var(--primary-dark);">Full segmentation implemented</option>
+                            <option value="partial" style="background: var(--primary-dark);">Partial segmentation</option>
+                            <option value="none" style="background: var(--primary-dark);">No segmentation</option>
+                        </select>
+                    </div>
+
+                    <!-- Q6: VPN Usage -->
+                    <div style="background: rgba(164, 0, 255, 0.05); border-left: 4px solid var(--purple); padding: 1.5rem; border-radius: 10px;">
+                        <label style="color: var(--text-light); font-weight: 600; display: block; margin-bottom: 1rem;">6. How often do employees use VPN?</label>
+                        <select name="vpn" required style="width: 100%; padding: 0.75rem; background: rgba(164, 0, 255, 0.05); border: 1px solid var(--purple); border-radius: 8px; color: var(--text-light);">
+                            <option value="" style="background: var(--primary-dark);">Select...</option>
+                            <option value="always" style="background: var(--primary-dark);">Always (enforced policy)</option>
+                            <option value="sometimes" style="background: var(--primary-dark);">Sometimes (on public WiFi)</option>
+                            <option value="never" style="background: var(--primary-dark);">Never/Rarely</option>
+                        </select>
+                    </div>
+
+                    <!-- Q7: Security Monitoring -->
+                    <div style="background: rgba(0, 255, 136, 0.05); border-left: 4px solid var(--green); padding: 1.5rem; border-radius: 10px;">
+                        <label style="color: var(--text-light); font-weight: 600; display: block; margin-bottom: 1rem;">7. Do you have active security monitoring?</label>
+                        <select name="monitoring" required style="width: 100%; padding: 0.75rem; background: rgba(0, 255, 136, 0.05); border: 1px solid var(--green); border-radius: 8px; color: var(--text-light);">
+                            <option value="" style="background: var(--primary-dark);">Select...</option>
+                            <option value="active" style="background: var(--primary-dark);">Active 24/7 monitoring</option>
+                            <option value="partial" style="background: var(--primary-dark);">Limited monitoring</option>
+                            <option value="none" style="background: var(--primary-dark);">No active monitoring</option>
+                        </select>
+                    </div>
+
+                    <!-- Q8: Incident Response Plan -->
+                    <div style="background: rgba(255, 107, 0, 0.05); border-left: 4px solid var(--warning); padding: 1.5rem; border-radius: 10px;">
+                        <label style="color: var(--text-light); font-weight: 600; display: block; margin-bottom: 1rem;">8. Do you have an incident response plan?</label>
+                        <select name="incident" required style="width: 100%; padding: 0.75rem; background: rgba(255, 107, 0, 0.05); border: 1px solid var(--warning); border-radius: 8px; color: var(--text-light);">
+                            <option value="" style="background: var(--primary-dark);">Select...</option>
+                            <option value="yes" style="background: var(--primary-dark);">Yes, documented and tested</option>
+                            <option value="partial" style="background: var(--primary-dark);">Partially documented</option>
+                            <option value="no" style="background: var(--primary-dark);">No formal plan</option>
+                        </select>
+                    </div>
+
+                    <button type="button" id="submitRiskQuiz" class="exit-intent-btn exit-intent-btn-primary" style="width: 100%; padding: 1rem; font-size: 1.05rem; margin-top: 1rem;">
+                         Calculate My Risk Score
+                    </button>
+                </form>
+
+                <div id="riskQuizResults" style="display: none; margin-top: 1.5rem;"></div>
+            </div>
+        </div>
+
+        <!-- CTA Section - Professional Services -->
+        <section class="section" style="background: linear-gradient(135deg, rgba(0, 229, 255, 0.08), rgba(164, 0, 255, 0.08)); border: 2px solid var(--cyan);">
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <h2 style="margin-bottom: 1.5rem;">Ready for Professional Security Services?</h2>
+                <p style="color: var(--text-light); margin-bottom: 2rem; font-size: 1.1rem; line-height: 1.8;">Take your security to the next level with professional penetration testing, managed detection & response, and expert consulting services.</p>
+                <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="services.html" class="btn btn-primary" style="padding: 1rem 2.5rem; font-size: 1rem;"> Book Assessment</a>
+                    <a href="contact.html" class="btn btn-secondary" style="padding: 1rem 2.5rem; font-size: 1rem;"> Get in Touch</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><img src="../assets/Icons/none (9).gif" alt="CyberGuard Logo" style="height: 30px; vertical-align: middle; margin-right: 8px;"> CyberGuard</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                    Your trusted resource for cybersecurity education, frameworks, and best practices.
+                </p>
+                 <div class="social-links">
+                    <a href=https://github.com/devarshi2007><img src="../assets/Icons/Github-Logo-PNG-Photo-1.png" alt="GitHub" style="width: 35px; height: 20px; filter: brightness(0) invert(1);"></a>
+                    <a href="https://x.com/CyberGuard404" title="Twitter">𝕏</a>
+                    <a href="https://www.linkedin.com/in/cyber-guard-335a413a9/" title="LinkedIn">in</a>
+<a href="https://mail.google.com/mail/?view=cm&fs=1&to=hellocyberguard.io@gmail.com&su=Inquiry%20from%20CyberGuard%20Website&body=Hi%20CyberGuard%20team,%0A%0AI%20would%20like%20to%20discuss..."
+   target="_blank"
+   rel="noopener noreferrer"
+   title="Email us on Gmail"
+   style="text-decoration: none; color: inherit;">
+    <span style="font-size: 1.5rem;">✉️</span></a>     
+    <a href ="https://www.instagram.com/cyberguard_404/"><img src="https://th.bing.com/th/id/R.735dda68880a385ce8cc5be4f3c5fcd6?rik=qSxRw2lCZYy9Mw&riu=http%3a%2f%2fpngimg.com%2fuploads%2finstagram%2finstagram_PNG11.png&ehk=QVCbfkCKi8pJLF08bRkS%2fLeMqLTnJQf402WRaIdN6jE%3d&risl=&pid=ImgRaw&r=0" height="25px" width="25px"></a>       
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                 <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="threats.html">Threats & Vulnerabilities</a></li>
+                    <li><a href="frameworks.html">Security Frameworks</a></li>
+                    <li><a href="learning.html">Learning Resources</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="tools.html">Tools & Utilities</a></li>
+                    <li><a href="blog.html">Blog & Updates</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-&-condition.html">Terms & Conditions</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 CyberGuard - Cybersecurity Education Platform. All rights reserved. | Made with  for a secure digital world</p>
+        </div>
+    </footer>
+
+
+    <!-- Cookie Banner for GDPR/CCPA Compliance -->
+    <div id="cookieBanner" class="cookie-banner">
+        <div class="cookie-banner-content">
+            <h3> Cookie Consent</h3>
+            <p>We use cookies to enhance your experience, analyze site traffic, and serve personalized content. By continuing to use this site, you consent to our <a href="#privacy">Privacy Policy</a> and <a href="#cookies">Cookie Policy</a>. You can change your consent preferences at any time.</p>
+        </div>
+        <div class="cookie-banner-buttons">
+            <button id="rejectCookies" class="cookie-btn cookie-btn-reject">Reject</button>
+            <button id="acceptCookies" class="cookie-btn cookie-btn-accept">Accept All</button>
+        </div>
+    </div>
+
+    <!-- JSON-LD Schema Markup for Learning -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "EducationalOccupationalCredential",
+        "name": "Cybersecurity Fundamentals Certification",
+        "description": "Comprehensive cybersecurity learning resources including threats, frameworks, tools, and practical exercises.",
+        "credentialCategory": "Badge",
+        "recognizedBy": {
+            "@type": "Organization",
+            "name": "CyberGuard"
+        }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LearningResource",
+        "name": "CyberGuard Learning Platform",
+        "description": "Interactive cybersecurity education platform with threats, frameworks, best practices, and assessment tools.",
+        "url": "https://cyberguard.com/learning.html",
+        "author": {
+            "@type": "Organization",
+            "name": "CyberGuard"
+        },
+        "educationalLevel": ["Beginner", "Intermediate", "Advanced"],
+        "inLanguage": "en",
+        "learningResourceType": "Course"
+    }
+    </script>
+
+    <script src="../js/script.js?v=3.0"></script>
+    <script src="../js/cyber-background.js?v=3.0"></script>
+    <script type="module" src="/src/auth.js"></script>
+    <script type="module" src="/src/quiz-score.js"></script>
+    
+    <!-- Cyber Range Lab JavaScript -->
+    <script>
+        let currentLabId = null;
+        const labs = {
+            'api-security': {
+                title: ' API Security Exploitation Lab',
+                description: 'Learn to identify and exploit common API vulnerabilities in a safe environment.',
+                content: `
+                    <div style="background: rgba(26, 39, 68, 0.6); border: 2px solid var(--cyan); border-radius: 15px; padding: 2rem; margin-bottom: 2rem;">
+                        <h3 style="color: var(--cyan); margin-bottom: 1rem;">Scenario:</h3>
+                        <p style="color: var(--text-light);">You are testing an e-commerce API that appears to have several security vulnerabilities. Your goal is to identify and document these issues.</p>
+                    </div>
+                    <div style="background: rgba(0, 229, 255, 0.05); border-radius: 15px; padding: 2rem;">
+                        <h4 style="color: var(--cyan); margin-bottom: 1rem;">Simulated API Endpoint:</h4>
+                        <code style="display: block; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; color: var(--green);">
+                            GET https://api.vulnerable-shop.local/users/{userId}<br>
+                            Authorization: Bearer eyJhbGciOiJub25lIn0...
+                        </code>
+                        <h4 style="color: var(--cyan); margin: 1.5rem 0 1rem;">Your Tasks:</h4>
+                        <ol style="color: var(--text-light); line-height: 2;">
+                            <li><strong>Broken Object Level Authorization:</strong> Test if you can access other users' data by changing userId parameter</li>
+                            <li><strong>Missing Rate Limiting:</strong> Check if the API limits request frequency</li>
+                            <li><strong>Excessive Data Exposure:</strong> Examine if sensitive fields (passwords, tokens) are returned</li>
+                            <li><strong>JWT Security:</strong> Analyze the JWT token for weak algorithms (alg: none)</li>
+                        </ol>
+                        <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(0, 255, 136, 0.1); border-left: 4px solid var(--green); border-radius: 8px;">
+                            <h4 style="color: var(--green); margin-bottom: 0.5rem;"> Key Findings:</h4>
+                            <ul style="color: var(--text-light); margin-top: 1rem; line-height: 1.8;">
+                                <li>IDOR vulnerability allows horizontal privilege escalation</li>
+                                <li>No rate limiting enables brute force attacks</li>
+                                <li>API returns password hashes in response</li>
+                                <li>JWT uses "none" algorithm - critical security flaw</li>
+                            </ul>
+                        </div>
+                        <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(164, 0, 255, 0.1); border-left: 4px solid var(--purple); border-radius: 8px;">
+                            <h4 style="color: var(--purple); margin-bottom: 0.5rem;"> Remediation:</h4>
+                            <ul style="color: var(--text-light); margin-top: 1rem; line-height: 1.8;">
+                                <li>Implement proper authorization checks for every request</li>
+                                <li>Apply rate limiting (e.g., 100 requests per minute per user)</li>
+                                <li>Filter sensitive data from API responses</li>
+                                <li>Use strong JWT algorithms (RS256, ES256)</li>
+                                <li>Implement API gateway with security policies</li>
+                            </ul>
+                        </div>
+                    </div>
+                `
+            },
+            'iot-hacking': {
+                title: ' IoT Device Exploitation Lab',
+                description: 'Discover and exploit common IoT security vulnerabilities.',
+                content: `
+                    <div style="background: rgba(26, 39, 68, 0.6); border: 2px solid var(--cyan); border-radius: 15px; padding: 2rem; margin-bottom: 2rem;">
+                        <h3 style="color: var(--cyan); margin-bottom: 1rem;">Scenario:</h3>
+                        <p style="color: var(--text-light);">You've discovered a smart home camera on the network. Assess its security posture and identify vulnerabilities.</p>
+                    </div>
+                    <div style="background: rgba(0, 229, 255, 0.05); border-radius: 15px; padding: 2rem;">
+                        <h4 style="color: var(--cyan); margin-bottom: 1rem;">Device Details:</h4>
+                        <code style="display: block; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; color: var(--green);">
+                            IP: 192.168.1.50<br>
+                            Open Ports: 23 (Telnet), 80 (HTTP), 554 (RTSP)<br>
+                            Device: SmartCam Pro v1.2.3<br>
+                            Web Interface: http://192.168.1.50/admin
+                        </code>
+                        <h4 style="color: var(--cyan); margin: 1.5rem 0 1rem;">Your Tasks:</h4>
+                        <ol style="color: var(--text-light); line-height: 2;">
+                            <li><strong>Default Credentials:</strong> Try default username/password combinations</li>
+                            <li><strong>Firmware Analysis:</strong> Download and extract firmware for hardcoded secrets</li>
+                            <li><strong>Network Traffic:</strong> Capture and analyze unencrypted communications</li>
+                            <li><strong>RTSP Stream Access:</strong> Attempt to access video stream without authentication</li>
+                        </ol>
+                        <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(0, 255, 136, 0.1); border-left: 4px solid var(--green); border-radius: 8px;">
+                            <h4 style="color: var(--green); margin-bottom: 0.5rem;"> Vulnerabilities Found:</h4>
+                            <ul style="color: var(--text-light); margin-top: 1rem; line-height: 1.8;">
+                                <li>Default credentials: admin/admin123</li>
+                                <li>Telnet enabled with root access</li>
+                                <li>RTSP stream accessible without authentication</li>
+                                <li>Hardcoded WiFi credentials in firmware</li>
+                                <li>No HTTPS - credentials transmitted in plaintext</li>
+                            </ul>
+                        </div>
+                        <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(164, 0, 255, 0.1); border-left: 4px solid var(--purple); border-radius: 8px;">
+                            <h4 style="color: var(--purple); margin-bottom: 0.5rem;"> Security Recommendations:</h4>
+                            <ul style="color: var(--text-light); margin-top: 1rem; line-height: 1.8;">
+                                <li>Force password change on first boot</li>
+                                <li>Disable Telnet, use SSH with key-based auth</li>
+                                <li>Implement authentication for all streams</li>
+                                <li>Use encrypted storage for credentials</li>
+                                <li>Enable HTTPS with valid certificates</li>
+                                <li>Regular firmware updates with vulnerability patching</li>
+                            </ul>
+                        </div>
+                    </div>
+                `
+            },
+            'network-defense': {
+                title: ' Network Defense Simulation',
+                description: 'Detect and respond to network-based attacks in real-time.',
+                content: `
+                    <div style="background: rgba(26, 39, 68, 0.6); border: 2px solid var(--cyan); border-radius: 15px; padding: 2rem; margin-bottom: 2rem;">
+                        <h3 style="color: var(--cyan); margin-bottom: 1rem;">Scenario:</h3>
+                        <p style="color: var(--text-light);">Your IDS has detected suspicious activity. Analyze the traffic patterns and implement defensive measures.</p>
+                    </div>
+                    <div style="background: rgba(0, 229, 255, 0.05); border-radius: 15px; padding: 2rem;">
+                        <h4 style="color: var(--cyan); margin-bottom: 1rem;">Detected Traffic Patterns:</h4>
+                        <code style="display: block; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; color: #FF6B00; font-size: 0.9rem;">
+                            [ALERT] Port Scan Detected<br>
+                            Source: 203.0.113.45 → Target: 192.168.1.0/24<br>
+                            Ports: 21, 22, 23, 80, 443, 3306, 3389, 8080<br>
+                            <br>
+                            [ALERT] Suspicious SSH Attempts<br>
+                            Source: 203.0.113.45 → Target: 192.168.1.10:22<br>
+                            Failed login attempts: 847 (last 5 minutes)<br>
+                            <br>
+                            [ALERT] Lateral Movement Detected<br>
+                            Source: 192.168.1.10 → Target: 192.168.1.25<br>
+                            SMB/445 connections with admin credentials
+                        </code>
+                        <h4 style="color: var(--cyan); margin: 1.5rem 0 1rem;">Your Tasks:</h4>
+                        <ol style="color: var(--text-light); line-height: 2;">
+                            <li><strong>Identify Attack Stages:</strong> Reconnaissance → Exploitation → Lateral Movement</li>
+                            <li><strong>Block Malicious IP:</strong> Add firewall rule to block 203.0.113.45</li>
+                            <li><strong>Isolate Compromised Host:</strong> Quarantine 192.168.1.10</li>
+                            <li><strong>Analyze Persistence:</strong> Check for backdoors and scheduled tasks</li>
+                        </ol>
+                        <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(0, 255, 136, 0.1); border-left: 4px solid var(--green); border-radius: 8px;">
+                            <h4 style="color: var(--green); margin-bottom: 0.5rem;"> Defensive Actions Taken:</h4>
+                            <ul style="color: var(--text-light); margin-top: 1rem; line-height: 1.8;">
+                                <li>Blocked attacker IP at perimeter firewall</li>
+                                <li>Isolated compromised host 192.168.1.10</li>
+                                <li>Implemented fail2ban for SSH brute force protection</li>
+                                <li>Enabled network segmentation between VLANs</li>
+                                <li>Deployed IPS rules for lateral movement detection</li>
+                            </ul>
+                        </div>
+                        <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(164, 0, 255, 0.1); border-left: 4px solid var(--purple); border-radius: 8px;">
+                            <h4 style="color: var(--purple); margin-bottom: 0.5rem;"> Long-term Improvements:</h4>
+                            <ul style="color: var(--text-light); margin-top: 1rem; line-height: 1.8;">
+                                <li>Implement Zero Trust network architecture</li>
+                                <li>Deploy EDR on all endpoints</li>
+                                <li>Enable MFA for all administrative access</li>
+                                <li>Regular vulnerability scanning and patching</li>
+                                <li>24/7 SOC monitoring and incident response</li>
+                            </ul>
+                        </div>
+                    </div>
+                `
+            },
+            'cloud-security': {
+                title: ' Cloud Misconfiguration Hunt',
+                description: 'Identify and secure common cloud misconfigurations.',
+                content: `
+                    <div style="background: rgba(26, 39, 68, 0.6); border: 2px solid var(--cyan); border-radius: 15px; padding: 2rem; margin-bottom: 2rem;">
+                        <h3 style="color: var(--cyan); margin-bottom: 1rem;">Scenario:</h3>
+                        <p style="color: var(--text-light);">Audit an AWS environment that may contain security misconfigurations and excessive permissions.</p>
+                    </div>
+                    <div style="background: rgba(0, 229, 255, 0.05); border-radius: 15px; padding: 2rem;">
+                        <h4 style="color: var(--cyan); margin-bottom: 1rem;">Cloud Resources to Audit:</h4>
+                        <code style="display: block; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; color: var(--green); font-size: 0.85rem;">
+                            S3 Bucket: company-backups-2024<br>
+                            IAM User: developer-bob (PowerUserAccess)<br>
+                            RDS Database: production-db (publicly accessible)<br>
+                            EC2 Instance: web-server (0.0.0.0/0 SSH access)
+                        </code>
+                        <h4 style="color: var(--cyan); margin: 1.5rem 0 1rem;">Your Tasks:</h4>
+                        <ol style="color: var(--text-light); line-height: 2;">
+                            <li><strong>S3 Bucket Analysis:</strong> Check for public access and encryption</li>
+                            <li><strong>IAM Review:</strong> Identify overly permissive policies</li>
+                            <li><strong>Database Security:</strong> Assess RDS public accessibility</li>
+                            <li><strong>Network Exposure:</strong> Review security group configurations</li>
+                        </ol>
+                        <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(255, 107, 0, 0.1); border-left: 4px solid #FF6B00; border-radius: 8px;">
+                            <h4 style="color: #FF6B00; margin-bottom: 0.5rem;"> Critical Findings:</h4>
+                            <ul style="color: var(--text-light); margin-top: 1rem; line-height: 1.8;">
+                                <li><strong>HIGH:</strong> S3 bucket publicly readable - contains customer data</li>
+                                <li><strong>HIGH:</strong> RDS database accessible from internet</li>
+                                <li><strong>CRITICAL:</strong> AWS access keys hardcoded in public GitHub repo</li>
+                                <li><strong>MEDIUM:</strong> EC2 security group allows 0.0.0.0/0 SSH access</li>
+                                <li><strong>MEDIUM:</strong> IAM user has AdministratorAccess policy</li>
+                            </ul>
+                        </div>
+                        <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(164, 0, 255, 0.1); border-left: 4px solid var(--purple); border-radius: 8px;">
+                            <h4 style="color: var(--purple); margin-bottom: 0.5rem;"> Remediation Steps:</h4>
+                            <ul style="color: var(--text-light); margin-top: 1rem; line-height: 1.8;">
+                                <li>Remove S3 public access, enable encryption at rest</li>
+                                <li>Restrict RDS to private subnet, VPN access only</li>
+                                <li>Rotate exposed AWS keys immediately</li>
+                                <li>Limit SSH to bastion host IP only</li>
+                                <li>Apply least privilege IAM policies</li>
+                                <li>Enable CloudTrail and GuardDuty monitoring</li>
+                                <li>Implement AWS Config for compliance checks</li>
+                            </ul>
+                        </div>
+                    </div>
+                `
+            },
+            'web-pentest': {
+                title: ' Web Application Penetration Testing',
+                description: 'Master OWASP Top 10 vulnerabilities through hands-on exploitation.',
+                content: `
+                    <div style="background: rgba(26, 39, 68, 0.6); border: 2px solid var(--cyan); border-radius: 15px; padding: 2rem; margin-bottom: 2rem;">
+                        <h3 style="color: var(--cyan); margin-bottom: 1rem;">Scenario:</h3>
+                        <p style="color: var(--text-light);">Test a vulnerable web application for common security flaws. Your goal is to exploit each vulnerability and document findings.</p>
+                    </div>
+                    <div style="background: rgba(0, 229, 255, 0.05); border-radius: 15px; padding: 2rem;">
+                        <h4 style="color: var(--cyan); margin-bottom: 1rem;">Target Application:</h4>
+                        <code style="display: block; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; color: var(--green);">
+                            https://vulnerable-app.local/login<br>
+                            PHP 7.4 | MySQL 5.7 | Apache 2.4
+                        </code>
+                        <h4 style="color: var(--cyan); margin: 1.5rem 0 1rem;">Your Tasks:</h4>
+                        <ol style="color: var(--text-light); line-height: 2;">
+                            <li><strong>SQL Injection:</strong> Test login form: ' OR '1'='1' --</li>
+                            <li><strong>XSS (Stored):</strong> Inject script in comment field: &lt;script&gt;alert('XSS')&lt;/script&gt;</li>
+                            <li><strong>CSRF:</strong> Create form to change user email without token</li>
+                            <li><strong>Broken Authentication:</strong> Test for session fixation and weak password policy</li>
+                        </ol>
+                        <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(0, 255, 136, 0.1); border-left: 4px solid var(--green); border-radius: 8px;">
+                            <h4 style="color: var(--green); margin-bottom: 0.5rem;"> Exploitation Results:</h4>
+                            <ul style="color: var(--text-light); margin-top: 1rem; line-height: 1.8;">
+                                <li><strong>SQLi:</strong> Successfully bypassed login, extracted user database</li>
+                                <li><strong>XSS:</strong> Stored XSS executes on all admin pages</li>
+                                <li><strong>CSRF:</strong> Changed victim email, gained account access</li>
+                                <li><strong>Session:</strong> Session ID predictable, fixation possible</li>
+                            </ul>
+                        </div>
+                        <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(164, 0, 255, 0.1); border-left: 4px solid var(--purple); border-radius: 8px;">
+                            <h4 style="color: var(--purple); margin-bottom: 0.5rem;"> Security Fixes:</h4>
+                            <ul style="color: var(--text-light); margin-top: 1rem; line-height: 1.8;">
+                                <li>Use parameterized queries/prepared statements</li>
+                                <li>Implement input validation and output encoding</li>
+                                <li>Add CSRF tokens to all state-changing operations</li>
+                                <li>Use cryptographically secure session IDs</li>
+                                <li>Implement Content Security Policy (CSP)</li>
+                                <li>Enable WAF with OWASP Core Rule Set</li>
+                            </ul>
+                        </div>
+                    </div>
+                `
+            },
+            'incident-response': {
+                title: ' Incident Response Drill',
+                description: 'Respond to a simulated ransomware attack following IR frameworks.',
+                content: `
+                    <div style="background: rgba(26, 39, 68, 0.6); border: 2px solid var(--cyan); border-radius: 15px; padding: 2rem; margin-bottom: 2rem;">
+                        <h3 style="color: var(--cyan); margin-bottom: 1rem;">Scenario:</h3>
+                        <p style="color: var(--text-light);">It's 3 AM. Multiple servers show encrypted files with ransom notes. You're the incident response lead. Follow NIST IR framework: Prepare → Detect → Contain → Eradicate → Recover → Lessons Learned.</p>
+                    </div>
+                    <div style="background: rgba(0, 229, 255, 0.05); border-radius: 15px; padding: 2rem;">
+                        <h4 style="color: var(--cyan); margin-bottom: 1rem;">Initial Alert:</h4>
+                        <code style="display: block; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; color: #FF6B00; font-size: 0.9rem;">
+                            [CRITICAL] Mass File Encryption Detected<br>
+                            Affected: FILE-SERVER-01, FILE-SERVER-02, BACKUP-01<br>
+                            Files: *.locked | Ransom Note: README_DECRYPT.txt<br>
+                            Ransom Amount: 10 BTC (~$500,000 USD)<br>
+                            Deadline: 72 hours
+                        </code>
+                        <h4 style="color: var(--cyan); margin: 1.5rem 0 1rem;">Your IR Phases:</h4>
+                        <div style="color: var(--text-light); line-height: 2;">
+                            <strong style="color: var(--purple);">1. Detection & Analysis:</strong>
+                            <ul style="margin: 0.5rem 0 1rem 2rem;">
+                                <li>Confirm ransomware: LockBit 3.0 variant</li>
+                                <li>Initial vector: Phishing email with malicious attachment</li>
+                                <li>First execution: 2:47 AM on user workstation</li>
+                            </ul>
+                            
+                            <strong style="color: var(--purple);">2. Containment:</strong>
+                            <ul style="margin: 0.5rem 0 1rem 2rem;">
+                                <li>Isolate infected systems from network</li>
+                                <li>Disable user accounts used in attack</li>
+                                <li>Block C2 server IPs at firewall</li>
+                                <li>Preserve memory dumps for forensics</li>
+                            </ul>
+                            
+                            <strong style="color: var(--purple);">3. Eradication:</strong>
+                            <ul style="margin: 0.5rem 0 1rem 2rem;">
+                                <li>Remove ransomware binaries and persistence mechanisms</li>
+                                <li>Patch initial entry point (VPN vulnerability)</li>
+                                <li>Reset all domain credentials</li>
+                            </ul>
+                            
+                            <strong style="color: var(--purple);">4. Recovery:</strong>
+                            <ul style="margin: 0.5rem 0 1rem 2rem;">
+                                <li>Restore from clean offline backups (24h old)</li>
+                                <li>Validate data integrity before reconnecting</li>
+                                <li>Gradual service restoration with monitoring</li>
+                            </ul>
+                        </div>
+                        <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(0, 255, 136, 0.1); border-left: 4px solid var(--green); border-radius: 8px;">
+                            <h4 style="color: var(--green); margin-bottom: 0.5rem;"> Incident Contained Successfully</h4>
+                            <ul style="color: var(--text-light); margin-top: 1rem; line-height: 1.8;">
+                                <li>Total downtime: 18 hours</li>
+                                <li>Data loss: Minimal (24h RPO achieved)</li>
+                                <li>No ransom paid</li>
+                                <li>Forensic evidence preserved</li>
+                            </ul>
+                        </div>
+                        <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(164, 0, 255, 0.1); border-left: 4px solid var(--purple); border-radius: 8px;">
+                            <h4 style="color: var(--purple); margin-bottom: 0.5rem;"> Lessons Learned:</h4>
+                            <ul style="color: var(--text-light); margin-top: 1rem; line-height: 1.8;">
+                                <li>Deploy EDR with behavioral detection</li>
+                                <li>Implement email sandboxing for attachments</li>
+                                <li>Test backup restoration procedures quarterly</li>
+                                <li>Enable MFA for VPN access</li>
+                                <li>Conduct regular tabletop exercises</li>
+                                <li>Improve network segmentation</li>
+                            </ul>
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        function loadLabProgress() {
+            const progress = JSON.parse(localStorage.getItem('cyberRangeProgress') || '{}');
+            const totalLabs = Object.keys(labs).length;
+            const completedCount = Object.values(progress).filter(Boolean).length;
+            
+            document.getElementById('completedLabs').textContent = completedCount;
+            document.getElementById('totalLabs').textContent = totalLabs;
+            
+            const percentage = (completedCount / totalLabs) * 100;
+            document.getElementById('overallProgress').style.width = percentage + '%';
+            document.getElementById('overallProgress').textContent = Math.round(percentage) + '%';
+            
+            document.querySelectorAll('.lab-card').forEach(card => {
+                const labId = card.getAttribute('data-lab-id');
+                const statusDiv = card.querySelector('.lab-status');
+                const statusText = statusDiv.querySelector('.status-text');
+                
+                if (progress[labId]) {
+                    statusDiv.style.background = 'rgba(0, 255, 136, 0.2)';
+                    statusDiv.style.color = 'var(--green)';
+                    statusText.textContent = ' Completed';
+                } else {
+                    statusDiv.style.background = 'rgba(255, 193, 0, 0.2)';
+                    statusDiv.style.color = '#FFC100';
+                    statusText.textContent = ' Locked';
+                }
+            });
+        }
+
+        function startLab(labId) {
+            currentLabId = labId;
+            const lab = labs[labId];
+            
+            document.getElementById('labTitle').textContent = lab.title;
+            document.getElementById('labDescription').textContent = lab.description;
+            document.getElementById('labContent').innerHTML = lab.content;
+            document.getElementById('labModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLab() {
+            document.getElementById('labModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            currentLabId = null;
+        }
+
+        function completeLab() {
+            if (!currentLabId) return;
+            
+            const progress = JSON.parse(localStorage.getItem('cyberRangeProgress') || '{}');
+            progress[currentLabId] = true;
+            localStorage.setItem('cyberRangeProgress', JSON.stringify(progress));
+            
+            closeLab();
+            loadLabProgress();
+            
+            alert(' Congratulations! You\'ve completed the ' + labs[currentLabId].title + '! Keep going to master all scenarios.');
+        }
+
+        function resetProgress() {
+            if (confirm('Are you sure you want to reset all lab progress? This cannot be undone.')) {
+                localStorage.removeItem('cyberRangeProgress');
+                loadLabProgress();
+                alert('Progress reset successfully!');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadLabProgress();
+        });
+    </script>
+    
+    <!-- Service Worker Registration for PWA -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('Service Worker registered:', registration);
+                    })
+                    .catch(error => {
+                        console.log('Service Worker registration failed:', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

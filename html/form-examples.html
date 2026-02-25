@@ -1,0 +1,459 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessible Form Examples - WCAG 2.2 AA</title>
+    <link rel="stylesheet" href="../css/accessibility-fixes.css">
+</head>
+<body>
+    <h1>Accessible Form Patterns</h1>
+
+    <!-- ============================================
+         EXAMPLE 1: Basic Contact Form
+         ============================================ -->
+    <section aria-labelledby="contact-heading">
+        <h2 id="contact-heading">Contact Form</h2>
+        
+        <form id="contactForm" novalidate>
+            <!-- Name Field -->
+            <div class="form-group">
+                <label for="name" class="required">Full Name</label>
+                <input 
+                    type="text" 
+                    id="name" 
+                    name="name"
+                    aria-required="true"
+                    aria-invalid="false"
+                    aria-describedby="name-hint name-error"
+                    autocomplete="name"
+                >
+                <span id="name-hint" class="form-hint">Enter your first and last name</span>
+                <span id="name-error" role="alert" class="error-message" aria-live="polite"></span>
+            </div>
+
+            <!-- Email Field -->
+            <div class="form-group">
+                <label for="email" class="required">Email Address</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email"
+                    aria-required="true"
+                    aria-invalid="false"
+                    aria-describedby="email-hint email-error"
+                    autocomplete="email"
+                >
+                <span id="email-hint" class="form-hint">We'll never share your email with anyone</span>
+                <span id="email-error" role="alert" class="error-message" aria-live="polite"></span>
+            </div>
+
+            <!-- Phone Field (Optional) -->
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input 
+                    type="tel" 
+                    id="phone" 
+                    name="phone"
+                    aria-describedby="phone-hint"
+                    autocomplete="tel"
+                >
+                <span id="phone-hint" class="form-hint">Optional - Format: (555) 123-4567</span>
+            </div>
+
+            <!-- Subject Field -->
+            <div class="form-group">
+                <label for="subject" class="required">Subject</label>
+                <select 
+                    id="subject" 
+                    name="subject"
+                    aria-required="true"
+                    aria-invalid="false"
+                    aria-describedby="subject-error"
+                >
+                    <option value="">-- Select a subject --</option>
+                    <option value="general">General Inquiry</option>
+                    <option value="support">Technical Support</option>
+                    <option value="sales">Sales Question</option>
+                    <option value="other">Other</option>
+                </select>
+                <span id="subject-error" role="alert" class="error-message" aria-live="polite"></span>
+            </div>
+
+            <!-- Message Field -->
+            <div class="form-group">
+                <label for="message" class="required">Message</label>
+                <textarea 
+                    id="message" 
+                    name="message" 
+                    rows="5"
+                    aria-required="true"
+                    aria-invalid="false"
+                    aria-describedby="message-hint message-error message-count"
+                    maxlength="500"
+                ></textarea>
+                <span id="message-hint" class="form-hint">Minimum 10 characters, maximum 500</span>
+                <span id="message-count" class="form-hint" aria-live="polite">0 / 500 characters</span>
+                <span id="message-error" role="alert" class="error-message" aria-live="polite"></span>
+            </div>
+
+            <!-- Checkbox Group -->
+            <fieldset>
+                <legend class="required">Preferred Contact Method</legend>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input 
+                            type="checkbox" 
+                            id="contact-email" 
+                            name="contactMethod" 
+                            value="email"
+                            aria-describedby="contact-method-error"
+                        >
+                        <label for="contact-email">Email</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input 
+                            type="checkbox" 
+                            id="contact-phone" 
+                            name="contactMethod" 
+                            value="phone"
+                        >
+                        <label for="contact-phone">Phone</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input 
+                            type="checkbox" 
+                            id="contact-text" 
+                            name="contactMethod" 
+                            value="text"
+                        >
+                        <label for="contact-text">Text Message</label>
+                    </div>
+                </div>
+                <span id="contact-method-error" role="alert" class="error-message" aria-live="polite"></span>
+            </fieldset>
+
+            <!-- Agreement Checkbox -->
+            <div class="form-group">
+                <div class="checkbox-item">
+                    <input 
+                        type="checkbox" 
+                        id="agreement" 
+                        name="agreement"
+                        aria-required="true"
+                        aria-describedby="agreement-error"
+                    >
+                    <label for="agreement" class="required">
+                        I agree to the <a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms of Service</a>
+                    </label>
+                </div>
+                <span id="agreement-error" role="alert" class="error-message" aria-live="polite"></span>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-actions">
+                <button type="submit" class="btn-primary">
+                    Submit Form
+                </button>
+                <button type="reset" class="btn-secondary">
+                    Reset Form
+                </button>
+            </div>
+
+            <!-- Form Status (for screen readers) -->
+            <div id="form-status" role="status" aria-live="polite" class="sr-only"></div>
+        </form>
+    </section>
+
+    <!-- ============================================
+         EXAMPLE 2: Search Form with Autocomplete
+         ============================================ -->
+    <section aria-labelledby="search-heading">
+        <h2 id="search-heading">Search with Autocomplete</h2>
+        
+        <form role="search" class="search-form">
+            <label for="threat-search">Search Cyber Threats</label>
+            <div class="search-wrapper">
+                <input 
+                    type="search" 
+                    id="threat-search" 
+                    name="q"
+                    role="combobox"
+                    aria-autocomplete="list"
+                    aria-expanded="false"
+                    aria-controls="search-results"
+                    aria-describedby="search-instructions"
+                    placeholder="e.g., phishing, ransomware"
+                >
+                <span id="search-instructions" class="sr-only">
+                    Start typing to see suggestions. Use arrow keys to navigate, Enter to select.
+                </span>
+                <button type="submit" aria-label="Search">
+                    <span aria-hidden="true">ðŸ”</span>
+                </button>
+            </div>
+            
+            <!-- Autocomplete Results -->
+            <ul 
+                id="search-results" 
+                role="listbox"
+                class="autocomplete-results"
+                hidden
+            >
+                <!-- Dynamically populated -->
+                <li role="option" id="result-1" aria-selected="false">Phishing Attacks</li>
+                <li role="option" id="result-2" aria-selected="false">Ransomware</li>
+                <li role="option" id="result-3" aria-selected="false">SQL Injection</li>
+            </ul>
+            
+            <!-- Search status for screen readers -->
+            <div id="search-status" role="status" aria-live="polite" class="sr-only"></div>
+        </form>
+    </section>
+
+    <!-- ============================================
+         EXAMPLE 3: Login Form with Error Handling
+         ============================================ -->
+    <section aria-labelledby="login-heading">
+        <h2 id="login-heading">Login Form</h2>
+        
+        <form id="loginForm" novalidate>
+            <!-- Error Summary (shown after submission) -->
+            <div 
+                id="error-summary" 
+                role="alert" 
+                aria-labelledby="error-summary-title"
+                class="error-summary"
+                hidden
+            >
+                <h3 id="error-summary-title">Please fix the following errors:</h3>
+                <ul id="error-list"></ul>
+            </div>
+
+            <!-- Username -->
+            <div class="form-group">
+                <label for="username" class="required">Username or Email</label>
+                <input 
+                    type="text" 
+                    id="username" 
+                    name="username"
+                    aria-required="true"
+                    aria-invalid="false"
+                    aria-describedby="username-error"
+                    autocomplete="username"
+                    autofocus
+                >
+                <span id="username-error" role="alert" class="error-message" aria-live="polite"></span>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+                <label for="password" class="required">Password</label>
+                <div class="password-wrapper">
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password"
+                        aria-required="true"
+                        aria-invalid="false"
+                        aria-describedby="password-error"
+                        autocomplete="current-password"
+                    >
+                    <button 
+                        type="button" 
+                        class="toggle-password"
+                        aria-label="Show password"
+                        aria-pressed="false"
+                        aria-controls="password"
+                    >
+                        <span aria-hidden="true">ðŸ‘ï¸</span>
+                    </button>
+                </div>
+                <span id="password-error" role="alert" class="error-message" aria-live="polite"></span>
+            </div>
+
+            <!-- Remember Me -->
+            <div class="form-group">
+                <div class="checkbox-item">
+                    <input 
+                        type="checkbox" 
+                        id="remember" 
+                        name="remember"
+                    >
+                    <label for="remember">Keep me signed in for 30 days</label>
+                </div>
+            </div>
+
+            <!-- Submit -->
+            <div class="form-actions">
+                <button type="submit" class="btn-primary" id="login-btn">
+                    Sign In
+                </button>
+                <a href="/forgot-password" class="btn-link">Forgot password?</a>
+            </div>
+
+            <!-- Loading indicator -->
+            <div id="login-status" role="status" aria-live="polite" class="sr-only"></div>
+        </form>
+    </section>
+
+    <!-- ============================================
+         EXAMPLE 4: Multi-Step Form (Wizard)
+         ============================================ -->
+    <section aria-labelledby="wizard-heading">
+        <h2 id="wizard-heading">Security Assessment Wizard</h2>
+        
+        <!-- Progress Indicator -->
+        <div 
+            role="progressbar" 
+            aria-valuemin="0" 
+            aria-valuemax="3" 
+            aria-valuenow="1"
+            aria-label="Assessment progress"
+            class="progress-bar"
+        >
+            <div class="progress-fill" style="width: 33.33%"></div>
+            <span class="sr-only">Step 1 of 3: Company Information</span>
+        </div>
+
+        <form id="wizardForm" novalidate>
+            <!-- Step 1: Company Info -->
+            <fieldset id="step-1" aria-labelledby="step-1-title">
+                <legend id="step-1-title">Step 1: Company Information</legend>
+                
+                <div class="form-group">
+                    <label for="company-name" class="required">Company Name</label>
+                    <input 
+                        type="text" 
+                        id="company-name" 
+                        name="companyName"
+                        aria-required="true"
+                        aria-describedby="company-name-error"
+                    >
+                    <span id="company-name-error" role="alert" class="error-message" aria-live="polite"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="company-size" class="required">Company Size</label>
+                    <select id="company-size" name="companySize" aria-required="true">
+                        <option value="">-- Select size --</option>
+                        <option value="1-10">1-10 employees</option>
+                        <option value="11-50">11-50 employees</option>
+                        <option value="51-200">51-200 employees</option>
+                        <option value="201+">201+ employees</option>
+                    </select>
+                </div>
+            </fieldset>
+
+            <!-- Navigation -->
+            <div class="wizard-nav">
+                <button type="button" class="btn-secondary" id="prev-btn" disabled>
+                    Previous
+                </button>
+                <button type="button" class="btn-primary" id="next-btn">
+                    Next Step
+                </button>
+            </div>
+
+            <!-- Status announcements -->
+            <div id="wizard-status" role="status" aria-live="polite" class="sr-only"></div>
+        </form>
+    </section>
+
+    <!-- ============================================
+         JAVASCRIPT FOR FORM VALIDATION
+         ============================================ -->
+    <script>
+        // Character counter for textarea
+        const messageField = document.getElementById('message');
+        const messageCount = document.getElementById('message-count');
+        
+        if (messageField && messageCount) {
+            messageField.addEventListener('input', () => {
+                const length = messageField.value.length;
+                messageCount.textContent = `${length} / 500 characters`;
+                
+                if (length >= 500) {
+                    messageCount.setAttribute('aria-live', 'assertive');
+                } else {
+                    messageCount.setAttribute('aria-live', 'polite');
+                }
+            });
+        }
+
+        // Form validation example
+        const contactForm = document.getElementById('contactForm');
+        
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                let isValid = true;
+                const formStatus = document.getElementById('form-status');
+                
+                // Validate name
+                const nameField = document.getElementById('name');
+                const nameError = document.getElementById('name-error');
+                
+                if (!nameField.value.trim()) {
+                    nameField.setAttribute('aria-invalid', 'true');
+                    nameError.textContent = 'Name is required';
+                    isValid = false;
+                } else {
+                    nameField.setAttribute('aria-invalid', 'false');
+                    nameError.textContent = '';
+                }
+                
+                // Validate email
+                const emailField = document.getElementById('email');
+                const emailError = document.getElementById('email-error');
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                
+                if (!emailField.value.trim()) {
+                    emailField.setAttribute('aria-invalid', 'true');
+                    emailError.textContent = 'Email is required';
+                    isValid = false;
+                } else if (!emailRegex.test(emailField.value)) {
+                    emailField.setAttribute('aria-invalid', 'true');
+                    emailError.textContent = 'Please enter a valid email address';
+                    isValid = false;
+                } else {
+                    emailField.setAttribute('aria-invalid', 'false');
+                    emailError.textContent = '';
+                }
+                
+                if (isValid) {
+                    formStatus.textContent = 'Form submitted successfully!';
+                    // Submit form
+                    contactForm.submit();
+                } else {
+                    formStatus.textContent = 'Please fix the errors above before submitting';
+                    // Focus first error
+                    const firstError = contactForm.querySelector('[aria-invalid="true"]');
+                    if (firstError) firstError.focus();
+                }
+            });
+        }
+
+        // Toggle password visibility
+        const togglePasswordBtn = document.querySelector('.toggle-password');
+        
+        if (togglePasswordBtn) {
+            togglePasswordBtn.addEventListener('click', () => {
+                const passwordField = document.getElementById('password');
+                const isPressed = togglePasswordBtn.getAttribute('aria-pressed') === 'true';
+                
+                if (isPressed) {
+                    passwordField.type = 'password';
+                    togglePasswordBtn.setAttribute('aria-pressed', 'false');
+                    togglePasswordBtn.setAttribute('aria-label', 'Show password');
+                } else {
+                    passwordField.type = 'text';
+                    togglePasswordBtn.setAttribute('aria-pressed', 'true');
+                    togglePasswordBtn.setAttribute('aria-label', 'Hide password');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

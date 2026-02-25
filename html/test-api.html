@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Gemini API</title>
+    <script type="importmap">
+    {
+      "imports": {
+        "@google/generative-ai": "https://esm.run/@google/generative-ai"
+      }
+    }
+    </script>
+</head>
+<body>
+    <h1>Testing Gemini API</h1>
+    <button id="test-btn">Test API</button>
+    <div id="result"></div>
+
+    <script type="module">
+        import { GoogleGenerativeAI } from "@google/generative-ai";
+
+        const API_KEY = 'AIzaSyAQw_ufyIN1-f7SD8AV7b2-RfWu4RxVXGc';
+        
+        document.getElementById('test-btn').addEventListener('click', async () => {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = 'Testing...';
+            
+            try {
+                const genAI = new GoogleGenerativeAI(API_KEY);
+                
+                // Try different model names
+                const modelsToTest = [
+                    'gemini-2.5-pro',
+                    'gemini-2.5-flash',
+                    'models/gemini-2.5-pro',
+                    'models/gemini-2.5-flash'
+                ];
+                
+                for (const modelName of modelsToTest) {
+                    try {
+                        console.log(`Testing model: ${modelName}`);
+                        const model = genAI.getGenerativeModel({ model: modelName });
+                        const result = await model.generateContent("Say 'hi'");
+                        const response = await result.response;
+                        const text = response.text();
+                        
+                        resultDiv.innerHTML += `<p style="color: green;">âœ… <strong>${modelName}</strong> works! Response: ${text}</p>`;
+                        console.log(`âœ… ${modelName} works:`, text);
+                        break;
+                    } catch (error) {
+                        resultDiv.innerHTML += `<p style="color: red;">âŒ <strong>${modelName}</strong> failed: ${error.message}</p>`;
+                        console.error(`âŒ ${modelName} failed:`, error);
+                    }
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+                console.error(error);
+            }
+        });
+    </script>
+</body>
+</html>

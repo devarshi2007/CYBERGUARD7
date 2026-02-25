@@ -1,0 +1,81 @@
+﻿<!-- Navigation -->
+ <nav>
+        <div class="navbar">
+            <div class="logo"><img src="../assets/Icons/none (9).gif" alt="CyberGuard Logo" style="height: 50px; vertical-align: middle; margin-right: 10px; opacity: 0.9;"> CyberGuard</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="threats.html">Threats</a></li>
+                <li><a href="learning.html">Learn</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="chatbot.html">AI Chat</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        <button id="theme-toggle" title="Toggle theme">🌙</button>
+        
+        <!-- Auth Container -->
+        <div id="auth-container" style="display: flex; align-items: center; gap: 10px; margin-left: 20px;">
+            <div id="user-status" style="color: #00E5FF;">Not logged in</div>
+            <button id="btn-show-login" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.9rem;">Login</button>
+            <button id="btn-show-signup" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.9rem;">Sign Up</button>
+        </div>
+    </div>
+
+    <!-- Login Form -->
+    <div id="login-form" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(26, 39, 68, 0.95); padding: 2rem; border-radius: 15px; border: 2px solid #00E5FF; box-shadow: 0 0 30px rgba(0, 229, 255, 0.3); z-index: 10000; min-width: 350px;">
+        <h3 style="color: #00E5FF; margin-bottom: 1.5rem; text-align: center;">Login</h3>
+        <form id="login-form-element">
+            <input type="email" id="login-email" placeholder="Email" required style="width: 100%; padding: 12px; margin-bottom: 1rem; border-radius: 8px; border: 1px solid #00E5FF; background: rgba(0, 0, 0, 0.3); color: white;" />
+            <input type="password" id="login-password" placeholder="Password" required style="width: 100%; padding: 12px; margin-bottom: 0.5rem; border-radius: 8px; border: 1px solid #00E5FF; background: rgba(0, 0, 0, 0.3); color: white;" />
+            <div style="text-align: right; margin-bottom: 1rem;">
+                <button type="button" id="btn-forgot-password" style="background: none; border: none; color: #00E5FF; text-decoration: underline; cursor: pointer; font-size: 0.85rem;">Forgot Password?</button>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button type="submit" class="btn btn-primary" style="flex: 1;">Login</button>
+                <button type="button" id="btn-hide-login" class="btn btn-secondary" style="flex: 1;">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Password Reset Form -->
+    <div id="reset-password-form" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(26, 39, 68, 0.95); padding: 2rem; border-radius: 15px; border: 2px solid #00E5FF; box-shadow: 0 0 30px rgba(0, 229, 255, 0.3); z-index: 10000; min-width: 350px;">
+        <h3 style="color: #00E5FF; margin-bottom: 1.5rem; text-align: center;">Reset Password</h3>
+        <form id="reset-password-form-element">
+            <input type="email" id="reset-email" placeholder="Email" required style="width: 100%; padding: 12px; margin-bottom: 1.5rem; border-radius: 8px; border: 1px solid #00E5FF; background: rgba(0, 0, 0, 0.3); color: white;" />
+            <div style="display: flex; gap: 10px;">
+                <button type="submit" class="btn btn-primary" style="flex: 1;">Send Reset Link</button>
+                <button type="button" id="btn-hide-reset" class="btn btn-secondary" style="flex: 1;">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Signup Form -->
+    <div id="signup-form" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(26, 39, 68, 0.95); padding: 2rem; border-radius: 15px; border: 2px solid #00E5FF; box-shadow: 0 0 30px rgba(0, 229, 255, 0.3); z-index: 10000; min-width: 350px;">
+        <h3 style="color: #00E5FF; margin-bottom: 1.5rem; text-align: center;">Sign Up</h3>
+        <form id="signup-form-element">
+            <input type="email" id="signup-email" placeholder="Email" required style="width: 100%; padding: 12px; margin-bottom: 1rem; border-radius: 8px; border: 1px solid #00E5FF; background: rgba(0, 0, 0, 0.3); color: white;" />
+            <input type="password" id="signup-password" placeholder="Password" required style="width: 100%; padding: 12px; margin-bottom: 1.5rem; border-radius: 8px; border: 1px solid #00E5FF; background: rgba(0, 0, 0, 0.3); color: white;" />
+            <div style="display: flex; gap: 10px;">
+                <button type="submit" class="btn btn-primary" style="flex: 1;">Create account</button>
+                <button type="button" id="btn-hide-signup" class="btn btn-secondary" style="flex: 1;">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div id="auth-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 9999;"></div>
+</nav>
+
+<!-- Email Verification Banner -->
+<div id="verification-banner" style="display: none; background: linear-gradient(135deg, #FF6B35, #F7931E); padding: 12px 20px; text-align: center; color: white; font-weight: 600; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);">
+    ⚠️ Please verify your email address to access all features. 
+    <button id="resend-verification" style="margin-left: 15px; padding: 6px 15px; background: white; color: #FF6B35; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; transition: all 0.3s ease;">
+        Resend Email
+    </button>
+</div>
+
+
+
+
+
+ 
