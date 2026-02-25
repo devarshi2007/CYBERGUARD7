@@ -2064,51 +2064,7 @@ function initLazyLoading() {
     }
 }
 
-function initExitIntentPopup() {
-    const exitIntentModal = document.getElementById('exitIntentModal');
-    if (!exitIntentModal) return;
-
-    const closeExitIntent = document.getElementById('closeExitIntent');
-    const dismissExitIntent = document.getElementById('dismissExitIntent');
-    const startScanBtn = document.getElementById('startScanBtn');
-
-    if (localStorage.getItem('exitIntentShown')) return;
-
-    document.addEventListener('mouseleave', (e) => {
-        if (e.clientY <= 0) {
-            exitIntentModal.style.display = 'flex';
-            localStorage.setItem('exitIntentShown', 'true');
-        }
-    });
-
-    if (closeExitIntent) {
-        closeExitIntent.addEventListener('click', () => {
-            exitIntentModal.style.display = 'none';
-        });
-    }
-
-    if (dismissExitIntent) {
-        dismissExitIntent.addEventListener('click', () => {
-            exitIntentModal.style.display = 'none';
-        });
-    }
-
-    if (startScanBtn) {
-        startScanBtn.addEventListener('click', () => {
-            const email = prompt('Enter your email for free security scan results:');
-            if (email) {
-                alert(`Thank you! We'll send your security scan results to ${email} within 24 hours.`);
-                exitIntentModal.style.display = 'none';
-            }
-        });
-    }
-
-    exitIntentModal.addEventListener('click', (e) => {
-        if (e.target === exitIntentModal) {
-            exitIntentModal.style.display = 'none';
-        }
-    });
-}
+function initExitIntentPopup() {}
 
 const threatMapData = {
     regions: [
