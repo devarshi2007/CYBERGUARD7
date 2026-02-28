@@ -314,19 +314,30 @@
         </section>
 
         <section class="section behavior-simulator-section">
-            <h2>Secure Behavior Information</h2>
+            <h2>Secure Behavior Simulator</h2>
+            <p style="color:var(--text-muted);margin-bottom:2rem;text-align:center;">Make the right call in real-world cyber threat scenarios and see what happens.</p>
             <div class="behavior-sim">
-                <div class="behavior-scenario-selector">
-                    <button type="button" class="behavior-chip active" data-scenario="suspiciousEmail">Suspicious Email</button>
-                    <button type="button" class="behavior-chip" data-scenario="fakeLogin">Fake Login Page</button>
-                    <button type="button" class="behavior-chip" data-scenario="publicWifi">Public Wi-Fi Risk</button>
+
+                <div class="bsim-header">
+                    <div class="bsim-step-dots" id="bsimStepDots"></div>
+                    <div class="bsim-score-badge">Score&nbsp;<span id="bsimScore">0</span>&nbsp;/&nbsp;<span id="bsimMax">3</span></div>
                 </div>
-                <div class="behavior-dashboard">
-                    <div class="behavior-primary">
-                        <h3 id="behaviorScenarioTitle"></h3>
-                        <p id="behaviorScenarioDesc"></p>
+                <div class="bsim-progress-track"><div class="bsim-progress-fill" id="bsimFill" style="width:0%"></div></div>
+
+                <div id="bsimQuestion">
+                    <div class="bsim-scenario-tag" id="bsimTag"></div>
+                    <div class="behavior-primary" style="margin:1.2rem 0 1.8rem;">
+                        <h3 id="behaviorScenarioTitle" style="font-size:1.3rem;margin-bottom:.6rem;"></h3>
+                        <p id="behaviorScenarioDesc" style="color:var(--text-muted);line-height:1.7;"></p>
                     </div>
-                    <div class="behavior-action-grid">
+                    <p class="bsim-prompt-label">What would you do?</p>
+                    <div class="bsim-choices" id="bsimChoices"></div>
+                </div>
+
+                <div id="bsimResult" style="display:none;">
+                    <div class="bsim-verdict" id="bsimVerdict"></div>
+                    <div class="bsim-choices bsim-choices-result" id="bsimChoicesResult"></div>
+                    <div class="behavior-action-grid" style="margin-top:1.5rem;">
                         <div class="behavior-card good">
                             <h4>Right Action</h4>
                             <p id="behaviorRightAction"></p>
@@ -344,7 +355,22 @@
                             <ul id="behaviorSafePlan" class="behavior-safe-list"></ul>
                         </div>
                     </div>
+                    <div style="text-align:center;margin-top:1.8rem;">
+                        <button class="btn btn-primary" id="bsimNextBtn" style="padding:.8rem 2.5rem;font-size:1rem;"></button>
+                    </div>
                 </div>
+
+                <div id="bsimFinal" style="display:none;text-align:center;padding:2rem 1rem;">
+                    <div class="bsim-final-emoji" id="bsimFinalEmoji"></div>
+                    <h3 style="font-size:1.5rem;margin:.5rem 0;" id="bsimFinalTitle"></h3>
+                    <p style="color:var(--text-muted);margin:.5rem 0 1.4rem;" id="bsimFinalDesc"></p>
+                    <div class="bsim-final-score">
+                        <span id="bsimFinalNum" class="bsim-final-num"></span>
+                        <span style="color:var(--text-muted);font-size:1.5rem;">&thinsp;/ 3</span>
+                    </div>
+                    <button class="btn btn-secondary" id="bsimRetry" style="margin-top:1.6rem;padding:.8rem 2.2rem;">Try Again</button>
+                </div>
+
             </div>
         </section>
 
@@ -716,6 +742,474 @@
             });
         }
     </script>
+    <!-- Behaviour Simulator Interactive Script -->
+    <script>
+    (function(){
+
+        var pool = {
+            email: [
+                {
+                    icon:'📧', label:'Suspicious Email',
+                    title:'Payroll Verification Scam',
+                    desc:'You receive an urgent email from "hr-dept@company-updates.net" claiming your payroll details need verification. It has an attached spreadsheet and demands immediate action.',
+                    choices:[
+                        {text:'Download the spreadsheet and fill in your payroll details immediately', correct:false},
+                        {text:'Hover over the sender address, verify with HR via the internal directory, then report to IT', correct:true},
+                        {text:'Forward it to your whole team as a warning — open the file first to confirm it is malicious', correct:false}
+                    ],
+                    rightAction:'Verify the sender through a trusted channel (not the email itself), report to IT, and never open unexpected attachments.',
+                    wrongAction:'Downloading and enabling macros in the attachment, or clicking any links inside the email.',
+                    outcome:'A credential-stealing macro executes, implants persistence, and replays your session tokens within minutes.',
+                    staySafe:['Slow down when urgency and incentives appear together','Inspect sender domain spelling and SPF headers carefully','Open attachments only after IT sandbox validation']
+                },
+                {
+                    icon:'📧', label:'Suspicious Email',
+                    title:'IT Password Reset Trap',
+                    desc:'An email from "it-support@company-helpdesk.co" says your account will be locked in 2 hours unless you click a link to reset your password immediately.',
+                    choices:[
+                        {text:'Click the link immediately — a locked account would disrupt your whole day', correct:false},
+                        {text:'Ignore it entirely and do nothing', correct:false},
+                        {text:'Navigate to the IT portal directly by typing the URL, check your account status there, and call IT to confirm', correct:true}
+                    ],
+                    rightAction:'Go directly to the IT portal using a known URL or call IT support. Never click links in unsolicited password-reset emails.',
+                    wrongAction:'Clicking the link in the email takes you to a credential-harvesting page designed to look like your IT portal.',
+                    outcome:'Your credentials are captured instantly. The attacker uses them to pivot to internal systems within the hour.',
+                    staySafe:['Always verify password-reset requests through official channels','Legitimate IT will never threaten account lockout via email','Use a password manager — it will refuse to autofill on fake domains']
+                },
+                {
+                    icon:'📧', label:'Suspicious Email',
+                    title:'CEO Wire Transfer Request',
+                    desc:'You receive an email apparently from your CEO asking you to urgently wire £45,000 to a new supplier. The email says it is confidential and to bypass normal approval.',
+                    choices:[
+                        {text:'Process the wire transfer immediately — the CEO is asking and it sounds urgent', correct:false},
+                        {text:'Reply to the email asking for more details before transferring', correct:false},
+                        {text:'Call the CEO directly on their known number to verify the request before taking any action', correct:true}
+                    ],
+                    rightAction:'Always verify large financial requests through a separate, out-of-band channel (phone call to a known number).',
+                    wrongAction:'Transferring funds based on email alone, or replying to the same email thread — both expose you to Business Email Compromise (BEC) fraud.',
+                    outcome:'The funds are transferred to an attacker-controlled account. Recovery is rarely possible once the wire clears.',
+                    staySafe:['Establish a verbal confirmation policy for all financial transfers','Treat "confidential — bypass normal approval" as a red flag','BEC fraud costs organisations billions annually']
+                },
+                {
+                    icon:'📧', label:'Suspicious Email',
+                    title:'Parcel Delivery Failure',
+                    desc:'An email from "noreply@dhl-delivery-notice.com" says your parcel could not be delivered and you must pay a £2.99 customs fee by clicking the link within 24 hours.',
+                    choices:[
+                        {text:'Click the link and pay — £2.99 is a small amount and you are expecting a parcel', correct:false},
+                        {text:'Go directly to the official courier website and enter your tracking number there to check status', correct:true},
+                        {text:'Reply to the email asking for more details about the parcel', correct:false}
+                    ],
+                    rightAction:'Always check delivery status directly on the official courier website. Never click tracking or payment links in unsolicited emails.',
+                    wrongAction:'Clicking the link leads to a fake payment page that steals your card details, not just the £2.99.',
+                    outcome:'Your card number, expiry and CVV are harvested. The attacker makes fraudulent charges or sells the card data on dark-web markets.',
+                    staySafe:['Type courier URLs manually — never click delivery email links','Real couriers never ask for card payment via email link','The low fee amount is deliberately unthreatening to lower your guard']
+                },
+                {
+                    icon:'📧', label:'Suspicious Email',
+                    title:'Bank Suspicious Activity Alert',
+                    desc:'Your bank emails you: "We have detected suspicious activity on your account. Click here to verify your identity and prevent your account from being suspended."',
+                    choices:[
+                        {text:'Click the link and verify your identity — account suspension would be catastrophic', correct:false},
+                        {text:'Open a new browser tab, type your bank\'s official URL, log in there, and call the bank\'s fraud number if concerned', correct:true},
+                        {text:'Reply to the email with your account details to resolve it quickly', correct:false}
+                    ],
+                    rightAction:'Navigate directly to your bank\'s website. Call the number on the back of your card to verify any account concerns.',
+                    wrongAction:'Clicking the link or replying with account details sends your credentials directly to attackers.',
+                    outcome:'Your banking credentials are stolen. Attackers drain the account or take out loans in your name within minutes.',
+                    staySafe:['Banks never ask for passwords or full card numbers via email','Use the number on the back of your card — not one in the email','Enable transaction notifications so you spot fraud immediately']
+                },
+                {
+                    icon:'📧', label:'Suspicious Email',
+                    title:'HR Policy Update Attachment',
+                    desc:'An internal-looking email from "hr@yourcompany-hr-updates.com" asks all staff to review and sign the new remote-work policy. A PDF is attached.',
+                    choices:[
+                        {text:'Open the PDF and sign — it looks like a routine HR document', correct:false},
+                        {text:'Check the sender domain carefully, confirm with HR via Slack or phone, and only open the file after IT clears it', correct:true},
+                        {text:'Save it to open later — it is probably fine but you are busy right now', correct:false}
+                    ],
+                    rightAction:'Verify the sender domain matches your company\'s official domain. Confirm with HR through a separate channel before opening any attachment.',
+                    wrongAction:'Opening the PDF executes an embedded exploit or prompts you to enable malicious macros.',
+                    outcome:'A remote access trojan is silently installed, giving attackers persistent access to your machine and network.',
+                    staySafe:['Your company\'s real HR domain never has hyphens or extra words','Verify all policy attachments with HR directly','Sandboxed PDF viewers can catch malicious content before it executes']
+                },
+                {
+                    icon:'📧', label:'Suspicious Email',
+                    title:'Software License Expiry Scare',
+                    desc:'An email from "licensing@adobe-renewals-support.net" warns your Creative Cloud subscription expires today and will delete all your files unless you renew now via the attached link.',
+                    choices:[
+                        {text:'Click the renewal link immediately — losing your files would be devastating', correct:false},
+                        {text:'Open the Adobe website directly in a new tab and check your actual subscription status there', correct:true},
+                        {text:'Forward it to your IT team and wait — but do not click anything', correct:false}
+                    ],
+                    rightAction:'Go directly to the vendor\'s official website to check your actual subscription status. Never click renewal links in unsolicited emails.',
+                    wrongAction:'The link leads to a fake Adobe page that steals your Adobe ID credentials and payment information.',
+                    outcome:'Your Adobe account is taken over and linked payment method is charged fraudulently on attacker-controlled storefronts.',
+                    staySafe:['Software subscriptions never delete files on expiry — that is a fabricated threat','Check subscription status in the app or official website directly','The domain "adobe-renewals-support.net" is not adobe.com — always check']
+                }
+            ],
+            login: [
+                {
+                    icon:'🔐', label:'Fake Login Page',
+                    title:'Corporate SSO Clone',
+                    desc:'A colleague sends you a chat link. It opens a page that looks exactly like your corporate login portal — same logo, same layout. The URL reads "login-corp-portal.net/auth" and shows a padlock.',
+                    choices:[
+                        {text:'Close the tab, manually type the real URL in the address bar, and verify the certificate details', correct:true},
+                        {text:'Enter your username, password, and MFA one-time code — the padlock means it is secure', correct:false},
+                        {text:'Use the "Forgot Password" link on the page just to be safe before logging in', correct:false}
+                    ],
+                    rightAction:'Close the tab immediately, navigate to the official URL from your bookmarks or by typing it, and verify the certificate issuer.',
+                    wrongAction:'Entering credentials on a cloned site — even with HTTPS, attackers control the server.',
+                    outcome:'Attackers harvest your real credentials and OTP and start impossible-travel logins within seconds.',
+                    staySafe:['Bookmark official portals; use password manager autofill as a phishing detector','Verify the exact domain — not just the padlock','Enable hardware MFA (FIDO2) which is phishing-resistant']
+                },
+                {
+                    icon:'🔐', label:'Fake Login Page',
+                    title:'Microsoft 365 Sign-In Spoof',
+                    desc:'You click a link in an email about a shared document and land on a Microsoft 365 login page. The URL bar shows "microsoftonline-secure-login.com". The page looks pixel-perfect.',
+                    choices:[
+                        {text:'Log in — Microsoft 365 pages all look the same and the page is identical', correct:false},
+                        {text:'Close the tab, open a new one, and go to microsoft.com or portal.office.com directly', correct:true},
+                        {text:'Log in but immediately change your password afterward just to be safe', correct:false}
+                    ],
+                    rightAction:'Navigate to portal.office.com by typing it manually. Your password manager will not autofill on impostor domains.',
+                    wrongAction:'Logging in hands your M365 credentials to attackers. Changing your password afterward is too late — the session is already stolen.',
+                    outcome:'Attackers access your entire M365 tenant: emails, Teams, SharePoint, OneDrive, and all connected SaaS apps.',
+                    staySafe:['microsoft.com is the only valid Microsoft domain — hyphens are a red flag','A password manager autofilling only on the real domain is one of the best defences','Enable conditional access policies that restrict login from unusual locations']
+                },
+                {
+                    icon:'🔐', label:'Fake Login Page',
+                    title:'Google Workspace Login Trap',
+                    desc:'A Google security alert email links to "accounts-google-verify.com" which displays a standard Google login interface asking you to confirm your identity.',
+                    choices:[
+                        {text:'Log in to confirm your identity — the email was sent to your work address so it must be real', correct:false},
+                        {text:'Go to accounts.google.com directly in a new tab to check if there is a real security alert', correct:true},
+                        {text:'Enter only your email address but not your password, then decide', correct:false}
+                    ],
+                    rightAction:'Always go to accounts.google.com directly to review security alerts. Never follow email links to login pages.',
+                    wrongAction:'Even entering just your email confirms your address to attackers and may trigger a secondary attack. Entering your password gives full access.',
+                    outcome:'Your Google account is compromised. Attackers access Google Drive, Gmail history, and use your account for further phishing campaigns.',
+                    staySafe:['Real Google security alerts are visible in your account security page, not just via email','accounts-google-verify.com is not google.com','Use a hardware security key on your Google account']
+                },
+                {
+                    icon:'🔐', label:'Fake Login Page',
+                    title:'Online Banking Clone via Ad',
+                    desc:'You search for your bank\'s name and click the top result — a sponsored ad. It takes you to "barclays-banking-secure.com" which shows a perfect replica of your bank\'s login.',
+                    choices:[
+                        {text:'Log in — you found it via Google search so it should be legitimate', correct:false},
+                        {text:'Check the URL bar carefully, notice the domain is wrong, close the tab, and type your bank\'s real URL', correct:true},
+                        {text:'Log in but watch your account closely afterward for suspicious activity', correct:false}
+                    ],
+                    rightAction:'Bookmark your bank\'s official URL. Always type it manually or use your bookmark — never use search engine results for financial sites.',
+                    wrongAction:'Sponsored search results can be purchased by attackers. Logging in gives them your banking credentials immediately.',
+                    outcome:'Your online banking credentials are stolen. Attackers transfer funds, change contact details, and lock you out of your own account.',
+                    staySafe:['Bookmark all financial institution URLs and use only bookmarks','Search engine top results including ads can be malicious','Your bank\'s real domain has no hyphens, extra words, or variations']
+                },
+                {
+                    icon:'🔐', label:'Fake Login Page',
+                    title:'Hotel VPN Portal Intercept',
+                    desc:'While at a hotel, you connect to hotel Wi-Fi and are redirected to what looks like your company\'s VPN login page at "vpn-company-remote-access.net" before you can browse.',
+                    choices:[
+                        {text:'Enter your VPN credentials — captive portals always redirect you before connecting', correct:false},
+                        {text:'Disconnect, switch to mobile data, and verify the real VPN address with IT before logging in from a trusted network', correct:true},
+                        {text:'Enter your credentials but use a temporary password just in case', correct:false}
+                    ],
+                    rightAction:'VPN login pages should never appear as captive portals. Disconnect, use mobile data, and confirm the legitimate VPN URL with IT support.',
+                    wrongAction:'The page is a credential-harvesting proxy. Entering VPN credentials gives attackers access to your entire corporate network.',
+                    outcome:'Attackers use your VPN credentials to enter the corporate network, move laterally, and exfiltrate sensitive data.',
+                    staySafe:['Legitimate VPN portals never appear as hotel captive portals','Always confirm VPN URLs with IT before entering credentials','Use certificate pinning on your VPN client to detect intercepts']
+                },
+                {
+                    icon:'🔐', label:'Fake Login Page',
+                    title:'GitHub Security Alert Phish',
+                    desc:'You receive a GitHub security email saying unusual activity was detected. It links to "github-security-check.io" which displays a standard GitHub sign-in asking you to verify ownership.',
+                    choices:[
+                        {text:'Sign in to verify — unusual activity on your repos could be a serious breach', correct:false},
+                        {text:'Open github.com manually in a new tab and check security settings under your profile', correct:true},
+                        {text:'Sign in using "Sign in with Google" on that page to avoid entering your GitHub password', correct:false}
+                    ],
+                    rightAction:'Go directly to github.com and check your security log under Settings > Security. GitHub will never redirect you to a third-party domain.',
+                    wrongAction:'Signing in via any method on the fake domain hands over your session token. Using OAuth "Sign in with Google" on a fake page is equally dangerous.',
+                    outcome:'Your GitHub account is taken over. The attacker clones private repos, plants backdoors in your code, and changes your SSH keys.',
+                    staySafe:['github.com is the only domain for GitHub — any variation is fake','Review your GitHub security log regularly for unrecognised logins','Enable hardware 2FA on your GitHub account']
+                },
+                {
+                    icon:'🔐', label:'Fake Login Page',
+                    title:'Intranet Clone via Search Result',
+                    desc:'You Google your company intranet because you forgot the URL. A result takes you to "company-intranet-portal.co.uk" — it looks identical to your real intranet with the company logo.',
+                    choices:[
+                        {text:'Log in — it looks exactly right and you need to access your files', correct:false},
+                        {text:'Close the tab, ask a colleague for the official intranet URL or check the company email footer for the correct link', correct:true},
+                        {text:'Log in but only look at non-sensitive pages', correct:false}
+                    ],
+                    rightAction:'Bookmark your intranet URL from a trusted source. Never use search engine results to find corporate portals.',
+                    wrongAction:'Logging in regardless of which pages you visit hands over your Active Directory credentials to the attacker.',
+                    outcome:'Your Active Directory credentials are compromised. Attackers use them for lateral movement across the entire corporate network.',
+                    staySafe:['Bookmark internal tools once you have the confirmed URL from IT','Never search for your intranet — attackers buy SEO-optimised fake pages','Your IT team can always provide the correct URL via verified channels']
+                }
+            ],
+            wifi: [
+                {
+                    icon:'📶', label:'Public Wi-Fi Risk',
+                    title:'Airport Free Wi-Fi Trap',
+                    desc:'You are at an airport. A network called "Airport_Free_WiFi" appears with no password required. You need to upload an urgent presentation to cloud storage before boarding.',
+                    choices:[
+                        {text:'Connect to the free network and upload your file quickly — you are in a hurry', correct:false},
+                        {text:'Connect to the free network but turn on your corporate VPN first', correct:false},
+                        {text:'Use your phone\'s personal mobile hotspot and avoid the unknown network entirely', correct:true}
+                    ],
+                    rightAction:'Use your personal mobile hotspot or a confirmed trusted network. Unknown open networks are always a risk regardless of VPN.',
+                    wrongAction:'Connecting to an unknown network — even through VPN, the rogue AP can perform DNS hijacking and traffic interception before the tunnel establishes.',
+                    outcome:'A man-in-the-middle attacker captures session cookies and injects a fake browser update that installs spyware.',
+                    staySafe:['Prefer your personal hotspot over any unknown infrastructure','Disable auto-connect to open networks in device settings','Use HTTPS-only mode in your browser as a minimum baseline']
+                },
+                {
+                    icon:'📶', label:'Public Wi-Fi Risk',
+                    title:'Hotel Guest Wi-Fi Eavesdrop',
+                    desc:'Your hotel room has Wi-Fi. After connecting with the room code, you start reviewing confidential client contracts stored in your cloud drive before an early meeting.',
+                    choices:[
+                        {text:'Continue reviewing — hotel Wi-Fi is paid and therefore more trustworthy than free public Wi-Fi', correct:false},
+                        {text:'Connect through your corporate VPN before accessing any confidential documents', correct:true},
+                        {text:'Download the documents locally first, then disconnect from Wi-Fi and read them offline', correct:false}
+                    ],
+                    rightAction:'Always use your corporate VPN before accessing sensitive data on any network you do not personally control — including paid hotel Wi-Fi.',
+                    wrongAction:'Hotel Wi-Fi is shared infrastructure accessible to all guests and hotel staff. Traffic can be intercepted without you knowing.',
+                    outcome:'An attacker on the same network captures unencrypted document traffic and extracts confidential client data.',
+                    staySafe:['Paid hotel Wi-Fi is not more secure — it is still shared infrastructure','Always activate VPN before accessing work documents on hotel networks','Consider downloading sensitive files before leaving the office on a trusted network']
+                },
+                {
+                    icon:'📶', label:'Public Wi-Fi Risk',
+                    title:'Coffee Shop Evil Twin',
+                    desc:'You are at a coffee shop. Two networks appear: "CafeNero" (the real one, with a coffee-branded splash page) and "CafeNero_Free" (no password, no splash page, faster signal).',
+                    choices:[
+                        {text:'Connect to "CafeNero_Free" — no login page means fewer friction and faster access', correct:false},
+                        {text:'Ask a staff member which network is the official one, connect to that, and use VPN for any sensitive work', correct:true},
+                        {text:'Connect to "CafeNero_Free" but only browse non-sensitive sites', correct:false}
+                    ],
+                    rightAction:'Always verify the correct network name with a member of staff. Use VPN regardless of which network you use in public.',
+                    wrongAction:'"CafeNero_Free" is a rogue access point mimicking the real network. Even browsing "non-sensitive" sites leaks cookies and DNS queries.',
+                    outcome:'The attacker performing the evil-twin attack captures all your traffic, including session tokens from sites you consider safe.',
+                    staySafe:['Always ask staff to confirm the official Wi-Fi name and password','Evil twins often have a stronger signal than the real AP','VPN protects you even if you accidentally connect to a rogue network']
+                },
+                {
+                    icon:'📶', label:'Public Wi-Fi Risk',
+                    title:'Train Station Hotspot Risk',
+                    desc:'On a commute, you connect to "TrainStation_WiFi" to catch up on emails. You notice you can access the internet without any login or captive portal page.',
+                    choices:[
+                        {text:'Continue using it — no login page actually means less data is collected about you', correct:false},
+                        {text:'Limit use to reading already-downloaded emails and avoid logging into any accounts', correct:false},
+                        {text:'Disconnect immediately, switch to mobile data, and use that for any account access', correct:true}
+                    ],
+                    rightAction:'An open Wi-Fi network with no authentication is a significant risk. Switch to mobile data for anything involving login credentials.',
+                    wrongAction:'Logging in to even one account on an unverified open network exposes your session token to anyone monitoring traffic.',
+                    outcome:'An attacker performs a passive sniffing attack, collecting session tokens from multiple commuters and using them to hijack accounts.',
+                    staySafe:['No captive portal does not mean the network is safe — it may mean it is a trap','Mobile data is almost always safer than public Wi-Fi for account access','Session hijacking attacks are passive — you will not notice them happening']
+                },
+                {
+                    icon:'📶', label:'Public Wi-Fi Risk',
+                    title:'Conference Network Snooping',
+                    desc:'At an industry conference, the event provides "Conference_Guest_WiFi" with a printed password on your badge. You want to demo a client\'s live system remotely.',
+                    choices:[
+                        {text:'Connect and demo directly — the network password is secure since it is printed on badges', correct:false},
+                        {text:'Use the conference Wi-Fi but only after enabling your corporate VPN for the remote demo', correct:false},
+                        {text:'Use your phone as a mobile hotspot and tether your laptop for the demo to ensure a private, isolated connection', correct:true}
+                    ],
+                    rightAction:'Conference networks are shared by hundreds of attendees including potential competitors. Use a personal hotspot for live client demos.',
+                    wrongAction:'Using conference Wi-Fi with corporate VPN for a client demo still exposes metadata and timing information. The safest option is a private hotspot.',
+                    outcome:'A competitor on the same network performs traffic analysis, identifying which client system you are accessing and timing the demo.',
+                    staySafe:['Conference Wi-Fi passwords are known to all 500 attendees in the room','Never demo live client systems on shared infrastructure','A personal hotspot takes 30 seconds to set up and removes the risk entirely']
+                },
+                {
+                    icon:'📶', label:'Public Wi-Fi Risk',
+                    title:'Shopping Mall Free Wi-Fi',
+                    desc:'At a shopping centre, you connect to "Mall_FreeWifi" to quickly check your work emails while waiting. You see an urgent email asking you to approve a contract via an online portal.',
+                    choices:[
+                        {text:'Log in to the portal and approve — it is urgent and the Wi-Fi is provided by the mall', correct:false},
+                        {text:'Switch to mobile data to log in to the portal and approve the contract securely', correct:true},
+                        {text:'Reply to the email approving it — replying is safer than clicking a portal link', correct:false}
+                    ],
+                    rightAction:'Switch to mobile data for any authentication or contract approval. Mall Wi-Fi is open infrastructure accessible to any visitor.',
+                    wrongAction:'Approving via portal over unsecured Wi-Fi exposes your session. Replying to the email is equally risky if the email itself was intercepted.',
+                    outcome:'An attacker intercepts your session token during portal login, later impersonates you to approve fraudulent contracts.',
+                    staySafe:['Mall Wi-Fi is public infrastructure — treat it like a risk, not a convenience','Mobile data uses encrypted cellular connections and is significantly safer','For anything requiring authentication, mobile data or VPN is non-negotiable']
+                }
+            ]
+        };
+
+        function pickOne(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+
+        function buildSession(){
+            var e = pickOne(pool.email);
+            var l = pickOne(pool.login);
+            var w = pickOne(pool.wifi);
+            var s = [e, l, w];
+            for(var i=s.length-1;i>0;i--){
+                var j=Math.floor(Math.random()*(i+1));
+                var tmp=s[i]; s[i]=s[j]; s[j]=tmp;
+            }
+            return s;
+        }
+
+        var simScenarios = buildSession();
+        var total = simScenarios.length;
+        var state = { current:0, score:0, answered:false };
+
+        function renderDots(){
+            var dotsEl = document.getElementById('bsimStepDots');
+            if(!dotsEl) return;
+            dotsEl.innerHTML = '';
+            simScenarios.forEach(function(s,i){
+                var dot = document.createElement('div');
+                dot.className = 'bsim-dot' + (i===state.current?' bsim-dot-active':'') + (i<state.current?' bsim-dot-done':'');
+                dot.title = s.label;
+                dotsEl.appendChild(dot);
+            });
+        }
+
+        function renderProgress(){
+            var fill = document.getElementById('bsimFill');
+            if(fill) fill.style.width = ((state.current)/total*100)+'%';
+        }
+
+        function renderQuestion(){
+            var s = simScenarios[state.current];
+            var tag = document.getElementById('bsimTag');
+            if(tag){ tag.textContent = s.icon+' '+s.label; }
+            var title = document.getElementById('behaviorScenarioTitle');
+            if(title) title.textContent = s.title;
+            var desc = document.getElementById('behaviorScenarioDesc');
+            if(desc) desc.textContent = s.desc;
+            var choicesEl = document.getElementById('bsimChoices');
+            if(!choicesEl) return;
+            choicesEl.innerHTML='';
+            s.choices.forEach(function(c,i){
+                var btn = document.createElement('button');
+                btn.type='button';
+                btn.className='bsim-choice-btn';
+                btn.innerHTML='<span class="bsim-choice-letter">'+String.fromCharCode(65+i)+'</span><span class="bsim-choice-text">'+c.text+'</span>';
+                btn.addEventListener('click', function(){ handleChoice(i); });
+                choicesEl.appendChild(btn);
+            });
+        }
+
+        function handleChoice(idx){
+            if(state.answered) return;
+            state.answered = true;
+            var s = simScenarios[state.current];
+            var correct = s.choices[idx].correct;
+            if(correct) state.score++;
+
+            var scoreEl = document.getElementById('bsimScore');
+            if(scoreEl) scoreEl.textContent = state.score;
+
+            var verdict = document.getElementById('bsimVerdict');
+            if(verdict){
+                verdict.className = 'bsim-verdict '+(correct?'bsim-verdict-correct':'bsim-verdict-wrong');
+                verdict.textContent = correct ? '✅  Correct! Great instinct.' : '❌  Incorrect — here\'s what you should do:';
+            }
+
+            var resultChoices = document.getElementById('bsimChoicesResult');
+            if(resultChoices){
+                resultChoices.innerHTML='';
+                s.choices.forEach(function(c,i){
+                    var div = document.createElement('div');
+                    div.className='bsim-choice-result-item '+(c.correct?'bsim-choice-correct':'bsim-choice-wrong')+(i===idx?' bsim-choice-selected':'');
+                    div.innerHTML='<span class="bsim-choice-letter">'+String.fromCharCode(65+i)+'</span><span class="bsim-choice-text">'+c.text+'</span><span class="bsim-choice-mark">'+(c.correct?'✓':'✗')+'</span>';
+                    resultChoices.appendChild(div);
+                });
+            }
+
+            document.getElementById('behaviorRightAction').textContent = s.rightAction;
+            document.getElementById('behaviorWrongAction').textContent = s.wrongAction;
+            document.getElementById('behaviorOutcome').textContent = s.outcome;
+            var ul = document.getElementById('behaviorSafePlan');
+            ul.innerHTML='';
+            s.staySafe.forEach(function(tip){
+                var li=document.createElement('li');
+                li.textContent=tip;
+                ul.appendChild(li);
+            });
+
+            var nextBtn = document.getElementById('bsimNextBtn');
+            if(nextBtn){
+                nextBtn.textContent = state.current < total-1 ? 'Next Scenario →' : 'See My Results';
+                nextBtn.onclick = function(){ advanceStep(); };
+            }
+
+            document.getElementById('bsimQuestion').style.display='none';
+            document.getElementById('bsimResult').style.display='block';
+        }
+
+        function advanceStep(){
+            state.current++;
+            if(state.current >= total){
+                showFinal();
+            } else {
+                state.answered=false;
+                document.getElementById('bsimResult').style.display='none';
+                document.getElementById('bsimQuestion').style.display='block';
+                renderDots();
+                renderProgress();
+                renderQuestion();
+            }
+        }
+
+        function showFinal(){
+            document.getElementById('bsimResult').style.display='none';
+            document.getElementById('bsimQuestion').style.display='none';
+            var fill = document.getElementById('bsimFill');
+            if(fill) fill.style.width='100%';
+            renderDots();
+
+            var emoji = document.getElementById('bsimFinalEmoji');
+            var title = document.getElementById('bsimFinalTitle');
+            var desc  = document.getElementById('bsimFinalDesc');
+            var num   = document.getElementById('bsimFinalNum');
+            var maxEl = document.querySelector('#bsimFinal .bsim-final-score span:last-child');
+            if(num) num.textContent = state.score;
+            if(maxEl) maxEl.textContent = '\u2009/ '+total;
+            if(state.score===total){
+                if(emoji) emoji.textContent='🏆';
+                if(title) title.textContent='Security Expert!';
+                if(desc)  desc.textContent='Perfect score — you made the right call in every scenario. Your instincts can stop a breach.';
+            } else if(state.score>=total*0.66){
+                if(emoji) emoji.textContent='🛡️';
+                if(title) title.textContent='Security Aware!';
+                if(desc)  desc.textContent='Good work — most answers correct. Review the scenario you missed to sharpen your defence skills.';
+            } else if(state.score>=1){
+                if(emoji) emoji.textContent='⚠️';
+                if(title) title.textContent='Stay Alert!';
+                if(desc)  desc.textContent='Cyber threats are designed to trick you. Review the correct answers and try a fresh set.';
+            } else {
+                if(emoji) emoji.textContent='🎓';
+                if(title) title.textContent='Keep Learning!';
+                if(desc)  desc.textContent='Every mistake is a lesson. Study the correct answers and try again — you will improve fast.';
+            }
+
+            var retry = document.getElementById('bsimRetry');
+            if(retry) retry.onclick = function(){
+                simScenarios = buildSession();
+                total = simScenarios.length;
+                state.current=0; state.score=0; state.answered=false;
+                var scoreEl = document.getElementById('bsimScore');
+                if(scoreEl) scoreEl.textContent='0';
+                document.getElementById('bsimFinal').style.display='none';
+                document.getElementById('bsimQuestion').style.display='block';
+                renderDots(); renderProgress(); renderQuestion();
+            };
+
+            document.getElementById('bsimFinal').style.display='block';
+        }
+
+        document.addEventListener('DOMContentLoaded', function(){
+            var maxEl = document.getElementById('bsimMax');
+            if(maxEl) maxEl.textContent = total;
+            renderDots();
+            renderProgress();
+            renderQuestion();
+        });
+    })();
+    </script>
+
     <!-- Auto-reload script for development -->
     <script>
         let lastModified = null;

@@ -892,46 +892,6 @@ function renderAttackPath(key) {
 }
 
 function initBehaviorSimulator() {
-    console.log('initBehaviorSimulator called');
-    const chips = document.querySelectorAll('.behavior-chip');
-    console.log('Behavior chips found:', chips.length);
-    const defaultChip = chips.length ? chips[0] : null;
-    if (!defaultChip) {
-        console.log('No behavior chips found');
-        return;
-    }
-    chips.forEach(chip => {
-        chip.addEventListener('click', function() {
-            chips.forEach(button => button.classList.remove('active'));
-            this.classList.add('active');
-            renderBehaviorScenario(this.getAttribute('data-scenario'));
-        });
-    });
-    renderBehaviorScenario(defaultChip.getAttribute('data-scenario'));
-}
-
-function renderBehaviorScenario(key) {
-    const data = behaviorScenarioLibrary[key];
-    const title = document.getElementById('behaviorScenarioTitle');
-    const description = document.getElementById('behaviorScenarioDesc');
-    const rightAction = document.getElementById('behaviorRightAction');
-    const wrongAction = document.getElementById('behaviorWrongAction');
-    const outcome = document.getElementById('behaviorOutcome');
-    const safeList = document.getElementById('behaviorSafePlan');
-    if (!data || !title || !description || !rightAction || !wrongAction || !outcome || !safeList) {
-        return;
-    }
-    title.textContent = data.title;
-    description.textContent = data.description;
-    rightAction.textContent = data.rightAction;
-    wrongAction.textContent = data.wrongAction;
-    outcome.textContent = data.outcome;
-    safeList.innerHTML = '';
-    data.staySafe.forEach(item => {
-        const li = document.createElement('li');
-        li.textContent = item;
-        safeList.appendChild(li);
-    });
 }
 
 function toggleAccordion(element) {
