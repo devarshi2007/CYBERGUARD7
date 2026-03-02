@@ -320,7 +320,7 @@
 
                 <div class="bsim-header">
                     <div class="bsim-step-dots" id="bsimStepDots"></div>
-                    <div class="bsim-score-badge">Score&nbsp;<span id="bsimScore">0</span>&nbsp;/&nbsp;<span id="bsimMax">3</span></div>
+                    <div class="bsim-score-badge">Score&nbsp;<span id="bsimScore">0</span>&nbsp;/&nbsp;3</div>
                 </div>
                 <div class="bsim-progress-track"><div class="bsim-progress-fill" id="bsimFill" style="width:0%"></div></div>
 
@@ -366,7 +366,7 @@
                     <p style="color:var(--text-muted);margin:.5rem 0 1.4rem;" id="bsimFinalDesc"></p>
                     <div class="bsim-final-score">
                         <span id="bsimFinalNum" class="bsim-final-num"></span>
-                        <span id="bsimFinalMax" style="color:var(--text-muted);font-size:1.5rem;">&thinsp;/ 20</span>
+                        <span style="color:var(--text-muted);font-size:1.5rem;">&thinsp;/ 3</span>
                     </div>
                     <button class="btn btn-secondary" id="bsimRetry" style="margin-top:1.6rem;padding:.8rem 2.2rem;">Try Again</button>
                 </div>
@@ -736,7 +736,7 @@
         var pool = {
             email: [
                 {
-                    icon:'📧', label:'Suspicious Email',
+                     label:'Suspicious Email',
                     title:'Payroll Verification Scam',
                     desc:'You receive an urgent email from "hr-dept@company-updates.net" claiming your payroll details need verification. It has an attached spreadsheet and demands immediate action.',
                     choices:[
@@ -750,7 +750,7 @@
                     staySafe:['Slow down when urgency and incentives appear together','Inspect sender domain spelling and SPF headers carefully','Open attachments only after IT sandbox validation']
                 },
                 {
-                    icon:'📧', label:'Suspicious Email',
+                    label:'Suspicious Email',
                     title:'IT Password Reset Trap',
                     desc:'An email from "it-support@company-helpdesk.co" says your account will be locked in 2 hours unless you click a link to reset your password immediately.',
                     choices:[
@@ -764,7 +764,7 @@
                     staySafe:['Always verify password-reset requests through official channels','Legitimate IT will never threaten account lockout via email','Use a password manager — it will refuse to autofill on fake domains']
                 },
                 {
-                    icon:'📧', label:'Suspicious Email',
+                    label:'Suspicious Email',
                     title:'CEO Wire Transfer Request',
                     desc:'You receive an email apparently from your CEO asking you to urgently wire £45,000 to a new supplier. The email says it is confidential and to bypass normal approval.',
                     choices:[
@@ -778,7 +778,7 @@
                     staySafe:['Establish a verbal confirmation policy for all financial transfers','Treat "confidential — bypass normal approval" as a red flag','BEC fraud costs organisations billions annually']
                 },
                 {
-                    icon:'📧', label:'Suspicious Email',
+                 label:'Suspicious Email',
                     title:'Parcel Delivery Failure',
                     desc:'An email from "noreply@dhl-delivery-notice.com" says your parcel could not be delivered and you must pay a £2.99 customs fee by clicking the link within 24 hours.',
                     choices:[
@@ -792,7 +792,7 @@
                     staySafe:['Type courier URLs manually — never click delivery email links','Real couriers never ask for card payment via email link','The low fee amount is deliberately unthreatening to lower your guard']
                 },
                 {
-                    icon:'📧', label:'Suspicious Email',
+                    label:'Suspicious Email',
                     title:'Bank Suspicious Activity Alert',
                     desc:'Your bank emails you: "We have detected suspicious activity on your account. Click here to verify your identity and prevent your account from being suspended."',
                     choices:[
@@ -806,7 +806,7 @@
                     staySafe:['Banks never ask for passwords or full card numbers via email','Use the number on the back of your card — not one in the email','Enable transaction notifications so you spot fraud immediately']
                 },
                 {
-                    icon:'📧', label:'Suspicious Email',
+                    label:'Suspicious Email',
                     title:'HR Policy Update Attachment',
                     desc:'An internal-looking email from "hr@yourcompany-hr-updates.com" asks all staff to review and sign the new remote-work policy. A PDF is attached.',
                     choices:[
@@ -820,7 +820,7 @@
                     staySafe:['Your company\'s real HR domain never has hyphens or extra words','Verify all policy attachments with HR directly','Sandboxed PDF viewers can catch malicious content before it executes']
                 },
                 {
-                    icon:'📧', label:'Suspicious Email',
+                    label:'Suspicious Email',
                     title:'Software License Expiry Scare',
                     desc:'An email from "licensing@adobe-renewals-support.net" warns your Creative Cloud subscription expires today and will delete all your files unless you renew now via the attached link.',
                     choices:[
@@ -836,7 +836,7 @@
             ],
             login: [
                 {
-                    icon:'🔐', label:'Fake Login Page',
+                    label:'Fake Login Page',
                     title:'Corporate SSO Clone',
                     desc:'A colleague sends you a chat link. It opens a page that looks exactly like your corporate login portal — same logo, same layout. The URL reads "login-corp-portal.net/auth" and shows a padlock.',
                     choices:[
@@ -850,7 +850,7 @@
                     staySafe:['Bookmark official portals; use password manager autofill as a phishing detector','Verify the exact domain — not just the padlock','Enable hardware MFA (FIDO2) which is phishing-resistant']
                 },
                 {
-                    icon:'🔐', label:'Fake Login Page',
+                 label:'Fake Login Page',
                     title:'Microsoft 365 Sign-In Spoof',
                     desc:'You click a link in an email about a shared document and land on a Microsoft 365 login page. The URL bar shows "microsoftonline-secure-login.com". The page looks pixel-perfect.',
                     choices:[
@@ -864,7 +864,7 @@
                     staySafe:['microsoft.com is the only valid Microsoft domain — hyphens are a red flag','A password manager autofilling only on the real domain is one of the best defences','Enable conditional access policies that restrict login from unusual locations']
                 },
                 {
-                    icon:'🔐', label:'Fake Login Page',
+                     label:'Fake Login Page',
                     title:'Google Workspace Login Trap',
                     desc:'A Google security alert email links to "accounts-google-verify.com" which displays a standard Google login interface asking you to confirm your identity.',
                     choices:[
@@ -878,7 +878,7 @@
                     staySafe:['Real Google security alerts are visible in your account security page, not just via email','accounts-google-verify.com is not google.com','Use a hardware security key on your Google account']
                 },
                 {
-                    icon:'🔐', label:'Fake Login Page',
+                     label:'Fake Login Page',
                     title:'Online Banking Clone via Ad',
                     desc:'You search for your bank\'s name and click the top result — a sponsored ad. It takes you to "barclays-banking-secure.com" which shows a perfect replica of your bank\'s login.',
                     choices:[
@@ -892,7 +892,7 @@
                     staySafe:['Bookmark all financial institution URLs and use only bookmarks','Search engine top results including ads can be malicious','Your bank\'s real domain has no hyphens, extra words, or variations']
                 },
                 {
-                    icon:'🔐', label:'Fake Login Page',
+                    label:'Fake Login Page',
                     title:'Hotel VPN Portal Intercept',
                     desc:'While at a hotel, you connect to hotel Wi-Fi and are redirected to what looks like your company\'s VPN login page at "vpn-company-remote-access.net" before you can browse.',
                     choices:[
@@ -906,7 +906,7 @@
                     staySafe:['Legitimate VPN portals never appear as hotel captive portals','Always confirm VPN URLs with IT before entering credentials','Use certificate pinning on your VPN client to detect intercepts']
                 },
                 {
-                    icon:'🔐', label:'Fake Login Page',
+                    label:'Fake Login Page',
                     title:'GitHub Security Alert Phish',
                     desc:'You receive a GitHub security email saying unusual activity was detected. It links to "github-security-check.io" which displays a standard GitHub sign-in asking you to verify ownership.',
                     choices:[
@@ -920,7 +920,7 @@
                     staySafe:['github.com is the only domain for GitHub — any variation is fake','Review your GitHub security log regularly for unrecognised logins','Enable hardware 2FA on your GitHub account']
                 },
                 {
-                    icon:'🔐', label:'Fake Login Page',
+                 label:'Fake Login Page',
                     title:'Intranet Clone via Search Result',
                     desc:'You Google your company intranet because you forgot the URL. A result takes you to "company-intranet-portal.co.uk" — it looks identical to your real intranet with the company logo.',
                     choices:[
@@ -936,7 +936,7 @@
             ],
             wifi: [
                 {
-                    icon:'📶', label:'Public Wi-Fi Risk',
+                    label:'Public Wi-Fi Risk',
                     title:'Airport Free Wi-Fi Trap',
                     desc:'You are at an airport. A network called "Airport_Free_WiFi" appears with no password required. You need to upload an urgent presentation to cloud storage before boarding.',
                     choices:[
@@ -950,7 +950,7 @@
                     staySafe:['Prefer your personal hotspot over any unknown infrastructure','Disable auto-connect to open networks in device settings','Use HTTPS-only mode in your browser as a minimum baseline']
                 },
                 {
-                    icon:'📶', label:'Public Wi-Fi Risk',
+                 label:'Public Wi-Fi Risk',
                     title:'Hotel Guest Wi-Fi Eavesdrop',
                     desc:'Your hotel room has Wi-Fi. After connecting with the room code, you start reviewing confidential client contracts stored in your cloud drive before an early meeting.',
                     choices:[
@@ -964,7 +964,7 @@
                     staySafe:['Paid hotel Wi-Fi is not more secure — it is still shared infrastructure','Always activate VPN before accessing work documents on hotel networks','Consider downloading sensitive files before leaving the office on a trusted network']
                 },
                 {
-                    icon:'📶', label:'Public Wi-Fi Risk',
+                     label:'Public Wi-Fi Risk',
                     title:'Coffee Shop Evil Twin',
                     desc:'You are at a coffee shop. Two networks appear: "CafeNero" (the real one, with a coffee-branded splash page) and "CafeNero_Free" (no password, no splash page, faster signal).',
                     choices:[
@@ -978,7 +978,7 @@
                     staySafe:['Always ask staff to confirm the official Wi-Fi name and password','Evil twins often have a stronger signal than the real AP','VPN protects you even if you accidentally connect to a rogue network']
                 },
                 {
-                    icon:'📶', label:'Public Wi-Fi Risk',
+                     label:'Public Wi-Fi Risk',
                     title:'Train Station Hotspot Risk',
                     desc:'On a commute, you connect to "TrainStation_WiFi" to catch up on emails. You notice you can access the internet without any login or captive portal page.',
                     choices:[
@@ -992,7 +992,7 @@
                     staySafe:['No captive portal does not mean the network is safe — it may mean it is a trap','Mobile data is almost always safer than public Wi-Fi for account access','Session hijacking attacks are passive — you will not notice them happening']
                 },
                 {
-                    icon:'📶', label:'Public Wi-Fi Risk',
+                    label:'Public Wi-Fi Risk',
                     title:'Conference Network Snooping',
                     desc:'At an industry conference, the event provides "Conference_Guest_WiFi" with a printed password on your badge. You want to demo a client\'s live system remotely.',
                     choices:[
@@ -1006,7 +1006,7 @@
                     staySafe:['Conference Wi-Fi passwords are known to all 500 attendees in the room','Never demo live client systems on shared infrastructure','A personal hotspot takes 30 seconds to set up and removes the risk entirely']
                 },
                 {
-                    icon:'📶', label:'Public Wi-Fi Risk',
+                    label:'Public Wi-Fi Risk',
                     title:'Shopping Mall Free Wi-Fi',
                     desc:'At a shopping centre, you connect to "Mall_FreeWifi" to quickly check your work emails while waiting. You see an urgent email asking you to approve a contract via an online portal.',
                     choices:[
@@ -1023,12 +1023,8 @@
         };
 
         function buildSession(){
-            var all = pool.email.concat(pool.login).concat(pool.wifi);
-            for(var i=all.length-1;i>0;i--){
-                var j=Math.floor(Math.random()*(i+1));
-                var tmp=all[i]; all[i]=all[j]; all[j]=tmp;
-            }
-            return all;
+            function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+            return [pick(pool.email), pick(pool.login), pick(pool.wifi)];
         }
 
         var simScenarios = buildSession();
@@ -1148,21 +1144,15 @@
             var num   = document.getElementById('bsimFinalNum');
             var maxEl = document.getElementById('bsimFinalMax');
             if(num) num.textContent = state.score;
-            if(maxEl) maxEl.textContent = '\u2009/ '+total;
-            var pct = state.score / total;
-            if(pct === 1){
+            if(state.score === 3){
                 if(emoji) emoji.textContent='🏆';
                 if(title) title.textContent='Security Expert!';
-                if(desc)  desc.textContent='Perfect score — you made the right call in all 20 scenarios. Your instincts can stop a real breach.';
-            } else if(pct >= 0.80){
+                if(desc)  desc.textContent='Perfect score — you made the right call in every scenario. Your instincts can stop a real breach.';
+            } else if(state.score === 2){
                 if(emoji) emoji.textContent='🛡️';
-                if(title) title.textContent='Security Champion!';
-                if(desc)  desc.textContent='Excellent work — 80%+ correct. You have strong cyber awareness. Review your misses to reach 100%.';
-            } else if(pct >= 0.60){
-                if(emoji) emoji.textContent='🔍';
                 if(title) title.textContent='Security Aware!';
-                if(desc)  desc.textContent='Good foundation — 60%+ correct. Review the scenarios you missed to sharpen your defence instincts.';
-            } else if(pct >= 0.40){
+                if(desc)  desc.textContent='Good work — 2 out of 3. Review the one you missed to sharpen your defence instincts.';
+            } else if(state.score === 1){
                 if(emoji) emoji.textContent='⚠️';
                 if(title) title.textContent='Stay Alert!';
                 if(desc)  desc.textContent='Cyber threats are designed to trick you. Study the correct answers carefully and try again.';
@@ -1188,8 +1178,6 @@
         }
 
         document.addEventListener('DOMContentLoaded', function(){
-            var maxEl = document.getElementById('bsimMax');
-            if(maxEl) maxEl.textContent = total;
             renderDots();
             renderProgress();
             renderQuestion();
