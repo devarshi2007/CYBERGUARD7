@@ -366,7 +366,7 @@
                     <p style="color:var(--text-muted);margin:.5rem 0 1.4rem;" id="bsimFinalDesc"></p>
                     <div class="bsim-final-score">
                         <span id="bsimFinalNum" class="bsim-final-num"></span>
-                        <span style="color:var(--text-muted);font-size:1.5rem;">&thinsp;/ 3</span>
+                        <span id="bsimFinalMax" style="color:var(--text-muted);font-size:1.5rem;">&thinsp;/ 20</span>
                     </div>
                     <button class="btn btn-secondary" id="bsimRetry" style="margin-top:1.6rem;padding:.8rem 2.2rem;">Try Again</button>
                 </div>
@@ -1022,18 +1022,13 @@
             ]
         };
 
-        function pickOne(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
-
         function buildSession(){
-            var e = pickOne(pool.email);
-            var l = pickOne(pool.login);
-            var w = pickOne(pool.wifi);
-            var s = [e, l, w];
-            for(var i=s.length-1;i>0;i--){
+            var all = pool.email.concat(pool.login).concat(pool.wifi);
+            for(var i=all.length-1;i>0;i--){
                 var j=Math.floor(Math.random()*(i+1));
-                var tmp=s[i]; s[i]=s[j]; s[j]=tmp;
+                var tmp=all[i]; all[i]=all[j]; all[j]=tmp;
             }
-            return s;
+            return all;
         }
 
         var simScenarios = buildSession();
@@ -1151,25 +1146,30 @@
             var title = document.getElementById('bsimFinalTitle');
             var desc  = document.getElementById('bsimFinalDesc');
             var num   = document.getElementById('bsimFinalNum');
-            var maxEl = document.querySelector('#bsimFinal .bsim-final-score span:last-child');
+            var maxEl = document.getElementById('bsimFinalMax');
             if(num) num.textContent = state.score;
             if(maxEl) maxEl.textContent = '\u2009/ '+total;
-            if(state.score===total){
+            var pct = state.score / total;
+            if(pct === 1){
                 if(emoji) emoji.textContent='🏆';
                 if(title) title.textContent='Security Expert!';
-                if(desc)  desc.textContent='Perfect score — you made the right call in every scenario. Your instincts can stop a breach.';
-            } else if(state.score>=total*0.66){
+                if(desc)  desc.textContent='Perfect score — you made the right call in all 20 scenarios. Your instincts can stop a real breach.';
+            } else if(pct >= 0.80){
                 if(emoji) emoji.textContent='🛡️';
+                if(title) title.textContent='Security Champion!';
+                if(desc)  desc.textContent='Excellent work — 80%+ correct. You have strong cyber awareness. Review your misses to reach 100%.';
+            } else if(pct >= 0.60){
+                if(emoji) emoji.textContent='🔍';
                 if(title) title.textContent='Security Aware!';
-                if(desc)  desc.textContent='Good work — most answers correct. Review the scenario you missed to sharpen your defence skills.';
-            } else if(state.score>=1){
+                if(desc)  desc.textContent='Good foundation — 60%+ correct. Review the scenarios you missed to sharpen your defence instincts.';
+            } else if(pct >= 0.40){
                 if(emoji) emoji.textContent='⚠️';
                 if(title) title.textContent='Stay Alert!';
-                if(desc)  desc.textContent='Cyber threats are designed to trick you. Review the correct answers and try a fresh set.';
+                if(desc)  desc.textContent='Cyber threats are designed to trick you. Study the correct answers carefully and try again.';
             } else {
                 if(emoji) emoji.textContent='🎓';
                 if(title) title.textContent='Keep Learning!';
-                if(desc)  desc.textContent='Every mistake is a lesson. Study the correct answers and try again — you will improve fast.';
+                if(desc)  desc.textContent='Every mistake is a lesson. Read the explanations, practise the tips, and try a fresh session.';
             }
 
             var retry = document.getElementById('bsimRetry');

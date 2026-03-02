@@ -341,18 +341,7 @@
                     </ul>
                 </div>
 
-                <div class="card">
-                    <h3> Real-World Usage</h3>
-                    <p>
-                        For production security checks, use professional tools:
-                    </p>
-                    <ul style="list-style-position: inside; color: #ffffff; margin-top: 1rem;">
-                        <li>SSL Labs (SSL testing)</li>
-                        <li>OWASP ZAP (Web app scanning)</li>
-                        <li>Burp Suite (Security testing)</li>
-                        <li>Metasploit (Penetration testing)</li>
-                    </ul>
-                </div>
+                
             </div>
         </section>
 
@@ -1576,51 +1565,59 @@
             
             resultsDiv.style.display = 'block';
             resultsDiv.innerHTML = `
-                <div style="background: rgba(26, 39, 68, 0.6); border: 2px solid var(--cyan); border-radius: 10px; padding: 1.5rem;">
+                <div style="border: 2px solid var(--cyan); border-radius: 10px; padding: 1.5rem;">
                     <h4 style="color: var(--cyan); margin-bottom: 1rem;"> ${selected.name} vs Traditional Cryptography</h4>
                     
-                    <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+                    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 8px;">
+                    <table style="width: 100%; min-width: 420px; border-collapse: collapse; font-size: 0.9rem; table-layout: fixed;">
+                        <colgroup>
+                            <col style="width: 32%;">
+                            <col style="width: 24%;">
+                            <col style="width: 22%;">
+                            <col style="width: 22%;">
+                        </colgroup>
                         <thead>
                             <tr style="border-bottom: 2px solid var(--cyan);">
-                                <th style="padding: 0.75rem; text-align: left;">Property</th>
-                                <th style="padding: 0.75rem; text-align: center;">${selected.name}</th>
-                                <th style="padding: 0.75rem; text-align: center;">RSA-2048</th>
-                                <th style="padding: 0.75rem; text-align: center;">ECC P-256</th>
+                                <th style="padding: 0.75rem 0.6rem; text-align: left; word-break: keep-all;">Property</th>
+                                <th style="padding: 0.75rem 0.6rem; text-align: center; word-break: break-word;">${selected.name}</th>
+                                <th style="padding: 0.75rem 0.6rem; text-align: center; word-break: keep-all;">RSA-2048</th>
+                                <th style="padding: 0.75rem 0.6rem; text-align: center; word-break: keep-all;">ECC P-256</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr style="border-bottom: 1px solid rgba(0, 229, 255, 0.2);">
-                                <td style="padding: 0.75rem;">Quantum Safe</td>
-                                <td style="padding: 0.75rem; text-align: center; color: var(--green);">✓ Yes</td>
-                                <td style="padding: 0.75rem; text-align: center; color: #FF6B00;">✗ No</td>
-                                <td style="padding: 0.75rem; text-align: center; color: #FF6B00;">✗ No</td>
+                                <td style="padding: 0.75rem 0.6rem;">Quantum Safe</td>
+                                <td style="padding: 0.75rem 0.6rem; text-align: center; color: var(--green);">✓ Yes</td>
+                                <td style="padding: 0.75rem 0.6rem; text-align: center; color: #FF6B00;">✗ No</td>
+                                <td style="padding: 0.75rem 0.6rem; text-align: center; color: #FF6B00;">✗ No</td>
                             </tr>
                             <tr style="border-bottom: 1px solid rgba(0, 229, 255, 0.2);">
-                                <td style="padding: 0.75rem;">Public Key Size</td>
-                                <td style="padding: 0.75rem; text-align: center;">${selected.keySize}</td>
-                                <td style="padding: 0.75rem; text-align: center;">256 bytes</td>
-                                <td style="padding: 0.75rem; text-align: center;">64 bytes</td>
+                                <td style="padding: 0.75rem 0.6rem;">Public Key Size</td>
+                                <td style="padding: 0.75rem 0.6rem; text-align: center; word-break: break-word;">${selected.keySize}</td>
+                                <td style="padding: 0.75rem 0.6rem; text-align: center;">256 bytes</td>
+                                <td style="padding: 0.75rem 0.6rem; text-align: center;">64 bytes</td>
                             </tr>
                             <tr style="border-bottom: 1px solid rgba(0, 229, 255, 0.2);">
-                                <td style="padding: 0.75rem;">Classical Security</td>
-                                <td style="padding: 0.75rem; text-align: center;">128-bit</td>
-                                <td style="padding: 0.75rem; text-align: center;">112-bit</td>
-                                <td style="padding: 0.75rem; text-align: center;">128-bit</td>
+                                <td style="padding: 0.75rem 0.6rem;">Classical Security</td>
+                                <td style="padding: 0.75rem 0.6rem; text-align: center;">128-bit</td>
+                                <td style="padding: 0.75rem 0.6rem; text-align: center;">112-bit</td>
+                                <td style="padding: 0.75rem 0.6rem; text-align: center;">128-bit</td>
                             </tr>
                             <tr style="border-bottom: 1px solid rgba(0, 229, 255, 0.2);">
-                                <td style="padding: 0.75rem;">Quantum Security</td>
-                                <td style="padding: 0.75rem; text-align: center; color: var(--green);">128-bit</td>
-                                <td style="padding: 0.75rem; text-align: center; color: #FF6B00;">0 (broken)</td>
-                                <td style="padding: 0.75rem; text-align: center; color: #FF6B00;">0 (broken)</td>
+                                <td style="padding: 0.75rem 0.6rem;">Quantum Security</td>
+                                <td style="padding: 0.75rem 0.6rem; text-align: center; color: var(--green);">128-bit</td>
+                                <td style="padding: 0.75rem 0.6rem; text-align: center; color: #FF6B00;">0 (broken)</td>
+                                <td style="padding: 0.75rem 0.6rem; text-align: center; color: #FF6B00;">0 (broken)</td>
                             </tr>
                             <tr>
-                                <td style="padding: 0.75rem;">Speed</td>
-                                <td style="padding: 0.75rem; text-align: center;">${selected.speed}</td>
-                                <td style="padding: 0.75rem; text-align: center;">Slow</td>
-                                <td style="padding: 0.75rem; text-align: center;">Fast</td>
+                                <td style="padding: 0.75rem 0.6rem;">Speed</td>
+                                <td style="padding: 0.75rem 0.6rem; text-align: center; word-break: break-word;">${selected.speed}</td>
+                                <td style="padding: 0.75rem 0.6rem; text-align: center;">Slow</td>
+                                <td style="padding: 0.75rem 0.6rem; text-align: center;">Fast</td>
                             </tr>
                         </tbody>
                     </table>
+                    </div>
                     
                     <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(255, 107, 0, 0.1); border-left: 3px solid #FF6B00; border-radius: 5px;">
                         <strong style="color: #FF6B00;"> Quantum Threat Timeline:</strong>
@@ -1730,7 +1727,6 @@
                 await this.runSimulation('greyhat');
                 
                 this.simulationRunning = false;
-                this.generateComparison();
             }
 
             async runSimulation(type) {
@@ -1739,6 +1735,7 @@
                     case 'whitehat': await this.simulateWhiteHat(); break;
                     case 'greyhat': await this.simulateGreyHat(); break;
                 }
+                this.generateComparison();
             }
 
             async simulateBlackHat() {
@@ -1958,51 +1955,51 @@
                 
                 resultsContainer.innerHTML = `
                     <h3 style="color: var(--purple); margin-bottom: 1.5rem;"> Simulation Results</h3>
-                    <div style="overflow-x: auto;">
-                        <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+                    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+                        <table style="width: 100%; min-width: 480px; border-collapse: collapse; font-size: 0.9rem; color: #e0e0e0;">
                             <thead>
                                 <tr style="background: rgba(164, 0, 255, 0.2);">
-                                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--purple);">Metric</th>
-                                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--purple);">Black Hat</th>
-                                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--purple);">White Hat</th>
-                                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--purple);">Grey Hat</th>
+                                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--purple); color: #ffffff;">Metric</th>
+                                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--purple); color: #ff0844;">Black Hat</th>
+                                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--purple); color: #56ab2f;">White Hat</th>
+                                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--purple); color: #ffd200;">Grey Hat</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr style="background: rgba(0, 0, 0, 0.2);">
-                                    <td style="padding: 10px;"><strong>Primary Goal</strong></td>
-                                    <td style="padding: 10px;">Exploit & Profit</td>
-                                    <td style="padding: 10px;">Secure & Protect</td>
-                                    <td style="padding: 10px;">Discover & Maybe Report</td>
+                                <tr style="background: rgba(255,255,255,0.04);">
+                                    <td style="padding: 10px; color: #ffffff;"><strong>Primary Goal</strong></td>
+                                    <td style="padding: 10px; color: #e0e0e0;">Exploit &amp; Profit</td>
+                                    <td style="padding: 10px; color: #e0e0e0;">Secure &amp; Protect</td>
+                                    <td style="padding: 10px; color: #e0e0e0;">Discover &amp; Maybe Report</td>
                                 </tr>
                                 <tr>
-                                    <td style="padding: 10px;"><strong>Authorization</strong></td>
-                                    <td style="padding: 10px; color: #ff0844;"> None</td>
-                                    <td style="padding: 10px; color: #4CAF50;"> Full</td>
-                                    <td style="padding: 10px; color: #ffd200;"> None</td>
+                                    <td style="padding: 10px; color: #ffffff;"><strong>Authorization</strong></td>
+                                    <td style="padding: 10px; color: #ff0844;">&#10008; None</td>
+                                    <td style="padding: 10px; color: #4CAF50;">&#10004; Full</td>
+                                    <td style="padding: 10px; color: #ffd200;">&#10008; None</td>
                                 </tr>
-                                <tr style="background: rgba(0, 0, 0, 0.2);">
-                                    <td style="padding: 10px;"><strong>Actions Taken</strong></td>
-                                    <td style="padding: 10px;">${this.hackerStats.blackhat.attacks} attacks</td>
-                                    <td style="padding: 10px;">${this.hackerStats.whitehat.tests} tests</td>
-                                    <td style="padding: 10px;">${this.hackerStats.greyhat.probes} probes</td>
+                                <tr style="background: rgba(255,255,255,0.04);">
+                                    <td style="padding: 10px; color: #ffffff;"><strong>Actions Taken</strong></td>
+                                    <td style="padding: 10px; color: #e0e0e0;">${this.hackerStats.blackhat.attacks} attacks</td>
+                                    <td style="padding: 10px; color: #e0e0e0;">${this.hackerStats.whitehat.tests} tests</td>
+                                    <td style="padding: 10px; color: #e0e0e0;">${this.hackerStats.greyhat.probes} probes</td>
                                 </tr>
                                 <tr>
-                                    <td style="padding: 10px;"><strong>Systems Affected</strong></td>
+                                    <td style="padding: 10px; color: #ffffff;"><strong>Systems Affected</strong></td>
                                     <td style="padding: 10px; color: #ff0844;">${this.hackerStats.blackhat.compromised} compromised</td>
                                     <td style="padding: 10px; color: #4CAF50;">${this.hackerStats.whitehat.secured} secured</td>
-                                    <td style="padding: 10px;">${this.hackerStats.greyhat.vulnsFound} vulnerabilities found</td>
+                                    <td style="padding: 10px; color: #e0e0e0;">${this.hackerStats.greyhat.vulnsFound} found</td>
                                 </tr>
-                                <tr style="background: rgba(0, 0, 0, 0.2);">
-                                    <td style="padding: 10px;"><strong>Data Impact</strong></td>
+                                <tr style="background: rgba(255,255,255,0.04);">
+                                    <td style="padding: 10px; color: #ffffff;"><strong>Data Impact</strong></td>
                                     <td style="padding: 10px; color: #ff0844;">${this.hackerStats.blackhat.dataStolen}MB stolen</td>
                                     <td style="padding: 10px; color: #4CAF50;">0MB stolen (protected)</td>
-                                    <td style="padding: 10px;">${this.hackerStats.greyhat.reported} issues reported</td>
+                                    <td style="padding: 10px; color: #e0e0e0;">${this.hackerStats.greyhat.reported} issues reported</td>
                                 </tr>
                                 <tr>
-                                    <td style="padding: 10px;"><strong>Legal Consequences</strong></td>
-                                    <td style="padding: 10px; color: #ff0844;">Criminal charges, fines, imprisonment</td>
-                                    <td style="padding: 10px; color: #4CAF50;">None (authorized activity)</td>
+                                    <td style="padding: 10px; color: #ffffff;"><strong>Legal Consequences</strong></td>
+                                    <td style="padding: 10px; color: #ff0844;">Criminal charges &amp; imprisonment</td>
+                                    <td style="padding: 10px; color: #4CAF50;">None (authorized)</td>
                                     <td style="padding: 10px; color: #ffd200;">Potential charges if caught</td>
                                 </tr>
                             </tbody>
