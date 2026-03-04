@@ -903,16 +903,16 @@
                 this.testResults = document.getElementById('testResults');
 
                 this.bindEvents();
-                this.updatePromptStats();
+                if (this.testPrompt) this.updatePromptStats();
             },
 
             bindEvents() {
-                this.attackVector.addEventListener('change', () => this.loadTemplate());
-                this.testPrompt.addEventListener('input', () => this.handleRealtimeAnalysis());
-                this.runTest.addEventListener('click', () => this.runComprehensiveAnalysis());
-                this.loadExample.addEventListener('click', () => this.loadRandomExample());
-                this.clearPrompt.addEventListener('click', () => this.clearPromptField());
-                this.analysisMode.addEventListener('change', () => this.handleModeChange());
+                if (this.attackVector) this.attackVector.addEventListener('change', () => this.loadTemplate());
+                if (this.testPrompt) this.testPrompt.addEventListener('input', () => this.handleRealtimeAnalysis());
+                if (this.runTest) this.runTest.addEventListener('click', () => this.runComprehensiveAnalysis());
+                if (this.loadExample) this.loadExample.addEventListener('click', () => this.loadRandomExample());
+                if (this.clearPrompt) this.clearPrompt.addEventListener('click', () => this.clearPromptField());
+                if (this.analysisMode) this.analysisMode.addEventListener('change', () => this.handleModeChange());
             },
 
             loadTemplate() {
@@ -2240,6 +2240,8 @@
             new HackerSimulation();
         }
     </script>
+
+    <script src="script.js?v=3.0"></script>
 
      <!-- Footer -->
       <footer>
