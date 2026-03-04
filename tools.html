@@ -580,6 +580,226 @@
 
    
     
+    <!-- Interactive Security Tools Script -->
+    <script>
+        function checkPasswordStrength() {
+            const pwd = document.getElementById('passwordInput').value;
+            const bar = document.getElementById('strengthBar');
+            const result = document.getElementById('strengthResult');
+            const feedback = document.getElementById('passwordFeedback');
+
+            if (!pwd) {
+                bar.style.width = '0%';
+                bar.style.background = '';
+                result.textContent = '';
+                feedback.textContent = '';
+                return;
+            }
+
+            let score = 0;
+            const tips = [];
+
+            if (pwd.length >= 8) score += 20; else tips.push('Use at least 8 characters');
+            if (pwd.length >= 12) score += 10;
+            if (pwd.length >= 16) score += 10;
+            if (/[a-z]/.test(pwd)) score += 10; else tips.push('Add lowercase letters');
+            if (/[A-Z]/.test(pwd)) score += 15; else tips.push('Add uppercase letters');
+            if (/[0-9]/.test(pwd)) score += 15; else tips.push('Add numbers');
+            if (/[^a-zA-Z0-9]/.test(pwd)) score += 20; else tips.push('Add special characters (!@#$...)');
+
+            const commonPasswords = ['password', '123456', 'qwerty', 'letmein', 'admin', 'welcome'];
+            if (commonPasswords.some(c => pwd.toLowerCase().includes(c))) {
+                score = Math.min(score, 20);
+                tips.push('Avoid common password patterns');
+            }
+
+            score = Math.min(100, score);
+            bar.style.width = score + '%';
+
+            let label, color;
+            if (score < 30) { label = 'Very Weak'; color = '#ff0844'; }
+            else if (score < 50) { label = 'Weak'; color = '#ff6b00'; }
+            else if (score < 70) { label = 'Moderate'; color = '#ffd200'; }
+            else if (score < 90) { label = 'Strong'; color = '#56ab2f'; }
+            else { label = 'Very Strong'; color = '#00e5ff'; }
+
+            bar.style.background = color;
+            result.innerHTML = `<span style="color:${color}; font-weight:bold;">${label}</span> &nbsp; (${score}/100)`;
+            document.querySelector('.progress-bar').setAttribute('aria-valuenow', score);
+            feedback.innerHTML = tips.length
+                ? '<strong>Suggestions:</strong><br>' + tips.map(t => `• ${t}`).join('<br>')
+                : '<span style="color:#56ab2f;">✓ Great password!</span>';
+        }
+
+        async function generateHash() {
+            const text = document.getElementById('hashInput').value;
+            const output = document.getElementById('hashOutput');
+            if (!text) { output.textContent = 'Hash will appear here'; return; }
+            try {
+                const encoder = new TextEncoder();
+                const data = encoder.encode(text);
+                const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+                output.textContent = hashHex;
+            } catch (e) {
+                output.textContent = 'Error generating hash. Ensure HTTPS or localhost.';
+            }
+        }
+
+        function encodeBase64() {
+            const text = document.getElementById('base64Input').value;
+            const output = document.getElementById('base64Output');
+            if (!text) { output.textContent = 'Encoded result will appear here'; return; }
+            try {
+                output.textContent = btoa(unescape(encodeURIComponent(text)));
+            } catch (e) {
+                output.textContent = 'Encoding error: ' + e.message;
+            }
+        }
+
+        function decodeBase64() {
+            const text = document.getElementById('base64Input').value;
+            const output = document.getElementById('base64Output');
+            if (!text) { output.textContent = 'Decoded result will appear here'; return; }
+            try {
+                output.textContent = decodeURIComponent(escape(atob(text)));
+            } catch (e) {
+                output.textContent = 'Decoding error: Input is not valid Base64.';
+            }
+        }
+
+        function simulateSSLCheck() {
+            const domain = document.getElementById('sslInput').value.trim();
+            const result = document.getElementById('sslResult');
+            if (!domain) {
+                result.innerHTML = '<span style="color:#ffd200;">⚠ Please enter a domain name (e.g. google.com)</span>';
+                return;
+            }
+            const clean = domain.replace(/^https?:\/\//, '').replace(/\/.*/, '');
+            const isHTTPS = domain.startsWith('https://') || !domain.startsWith('http://');
+            const hasValidFormat = /^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$/.test(clean);
+            const knownCA = ['google', 'cloudflare', 'amazon', 'microsoft', 'github', 'mozilla', 'apple'].some(k => clean.includes(k));
+
+            const now = new Date();
+            const expiry = new Date(now.getFullYear() + 1, now.getMonth(), now.getDate());
+
+            result.innerHTML = `
+                <strong>🔍 SSL/TLS Check: <span style="color:#00e5ff;">${clean}</span></strong><br><br>
+                ${isHTTPS ? '<span style="color:#56ab2f;">✓ HTTPS Protocol</span>' : '<span style="color:#ff0844;">✗ HTTP Only — Not Secure</span>'}<br>
+                ${hasValidFormat ? '<span style="color:#56ab2f;">✓ Valid domain format</span>' : '<span style="color:#ffd200;">⚠ Check domain format</span>'}<br>
+                <span style="color:#56ab2f;">✓ TLS 1.3 Supported (simulated)</span><br>
+                ${knownCA ? '<span style="color:#56ab2f;">✓ Likely issued by trusted CA</span>' : '<span style="color:#ffd200;">⚠ Verify certificate authority</span>'}<br>
+                <span style="color:#56ab2f;">✓ Simulated expiry: ${expiry.toDateString()}</span><br><br>
+                <em style="font-size:0.82rem;color:#aaa;">This is a simulated check. For real SSL analysis use <a href="https://www.ssllabs.com/ssltest/" target="_blank" style="color:#00e5ff;">ssllabs.com</a> or <a href="https://crt.sh" target="_blank" style="color:#00e5ff;">crt.sh</a>.</em>
+            `;
+        }
+
+        function generateGUID() {
+            const output = document.getElementById('guidOutput');
+            if (crypto.randomUUID) {
+                output.textContent = crypto.randomUUID();
+            } else {
+                const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+                output.textContent = `${s4()}${s4()}-${s4()}-4${s4().substr(0,3)}-${['8','9','a','b'][Math.floor(Math.random()*4)]}${s4().substr(0,3)}-${s4()}${s4()}${s4()}`;
+            }
+        }
+
+        function convertColor() {
+            const input = document.getElementById('hexInput').value.trim();
+            const output = document.getElementById('colorOutput');
+            const preview = document.getElementById('colorPreview');
+
+            if (!input) {
+                output.textContent = 'Converted color will appear here';
+                preview.style.background = '';
+                return;
+            }
+
+            let hex = '', rgb = '';
+
+            if (/^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(input)) {
+                let h = input.replace('#', '');
+                if (h.length === 3) h = h.split('').map(c => c + c).join('');
+                const r = parseInt(h.slice(0,2), 16);
+                const g = parseInt(h.slice(2,4), 16);
+                const b = parseInt(h.slice(4,6), 16);
+                hex = '#' + h.toUpperCase();
+                rgb = `rgb(${r}, ${g}, ${b})`;
+                output.innerHTML = `<strong>HEX:</strong> ${hex}<br><strong>RGB:</strong> ${rgb}`;
+                preview.style.background = hex;
+            } else if (/^(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})$/.test(input)) {
+                const [, r, g, b] = input.match(/^(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})$/);
+                if ([r,g,b].some(v => parseInt(v) > 255)) {
+                    output.textContent = 'RGB values must be 0–255';
+                    return;
+                }
+                hex = '#' + [r,g,b].map(v => parseInt(v).toString(16).padStart(2,'0')).join('').toUpperCase();
+                rgb = `rgb(${r}, ${g}, ${b})`;
+                output.innerHTML = `<strong>HEX:</strong> ${hex}<br><strong>RGB:</strong> ${rgb}`;
+                preview.style.background = rgb;
+            } else {
+                output.textContent = 'Enter a hex code (#FF5733) or RGB (255,87,51)';
+                preview.style.background = '';
+            }
+        }
+
+        function validateJSON() {
+            const input = document.getElementById('jsonInput').value.trim();
+            const result = document.getElementById('jsonResult');
+            if (!input) { result.innerHTML = ''; return; }
+            try {
+                const parsed = JSON.parse(input);
+                const formatted = JSON.stringify(parsed, null, 2);
+                result.innerHTML = `
+                    <div style="color:#56ab2f; font-weight:bold; margin-bottom:0.5rem;">✓ Valid JSON</div>
+                    <pre style="background:rgba(0,0,0,0.4); padding:1rem; border-radius:8px; overflow-x:auto; font-size:0.85rem; color:#00e5ff; white-space:pre-wrap; word-break:break-word;">${formatted.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</pre>
+                    <button class="btn btn-secondary" onclick="copyText(\`${formatted.replace(/`/g,'\\`')}\`)" style="width:100%; margin-top:0.5rem;">Copy Formatted</button>
+                `;
+            } catch (e) {
+                result.innerHTML = `<div style="color:#ff0844; font-weight:bold;">✗ Invalid JSON</div><div style="color:#ffd200; font-size:0.9rem; margin-top:0.5rem;">${e.message}</div>`;
+            }
+        }
+
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = event.target;
+                const orig = btn.textContent;
+                btn.textContent = 'Copied!';
+                setTimeout(() => btn.textContent = orig, 1500);
+            }).catch(() => {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+            });
+        }
+
+        function copyToClipboard(elementId) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+            const text = el.textContent || el.innerText;
+            if (!text || text === 'Hash will appear here' || text === 'Encoded result will appear here' || text === 'Your GUID will appear here') return;
+            navigator.clipboard.writeText(text).then(() => {
+                const btns = document.querySelectorAll(`button[onclick="copyToClipboard('${elementId}')"]`);
+                btns.forEach(btn => {
+                    const orig = btn.textContent;
+                    btn.textContent = ' Copied!';
+                    setTimeout(() => btn.textContent = orig, 1500);
+                });
+            }).catch(() => {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+            });
+        }
+    </script>
+
     <!-- AI Red Teaming Tool Script -->
     <script>
         const AIRedTeaming = {
