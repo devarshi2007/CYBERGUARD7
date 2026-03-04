@@ -386,10 +386,11 @@
             </div>
 
             <!-- Lab Modal -->
-            <div id="labModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); z-index: 10000; overflow-y: auto;">
-                <div style="max-width: 1200px; margin: 2rem auto; background: rgba(26, 39, 68, 0.98); border: 3px solid var(--cyan); border-radius: 20px; padding: 3rem; position: relative;">
-                    <button onclick="closeLab()" style="position: absolute; top: 1rem; right: 1rem; background: rgba(255, 107, 0, 0.2); border: 2px solid #FF6B00; color: #FF6B00; padding: 0.5rem 1rem; border-radius: 10px; cursor: pointer; font-size: 1.2rem; font-weight: bold;">✕ Close</button>
-                    
+            <div id="labModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); z-index: 10000; overflow-y: auto; overflow-x: hidden; box-sizing: border-box;">
+                <div style="max-width: 1200px; width: 100%; margin: 2rem auto; background: rgba(26, 39, 68, 0.98); border: 3px solid var(--cyan); border-radius: 20px; padding: 3rem 2rem; position: relative; box-sizing: border-box;">
+                    <div style="display: flex; justify-content: flex-end; margin-bottom: 1rem;">
+                        <button onclick="closeLab()" style="background: rgba(255, 107, 0, 0.2); border: 2px solid #FF6B00; color: #FF6B00; padding: 0.5rem 1.2rem; border-radius: 10px; cursor: pointer; font-size: 1rem; font-weight: bold; white-space: nowrap;">✕ Close</button>
+                    </div>
                     <h2 id="labTitle" style="color: var(--cyan); margin-bottom: 1rem;"></h2>
                     <p id="labDescription" style="color: var(--text-muted); margin-bottom: 2rem;"></p>
 
@@ -795,6 +796,142 @@
             </div>
         </section>
 
+        <!-- 2025 Security Risk Calculator Quiz -->
+        <section class="section">
+            <div style="max-width: 900px; margin: 0 auto;">
+                <h2 style="text-align: center; margin-bottom: 1rem;"> 2025 Security Risk Assessment</h2>
+                <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">
+                    Take our interactive quiz to assess your organization's security posture against 2025 threat landscape (ransomware, supply chain attacks, AI threats, and more).
+                </p>
+                
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <button id="startRiskQuiz" class="btn btn-primary" style="padding: 1rem 2.5rem; font-size: 1.1rem;">
+                         Start Risk Assessment (2 min)
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Risk Calculator Modal -->
+        <div id="riskCalculatorModal" class="exit-intent-modal" style="display: none;">
+            <div class="exit-intent-content" style="max-width: 600px;">
+                <button id="closeRiskCalculator" class="exit-intent-close">✕</button>
+                <h2 style="color: var(--cyan); text-align: center; margin-bottom: 2rem; margin-top: 2rem; padding-top: 0.5rem;">Security Risk Assessment Quiz</h2>
+                
+                <form id="riskQuizForm" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    <!-- Q1: Multi-Factor Authentication -->
+                    <div style="background: rgba(0, 229, 255, 0.05); border-left: 4px solid var(--cyan); padding: 1.5rem; border-radius: 10px;">
+                        <label style="color: var(--text-light); font-weight: 600; display: block; margin-bottom: 1rem;">1. Do you enforce Multi-Factor Authentication (MFA)?</label>
+                        <select name="mfa" required style="width: 100%; padding: 0.75rem; background: rgba(0, 229, 255, 0.05); border: 1px solid var(--cyan); border-radius: 8px; color: var(--text-light);">
+                            <option value="" style="background: var(--primary-dark);">Select...</option>
+                            <option value="yes" style="background: var(--primary-dark);">Yes, for all users</option>
+                            <option value="partial" style="background: var(--primary-dark);">Partial, for critical accounts</option>
+                            <option value="yes" style="background: var(--primary-dark);">Yes, enforced for admins only</option>
+                            <options value="yes" style="background: var(--primary-dark);">Yes, enforced for VPN access</option>
+                            <option value="no" style="background: var(--primary-dark);">No, not implemented</option>
+                        </select>
+                    </div>
+
+                    <!-- Q2: Patch Management -->
+                    <div style="background: rgba(164, 0, 255, 0.05); border-left: 4px solid var(--purple); padding: 1.5rem; border-radius: 10px;">
+                        <label style="color: var(--text-light); font-weight: 600; display: block; margin-bottom: 1rem;">2. How frequently do you patch systems?</label>
+                        <select name="updates" required style="width: 100%; padding: 0.75rem; background: rgba(164, 0, 255, 0.05); border: 1px solid var(--purple); border-radius: 8px; color: var(--text-light);">
+                            <option value="" style="background: var(--primary-dark);">Select...</option>
+                            <option value="monthly" style="background: var(--primary-dark);">Monthly or more frequent</option>
+                            <option value="sometimes" style="background: var(--primary-dark);">Quarterly</option>
+                            <option value="rarely" style="background: var(--primary-dark);">Rarely or ad-hoc</option>
+                            <option value="no" style="background: var(--primary-dark);">No formal patching process</option>
+                            <option value="no" style="background: var(--primary-dark);">Within 24–48 hours of release (critical patches)</option>
+                        </select>
+                    </div>
+
+                    <!-- Q3: Backups -->
+                    <div style="background: rgba(0, 255, 136, 0.05); border-left: 4px solid var(--green); padding: 1.5rem; border-radius: 10px;">
+                        <label style="color: var(--text-light); font-weight: 600; display: block; margin-bottom: 1rem;">3. What is your backup strategy?</label>
+                        <select name="backup" required style="width: 100%; padding: 0.75rem; background: rgba(0, 255, 136, 0.05); border: 1px solid var(--green); border-radius: 8px; color: var(--text-light);">
+                            <option value="" style="background: var(--primary-dark);">Select...</option>
+                            <option value="automated" style="background: var(--primary-dark);">Automated, tested regularly</option>
+                            <option value="partial" style="background: var(--primary-dark);">Manual or inconsistent</option>
+                            <option value="no" style="background: var(--primary-dark);">Cloud-only backup</option>
+                            <option value="no" style="background: var(--primary-dark);">On-site backup only</option>
+                            <option value="no" style="background: var(--primary-dark);">No formal backup plan</option>
+                        </select>
+                    </div>
+
+                    <!-- Q4: Security Training -->
+                    <div style="background: rgba(255, 107, 0, 0.05); border-left: 4px solid var(--warning); padding: 1.5rem; border-radius: 10px;">
+                        <label style="color: var(--text-light); font-weight: 600; display: block; margin-bottom: 1rem;">4. Do you provide security awareness training?</label>
+                        <select name="training" required style="width: 100%; padding: 0.75rem; background: rgba(255, 107, 0, 0.05); border: 1px solid var(--warning); border-radius: 8px; color: var(--text-light);">
+                            <option value="" style="background: var(--primary-dark);">Select...</option>
+                            <option value="annual" style="background: var(--primary-dark);">Annual or more frequent</option>
+                            <option value="sometimes" style="background: var(--primary-dark);">Occasionally</option>
+                            <option value="no" style="background: var(--primary-dark);">Only during onboarding</option>
+                            <option value="no" style="background: var(--primary-dark);">Regular structured training with phishing simulations and tracking</option>
+                            <option value="no" style="background: var(--primary-dark);">No formal training</option>
+                        </select>
+                    </div>
+
+                    <!-- Q5: Network Segmentation -->
+                    <div style="background: rgba(0, 229, 255, 0.05); border-left: 4px solid var(--cyan); padding: 1.5rem; border-radius: 10px;">
+                        <label style="color: var(--text-light); font-weight: 600; display: block; margin-bottom: 1rem;">5. Do you implement network segmentation?</label>
+                        <select name="segmentation" required style="width: 100%; padding: 0.75rem; background: rgba(0, 229, 255, 0.05); border: 1px solid var(--cyan); border-radius: 8px; color: var(--text-light);">
+                            <option value="" style="background: var(--primary-dark);">Select...</option>
+                            <option value="full" style="background: var(--primary-dark);">Full segmentation implemented</option>
+                            <option value="partial" style="background: var(--primary-dark);">Partial segmentation</option>
+                            <option value="no" style="background: var(--primary-dark);">Proper network segmentation (critical systems isolated; access controlled)</option>
+                            <option value="no" style="background: var(--primary-dark);">Segmentation only for critical systems</option>
+                            <option value="none" style="background: var(--primary-dark);">No segmentation</option>
+                        </select>
+                    </div>
+
+                    <!-- Q6: VPN Usage -->
+                    <div style="background: rgba(164, 0, 255, 0.05); border-left: 4px solid var(--purple); padding: 1.5rem; border-radius: 10px;">
+                        <label style="color: var(--text-light); font-weight: 600; display: block; margin-bottom: 1rem;">6. How often do employees use VPN?</label>
+                        <select name="vpn" required style="width: 100%; padding: 0.75rem; background: rgba(164, 0, 255, 0.05); border: 1px solid var(--purple); border-radius: 8px; color: var(--text-light);">
+                            <option value="" style="background: var(--primary-dark);">Select...</option>
+                            <option value="always" style="background: var(--primary-dark);">Always (enforced policy)</option>
+                            <option value="sometimes" style="background: var(--primary-dark);">Sometimes (on public WiFi)</option>
+                            <option value="no" style="background: var(--primary-dark);">Only when traveling</option>
+                            <option value="no" style="background: var(--primary-dark);">Only when working remotely</option>
+                            <option value="never" style="background: var(--primary-dark);">Never/Rarely</option>
+                        </select>
+                    </div>
+
+                    <!-- Q7: Security Monitoring -->
+                    <div style="background: rgba(0, 255, 136, 0.05); border-left: 4px solid var(--green); padding: 1.5rem; border-radius: 10px;">
+                        <label style="color: var(--text-light); font-weight: 600; display: block; margin-bottom: 1rem;">7. Do you have active security monitoring?</label>
+                        <select name="monitoring" required style="width: 100%; padding: 0.75rem; background: rgba(0, 255, 136, 0.05); border: 1px solid var(--green); border-radius: 8px; color: var(--text-light);">
+                            <option value="" style="background: var(--primary-dark);">Select...</option>
+                            <option value="active" style="background: var(--primary-dark);">Active 24/7 monitoring</option>
+                            <option value="partial" style="background: var(--primary-dark);">Limited monitoring</option>
+                            <option value="no" style="background: var(--primary-dark);">Monitoring only for critical systems</option>
+                            <option value="no" style="background: var(--primary-dark);">Business hours monitoring only</option>
+                            <option value="none" style="background: var(--primary-dark);">No active monitoring</option>
+                        </select>
+                    </div>
+
+                    <!-- Q8: Incident Response Plan -->
+                    <div style="background: rgba(255, 107, 0, 0.05); border-left: 4px solid var(--warning); padding: 1.5rem; border-radius: 10px;">
+                        <label style="color: var(--text-light); font-weight: 600; display: block; margin-bottom: 1rem;">8. Do you have an incident response plan?</label>
+                        <select name="incident" required style="width: 100%; padding: 0.75rem; background: rgba(255, 107, 0, 0.05); border: 1px solid var(--warning); border-radius: 8px; color: var(--text-light);">
+                            <option value="" style="background: var(--primary-dark);">Select...</option>
+                            <option value="yes" style="background: var(--primary-dark);">Yes, documented and tested</option>
+                            <option value="partial" style="background: var(--primary-dark);">Partially documented</option>
+                            <option value="no" style="background: var(--primary-dark);">Yes, documented but never tested</option>
+                            <option value="no" style="background: var(--primary-dark);">Only for critical incidents</option>
+                            <option value="no" style="background: var(--primary-dark);">No formal plan</option>
+                        </select>
+                    </div>
+
+                    <button type="button" id="submitRiskQuiz" class="exit-intent-btn exit-intent-btn-primary" style="width: 100%; padding: 1rem; font-size: 1.05rem; margin-top: 1rem;">
+                         Calculate My Risk Score
+                    </button>
+                </form>
+
+                <div id="riskQuizResults" style="display: none; margin-top: 1.5rem;"></div>
+            </div>
+        </div>
+
         <!-- Cybersecurity Career Roadmap -->
         <section class="section">
             <h2> Cybersecurity Career Roadmap</h2>
@@ -999,125 +1136,9 @@
             </div>
         </section>
 
-        <!-- 2025 Security Risk Calculator Quiz -->
-        <section class="section">
-            <div style="max-width: 900px; margin: 0 auto;">
-                <h2 style="text-align: center; margin-bottom: 1rem;"> 2025 Security Risk Assessment</h2>
-                <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">
-                    Take our interactive quiz to assess your organization's security posture against 2025 threat landscape (ransomware, supply chain attacks, AI threats, and more).
-                </p>
-                
-                <div style="text-align: center; margin-bottom: 2rem;">
-                    <button id="startRiskQuiz" class="btn btn-primary" style="padding: 1rem 2.5rem; font-size: 1.1rem;">
-                         Start Risk Assessment (2 min)
-                    </button>
-                </div>
-            </div>
-        </section>
+      
 
-        <!-- Risk Calculator Modal -->
-        <div id="riskCalculatorModal" class="exit-intent-modal" style="display: none;">
-            <div class="exit-intent-content" style="max-width: 600px;">
-                <button id="closeRiskCalculator" class="exit-intent-close">✕</button>
-                <h2 style="color: var(--cyan); text-align: center; margin-bottom: 2rem;">Security Risk Assessment Quiz</h2>
-                
-                <form id="riskQuizForm" style="display: flex; flex-direction: column; gap: 1.5rem;">
-                    <!-- Q1: Multi-Factor Authentication -->
-                    <div style="background: rgba(0, 229, 255, 0.05); border-left: 4px solid var(--cyan); padding: 1.5rem; border-radius: 10px;">
-                        <label style="color: var(--text-light); font-weight: 600; display: block; margin-bottom: 1rem;">1. Do you enforce Multi-Factor Authentication (MFA)?</label>
-                        <select name="mfa" required style="width: 100%; padding: 0.75rem; background: rgba(0, 229, 255, 0.05); border: 1px solid var(--cyan); border-radius: 8px; color: var(--text-light);">
-                            <option value="" style="background: var(--primary-dark);">Select...</option>
-                            <option value="yes" style="background: var(--primary-dark);">Yes, for all users</option>
-                            <option value="partial" style="background: var(--primary-dark);">Partial, for critical accounts</option>
-                            <option value="no" style="background: var(--primary-dark);">No, not implemented</option>
-                        </select>
-                    </div>
-
-                    <!-- Q2: Patch Management -->
-                    <div style="background: rgba(164, 0, 255, 0.05); border-left: 4px solid var(--purple); padding: 1.5rem; border-radius: 10px;">
-                        <label style="color: var(--text-light); font-weight: 600; display: block; margin-bottom: 1rem;">2. How frequently do you patch systems?</label>
-                        <select name="updates" required style="width: 100%; padding: 0.75rem; background: rgba(164, 0, 255, 0.05); border: 1px solid var(--purple); border-radius: 8px; color: var(--text-light);">
-                            <option value="" style="background: var(--primary-dark);">Select...</option>
-                            <option value="monthly" style="background: var(--primary-dark);">Monthly or more frequent</option>
-                            <option value="sometimes" style="background: var(--primary-dark);">Quarterly</option>
-                            <option value="rarely" style="background: var(--primary-dark);">Rarely or ad-hoc</option>
-                        </select>
-                    </div>
-
-                    <!-- Q3: Backups -->
-                    <div style="background: rgba(0, 255, 136, 0.05); border-left: 4px solid var(--green); padding: 1.5rem; border-radius: 10px;">
-                        <label style="color: var(--text-light); font-weight: 600; display: block; margin-bottom: 1rem;">3. What is your backup strategy?</label>
-                        <select name="backup" required style="width: 100%; padding: 0.75rem; background: rgba(0, 255, 136, 0.05); border: 1px solid var(--green); border-radius: 8px; color: var(--text-light);">
-                            <option value="" style="background: var(--primary-dark);">Select...</option>
-                            <option value="automated" style="background: var(--primary-dark);">Automated, tested regularly</option>
-                            <option value="partial" style="background: var(--primary-dark);">Manual or inconsistent</option>
-                            <option value="no" style="background: var(--primary-dark);">No formal backup plan</option>
-                        </select>
-                    </div>
-
-                    <!-- Q4: Security Training -->
-                    <div style="background: rgba(255, 107, 0, 0.05); border-left: 4px solid var(--warning); padding: 1.5rem; border-radius: 10px;">
-                        <label style="color: var(--text-light); font-weight: 600; display: block; margin-bottom: 1rem;">4. Do you provide security awareness training?</label>
-                        <select name="training" required style="width: 100%; padding: 0.75rem; background: rgba(255, 107, 0, 0.05); border: 1px solid var(--warning); border-radius: 8px; color: var(--text-light);">
-                            <option value="" style="background: var(--primary-dark);">Select...</option>
-                            <option value="annual" style="background: var(--primary-dark);">Annual or more frequent</option>
-                            <option value="sometimes" style="background: var(--primary-dark);">Occasionally</option>
-                            <option value="no" style="background: var(--primary-dark);">No formal training</option>
-                        </select>
-                    </div>
-
-                    <!-- Q5: Network Segmentation -->
-                    <div style="background: rgba(0, 229, 255, 0.05); border-left: 4px solid var(--cyan); padding: 1.5rem; border-radius: 10px;">
-                        <label style="color: var(--text-light); font-weight: 600; display: block; margin-bottom: 1rem;">5. Do you implement network segmentation?</label>
-                        <select name="segmentation" required style="width: 100%; padding: 0.75rem; background: rgba(0, 229, 255, 0.05); border: 1px solid var(--cyan); border-radius: 8px; color: var(--text-light);">
-                            <option value="" style="background: var(--primary-dark);">Select...</option>
-                            <option value="full" style="background: var(--primary-dark);">Full segmentation implemented</option>
-                            <option value="partial" style="background: var(--primary-dark);">Partial segmentation</option>
-                            <option value="none" style="background: var(--primary-dark);">No segmentation</option>
-                        </select>
-                    </div>
-
-                    <!-- Q6: VPN Usage -->
-                    <div style="background: rgba(164, 0, 255, 0.05); border-left: 4px solid var(--purple); padding: 1.5rem; border-radius: 10px;">
-                        <label style="color: var(--text-light); font-weight: 600; display: block; margin-bottom: 1rem;">6. How often do employees use VPN?</label>
-                        <select name="vpn" required style="width: 100%; padding: 0.75rem; background: rgba(164, 0, 255, 0.05); border: 1px solid var(--purple); border-radius: 8px; color: var(--text-light);">
-                            <option value="" style="background: var(--primary-dark);">Select...</option>
-                            <option value="always" style="background: var(--primary-dark);">Always (enforced policy)</option>
-                            <option value="sometimes" style="background: var(--primary-dark);">Sometimes (on public WiFi)</option>
-                            <option value="never" style="background: var(--primary-dark);">Never/Rarely</option>
-                        </select>
-                    </div>
-
-                    <!-- Q7: Security Monitoring -->
-                    <div style="background: rgba(0, 255, 136, 0.05); border-left: 4px solid var(--green); padding: 1.5rem; border-radius: 10px;">
-                        <label style="color: var(--text-light); font-weight: 600; display: block; margin-bottom: 1rem;">7. Do you have active security monitoring?</label>
-                        <select name="monitoring" required style="width: 100%; padding: 0.75rem; background: rgba(0, 255, 136, 0.05); border: 1px solid var(--green); border-radius: 8px; color: var(--text-light);">
-                            <option value="" style="background: var(--primary-dark);">Select...</option>
-                            <option value="active" style="background: var(--primary-dark);">Active 24/7 monitoring</option>
-                            <option value="partial" style="background: var(--primary-dark);">Limited monitoring</option>
-                            <option value="none" style="background: var(--primary-dark);">No active monitoring</option>
-                        </select>
-                    </div>
-
-                    <!-- Q8: Incident Response Plan -->
-                    <div style="background: rgba(255, 107, 0, 0.05); border-left: 4px solid var(--warning); padding: 1.5rem; border-radius: 10px;">
-                        <label style="color: var(--text-light); font-weight: 600; display: block; margin-bottom: 1rem;">8. Do you have an incident response plan?</label>
-                        <select name="incident" required style="width: 100%; padding: 0.75rem; background: rgba(255, 107, 0, 0.05); border: 1px solid var(--warning); border-radius: 8px; color: var(--text-light);">
-                            <option value="" style="background: var(--primary-dark);">Select...</option>
-                            <option value="yes" style="background: var(--primary-dark);">Yes, documented and tested</option>
-                            <option value="partial" style="background: var(--primary-dark);">Partially documented</option>
-                            <option value="no" style="background: var(--primary-dark);">No formal plan</option>
-                        </select>
-                    </div>
-
-                    <button type="button" id="submitRiskQuiz" class="exit-intent-btn exit-intent-btn-primary" style="width: 100%; padding: 1rem; font-size: 1.05rem; margin-top: 1rem;">
-                         Calculate My Risk Score
-                    </button>
-                </form>
-
-                <div id="riskQuizResults" style="display: none; margin-top: 1.5rem;"></div>
-            </div>
-        </div>
+       
 
       
     </div>
