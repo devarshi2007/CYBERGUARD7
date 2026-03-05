@@ -2626,10 +2626,21 @@ function initRiskCalculatorQuiz() {
 function calculateRiskScore() {
     const form = document.getElementById('riskQuizForm');
     if (!form) return;
-    
+
     let totalScore = 0;
     let maxScore = 0;
-    
+
+    const answers = {
+        mfa: form.elements['mfa']?.value || '',
+        updates: form.elements['updates']?.value || '',
+        backup: form.elements['backup']?.value || '',
+        training: form.elements['training']?.value || '',
+        segmentation: form.elements['segmentation']?.value || '',
+        vpn: form.elements['vpn']?.value || '',
+        monitoring: form.elements['monitoring']?.value || '',
+        incident: form.elements['incident']?.value || ''
+    };
+
     const questions = [
         { name: 'mfa', weight: 15, high: 'no', low: 'yes' },
         { name: 'updates', weight: 12, high: 'rarely', low: 'monthly' },
@@ -2640,11 +2651,10 @@ function calculateRiskScore() {
         { name: 'monitoring', weight: 12, high: 'none', low: 'active' },
         { name: 'incident', weight: 10, high: 'no', low: 'yes' }
     ];
-    
+
     questions.forEach(q => {
-        const value = form.elements[q.name]?.value;
+        const value = answers[q.name];
         maxScore += q.weight;
-        
         if (value === q.high) {
             totalScore += q.weight;
         } else if (value === q.low) {
@@ -2653,40 +2663,406 @@ function calculateRiskScore() {
             totalScore += q.weight * 0.5;
         }
     });
-    
+
     const percentage = Math.round((totalScore / maxScore) * 100);
     const riskLevel = percentage <= 33 ? 'LOW RISK' : percentage <= 66 ? 'MEDIUM RISK' : 'HIGH RISK';
     const riskColor = percentage <= 33 ? '#00ff1e' : percentage <= 66 ? '#FFB81C' : '#FF6B00';
-    
+
+    const weaknesses = [];
+    const recommendations = [];
+
+    if (answers.mfa === 'no') {
+        weaknesses.push('No Multi-Factor Authentication');
+        recommendations.push('Enable MFA for all user accounts immediately — it blocks 99.9% of automated attacks');
+    } else if (answers.mfa === 'partial') {
+        weaknesses.push('Partial MFA coverage (not all users protected)');
+        recommendations.push('Extend MFA enforcement to ALL users, not just critical or admin accounts');
+    }
+
+    if (answers.updates === 'rarely' || answers.updates === 'no') {
+        weaknesses.push('Infrequent or no formal patch management');
+        recommendations.push('Establish a patch management process — apply critical patches within 48 hours of release');
+    } else if (answers.updates === 'sometimes') {
+        weaknesses.push('Quarterly patching cycle is too slow for modern threats');
+        recommendations.push('Move from quarterly to monthly patching, with critical patches applied immediately upon release');
+    }
+
+    if (answers.backup === 'no') {
+        weaknesses.push('No reliable or tested backup strategy');
+        recommendations.push('Implement automated backups using the 3-2-1 rule (3 copies, 2 media types, 1 offsite/cloud)');
+    } else if (answers.backup === 'partial') {
+        weaknesses.push('Manual or inconsistent backup process');
+        recommendations.push('Automate your backup process and perform monthly restoration tests to ensure data recovery works');
+    }
+
+    if (answers.training === 'no') {
+        weaknesses.push('No security awareness training program');
+        recommendations.push('Launch a formal security awareness training program including phishing simulations and completion tracking');
+    } else if (answers.training === 'sometimes') {
+        weaknesses.push('Infrequent security awareness training');
+        recommendations.push('Increase training to at least annually with quarterly phishing simulation exercises for all staff');
+    }
+
+    if (answers.segmentation === 'none') {
+        weaknesses.push('No network segmentation — full lateral movement possible');
+        recommendations.push('Implement network segmentation to isolate critical systems and limit attacker lateral movement');
+    } else if (answers.segmentation === 'partial') {
+        weaknesses.push('Partial network segmentation leaves gaps');
+        recommendations.push('Extend micro-segmentation to all systems, not just critical ones, to minimize breach blast radius');
+    }
+
+    if (answers.vpn === 'never') {
+        weaknesses.push('No VPN or Zero Trust access for remote connections');
+        recommendations.push('Enforce VPN or Zero Trust Network Access (ZTNA) for ALL remote connections to protect data in transit');
+    } else if (answers.vpn === 'sometimes') {
+        weaknesses.push('Inconsistent VPN usage policy');
+        recommendations.push('Make VPN a mandatory enforced policy for all remote access — not just recommended on public WiFi');
+    }
+
+    if (answers.monitoring === 'none') {
+        weaknesses.push('No active security monitoring or alerting');
+        recommendations.push('Deploy a SIEM solution for 24/7 monitoring, log aggregation, and real-time threat alerting');
+    } else if (answers.monitoring === 'partial') {
+        weaknesses.push('Limited security monitoring coverage');
+        recommendations.push('Extend monitoring to ALL systems with 24/7 automated alerting and incident detection capabilities');
+    }
+
+    if (answers.incident === 'no') {
+        weaknesses.push('No documented Incident Response Plan');
+        recommendations.push('Develop, document, and test a formal Incident Response Plan — define roles, escalation paths, and playbooks');
+    } else if (answers.incident === 'partial') {
+        weaknesses.push('Incident Response Plan exists but is not tested');
+        recommendations.push('Complete your IRP documentation and run quarterly tabletop exercises to validate response readiness');
+    }
+
+    if (recommendations.length === 0) {
+        recommendations.push('Maintain your strong security posture with regular security reviews and threat intelligence updates');
+        recommendations.push('Consider pursuing ISO 27001 or SOC 2 certification to formalize and validate your security program');
+    }
+
+    window._lastRiskAssessment = {
+        score: percentage,
+        riskLevel,
+        answers,
+        weaknesses,
+        recommendations,
+        date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+    };
+
     const resultsDiv = document.getElementById('riskQuizResults');
     if (resultsDiv) {
+        const weaknessHTML = weaknesses.length > 0
+            ? weaknesses.map(w => `<li style="margin-bottom:0.5rem;">⚠️ ${w}</li>`).join('')
+            : '<li>No critical weaknesses detected</li>';
+
+        const recHTML = recommendations.map((r, i) =>
+            `<li style="margin-bottom:0.75rem;"><strong>${i + 1}.</strong> ${r}</li>`
+        ).join('');
+
         resultsDiv.innerHTML = `
-            <div style="text-align: center; padding: 2rem; background: rgba(26, 39, 68, 0.8); border-radius: 15px; border: 2px solid ${riskColor};">
-                <h3 style="color: ${riskColor}; margin-bottom: 1rem;">Your Security Risk Score</h3>
-                <div style="font-size: 3rem; font-weight: 700; color: ${riskColor}; margin-bottom: 1rem;">${percentage}%</div>
-                <p style="font-size: 1.3rem; color: ${riskColor}; margin-bottom: 1.5rem; font-weight: 600;">${riskLevel}</p>
-                <p style="color: var(--text-muted); margin-bottom: 1rem;">
-                    ${percentage <= 33 ? 'Your organization faces significant security risks. Immediate action on critical areas is recommended.' : percentage <= 66 ? 'You have a balanced security posture, but key areas need improvement.' : 'Excellent security practices! Continue monitoring and stay updated on emerging threats.'}
-                </p>
-                <div style="background: rgba(0, 229, 255, 0.1); border-left: 4px solid var(--cyan); padding: 1rem; border-radius: 8px; text-align: left; margin-top: 1.5rem;">
-                    <p style="color: var(--text-light); font-weight: 600; margin-bottom: 0.5rem;">Next Steps:</p>
-                    <ul style="color: var(--text-muted); margin: 0; padding-left: 1.5rem;">
-                        <li>Review areas with lower scores</li>
-                        <li>Create an action plan for improvements</li>
-                        <li>Schedule quarterly assessments</li>
-                        <li><a href="services.html" style="color: var(--cyan); text-decoration: underline;">Contact our experts</a> for professional guidance</li>
-                    </ul>
+            <div style="padding:2rem; background:rgba(26,39,68,0.8); border-radius:15px; border:2px solid ${riskColor};">
+                <div style="text-align:center; margin-bottom:2rem;">
+                    <h3 style="color:${riskColor}; margin-bottom:0.5rem;">Your Security Risk Score</h3>
+                    <div style="font-size:3rem; font-weight:700; color:${riskColor}; margin-bottom:0.5rem;">${percentage}%</div>
+                    <div style="display:inline-block; background:${riskColor}22; border:2px solid ${riskColor}; border-radius:20px; padding:0.4rem 1.5rem; font-size:1.1rem; font-weight:700; color:${riskColor}; letter-spacing:2px;">${riskLevel}</div>
+                </div>
+
+                ${weaknesses.length > 0 ? `
+                <div style="background:rgba(255,107,0,0.1); border-left:4px solid #FF6B00; padding:1.25rem; border-radius:8px; margin-bottom:1.5rem;">
+                    <p style="color:#FF6B00; font-weight:700; margin-bottom:0.75rem;">🔍 Detected Weaknesses</p>
+                    <ul style="color:var(--text-light); margin:0; padding-left:1.25rem; line-height:1.9;">${weaknessHTML}</ul>
+                </div>` : ''}
+
+                <div style="background:rgba(0,229,255,0.08); border-left:4px solid var(--cyan); padding:1.25rem; border-radius:8px; margin-bottom:1.5rem;">
+                    <p style="color:var(--cyan); font-weight:700; margin-bottom:0.75rem;"> Personalized Recommendations</p>
+                    <ul style="color:var(--text-light); margin:0; padding-left:1.25rem; line-height:1.9;">${recHTML}</ul>
+                </div>
+
+                <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+                    <button onclick="generateRiskPDF()" class="btn btn-primary" style="flex:1; min-width:200px; padding:0.9rem; font-size:1rem;">
+                         Download PDF Report
+                    </button>
+                    
                 </div>
             </div>
         `;
         resultsDiv.style.display = 'block';
-        
-        if (typeof window.saveQuizScore === 'function') {
+        resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+        if (typeof window.saveRiskAssessment === 'function') {
+            window.saveRiskAssessment(window._lastRiskAssessment).catch(err => {
+                console.log('Could not save assessment:', err);
+            });
+        } else if (typeof window.saveQuizScore === 'function') {
             window.saveQuizScore(percentage, 'risk-assessment').catch(err => {
                 console.log('Could not save quiz score:', err);
             });
         }
     }
+}
+
+function generateRiskPDF() {
+    const data = window._lastRiskAssessment;
+    if (!data) {
+        alert('Please complete the risk assessment first.');
+        return;
+    }
+
+    const jsPDFLib = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF;
+    if (!jsPDFLib) {
+        alert('PDF library not loaded. Please refresh and try again.');
+        return;
+    }
+
+    const doc = new jsPDFLib({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+    const margin = 20;
+    const contentWidth = pageWidth - margin * 2;
+    let y = 0;
+
+    function checkPageBreak(needed) {
+        if (y + needed > pageHeight - margin) {
+            doc.addPage();
+            y = margin + 5;
+        }
+    }
+
+    const riskRGB = data.score <= 33 ? [0, 200, 30] : data.score <= 66 ? [255, 184, 28] : [255, 107, 0];
+
+    doc.setFillColor(10, 25, 50);
+    doc.rect(0, 0, pageWidth, 45, 'F');
+    doc.setFillColor(0, 229, 255);
+    doc.rect(0, 43, pageWidth, 2, 'F');
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(22);
+    doc.setTextColor(0, 229, 255);
+    doc.text('CYBERGUARD', margin, 18);
+
+    doc.setFontSize(10);
+    doc.setTextColor(180, 220, 255);
+    doc.text('Security Intelligence Platform', margin, 26);
+
+    doc.setFontSize(13);
+    doc.setTextColor(255, 255, 255);
+    doc.text('2025 SECURITY RISK ASSESSMENT REPORT', margin, 37);
+
+    doc.setFontSize(9);
+    doc.setTextColor(150, 180, 220);
+    doc.text('Generated: ' + data.date, pageWidth - margin, 37, { align: 'right' });
+
+    y = 55;
+
+    doc.setFillColor(10, 25, 50);
+    doc.roundedRect(margin, y, contentWidth, 42, 3, 3, 'F');
+    doc.setDrawColor(...riskRGB);
+    doc.setLineWidth(0.8);
+    doc.roundedRect(margin, y, contentWidth, 42, 3, 3, 'S');
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(9);
+    doc.setTextColor(170, 200, 230);
+    doc.text('EXECUTIVE SUMMARY', margin + 8, y + 10);
+
+    doc.setFontSize(28);
+    doc.setTextColor(...riskRGB);
+    doc.text(data.score + '%', margin + 8, y + 28);
+
+    doc.setFontSize(10);
+    doc.text(data.riskLevel, margin + 8, y + 37);
+
+    doc.setDrawColor(50, 80, 120);
+    doc.setLineWidth(0.3);
+    doc.line(margin + 55, y + 8, margin + 55, y + 38);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(200, 220, 240);
+    const summaryText = data.score <= 33
+        ? 'Your organization faces significant security risks. Multiple critical\nweaknesses were identified that require immediate remediation to\nprevent potential data breaches or ransomware attacks.'
+        : data.score <= 66
+        ? 'Your organization has a moderate security posture with key areas\nrequiring improvement. Addressing the identified gaps will significantly\nreduce your attack surface and breach likelihood.'
+        : 'Your organization demonstrates strong security practices. Continue\nmaintaining and improving your controls while monitoring emerging\nthreats to sustain this excellent security posture.';
+    doc.text(summaryText, margin + 62, y + 12, { lineHeightFactor: 1.6 });
+
+    y += 52;
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(11);
+    doc.setTextColor(0, 229, 255);
+    doc.text('RISK SCORE BREAKDOWN', margin, y + 6);
+    doc.setDrawColor(0, 229, 255);
+    doc.setLineWidth(0.5);
+    doc.line(margin, y + 8, margin + 68, y + 8);
+    y += 14;
+
+    const breakdown = [
+        { label: 'Multi-Factor Authentication', answer: data.answers.mfa },
+        { label: 'Patch Management', answer: data.answers.updates },
+        { label: 'Backup Strategy', answer: data.answers.backup },
+        { label: 'Security Awareness Training', answer: data.answers.training },
+        { label: 'Network Segmentation', answer: data.answers.segmentation },
+        { label: 'VPN / Remote Access', answer: data.answers.vpn },
+        { label: 'Security Monitoring', answer: data.answers.monitoring },
+        { label: 'Incident Response Plan', answer: data.answers.incident }
+    ];
+
+    const highRisk = ['no', 'none', 'never', 'rarely'];
+    const midRisk = ['partial', 'sometimes'];
+
+    breakdown.forEach((item, idx) => {
+        checkPageBreak(12);
+        if (idx % 2 === 0) {
+            doc.setFillColor(18, 35, 65);
+            doc.rect(margin, y - 2, contentWidth, 10, 'F');
+        }
+        const isHigh = highRisk.includes(item.answer);
+        const isMid = midRisk.includes(item.answer);
+        const sColor = isHigh ? [255, 107, 0] : isMid ? [255, 184, 28] : [0, 200, 30];
+        const sText = isHigh ? 'HIGH RISK' : isMid ? 'MEDIUM' : 'SECURED';
+
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(9);
+        doc.setTextColor(210, 225, 245);
+        doc.text(item.label, margin + 3, y + 5);
+
+        const badgeW = 22;
+        doc.setFillColor(...sColor);
+        doc.roundedRect(pageWidth - margin - badgeW - 3, y, badgeW, 8, 1.5, 1.5, 'F');
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(7);
+        doc.setTextColor(10, 20, 40);
+        doc.text(sText, pageWidth - margin - badgeW / 2 - 3, y + 5.5, { align: 'center' });
+
+        const barX = margin + 78;
+        const barW = 60;
+        doc.setFillColor(30, 50, 85);
+        doc.roundedRect(barX, y + 3, barW, 3, 1, 1, 'F');
+        const fillW = isHigh ? barW : isMid ? barW * 0.5 : 0;
+        if (fillW > 0) {
+            doc.setFillColor(...sColor);
+            doc.roundedRect(barX, y + 3, fillW, 3, 1, 1, 'F');
+        }
+        y += 11;
+    });
+
+    y += 8;
+
+    if (data.weaknesses.length > 0) {
+        checkPageBreak(20 + data.weaknesses.length * 9);
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(11);
+        doc.setTextColor(255, 107, 0);
+        doc.text('DETECTED WEAKNESSES', margin, y + 6);
+        doc.setDrawColor(255, 107, 0);
+        doc.setLineWidth(0.5);
+        doc.line(margin, y + 8, margin + 65, y + 8);
+        y += 14;
+
+        data.weaknesses.forEach(w => {
+            checkPageBreak(11);
+            doc.setFillColor(40, 20, 10);
+            doc.rect(margin, y - 2, contentWidth, 9, 'F');
+            doc.setFillColor(255, 107, 0);
+            doc.rect(margin, y - 2, 3, 9, 'F');
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(9);
+            doc.setTextColor(255, 200, 160);
+            doc.text('\u26A0  ' + w, margin + 7, y + 4.5);
+            y += 10;
+        });
+        y += 6;
+    }
+
+    checkPageBreak(25);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(11);
+    doc.setTextColor(0, 229, 255);
+    doc.text('PERSONALIZED RECOMMENDATIONS', margin, y + 6);
+    doc.setDrawColor(0, 229, 255);
+    doc.setLineWidth(0.5);
+    doc.line(margin, y + 8, margin + 98, y + 8);
+    y += 14;
+
+    data.recommendations.forEach((rec, idx) => {
+        const lines = doc.splitTextToSize(rec, contentWidth - 20);
+        const blockH = lines.length * 5.5 + 8;
+        checkPageBreak(blockH + 4);
+
+        doc.setFillColor(8, 22, 48);
+        doc.roundedRect(margin, y, contentWidth, blockH, 2, 2, 'F');
+        doc.setFillColor(0, 229, 255);
+        doc.roundedRect(margin, y, 4, blockH, 1, 1, 'F');
+
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(9);
+        doc.setTextColor(0, 229, 255);
+        doc.text(String(idx + 1), margin + 10, y + blockH / 2 + 1.5, { align: 'center' });
+
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(9);
+        doc.setTextColor(210, 230, 250);
+        doc.text(lines, margin + 16, y + 6.5, { lineHeightFactor: 1.5 });
+        y += blockH + 4;
+    });
+
+    y += 8;
+
+    if (data.weaknesses.length > 0) {
+        checkPageBreak(55);
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(11);
+        doc.setTextColor(164, 0, 255);
+        doc.text('ACTION PLAN', margin, y + 6);
+        doc.setDrawColor(164, 0, 255);
+        doc.setLineWidth(0.5);
+        doc.line(margin, y + 8, margin + 38, y + 8);
+        y += 14;
+
+        const phases = [
+            { label: 'Immediate (Week 1\u20132)', color: [255, 107, 0], items: data.weaknesses.slice(0, 2) },
+            { label: 'Short-term (Month 1\u20133)', color: [255, 184, 28], items: data.weaknesses.slice(2, 5) },
+            { label: 'Long-term (Month 3\u20136)', color: [0, 200, 30], items: data.weaknesses.slice(5) }
+        ];
+
+        phases.forEach(phase => {
+            if (phase.items.length === 0) return;
+            checkPageBreak(15 + phase.items.length * 8);
+            doc.setFillColor(20, 35, 65);
+            doc.roundedRect(margin, y, contentWidth, 8, 1.5, 1.5, 'F');
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(9);
+            doc.setTextColor(...phase.color);
+            doc.text('\u25B6  ' + phase.label, margin + 5, y + 5.5);
+            y += 10;
+            phase.items.forEach(item => {
+                checkPageBreak(8);
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(8.5);
+                doc.setTextColor(190, 210, 240);
+                doc.text('    \u2726  ' + item, margin + 3, y + 4.5);
+                y += 7;
+            });
+            y += 3;
+        });
+    }
+
+    const totalPages = doc.internal.getNumberOfPages();
+    for (let i = 1; i <= totalPages; i++) {
+        doc.setPage(i);
+        doc.setFillColor(10, 25, 50);
+        doc.rect(0, pageHeight - 14, pageWidth, 14, 'F');
+        doc.setFillColor(0, 229, 255);
+        doc.rect(0, pageHeight - 14, pageWidth, 0.5, 'F');
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(7.5);
+        doc.setTextColor(120, 160, 200);
+        doc.text('CyberGuard Security Intelligence Platform  |  Confidential  |  cyberguard.edu', margin, pageHeight - 6);
+        doc.text('Page ' + i + ' of ' + totalPages, pageWidth - margin, pageHeight - 6, { align: 'right' });
+    }
+
+    doc.save('CyberGuard_Security_Report_2025.pdf');
 }
 
 function runBrowserSecurityScan() {

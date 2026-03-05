@@ -1,7 +1,7 @@
 // Service Worker for CyberGuard PWA
-const CACHE_NAME = 'cyberguard-v1.0.1';
-const STATIC_CACHE = 'cyberguard-static-v1.0.1';
-const DYNAMIC_CACHE = 'cyberguard-dynamic-v1.0.1';
+const CACHE_NAME = 'cyberguard-v2.0.0';
+const STATIC_CACHE = 'cyberguard-static-v2.0.0';
+const DYNAMIC_CACHE = 'cyberguard-dynamic-v2.0.0';
 
 // Files to cache immediately
 const STATIC_ASSETS = [
@@ -64,7 +64,6 @@ self.addEventListener('fetch', (event) => {
         event.respondWith(
             fetch(request)
                 .then((response) => {
-                    // Cache successful API responses
                     if (response.status === 200) {
                         const responseClone = response.clone();
                         caches.open(DYNAMIC_CACHE)
@@ -73,8 +72,26 @@ self.addEventListener('fetch', (event) => {
                     return response;
                 })
                 .catch(() => {
-                    // Return cached API response if available
-                    return caches.match(request);
+                    return caches.match(request).then(r => r || new Response('', { status: 503, statusText: 'Service Unavailable' }));
+                })
+        );
+        return;
+    }
+
+    // Network-first for ALL HTML pages so updates are always picked up
+    if (url.pathname.endsWith('.html') || url.pathname === '/') {
+        event.respondWith(
+            fetch(request)
+                .then((response) => {
+                    if (response && response.status === 200) {
+                        const responseClone = response.clone();
+                        caches.open(DYNAMIC_CACHE)
+                            .then((cache) => cache.put(request, responseClone));
+                    }
+                    return response;
+                })
+                .catch(() => {
+                    return caches.match(request).then(r => r || new Response('<h1>Offline</h1>', { status: 503, headers: { 'Content-Type': 'text/html' } }));
                 })
         );
         return;
@@ -93,7 +110,7 @@ self.addEventListener('fetch', (event) => {
                     return response;
                 })
                 .catch(() => {
-                    return caches.match(request);
+                    return caches.match(request).then(r => r || new Response('', { status: 503, statusText: 'Service Unavailable' }));
                 })
         );
         return;
@@ -132,12 +149,10 @@ self.addEventListener('fetch', (event) => {
 
                 return fetch(request)
                     .then((response) => {
-                        // Don't cache non-successful responses
                         if (!response || response.status !== 200 || response.type !== 'basic') {
-                            return response;
+                            return response || new Response('', { status: 503, statusText: 'Service Unavailable' });
                         }
 
-                        // Cache the response
                         const responseClone = response.clone();
                         caches.open(DYNAMIC_CACHE)
                             .then((cache) => cache.put(request, responseClone));
@@ -145,10 +160,11 @@ self.addEventListener('fetch', (event) => {
                         return response;
                     })
                     .catch(() => {
-                        // Return offline fallback for HTML pages
-                        if (request.headers.get('accept').includes('text/html')) {
-                            return caches.match('/index.html');
+                        const accept = request.headers.get('accept') || '';
+                        if (accept.includes('text/html')) {
+                            return caches.match('/index.html').then(r => r || new Response('<h1>Offline</h1>', { status: 503, headers: { 'Content-Type': 'text/html' } }));
                         }
+                        return new Response('', { status: 503, statusText: 'Service Unavailable' });
                     });
             })
     );
