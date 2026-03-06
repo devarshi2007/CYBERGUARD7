@@ -2901,7 +2901,7 @@ footer {
 }
 
 .milestone-duration {
-    background: linear-gradient(135deg, var(--purple), var(--cyan));
+    background: linear-gradient(135deg, var(--cyan), #1E40AF);
     color: var(--primary-dark);
     padding: 0.3rem 0.8rem;
     border-radius: 20px;
