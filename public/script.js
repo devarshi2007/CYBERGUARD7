@@ -2773,11 +2773,6 @@ function calculateRiskScore() {
                     <ul style="color:var(--text-light); margin:0; padding-left:1.25rem; line-height:1.9;">${weaknessHTML}</ul>
                 </div>` : ''}
 
-                <div style="background:rgba(0,229,255,0.08); border-left:4px solid var(--cyan); padding:1.25rem; border-radius:8px; margin-bottom:1.5rem;">
-                    <p style="color:var(--cyan); font-weight:700; margin-bottom:0.75rem;"> Personalized Recommendations</p>
-                    <ul style="color:var(--text-light); margin:0; padding-left:1.25rem; line-height:1.9;">${recHTML}</ul>
-                </div>
-
                 <div style="display:flex; gap:1rem; flex-wrap:wrap;">
                     <button onclick="generateRiskPDF()" class="btn btn-primary" style="flex:1; min-width:200px; padding:0.9rem; font-size:1rem;">
                          Download PDF Report
