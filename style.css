@@ -3839,6 +3839,10 @@ footer {
     transform: translateX(0);
 }
 
+[data-theme="light"] .hamburger-menu {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(240, 244, 255, 0.98));
+}
+
 .hamburger-close {
     position: absolute;
     top: 20px;
