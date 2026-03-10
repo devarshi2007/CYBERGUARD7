@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberGuard - Search Results</title>
+    
+  <script type="module" crossorigin src="/assets/js/modulepreload-polyfill-YP0FEG5d.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/css/main-2_nR-10Q.css">
+</head>
+<body class="search-page">
+    <!-- ============================================
+         ANIMATED CYBERSECURITY BACKGROUND SYSTEM
+         - Particle network animation
+         - Cyber grid overlay
+         - Neon glow effects
+         - Runs on all pages
+         ============================================ -->
+    
+    <!-- Fixed background container -->
+    <div id="bg-container" class="bg-container">
+        <!-- Canvas for particle network animation -->
+        <canvas id="cyber-canvas"></canvas>
+        
+        <!-- Animated cyber grid overlay -->
+        <div class="cyber-grid-overlay"></div>
+        
+        <!-- Soft neon glow effect -->
+        <div class="cyber-glow-effect"></div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav>
+        <div class="navbar">
+            <div class="logo"><img src="/assets/gif/none%20(9)-DGQB9T3b.gif" alt="CyberGuard Logo" style="height: 70px; vertical-align: middle; margin-right: 10px; opacity: 0.9;"> CyberGuard</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="threats.html">Threats</a></li>
+                <li><a href="threat-map.html">Threat Map</a></li>
+                <li><a href="frameworks.html">Frameworks</a></li>
+                <li><a href="learning.html">Learn</a></li>
+                <li><a href="tools.html">Tools</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="chatbot.html">AI Chat</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="navbar-right">
+                <button id="theme-toggle" class="theme-toggle-btn" title="Toggle theme">🌙</button>
+                <button id="hamburger-btn" class="hamburger-btn" title="Menu" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hamburger Menu -->
+    <div id="hamburger-overlay" class="hamburger-overlay"></div>
+    <div id="hamburger-menu" class="hamburger-menu">
+        <button id="hamburger-close" class="hamburger-close">✕</button>
+        <ul class="hamburger-menu-list">
+            <li><a href="index.html" class="hamburger-link">Home</a></li>
+            <li><a href="about.html" class="hamburger-link">About Us</a></li>
+            <li><a href="case-studies.html" class="hamburger-link">Case Studies</a></li>
+            <li><a href="community.html" class="hamburger-link">Community</a></li>
+            <li><a href="privacy-policy.html" class="hamburger-link">Privacy Policy</a></li>
+            <li><a href="terms-of-service.html" class="hamburger-link">Terms of Service</a></li>
+        </ul>
+    </div>
+
+    <section class="container" style="padding: 4rem 0 2rem;">
+        <div style="background: rgba(26, 39, 68, 0.7); backdrop-filter: blur(12px); border: 2px solid var(--cyan); border-radius: 24px; padding: 2.5rem; box-shadow: 0 0 40px rgba(0, 229, 255, 0.15);">
+            <h1 style="text-align: center; margin-bottom: 1rem;"> Cyber Knowledge Results</h1>
+            <p id="searchPageIntro" style="text-align: center; color: var(--text-muted); margin-bottom: 1.5rem;">Enter a cybersecurity question below or pick from the quick hints to dive deeper.</p>
+            <div style="display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                <input type="text" id="cyberSearchInput" class="tool-input" placeholder="e.g., How does DNS tunneling work? Explain SIEM? What is Kerberoasting?" style="flex: 1; min-width: 240px;">
+                <button class="btn btn-primary" onclick="searchCyberKnowledge()" style="white-space: nowrap;">Search</button>
+            </div>
+            <p style="text-align: center; color: var(--text-light); margin-bottom: 1.5rem;">Showing results for: <strong><span id="searchQueryText">...</span></strong></p>
+
+            <div id="searchPageResults" style="display: none; background: rgba(0, 229, 255, 0.05); border-left: 4px solid var(--cyan); padding: 2rem; border-radius: 16px;">
+                <h2 id="searchPageQuestion" style="color: var(--cyan); margin-bottom: 1rem;"></h2>
+                <p id="searchPageAnswer" style="color: var(--text-light); line-height: 1.8; margin-bottom: 1rem;"></p>
+                <div id="searchPageTips"></div>
+            </div>
+
+            <div id="searchPageNoResult" style="display: none; background: rgba(255, 107, 0, 0.1); border-left: 4px solid #FF6B00; padding: 1.5rem; border-radius: 12px; color: var(--text-light);"></div>
+
+            <div id="searchHints" style="margin-top: 2rem; text-align: center; color: var(--text-muted); font-size: 0.9rem;">
+                <p style="margin-bottom: 0.5rem;"> <strong>Try searching:</strong></p>
+                <p style="line-height: 1.6;">
+                    <strong>Fundamentals:</strong> cybersecurity • network security fundamentals • virus vs worm • CIA triad • authentication vs authorization<br>
+                    <strong>Basics:</strong> password • encryption • brute force attack • botnet • data breach • VPN • 2FA • firewall<br>
+                    <strong>Attacks:</strong> phishing • SQL injection • XSS • MITM • ARP spoofing • session hijacking • buffer overflow • DDoS<br>
+                    <strong>Advanced:</strong> ransomware kill chain • PTES lifecycle • APT • Kerberoasting • side-channel attack • hypervisor escape • memory forensics<br>
+                    <strong>Architecture:</strong> PKI • OAuth 2.0 • micro-segmentation • zero trust • network segmentation • SIEM • sandboxing<br>
+                    <strong>Risk & Response:</strong> risk assessment • NIST incident response • CVE/CVSS • anomaly detection • supply-chain attacks • OSINT • digital forensics
+                </p>
+            </div>
+        </div>
+    </section>
+
+        <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><img src="/assets/gif/none%20(9)-DGQB9T3b.gif" alt="CyberGuard Logo" style="height: 30px; vertical-align: middle; margin-right: 8px;"> CyberGuard</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                    Your trusted resource for cybersecurity education, frameworks, and best practices.
+                </p>
+                 <div class="social-links">
+                    <a href=https://github.com/devarshi2007><img src="/assets/png/Github-Logo-PNG-Photo-1-ByDVGvjH.png" alt="GitHub" style="width: 35px; height: 20px; filter: brightness(0) invert(1);"></a>
+                    <a href="https://x.com/CyberGuard404" title="Twitter">𝕏</a>
+                    <a href="https://www.linkedin.com/in/cyber-guard-335a413a9/" title="LinkedIn">in</a>
+<a href="https://mail.google.com/mail/?view=cm&fs=1&to=hellocyberguard.io@gmail.com&su=Inquiry%20from%20CyberGuard%20Website&body=Hi%20CyberGuard%20team,%0A%0AI%20would%20like%20to%20discuss..."
+   target="_blank"
+   rel="noopener noreferrer"
+   title="Email us on Gmail"
+   style="text-decoration: none; color: inherit;">
+    <span style="font-size: 1.5rem;">✉️</span></a>     
+    <a href ="https://www.instagram.com/cyberguard_404/"><img src="https://th.bing.com/th/id/R.735dda68880a385ce8cc5be4f3c5fcd6?rik=qSxRw2lCZYy9Mw&riu=http%3a%2f%2fpngimg.com%2fuploads%2finstagram%2finstagram_PNG11.png&ehk=QVCbfkCKi8pJLF08bRkS%2fLeMqLTnJQf402WRaIdN6jE%3d&risl=&pid=ImgRaw&r=0" height="25px" width="25px"></a>       
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="threats.html">Threats & Vulnerabilities</a></li>
+                    <li><a href="frameworks.html">Security Frameworks</a></li>
+                    <li><a href="learning.html">Learning Resources</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="tools.html">Tools & Utilities</a></li>
+                    <li><a href="blog.html">Blog & Updates</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-of-service.html">Terms & Conditions</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 CyberGuard - Cybersecurity Education Platform. All rights reserved. | Made with  for a secure digital world</p>
+        </div>
+    </footer>
+
+
+    <script type="module" src="/cyber-background.js"></script>
+    <script type="module" src="/script.js"></script>
+</body>
+</html>
