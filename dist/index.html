@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Comprehensive cybersecurity education platform offering tools, frameworks, learning resources, and AI-powered threat explanations to protect against digital threats.">
+    <meta name="theme-color" content="#00E5FF">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>CyberGuard - Cyber Security & Education Platform</title>
+    <link rel="manifest" href="/assets/json/manifest-D-g0F_av.json">
+    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://unpkg.com/highcharts@11.2.0/highcharts.js" 
+            onload="console.log('Highcharts core loaded')" 
+            onerror="console.error('Failed to load Highcharts from unpkg')">
+    </script>
+    <script src="https://unpkg.com/highcharts@11.2.0/highcharts-3d.js" 
+            onload="console.log('Highcharts 3D module loaded')" 
+            onerror="console.error('Failed to load Highcharts 3D module')">
+    </script>
+    <!-- Plausible Analytics for Privacy-Respecting Usage Tracking -->
+    <script defer data-domain="cyberguard.local" src="https://plausible.io/js/script.js"></script>
+    <!-- Font Preconnects and Links -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/azonix" rel="stylesheet">
+    <!-- Notification Blocker -->
+    <script>
+        const MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.addedNodes.length) {
+                    mutation.addedNodes.forEach((node) => {
+                        if (node.nodeType === 1 && node.classList) {
+                            const isAuthElement = node.id && (node.id.includes('login-form') || node.id.includes('signup-form') || node.id.includes('auth-overlay'));
+                            if (!isAuthElement && (node.classList.contains('notification') || node.classList.contains('update'))) {
+                                node.remove();
+                            }
+                        }
+                    });
+                }
+            });
+        });
+        if (document.body) {
+            observer.observe(document.body, { childList: true, subtree: true });
+        } else {
+            document.addEventListener('DOMContentLoaded', () => {
+                observer.observe(document.body, { childList: true, subtree: true });
+            });
+        }
+    </script>
+    <!-- Crisp Chat Widget for AI Support - DISABLED -->
+    <style>
+        .hero h1 {
+            /* "Azonix" is the closest match to the image */
+            font-family: 'Azonix', sans-serif;
+            font-size: 3.5rem;
+            line-height: 1.5;
+            
+            /* Adds the neon glow effect seen in the image */
+            color: #ffffff;
+            text-shadow: 0 0 10px #00e6e6, 0 0 20px #00e6e6;
+            
+            /* Ensures text is uppercase (Azonix is an all-caps font) */
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+    </style>
+  <script type="module" crossorigin src="/assets/js/modulepreload-polyfill-YP0FEG5d.js"></script>
+  <script type="module" crossorigin src="/assets/js/auth-CRvsX7R8.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/css/main-2_nR-10Q.css">
+</head>
+<body>
+    <!-- ============================================
+         ANIMATED CYBERSECURITY BACKGROUND SYSTEM
+         - Particle network animation
+         - Cyber grid overlay
+         - Neon glow effects
+         - Runs on all pages
+         ============================================ -->
+    
+    <!-- Fixed background container -->
+    <div id="bg-container" class="bg-container">
+        <!-- Canvas for particle network animation -->
+        <canvas id="cyber-canvas"></canvas>
+        
+        <!-- Animated cyber grid overlay -->
+        <div class="cyber-grid-overlay"></div>
+        
+        <!-- Soft neon glow effect -->
+        <div class="cyber-glow-effect"></div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav>
+        <div class="navbar">
+            <div class="logo"><img src="/assets/gif/none%20(9)-DGQB9T3b.gif" alt="CyberGuard Logo" style="height: 50px; vertical-align: middle; margin-right: 10px; opacity: 0.9;">CyberGuard</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="threats.html">Threats</a></li>
+                <li><a href="learning.html">Learn</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="chatbot.html">AI Chat</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="navbar-right">
+                <button id="theme-toggle" class="theme-toggle-btn" title="Toggle theme">🌙</button>
+                <button id="hamburger-btn" class="hamburger-btn" title="Menu" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            
+            <!-- Auth Container -->
+            <div id="auth-container" style="display: flex; align-items: center; gap: 10px; margin-left: 20px;">
+                <div id="user-status" style="color: #00E5FF;">Not logged in</div>
+                <button id="btn-show-login" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.9rem;">Login</button>
+                <button id="btn-show-signup" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.9rem;">Sign Up</button>
+            </div>
+        </div>
+
+        <!-- Login Form -->
+        <div id="login-form" style="display: none; background: rgba(26, 39, 68, 0.95); padding: 2rem; border-radius: 15px; border: 2px solid #00E5FF; box-shadow: 0 0 30px rgba(0, 229, 255, 0.3); z-index: 10000; min-width: 350px;">
+            <h3 style="color: #00E5FF; margin-bottom: 1.5rem; text-align: center;">Login</h3>
+            <form id="login-form-element">
+                <input type="email" id="login-email" placeholder="Email" required style="width: 100%; padding: 12px; margin-bottom: 1rem; border-radius: 8px; border: 1px solid #00E5FF; background: rgba(0, 0, 0, 0.3); color: white;" />
+                <input type="password" id="login-password" placeholder="Password" required style="width: 100%; padding: 12px; margin-bottom: 0.5rem; border-radius: 8px; border: 1px solid #00E5FF; background: rgba(0, 0, 0, 0.3); color: white;" />
+                <div style="text-align: right; margin-bottom: 1.5rem;">
+                    <button type="button" id="btn-forgot-password" style="background: none; border: none; color: #00E5FF; cursor: pointer; font-size: 0.85rem; text-decoration: underline;">Forgot Password?</button>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">Login</button>
+                    <button type="button" id="btn-hide-login" class="btn btn-secondary" style="flex: 1;">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Signup Form -->
+        <div id="signup-form" style="display: none; background: rgba(26, 39, 68, 0.95); padding: 2rem; border-radius: 15px; border: 2px solid #00E5FF; box-shadow: 0 0 30px rgba(0, 229, 255, 0.3); z-index: 10000; min-width: 350px;">
+            <h3 style="color: #00E5FF; margin-bottom: 1.5rem; text-align: center;">Sign Up</h3>
+            <form id="signup-form-element">
+                <input type="email" id="signup-email" placeholder="Email" required style="width: 100%; padding: 12px; margin-bottom: 1rem; border-radius: 8px; border: 1px solid #00E5FF; background: rgba(0, 0, 0, 0.3); color: white;" />
+                <input type="password" id="signup-password" placeholder="Password" required style="width: 100%; padding: 12px; margin-bottom: 1.5rem; border-radius: 8px; border: 1px solid #00E5FF; background: rgba(0, 0, 0, 0.3); color: white;" />
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">Create account</button>
+                    <button type="button" id="btn-hide-signup" class="btn btn-secondary" style="flex: 1;">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Password Reset Form -->
+        <div id="reset-password-form" style="display: none; background: rgba(26, 39, 68, 0.95); padding: 2rem; border-radius: 15px; border: 2px solid #00E5FF; box-shadow: 0 0 30px rgba(0, 229, 255, 0.3); z-index: 10000; min-width: 350px;">
+            <h3 style="color: #00E5FF; margin-bottom: 1rem; text-align: center;">Reset Password</h3>
+            <p style="color: #B0BEC5; font-size: 0.9rem; margin-bottom: 1.5rem; text-align: center;">Enter your email to receive a password reset link</p>
+            <form id="reset-password-form-element">
+                <input type="email" id="reset-email" placeholder="Email" required style="width: 100%; padding: 12px; margin-bottom: 1.5rem; border-radius: 8px; border: 1px solid #00E5FF; background: rgba(0, 0, 0, 0.3); color: white;" />
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">Send Reset Link</button>
+                    <button type="button" id="btn-hide-reset" class="btn btn-secondary" style="flex: 1;">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Modal Overlay -->
+        <div id="auth-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 9999;"></div>
+    </nav>
+
+    <!-- Hamburger Menu -->
+    <div id="hamburger-overlay" class="hamburger-overlay"></div>
+    <div id="hamburger-menu" class="hamburger-menu">
+        <button id="hamburger-close" class="hamburger-close">✕</button>
+        <ul class="hamburger-menu-list">
+            <li><a href="frameworks.html" class="hamburger-link">Frameworks</a></li>
+            <li><a href="tools.html" class="hamburger-link">Tools</a></li>
+             <li><a href="services.html" class="hamburger-link">Services</a></li>
+            <li><a href="privacy-policy.html" class="hamburger-link">Privacy Policy</a></li>
+            <li><a href="terms-&-condition.html" class="hamburger-link">Terms & Condition</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="cyber-grid"></div>
+        <div class="hero-content">
+            <h1> Secure Your Digital World</h1>
+            <p>Comprehensive cybersecurity education, frameworks, and tools to protect yourself and your organization from evolving digital threats.</p>
+            <div class="hero-buttons">
+                <a href="learning.html" class="btn btn-primary"> Start Learning</a>
+                <a href="tools.html" class="btn btn-secondary"> Explore Tools</a>
+                <a href="chatbot.html" class="btn btn-secondary"> AI Chat</a>
+            </div>
+        </div>
+    </section>
+
+   <!-- Hero Image Section -->
+    <section class="hero-image-section">
+        <div class="container">
+            <div class="hero-image-container">
+                <img src="/assets/jpeg/WhatsApp%20Image%202026-02-17%20at%207.20.54%20PM-DSPXTJ6U.jpeg" alt="CyberGuard cybersecurity platform background" style="width: 100%; height: auto; display: block; margin: 0 auto;">
+            </div>
+        </div>
+    </section>
+
+    <!-- What is CyberGuard Section -->
+    <section class="section" style="margin: 3rem auto; max-width: 1200px;">
+        <div class="card" style="border-color: var(--cyan); text-align: center;">
+            <h2 style="color: var(--cyan); text-shadow: 0 0 10px var(--cyan); margin-bottom: 1.5rem;">What is CyberGuard?</h2>
+            <p style="font-size: 1.1rem; line-height: 1.8; color: #B0BEC5;">
+                CyberGuard is a comprehensive cybersecurity education platform that empowers individuals and organizations to defend against digital threats. We provide accessible learning resources, security frameworks, professional tools, and AI-powered threat analysis to make cybersecurity education practical and effective. From penetration testing and managed detection services to security training and real-time threat monitoring, CyberGuard delivers the knowledge and tools needed to secure your digital world while promoting ethical practices and responsible security disclosure.
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+
+        <!-- Quick Access -->
+        <section class="section">
+            <h2>Quick Access Guides</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3> Getting Started</h3>
+                    <p>New to cybersecurity? Start with our beginner's guide covering fundamentals, terminology, and essential concepts.</p>
+                    <a href="learning.html" class="blog-read-more">Start Now →</a>
+                </div>
+                <div class="card">
+                    <h3> Understanding Threats</h3>
+                    <p>Explore detailed explanations of common vulnerabilities including XSS, SQL Injection, CSRF, and social engineering tactics.</p>
+                    <a href="threats.html" class="blog-read-more">View Threats →</a>
+                </div>
+                <div class="card">
+                    <h3> Security Tools</h3>
+                    <p>Discover safe, educational tools including password checkers, SSL validators, hashing demos, and data breach checkers.</p>
+                    <a href="tools.html" class="blog-read-more">Try Tools →</a>
+                </div>
+                <div class="card">
+                    <h3> Industry Standards</h3>
+                    <p>Learn about OWASP, NIST, and ISO standards that guide organizations in building secure and resilient systems.</p>
+                    <a href="frameworks.html" class="blog-read-more">Explore Frameworks →</a>
+                </div>
+                <div class="card">
+                    <h3> Latest Updates</h3>
+                    <p>Stay informed with our blog covering latest vulnerabilities, security tips, industry news, and research trends.</p>
+                    <a href="blog.html" class="blog-read-more">Read Blog →</a>
+                </div>
+                <div class="card">
+                    <h3> Get In Touch</h3>
+                    <p>We're here to help with your cybersecurity needs. Contact us for consulting, services, partnerships, or questions.</p>
+                    <a href="contact.html" class="blog-read-more">Contact Us →</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section attack-mapper-section">
+            <h2>Visual Attack Path Mapper</h2>
+            <div class="attack-mapper">
+                <div class="attack-controls">
+                    <p>Select an attack to see how adversaries move and where to intervene.</p>
+                    <div class="attack-chip-group">
+                        <button type="button" class="attack-chip active" data-attack="sqlInjection">SQL Injection</button>
+                        <button type="button" class="attack-chip" data-attack="xss">XSS</button>
+                        <button type="button" class="attack-chip" data-attack="ransomware">Ransomware</button>
+                    </div>
+                </div>
+                <div class="attack-diagram">
+                    <div class="attack-path" id="attackFlow"></div>
+                    <div class="attack-summary-panel">
+                        <h3 id="attackTitle"></h3>
+                        <p id="attackDescription"></p>
+                        <h4>Break the chain</h4>
+                        <ul class="attack-defense-list" id="attackDefenseList"></ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+       <section class="section attack-distribution-section">
+            <h2>Attack Types Distribution</h2>
+            <div style="background: var(--card-bg); backdrop-filter: blur(10px); border: 2px solid var(--cyan); border-radius: 20px; padding: 2rem; box-shadow: 0 0 30px rgba(0, 229, 255, 0.1);">
+                <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">
+                    Common cyber attack types detected in real-world scenarios
+                </p>
+                <div style="max-width: 700px; margin: 0 auto; position: relative;">
+                    <div id="attackTypesChart" style="height: 450px;"></div>
+                </div>
+                <div id="attackStats" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem;">
+                    <div style="background: rgba(0, 229, 255, 0.05); border-left: 4px solid #FF6384; padding: 1rem; border-radius: 8px;">
+                        <div style="font-size: 1.5rem; font-weight: 700; color: #FF6384;">30%</div>
+                        <div style="color: var(--text-light);">Phishing</div>
+                    </div>
+                    <div style="background: rgba(0, 229, 255, 0.05); border-left: 4px solid #36A2EB; padding: 1rem; border-radius: 8px;">
+                        <div style="font-size: 1.5rem; font-weight: 700; color: #36A2EB;">25%</div>
+                        <div style="color: var(--text-light);">Malware</div>
+                    </div>
+                    <div style="background: rgba(0, 229, 255, 0.05); border-left: 4px solid #FFCE56; padding: 1rem; border-radius: 8px;">
+                        <div style="font-size: 1.5rem; font-weight: 700; color: #FFCE56;">20%</div>
+                        <div style="color: var(--text-light);">Ransomware</div>
+                    </div>
+                    <div style="background: rgba(0, 229, 255, 0.05); border-left: 4px solid #4BC0C0; padding: 1rem; border-radius: 8px;">
+                        <div style="font-size: 1.5rem; font-weight: 700; color: #4BC0C0;">15%</div>
+                        <div style="color: var(--text-light);">DDoS</div>
+                    </div>
+                    <div style="background: rgba(0, 229, 255, 0.05); border-left: 4px solid #9966FF; padding: 1rem; border-radius: 8px;">
+                        <div style="font-size: 1.5rem; font-weight: 700; color: #9966FF;">10%</div>
+                        <div style="color: var(--text-light);">SQL Injection</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section behavior-simulator-section">
+            <h2>Secure Behavior Simulator</h2>
+            <p style="color:var(--text-muted);margin-bottom:2rem;text-align:center;">Make the right call in real-world cyber threat scenarios and see what happens.</p>
+            <div class="behavior-sim">
+
+                <div class="bsim-header">
+                    <div class="bsim-step-dots" id="bsimStepDots"></div>
+                    <div class="bsim-score-badge">Score&nbsp;<span id="bsimScore">0</span>&nbsp;/&nbsp;3</div>
+                </div>
+                <div class="bsim-progress-track"><div class="bsim-progress-fill" id="bsimFill" style="width:0%"></div></div>
+
+                <div id="bsimQuestion">
+                    <div class="bsim-scenario-tag" id="bsimTag"></div>
+                    <div class="behavior-primary" style="margin:1.2rem 0 1.8rem;">
+                        <h3 id="behaviorScenarioTitle" style="font-size:1.3rem;margin-bottom:.6rem;"></h3>
+                        <p id="behaviorScenarioDesc" style="color:var(--text-muted);line-height:1.7;"></p>
+                    </div>
+                    <p class="bsim-prompt-label">What would you do?</p>
+                    <div class="bsim-choices" id="bsimChoices"></div>
+                </div>
+
+                <div id="bsimResult" style="display:none;">
+                    <div class="bsim-verdict" id="bsimVerdict"></div>
+                    <div class="bsim-choices bsim-choices-result" id="bsimChoicesResult"></div>
+                    <div class="behavior-action-grid" style="margin-top:1.5rem;">
+                        <div class="behavior-card good">
+                            <h4>Right Action</h4>
+                            <p id="behaviorRightAction"></p>
+                        </div>
+                        <div class="behavior-card risk">
+                            <h4>Wrong Move</h4>
+                            <p id="behaviorWrongAction"></p>
+                        </div>
+                        <div class="behavior-card impact">
+                            <h4>What Happens</h4>
+                            <p id="behaviorOutcome"></p>
+                        </div>
+                        <div class="behavior-card plan">
+                            <h4>Stay Safe</h4>
+                            <ul id="behaviorSafePlan" class="behavior-safe-list"></ul>
+                        </div>
+                    </div>
+                    <div style="text-align:center;margin-top:1.8rem;">
+                        <button class="btn btn-primary" id="bsimNextBtn" style="padding:.8rem 2.5rem;font-size:1rem;"></button>
+                    </div>
+                </div>
+
+                <div id="bsimFinal" style="display:none;text-align:center;padding:2rem 1rem;">
+                    <div class="bsim-final-emoji" id="bsimFinalEmoji"></div>
+                    <h3 style="font-size:1.5rem;margin:.5rem 0;" id="bsimFinalTitle"></h3>
+                    <p style="color:var(--text-muted);margin:.5rem 0 1.4rem;" id="bsimFinalDesc"></p>
+                    <div class="bsim-final-score">
+                        <span id="bsimFinalNum" class="bsim-final-num"></span>
+                        <span style="color:var(--text-muted);font-size:1.5rem;">&thinsp;/ 3</span>
+                    </div>
+                    <button class="btn btn-secondary" id="bsimRetry" style="margin-top:1.6rem;padding:.8rem 2.2rem;">Try Again</button>
+                </div>
+
+            </div>
+        </section>
+
+        
+
+        
+        
+
+       
+
+        <!-- Mission Statement -->
+        <section class="section">
+            <div class="card" style="border: 2px solid #00E5FF; text-align: center;">
+                <h2 style="color: #00E5FF; text-shadow:  #00E5FF;">Our Mission</h2>
+                <p style="font-size: 1.1rem; margin-bottom: 1rem; color: #B0BEC5;">
+                    This platform is designed for beginners with no prior cybersecurity knowledge. We make complex security concepts simple and easy to understand, providing step-by-step learning paths, practical tools, and hands-on examples to help you start your cybersecurity journey from the ground up.
+                </p>
+                <p style="color: #B0BEC5;">
+                     Beginner-Friendly |  Easy to Learn |  Practical Examples |  Step-by-Step Guidance
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><img src="/assets/gif/none%20(9)-DGQB9T3b.gif" alt="CyberGuard Logo" style="height: 30px; vertical-align: middle; margin-right: 8px;"> CyberGuard</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                    Your trusted resource for cybersecurity education, frameworks, and best practices.
+                </p>
+                 <div class="social-links">
+                    <a href=https://github.com/devarshi2007><img src="/assets/png/Github-Logo-PNG-Photo-1-ByDVGvjH.png" alt="GitHub" style="width: 35px; height: 20px; filter: brightness(0) invert(1);"></a>
+                    <a href="https://x.com/CyberGuard404" title="Twitter">𝕏</a>
+<a href="https://mail.google.com/mail/?view=cm&fs=1&to=hellocyberguard.io@gmail.com&su=Inquiry%20from%20CyberGuard%20Website&body=Hi%20CyberGuard%20team,%0A%0AI%20would%20like%20to%20discuss..."
+   target="_blank"
+   rel="noopener noreferrer"
+   title="Email us on Gmail"
+   style="text-decoration: none; color: inherit;">
+    <span style="font-size: 1.5rem;">✉️</span></a>     
+    <a href ="https://www.instagram.com/cyberguard_404/"><img src="https://th.bing.com/th/id/R.735dda68880a385ce8cc5be4f3c5fcd6?rik=qSxRw2lCZYy9Mw&riu=http%3a%2f%2fpngimg.com%2fuploads%2finstagram%2finstagram_PNG11.png&ehk=QVCbfkCKi8pJLF08bRkS%2fLeMqLTnJQf402WRaIdN6jE%3d&risl=&pid=ImgRaw&r=0" height="25px" width="25px"></a>       
+        </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="threats.html">Threats & Vulnerabilities</a></li>
+                    <li><a href="frameworks.html">Security Frameworks</a></li>
+                    <li><a href="learning.html">Learning Resources</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="tools.html">Tools & Utilities</a></li>
+                    <li><a href="blog.html">Blog & Updates</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-&-condition.html">Terms & Conditions</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 CyberGuard - Cybersecurity Education Platform.| Made for a secure digital world</p>
+        </div>
+    </footer>
+
+
+
+    <!-- Cookie Banner for GDPR/CCPA Compliance -->
+    <div id="cookieBanner" class="cookie-banner">
+        <div class="cookie-banner-content">
+            <h3> Cookie Consent</h3>
+            <p>We use cookies to enhance your experience, analyze site traffic, and serve personalized content. By continuing to use this site, you consent to our <a href="privacy-policy.html">Privacy Policy</a> and <a href="privacy-policy.html#cookies">Cookie Policy</a>. You can change your consent preferences at any time.</p>
+        </div>
+        <div class="cookie-banner-buttons">
+            <button id="rejectCookies" class="cookie-btn cookie-btn-reject">Reject</button>
+            <button id="acceptCookies" class="cookie-btn cookie-btn-accept">Accept All</button>
+        </div>
+    </div>
+
+    <!-- JSON-LD Schema Markup for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "CyberGuard",
+        "url": "https://cyberguard.com",
+        "logo": "https://cyberguard.com/logo.png",
+        "description": "Comprehensive cybersecurity education platform offering tools, frameworks, learning resources, and AI-powered threat explanations to protect against digital threats.",
+        "sameAs": [
+            "https://facebook.com/cyberguard",
+            "https://twitter.com/cyberguard",
+            "https://linkedin.com/company/cyberguard"
+        ],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "Customer Service",
+            "email": "support@cyberguard.com"
+        }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Cybersecurity Education & Training",
+        "description": "Professional cybersecurity education, frameworks, tools, and threat analysis platform.",
+        "provider": {
+            "@type": "Organization",
+            "name": "CyberGuard"
+        },
+        "areaServed": "Worldwide",
+        "serviceType": [
+            "Security Training",
+            "Penetration Testing",
+            "Threat Analysis",
+            "Security Frameworks",
+            "Vulnerability Assessment"
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is cybersecurity?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Cybersecurity is the practice of protecting systems, networks, software, and data from digital attacks, unauthorized access, and disruption."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is phishing?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Phishing is a cyberattack method where attackers send fraudulent emails or create fake websites to trick people into revealing sensitive information."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is the difference between HTTP and HTTPS?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "HTTP transmits data in plain text, while HTTPS wraps HTTP inside TLS/SSL encryption to protect confidentiality and integrity."
+                }
+            }
+        ]
+    }
+    </script>
+
+     <!-- Attack Types 3D Pie Chart -->
+    <script>
+        let chartInitRetries = 0;
+        const maxRetries = 10;
+        
+        function initAttackTypesChart() {
+            console.log('Attempting to load 3D pie chart... (Attempt ' + (chartInitRetries + 1) + '/' + maxRetries + ')');
+            const chartContainer = document.getElementById('attackTypesChart');
+            console.log('Chart container found:', chartContainer);
+            console.log('Highcharts available:', typeof Highcharts !== 'undefined');
+            
+            if (!chartContainer) {
+                console.error('Chart container not found!');
+                return;
+            }
+            
+            if (typeof Highcharts === 'undefined') {
+                chartInitRetries++;
+                if (chartInitRetries >= maxRetries) {
+                    console.error('Failed to load Highcharts after ' + maxRetries + ' attempts. Please check your internet connection.');
+                    return;
+                }
+                console.error('Highcharts library not loaded! Retrying in 1000ms...');
+                setTimeout(initAttackTypesChart, 1000);
+                return;
+            }
+            
+            if (typeof Highcharts.chart3d === 'undefined' && !Highcharts.Chart.prototype.is3d) {
+                chartInitRetries++;
+                if (chartInitRetries >= maxRetries) {
+                    console.error('Failed to load Highcharts 3D module after ' + maxRetries + ' attempts.');
+                    return;
+                }
+                console.warn('Highcharts 3D module may not be loaded yet, retrying...');
+                setTimeout(initAttackTypesChart, 1000);
+                return;
+            }
+            
+            console.log('Initializing Highcharts 3D pie chart...');
+            try {
+                Highcharts.chart('attackTypesChart', {
+                    chart: {
+                        type: 'pie',
+                        backgroundColor: 'transparent',
+                        options3d: {
+                            enabled: true,
+                            alpha: 55,
+                            beta: 0,
+                            depth: 70,
+                            viewDistance: 25
+                        }
+                    },
+                    title: {
+                        text: null
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                        borderColor: '#00E5FF',
+                        borderWidth: 2,
+                        style: {
+                            color: '#ffffff'
+                        },
+                        pointFormat: '<b>{point.percentage:.1f}%</b>'
+                    },
+                    plotOptions: {
+                        pie: {
+                            innerSize: 0,
+                            depth: 70,
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: false
+                            },
+                            showInLegend: true
+                        }
+                    },
+                    legend: {
+                        align: 'right',
+                        verticalAlign: 'middle',
+                        layout: 'vertical',
+                        itemStyle: {
+                            color: '#e0e0e0',
+                            fontSize: '14px'
+                        },
+                        itemHoverStyle: {
+                            color: '#00E5FF'
+                        }
+                    },
+                    series: [{
+                        name: 'Attack Types',
+                        colorByPoint: true,
+                        data: [{
+                            name: 'Phishing',
+                            y: 30,
+                            sliced: true,
+                            selected: true,
+                            color: {
+                                linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+                                stops: [
+                                    [0, '#FF8A9A'],
+                                    [1, '#FF6384']
+                                ]
+                            }
+                        }, {
+                            name: 'Malware',
+                            y: 25,
+                            sliced: true,
+                            color: {
+                                linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+                                stops: [
+                                    [0, '#5DD5DD'],
+                                    [1, '#4BC0C0']
+                                ]
+                            }
+                        }, {
+                            name: 'Ransomware',
+                            y: 20,
+                            sliced: true,
+                            color: {
+                                linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+                                stops: [
+                                    [0, '#FFE082'],
+                                    [1, '#FFCE56']
+                                ]
+                            }
+                        }, {
+                            name: 'DDoS',
+                            y: 15,
+                            sliced: true,
+                            color: {
+                                linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+                                stops: [
+                                    [0, '#5DD5DD'],
+                                    [1, '#2A9D8F']
+                                ]
+                            }
+                        }, {
+                            name: 'SQL Injection',
+                            y: 10,
+                            color: {
+                                linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+                                stops: [
+                                    [0, '#A988FF'],
+                                    [1, '#8B5CF6']
+                                ]
+                            }
+                        }]
+                    }]
+                });
+                console.log('3D pie chart initialized successfully!');
+            } catch (error) {
+                console.error('Error initializing chart:', error);
+            }
+        }
+        
+        // Try to initialize immediately if DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initAttackTypesChart);
+        } else {
+            // DOM is already ready
+            initAttackTypesChart();
+        }
+    </script>
+    <!-- Main Application Script -->
+    <script src="script.js"></script>
+    <script>
+        console.log('Script.js loaded successfully');
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM Content Loaded - Page initialized');
+        });
+    </script>
+    <!-- Animated Background System -->
+    <script type="module" src="/cyber-background.js?v=1.0.1"></script>
+    <!-- Firebase Authentication Module -->
+    <!-- Service Worker Registration for PWA -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => {
+                        console.log('Service Worker registered:', registration);
+                    })
+                    .catch(error => {
+                        console.log('Service Worker registration failed:', error);
+                    });
+            });
+        }
+    </script>
+    <!-- Behaviour Simulator Interactive Script -->
+    <script>
+    (function(){
+
+        var pool = {
+            email: [
+                {
+                     label:'Suspicious Email',
+                    title:'Payroll Verification Scam',
+                    desc:'You receive an urgent email from "hr-dept@company-updates.net" claiming your payroll details need verification. It has an attached spreadsheet and demands immediate action.',
+                    choices:[
+                        {text:'Download the spreadsheet and fill in your payroll details immediately', correct:false},
+                        {text:'Hover over the sender address, verify with HR via the internal directory, then report to IT', correct:true},
+                        {text:'Forward it to your whole team as a warning — open the file first to confirm it is malicious', correct:false}
+                    ],
+                    rightAction:'Verify the sender through a trusted channel (not the email itself), report to IT, and never open unexpected attachments.',
+                    wrongAction:'Downloading and enabling macros in the attachment, or clicking any links inside the email.',
+                    outcome:'A credential-stealing macro executes, implants persistence, and replays your session tokens within minutes.',
+                    staySafe:['Slow down when urgency and incentives appear together','Inspect sender domain spelling and SPF headers carefully','Open attachments only after IT sandbox validation']
+                },
+                {
+                    label:'Suspicious Email',
+                    title:'IT Password Reset Trap',
+                    desc:'An email from "it-support@company-helpdesk.co" says your account will be locked in 2 hours unless you click a link to reset your password immediately.',
+                    choices:[
+                        {text:'Click the link immediately — a locked account would disrupt your whole day', correct:false},
+                        {text:'Ignore it entirely and do nothing', correct:false},
+                        {text:'Navigate to the IT portal directly by typing the URL, check your account status there, and call IT to confirm', correct:true}
+                    ],
+                    rightAction:'Go directly to the IT portal using a known URL or call IT support. Never click links in unsolicited password-reset emails.',
+                    wrongAction:'Clicking the link in the email takes you to a credential-harvesting page designed to look like your IT portal.',
+                    outcome:'Your credentials are captured instantly. The attacker uses them to pivot to internal systems within the hour.',
+                    staySafe:['Always verify password-reset requests through official channels','Legitimate IT will never threaten account lockout via email','Use a password manager — it will refuse to autofill on fake domains']
+                },
+                {
+                    label:'Suspicious Email',
+                    title:'CEO Wire Transfer Request',
+                    desc:'You receive an email apparently from your CEO asking you to urgently wire £45,000 to a new supplier. The email says it is confidential and to bypass normal approval.',
+                    choices:[
+                        {text:'Process the wire transfer immediately — the CEO is asking and it sounds urgent', correct:false},
+                        {text:'Reply to the email asking for more details before transferring', correct:false},
+                        {text:'Call the CEO directly on their known number to verify the request before taking any action', correct:true}
+                    ],
+                    rightAction:'Always verify large financial requests through a separate, out-of-band channel (phone call to a known number).',
+                    wrongAction:'Transferring funds based on email alone, or replying to the same email thread — both expose you to Business Email Compromise (BEC) fraud.',
+                    outcome:'The funds are transferred to an attacker-controlled account. Recovery is rarely possible once the wire clears.',
+                    staySafe:['Establish a verbal confirmation policy for all financial transfers','Treat "confidential — bypass normal approval" as a red flag','BEC fraud costs organisations billions annually']
+                },
+                {
+                 label:'Suspicious Email',
+                    title:'Parcel Delivery Failure',
+                    desc:'An email from "noreply@dhl-delivery-notice.com" says your parcel could not be delivered and you must pay a £2.99 customs fee by clicking the link within 24 hours.',
+                    choices:[
+                        {text:'Click the link and pay — £2.99 is a small amount and you are expecting a parcel', correct:false},
+                        {text:'Go directly to the official courier website and enter your tracking number there to check status', correct:true},
+                        {text:'Reply to the email asking for more details about the parcel', correct:false}
+                    ],
+                    rightAction:'Always check delivery status directly on the official courier website. Never click tracking or payment links in unsolicited emails.',
+                    wrongAction:'Clicking the link leads to a fake payment page that steals your card details, not just the £2.99.',
+                    outcome:'Your card number, expiry and CVV are harvested. The attacker makes fraudulent charges or sells the card data on dark-web markets.',
+                    staySafe:['Type courier URLs manually — never click delivery email links','Real couriers never ask for card payment via email link','The low fee amount is deliberately unthreatening to lower your guard']
+                },
+                {
+                    label:'Suspicious Email',
+                    title:'Bank Suspicious Activity Alert',
+                    desc:'Your bank emails you: "We have detected suspicious activity on your account. Click here to verify your identity and prevent your account from being suspended."',
+                    choices:[
+                        {text:'Click the link and verify your identity — account suspension would be catastrophic', correct:false},
+                        {text:'Open a new browser tab, type your bank\'s official URL, log in there, and call the bank\'s fraud number if concerned', correct:true},
+                        {text:'Reply to the email with your account details to resolve it quickly', correct:false}
+                    ],
+                    rightAction:'Navigate directly to your bank\'s website. Call the number on the back of your card to verify any account concerns.',
+                    wrongAction:'Clicking the link or replying with account details sends your credentials directly to attackers.',
+                    outcome:'Your banking credentials are stolen. Attackers drain the account or take out loans in your name within minutes.',
+                    staySafe:['Banks never ask for passwords or full card numbers via email','Use the number on the back of your card — not one in the email','Enable transaction notifications so you spot fraud immediately']
+                },
+                {
+                    label:'Suspicious Email',
+                    title:'HR Policy Update Attachment',
+                    desc:'An internal-looking email from "hr@yourcompany-hr-updates.com" asks all staff to review and sign the new remote-work policy. A PDF is attached.',
+                    choices:[
+                        {text:'Open the PDF and sign — it looks like a routine HR document', correct:false},
+                        {text:'Check the sender domain carefully, confirm with HR via Slack or phone, and only open the file after IT clears it', correct:true},
+                        {text:'Save it to open later — it is probably fine but you are busy right now', correct:false}
+                    ],
+                    rightAction:'Verify the sender domain matches your company\'s official domain. Confirm with HR through a separate channel before opening any attachment.',
+                    wrongAction:'Opening the PDF executes an embedded exploit or prompts you to enable malicious macros.',
+                    outcome:'A remote access trojan is silently installed, giving attackers persistent access to your machine and network.',
+                    staySafe:['Your company\'s real HR domain never has hyphens or extra words','Verify all policy attachments with HR directly','Sandboxed PDF viewers can catch malicious content before it executes']
+                },
+                {
+                    label:'Suspicious Email',
+                    title:'Software License Expiry Scare',
+                    desc:'An email from "licensing@adobe-renewals-support.net" warns your Creative Cloud subscription expires today and will delete all your files unless you renew now via the attached link.',
+                    choices:[
+                        {text:'Click the renewal link immediately — losing your files would be devastating', correct:false},
+                        {text:'Open the Adobe website directly in a new tab and check your actual subscription status there', correct:true},
+                        {text:'Forward it to your IT team and wait — but do not click anything', correct:false}
+                    ],
+                    rightAction:'Go directly to the vendor\'s official website to check your actual subscription status. Never click renewal links in unsolicited emails.',
+                    wrongAction:'The link leads to a fake Adobe page that steals your Adobe ID credentials and payment information.',
+                    outcome:'Your Adobe account is taken over and linked payment method is charged fraudulently on attacker-controlled storefronts.',
+                    staySafe:['Software subscriptions never delete files on expiry — that is a fabricated threat','Check subscription status in the app or official website directly','The domain "adobe-renewals-support.net" is not adobe.com — always check']
+                }
+            ],
+            login: [
+                {
+                    label:'Fake Login Page',
+                    title:'Corporate SSO Clone',
+                    desc:'A colleague sends you a chat link. It opens a page that looks exactly like your corporate login portal — same logo, same layout. The URL reads "login-corp-portal.net/auth" and shows a padlock.',
+                    choices:[
+                        {text:'Close the tab, manually type the real URL in the address bar, and verify the certificate details', correct:true},
+                        {text:'Enter your username, password, and MFA one-time code — the padlock means it is secure', correct:false},
+                        {text:'Use the "Forgot Password" link on the page just to be safe before logging in', correct:false}
+                    ],
+                    rightAction:'Close the tab immediately, navigate to the official URL from your bookmarks or by typing it, and verify the certificate issuer.',
+                    wrongAction:'Entering credentials on a cloned site — even with HTTPS, attackers control the server.',
+                    outcome:'Attackers harvest your real credentials and OTP and start impossible-travel logins within seconds.',
+                    staySafe:['Bookmark official portals; use password manager autofill as a phishing detector','Verify the exact domain — not just the padlock','Enable hardware MFA (FIDO2) which is phishing-resistant']
+                },
+                {
+                 label:'Fake Login Page',
+                    title:'Microsoft 365 Sign-In Spoof',
+                    desc:'You click a link in an email about a shared document and land on a Microsoft 365 login page. The URL bar shows "microsoftonline-secure-login.com". The page looks pixel-perfect.',
+                    choices:[
+                        {text:'Log in — Microsoft 365 pages all look the same and the page is identical', correct:false},
+                        {text:'Close the tab, open a new one, and go to microsoft.com or portal.office.com directly', correct:true},
+                        {text:'Log in but immediately change your password afterward just to be safe', correct:false}
+                    ],
+                    rightAction:'Navigate to portal.office.com by typing it manually. Your password manager will not autofill on impostor domains.',
+                    wrongAction:'Logging in hands your M365 credentials to attackers. Changing your password afterward is too late — the session is already stolen.',
+                    outcome:'Attackers access your entire M365 tenant: emails, Teams, SharePoint, OneDrive, and all connected SaaS apps.',
+                    staySafe:['microsoft.com is the only valid Microsoft domain — hyphens are a red flag','A password manager autofilling only on the real domain is one of the best defences','Enable conditional access policies that restrict login from unusual locations']
+                },
+                {
+                     label:'Fake Login Page',
+                    title:'Google Workspace Login Trap',
+                    desc:'A Google security alert email links to "accounts-google-verify.com" which displays a standard Google login interface asking you to confirm your identity.',
+                    choices:[
+                        {text:'Log in to confirm your identity — the email was sent to your work address so it must be real', correct:false},
+                        {text:'Go to accounts.google.com directly in a new tab to check if there is a real security alert', correct:true},
+                        {text:'Enter only your email address but not your password, then decide', correct:false}
+                    ],
+                    rightAction:'Always go to accounts.google.com directly to review security alerts. Never follow email links to login pages.',
+                    wrongAction:'Even entering just your email confirms your address to attackers and may trigger a secondary attack. Entering your password gives full access.',
+                    outcome:'Your Google account is compromised. Attackers access Google Drive, Gmail history, and use your account for further phishing campaigns.',
+                    staySafe:['Real Google security alerts are visible in your account security page, not just via email','accounts-google-verify.com is not google.com','Use a hardware security key on your Google account']
+                },
+                {
+                     label:'Fake Login Page',
+                    title:'Online Banking Clone via Ad',
+                    desc:'You search for your bank\'s name and click the top result — a sponsored ad. It takes you to "barclays-banking-secure.com" which shows a perfect replica of your bank\'s login.',
+                    choices:[
+                        {text:'Log in — you found it via Google search so it should be legitimate', correct:false},
+                        {text:'Check the URL bar carefully, notice the domain is wrong, close the tab, and type your bank\'s real URL', correct:true},
+                        {text:'Log in but watch your account closely afterward for suspicious activity', correct:false}
+                    ],
+                    rightAction:'Bookmark your bank\'s official URL. Always type it manually or use your bookmark — never use search engine results for financial sites.',
+                    wrongAction:'Sponsored search results can be purchased by attackers. Logging in gives them your banking credentials immediately.',
+                    outcome:'Your online banking credentials are stolen. Attackers transfer funds, change contact details, and lock you out of your own account.',
+                    staySafe:['Bookmark all financial institution URLs and use only bookmarks','Search engine top results including ads can be malicious','Your bank\'s real domain has no hyphens, extra words, or variations']
+                },
+                {
+                    label:'Fake Login Page',
+                    title:'Hotel VPN Portal Intercept',
+                    desc:'While at a hotel, you connect to hotel Wi-Fi and are redirected to what looks like your company\'s VPN login page at "vpn-company-remote-access.net" before you can browse.',
+                    choices:[
+                        {text:'Enter your VPN credentials — captive portals always redirect you before connecting', correct:false},
+                        {text:'Disconnect, switch to mobile data, and verify the real VPN address with IT before logging in from a trusted network', correct:true},
+                        {text:'Enter your credentials but use a temporary password just in case', correct:false}
+                    ],
+                    rightAction:'VPN login pages should never appear as captive portals. Disconnect, use mobile data, and confirm the legitimate VPN URL with IT support.',
+                    wrongAction:'The page is a credential-harvesting proxy. Entering VPN credentials gives attackers access to your entire corporate network.',
+                    outcome:'Attackers use your VPN credentials to enter the corporate network, move laterally, and exfiltrate sensitive data.',
+                    staySafe:['Legitimate VPN portals never appear as hotel captive portals','Always confirm VPN URLs with IT before entering credentials','Use certificate pinning on your VPN client to detect intercepts']
+                },
+                {
+                    label:'Fake Login Page',
+                    title:'GitHub Security Alert Phish',
+                    desc:'You receive a GitHub security email saying unusual activity was detected. It links to "github-security-check.io" which displays a standard GitHub sign-in asking you to verify ownership.',
+                    choices:[
+                        {text:'Sign in to verify — unusual activity on your repos could be a serious breach', correct:false},
+                        {text:'Open github.com manually in a new tab and check security settings under your profile', correct:true},
+                        {text:'Sign in using "Sign in with Google" on that page to avoid entering your GitHub password', correct:false}
+                    ],
+                    rightAction:'Go directly to github.com and check your security log under Settings > Security. GitHub will never redirect you to a third-party domain.',
+                    wrongAction:'Signing in via any method on the fake domain hands over your session token. Using OAuth "Sign in with Google" on a fake page is equally dangerous.',
+                    outcome:'Your GitHub account is taken over. The attacker clones private repos, plants backdoors in your code, and changes your SSH keys.',
+                    staySafe:['github.com is the only domain for GitHub — any variation is fake','Review your GitHub security log regularly for unrecognised logins','Enable hardware 2FA on your GitHub account']
+                },
+                {
+                 label:'Fake Login Page',
+                    title:'Intranet Clone via Search Result',
+                    desc:'You Google your company intranet because you forgot the URL. A result takes you to "company-intranet-portal.co.uk" — it looks identical to your real intranet with the company logo.',
+                    choices:[
+                        {text:'Log in — it looks exactly right and you need to access your files', correct:false},
+                        {text:'Close the tab, ask a colleague for the official intranet URL or check the company email footer for the correct link', correct:true},
+                        {text:'Log in but only look at non-sensitive pages', correct:false}
+                    ],
+                    rightAction:'Bookmark your intranet URL from a trusted source. Never use search engine results to find corporate portals.',
+                    wrongAction:'Logging in regardless of which pages you visit hands over your Active Directory credentials to the attacker.',
+                    outcome:'Your Active Directory credentials are compromised. Attackers use them for lateral movement across the entire corporate network.',
+                    staySafe:['Bookmark internal tools once you have the confirmed URL from IT','Never search for your intranet — attackers buy SEO-optimised fake pages','Your IT team can always provide the correct URL via verified channels']
+                }
+            ],
+            wifi: [
+                {
+                    label:'Public Wi-Fi Risk',
+                    title:'Airport Free Wi-Fi Trap',
+                    desc:'You are at an airport. A network called "Airport_Free_WiFi" appears with no password required. You need to upload an urgent presentation to cloud storage before boarding.',
+                    choices:[
+                        {text:'Connect to the free network and upload your file quickly — you are in a hurry', correct:false},
+                        {text:'Connect to the free network but turn on your corporate VPN first', correct:false},
+                        {text:'Use your phone\'s personal mobile hotspot and avoid the unknown network entirely', correct:true}
+                    ],
+                    rightAction:'Use your personal mobile hotspot or a confirmed trusted network. Unknown open networks are always a risk regardless of VPN.',
+                    wrongAction:'Connecting to an unknown network — even through VPN, the rogue AP can perform DNS hijacking and traffic interception before the tunnel establishes.',
+                    outcome:'A man-in-the-middle attacker captures session cookies and injects a fake browser update that installs spyware.',
+                    staySafe:['Prefer your personal hotspot over any unknown infrastructure','Disable auto-connect to open networks in device settings','Use HTTPS-only mode in your browser as a minimum baseline']
+                },
+                {
+                 label:'Public Wi-Fi Risk',
+                    title:'Hotel Guest Wi-Fi Eavesdrop',
+                    desc:'Your hotel room has Wi-Fi. After connecting with the room code, you start reviewing confidential client contracts stored in your cloud drive before an early meeting.',
+                    choices:[
+                        {text:'Continue reviewing — hotel Wi-Fi is paid and therefore more trustworthy than free public Wi-Fi', correct:false},
+                        {text:'Connect through your corporate VPN before accessing any confidential documents', correct:true},
+                        {text:'Download the documents locally first, then disconnect from Wi-Fi and read them offline', correct:false}
+                    ],
+                    rightAction:'Always use your corporate VPN before accessing sensitive data on any network you do not personally control — including paid hotel Wi-Fi.',
+                    wrongAction:'Hotel Wi-Fi is shared infrastructure accessible to all guests and hotel staff. Traffic can be intercepted without you knowing.',
+                    outcome:'An attacker on the same network captures unencrypted document traffic and extracts confidential client data.',
+                    staySafe:['Paid hotel Wi-Fi is not more secure — it is still shared infrastructure','Always activate VPN before accessing work documents on hotel networks','Consider downloading sensitive files before leaving the office on a trusted network']
+                },
+                {
+                     label:'Public Wi-Fi Risk',
+                    title:'Coffee Shop Evil Twin',
+                    desc:'You are at a coffee shop. Two networks appear: "CafeNero" (the real one, with a coffee-branded splash page) and "CafeNero_Free" (no password, no splash page, faster signal).',
+                    choices:[
+                        {text:'Connect to "CafeNero_Free" — no login page means fewer friction and faster access', correct:false},
+                        {text:'Ask a staff member which network is the official one, connect to that, and use VPN for any sensitive work', correct:true},
+                        {text:'Connect to "CafeNero_Free" but only browse non-sensitive sites', correct:false}
+                    ],
+                    rightAction:'Always verify the correct network name with a member of staff. Use VPN regardless of which network you use in public.',
+                    wrongAction:'"CafeNero_Free" is a rogue access point mimicking the real network. Even browsing "non-sensitive" sites leaks cookies and DNS queries.',
+                    outcome:'The attacker performing the evil-twin attack captures all your traffic, including session tokens from sites you consider safe.',
+                    staySafe:['Always ask staff to confirm the official Wi-Fi name and password','Evil twins often have a stronger signal than the real AP','VPN protects you even if you accidentally connect to a rogue network']
+                },
+                {
+                     label:'Public Wi-Fi Risk',
+                    title:'Train Station Hotspot Risk',
+                    desc:'On a commute, you connect to "TrainStation_WiFi" to catch up on emails. You notice you can access the internet without any login or captive portal page.',
+                    choices:[
+                        {text:'Continue using it — no login page actually means less data is collected about you', correct:false},
+                        {text:'Limit use to reading already-downloaded emails and avoid logging into any accounts', correct:false},
+                        {text:'Disconnect immediately, switch to mobile data, and use that for any account access', correct:true}
+                    ],
+                    rightAction:'An open Wi-Fi network with no authentication is a significant risk. Switch to mobile data for anything involving login credentials.',
+                    wrongAction:'Logging in to even one account on an unverified open network exposes your session token to anyone monitoring traffic.',
+                    outcome:'An attacker performs a passive sniffing attack, collecting session tokens from multiple commuters and using them to hijack accounts.',
+                    staySafe:['No captive portal does not mean the network is safe — it may mean it is a trap','Mobile data is almost always safer than public Wi-Fi for account access','Session hijacking attacks are passive — you will not notice them happening']
+                },
+                {
+                    label:'Public Wi-Fi Risk',
+                    title:'Conference Network Snooping',
+                    desc:'At an industry conference, the event provides "Conference_Guest_WiFi" with a printed password on your badge. You want to demo a client\'s live system remotely.',
+                    choices:[
+                        {text:'Connect and demo directly — the network password is secure since it is printed on badges', correct:false},
+                        {text:'Use the conference Wi-Fi but only after enabling your corporate VPN for the remote demo', correct:false},
+                        {text:'Use your phone as a mobile hotspot and tether your laptop for the demo to ensure a private, isolated connection', correct:true}
+                    ],
+                    rightAction:'Conference networks are shared by hundreds of attendees including potential competitors. Use a personal hotspot for live client demos.',
+                    wrongAction:'Using conference Wi-Fi with corporate VPN for a client demo still exposes metadata and timing information. The safest option is a private hotspot.',
+                    outcome:'A competitor on the same network performs traffic analysis, identifying which client system you are accessing and timing the demo.',
+                    staySafe:['Conference Wi-Fi passwords are known to all 500 attendees in the room','Never demo live client systems on shared infrastructure','A personal hotspot takes 30 seconds to set up and removes the risk entirely']
+                },
+                {
+                    label:'Public Wi-Fi Risk',
+                    title:'Shopping Mall Free Wi-Fi',
+                    desc:'At a shopping centre, you connect to "Mall_FreeWifi" to quickly check your work emails while waiting. You see an urgent email asking you to approve a contract via an online portal.',
+                    choices:[
+                        {text:'Log in to the portal and approve — it is urgent and the Wi-Fi is provided by the mall', correct:false},
+                        {text:'Switch to mobile data to log in to the portal and approve the contract securely', correct:true},
+                        {text:'Reply to the email approving it — replying is safer than clicking a portal link', correct:false}
+                    ],
+                    rightAction:'Switch to mobile data for any authentication or contract approval. Mall Wi-Fi is open infrastructure accessible to any visitor.',
+                    wrongAction:'Approving via portal over unsecured Wi-Fi exposes your session. Replying to the email is equally risky if the email itself was intercepted.',
+                    outcome:'An attacker intercepts your session token during portal login, later impersonates you to approve fraudulent contracts.',
+                    staySafe:['Mall Wi-Fi is public infrastructure — treat it like a risk, not a convenience','Mobile data uses encrypted cellular connections and is significantly safer','For anything requiring authentication, mobile data or VPN is non-negotiable']
+                }
+            ]
+        };
+
+        function buildSession(){
+            function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+            return [pick(pool.email), pick(pool.login), pick(pool.wifi)];
+        }
+
+        var simScenarios = buildSession();
+        var total = simScenarios.length;
+        var state = { current:0, score:0, answered:false };
+
+        function renderDots(){
+            var dotsEl = document.getElementById('bsimStepDots');
+            if(!dotsEl) return;
+            dotsEl.innerHTML = '';
+            simScenarios.forEach(function(s,i){
+                var dot = document.createElement('div');
+                dot.className = 'bsim-dot' + (i===state.current?' bsim-dot-active':'') + (i<state.current?' bsim-dot-done':'');
+                dot.title = s.label;
+                dotsEl.appendChild(dot);
+            });
+        }
+
+        function renderProgress(){
+            var fill = document.getElementById('bsimFill');
+            if(fill) fill.style.width = ((state.current)/total*100)+'%';
+        }
+
+        function renderQuestion(){
+            var s = simScenarios[state.current];
+            var tag = document.getElementById('bsimTag');
+            if(tag){ tag.textContent = s.icon+' '+s.label; }
+            var title = document.getElementById('behaviorScenarioTitle');
+            if(title) title.textContent = s.title;
+            var desc = document.getElementById('behaviorScenarioDesc');
+            if(desc) desc.textContent = s.desc;
+            var choicesEl = document.getElementById('bsimChoices');
+            if(!choicesEl) return;
+            choicesEl.innerHTML='';
+            s.choices.forEach(function(c,i){
+                var btn = document.createElement('button');
+                btn.type='button';
+                btn.className='bsim-choice-btn';
+                btn.innerHTML='<span class="bsim-choice-letter">'+String.fromCharCode(65+i)+'</span><span class="bsim-choice-text">'+c.text+'</span>';
+                btn.addEventListener('click', function(){ handleChoice(i); });
+                choicesEl.appendChild(btn);
+            });
+        }
+
+        function handleChoice(idx){
+            if(state.answered) return;
+            state.answered = true;
+            var s = simScenarios[state.current];
+            var correct = s.choices[idx].correct;
+            if(correct) state.score++;
+
+            var scoreEl = document.getElementById('bsimScore');
+            if(scoreEl) scoreEl.textContent = state.score;
+
+            var verdict = document.getElementById('bsimVerdict');
+            if(verdict){
+                verdict.className = 'bsim-verdict '+(correct?'bsim-verdict-correct':'bsim-verdict-wrong');
+                verdict.textContent = correct ? '✅  Correct! Great instinct.' : '❌  Incorrect — here\'s what you should do:';
+            }
+
+            var resultChoices = document.getElementById('bsimChoicesResult');
+            if(resultChoices){
+                resultChoices.innerHTML='';
+                s.choices.forEach(function(c,i){
+                    var div = document.createElement('div');
+                    div.className='bsim-choice-result-item '+(c.correct?'bsim-choice-correct':'bsim-choice-wrong')+(i===idx?' bsim-choice-selected':'');
+                    div.innerHTML='<span class="bsim-choice-letter">'+String.fromCharCode(65+i)+'</span><span class="bsim-choice-text">'+c.text+'</span><span class="bsim-choice-mark">'+(c.correct?'✓':'✗')+'</span>';
+                    resultChoices.appendChild(div);
+                });
+            }
+
+            document.getElementById('behaviorRightAction').textContent = s.rightAction;
+            document.getElementById('behaviorWrongAction').textContent = s.wrongAction;
+            document.getElementById('behaviorOutcome').textContent = s.outcome;
+            var ul = document.getElementById('behaviorSafePlan');
+            ul.innerHTML='';
+            s.staySafe.forEach(function(tip){
+                var li=document.createElement('li');
+                li.textContent=tip;
+                ul.appendChild(li);
+            });
+
+            var nextBtn = document.getElementById('bsimNextBtn');
+            if(nextBtn){
+                nextBtn.textContent = state.current < total-1 ? 'Next Scenario →' : 'See My Results';
+                nextBtn.onclick = function(){ advanceStep(); };
+            }
+
+            document.getElementById('bsimQuestion').style.display='none';
+            document.getElementById('bsimResult').style.display='block';
+        }
+
+        function advanceStep(){
+            state.current++;
+            if(state.current >= total){
+                showFinal();
+            } else {
+                state.answered=false;
+                document.getElementById('bsimResult').style.display='none';
+                document.getElementById('bsimQuestion').style.display='block';
+                renderDots();
+                renderProgress();
+                renderQuestion();
+            }
+        }
+
+        function showFinal(){
+            document.getElementById('bsimResult').style.display='none';
+            document.getElementById('bsimQuestion').style.display='none';
+            var fill = document.getElementById('bsimFill');
+            if(fill) fill.style.width='100%';
+            renderDots();
+
+            var emoji = document.getElementById('bsimFinalEmoji');
+            var title = document.getElementById('bsimFinalTitle');
+            var desc  = document.getElementById('bsimFinalDesc');
+            var num   = document.getElementById('bsimFinalNum');
+            var maxEl = document.getElementById('bsimFinalMax');
+            if(num) num.textContent = state.score;
+            if(state.score === 3){
+                if(emoji) emoji.textContent='🏆';
+                if(title) title.textContent='Security Expert!';
+                if(desc)  desc.textContent='Perfect score — you made the right call in every scenario. Your instincts can stop a real breach.';
+            } else if(state.score === 2){
+                if(emoji) emoji.textContent='🛡️';
+                if(title) title.textContent='Security Aware!';
+                if(desc)  desc.textContent='Good work — 2 out of 3. Review the one you missed to sharpen your defence instincts.';
+            } else if(state.score === 1){
+                if(emoji) emoji.textContent='⚠️';
+                if(title) title.textContent='Stay Alert!';
+                if(desc)  desc.textContent='Cyber threats are designed to trick you. Study the correct answers carefully and try again.';
+            } else {
+                if(emoji) emoji.textContent='🎓';
+                if(title) title.textContent='Keep Learning!';
+                if(desc)  desc.textContent='Every mistake is a lesson. Read the explanations, practise the tips, and try a fresh session.';
+            }
+
+            var retry = document.getElementById('bsimRetry');
+            if(retry) retry.onclick = function(){
+                simScenarios = buildSession();
+                total = simScenarios.length;
+                state.current=0; state.score=0; state.answered=false;
+                var scoreEl = document.getElementById('bsimScore');
+                if(scoreEl) scoreEl.textContent='0';
+                document.getElementById('bsimFinal').style.display='none';
+                document.getElementById('bsimQuestion').style.display='block';
+                renderDots(); renderProgress(); renderQuestion();
+            };
+
+            document.getElementById('bsimFinal').style.display='block';
+        }
+
+        document.addEventListener('DOMContentLoaded', function(){
+            renderDots();
+            renderProgress();
+            renderQuestion();
+        });
+    })();
+    </script>
+
+    <!-- Auto-reload script for development -->
+    <script>
+        let lastModified = null;
+        setInterval(async () => {
+            try {
+                const response = await fetch(window.location.href, { 
+                    method: 'HEAD',
+                    cache: 'no-cache'
+                });
+                const modified = response.headers.get('Last-Modified');
+                if (lastModified === null) {
+                    lastModified = modified;
+                } else if (lastModified !== modified) {
+                    window.location.reload(true);
+                }
+            } catch (e) {
+                console.log('Auto-reload check failed:', e);
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

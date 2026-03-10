@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Threats & Vulnerabilities - CyberGuard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/azonix" rel="stylesheet">
+    <style>
+        .hero h1 {
+            font-family: 'Azonix', sans-serif;
+            font-size: 3.5rem;
+            line-height: 1.5;
+            color: #ffffff;
+            text-shadow: 0 0 10px #00e6e6, 0 0 20px #00e6e6;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+    </style>
+  <script type="module" crossorigin src="/assets/js/threats-DaZkDZbe.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/js/modulepreload-polyfill-YP0FEG5d.js">
+  <link rel="stylesheet" crossorigin href="/assets/css/main-2_nR-10Q.css">
+</head>
+<body>
+    <!-- Animated Cyber Background -->
+    <div id="bg-container" class="bg-container">
+        <canvas id="cyber-canvas"></canvas>
+        <div class="cyber-grid-overlay"></div>
+        <div class="cyber-glow-effect"></div>
+    </div>
+    
+    <!-- Navigation -->
+        <nav>
+        <div class="navbar">
+            <div class="logo"><img src="/assets/gif/none%20(9)-DGQB9T3b.gif" alt="CyberGuard Logo" style="height: 50px; vertical-align: middle; margin-right: 10px; opacity: 0.9;"> CyberGuard</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="threats.html">Threats</a></li>
+                <li><a href="learning.html">Learn</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="chatbot.html">AI Chat</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="navbar-right">
+                <button id="theme-toggle" class="theme-toggle-btn" title="Toggle theme">🌙</button>
+                <button id="hamburger-btn" class="hamburger-btn" title="Menu" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            
+            <!-- Auth Container -->
+            <div id="auth-container" style="display: flex; align-items: center; gap: 10px; margin-left: 20px;">
+                <div id="user-status" style="color: #00E5FF;">Not logged in</div>
+                <button id="btn-show-login" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.9rem;">Login</button>
+                <button id="btn-show-signup" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.9rem;">Sign Up</button>
+            </div>
+        </div>
+
+        <!-- Login Form -->
+        <div id="login-form" style="display: none; background: rgba(26, 39, 68, 0.95); padding: 2rem; border-radius: 15px; border: 2px solid #00E5FF; box-shadow: 0 0 30px rgba(0, 229, 255, 0.3); z-index: 10000; min-width: 350px;">
+            <h3 style="color: #00E5FF; margin-bottom: 1.5rem; text-align: center;">Login</h3>
+            <form id="login-form-element">
+                <input type="email" id="login-email" placeholder="Email" required style="width: 100%; padding: 12px; margin-bottom: 1rem; border-radius: 8px; border: 1px solid #00E5FF; background: rgba(0, 0, 0, 0.3); color: white;" />
+                <input type="password" id="login-password" placeholder="Password" required style="width: 100%; padding: 12px; margin-bottom: 0.5rem; border-radius: 8px; border: 1px solid #00E5FF; background: rgba(0, 0, 0, 0.3); color: white;" />
+                <div style="text-align: right; margin-bottom: 1.5rem;">
+                    <button type="button" id="btn-forgot-password" style="background: none; border: none; color: #00E5FF; cursor: pointer; font-size: 0.85rem; text-decoration: underline;">Forgot Password?</button>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">Login</button>
+                    <button type="button" id="btn-hide-login" class="btn btn-secondary" style="flex: 1;">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Signup Form -->
+        <div id="signup-form" style="display: none; background: rgba(26, 39, 68, 0.95); padding: 2rem; border-radius: 15px; border: 2px solid #00E5FF; box-shadow: 0 0 30px rgba(0, 229, 255, 0.3); z-index: 10000; min-width: 350px;">
+            <h3 style="color: #00E5FF; margin-bottom: 1.5rem; text-align: center;">Sign Up</h3>
+            <form id="signup-form-element">
+                <input type="email" id="signup-email" placeholder="Email" required style="width: 100%; padding: 12px; margin-bottom: 1rem; border-radius: 8px; border: 1px solid #00E5FF; background: rgba(0, 0, 0, 0.3); color: white;" />
+                <input type="password" id="signup-password" placeholder="Password" required style="width: 100%; padding: 12px; margin-bottom: 1.5rem; border-radius: 8px; border: 1px solid #00E5FF; background: rgba(0, 0, 0, 0.3); color: white;" />
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">Create account</button>
+                    <button type="button" id="btn-hide-signup" class="btn btn-secondary" style="flex: 1;">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Password Reset Form -->
+        <div id="reset-password-form" style="display: none; background: rgba(26, 39, 68, 0.95); padding: 2rem; border-radius: 15px; border: 2px solid #00E5FF; box-shadow: 0 0 30px rgba(0, 229, 255, 0.3); z-index: 10000; min-width: 350px;">
+            <h3 style="color: #00E5FF; margin-bottom: 1rem; text-align: center;">Reset Password</h3>
+            <p style="color: #B0BEC5; font-size: 0.9rem; margin-bottom: 1.5rem; text-align: center;">Enter your email to receive a password reset link</p>
+            <form id="reset-password-form-element">
+                <input type="email" id="reset-email" placeholder="Email" required style="width: 100%; padding: 12px; margin-bottom: 1.5rem; border-radius: 8px; border: 1px solid #00E5FF; background: rgba(0, 0, 0, 0.3); color: white;" />
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">Send Reset Link</button>
+                    <button type="button" id="btn-hide-reset" class="btn btn-secondary" style="flex: 1;">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Modal Overlay -->
+        <div id="auth-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 9999;"></div>
+    </nav>
+
+    <!-- Hamburger Menu -->
+    <div id="hamburger-overlay" class="hamburger-overlay"></div>
+    <div id="hamburger-menu" class="hamburger-menu">
+        <button id="hamburger-close" class="hamburger-close">✕</button>
+        <ul class="hamburger-menu-list">
+            <li><a href="frameworks.html" class="hamburger-link">Frameworks</a></li>
+            <li><a href="tools.html" class="hamburger-link">Tools</a></li>
+             <li><a href="services.html" class="hamburger-link">Services</a></li>
+            <li><a href="privacy-policy.html" class="hamburger-link">Privacy Policy</a></li>
+            <li><a href="terms-&-condition.html" class="hamburger-link">Terms & Condition</a></li>
+        </ul>
+    </div>
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="cyber-grid"></div>
+        <div class="hero-content">
+            <h1> Threats & Vulnerabilities</h1>
+            <p>Understanding cybersecurity threats is the first step toward defense. Learn about common attack vectors and how to protect yourself.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Live Threat Statistics Dashboard -->
+        <section class="section" style="background: linear-gradient(135deg, rgba(220, 0, 70, 0.1) 0%, rgba(255, 107, 0, 0.1) 100%); border: 2px solid rgba(220, 0, 70, 0.3); border-radius: 20px; padding: 2.5rem; margin-bottom: 3rem;">
+            <h2 style="text-align: center; margin-bottom: 1rem;"> Global Threat Intelligence</h2>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem; font-size: 1rem;">
+                Real-time cybersecurity threat statistics from global threat intelligence networks
+            </p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                <!-- Stat Cards -->
+                <div style="background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(220, 0, 70, 0.3); border-radius: 15px; padding: 1.5rem; text-align: center;">
+                    <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem;">Threats Detected (24h)</div>
+                    <div id="threats-24h" style="font-size: 2.5rem; font-weight: bold; color: #DC0046;">...</div>
+                    <div style="font-size: 0.8rem; color: var(--green); margin-top: 0.5rem;" id="threats-trend">Loading...</div>
+                </div>
+                
+                <div style="background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 107, 0, 0.3); border-radius: 15px; padding: 1.5rem; text-align: center;">
+                    <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem;">Active Malware Families</div>
+                    <div id="malware-families" style="font-size: 2.5rem; font-weight: bold; color: #FF6B35;">...</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">Tracked globally</div>
+                </div>
+                
+                <div style="background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(0, 229, 255, 0.3); border-radius: 15px; padding: 1.5rem; text-align: center;">
+                    <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem;">Phishing Sites Blocked</div>
+                    <div id="phishing-blocked" style="font-size: 2.5rem; font-weight: bold; color: var(--cyan);">...</div>
+                    <div style="font-size: 0.8rem; color: var(--warning); margin-top: 0.5rem;" id="phishing-trend">Loading...</div>
+                </div>
+                
+                <div style="background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(164, 0, 255, 0.3); border-radius: 15px; padding: 1.5rem; text-align: center;">
+                    <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem;">DDoS Attacks (Today)</div>
+                    <div id="ddos-attacks" style="font-size: 2.5rem; font-weight: bold; color: var(--purple);">...</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">Mitigated worldwide</div>
+                </div>
+            </div>
+            
+            <!-- Top Threats Today -->
+            <div style="background: rgba(0, 0, 0, 0.2); border-radius: 15px; padding: 1.5rem;">
+                <h3 style="color: var(--cyan); margin-bottom: 1rem; text-align: center;"> Top Threats Today</h3>
+                <div id="top-threats-list" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <div style="text-align: center; padding: 1rem; background: rgba(220, 0, 70, 0.1); border-radius: 10px;">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.3rem;">Loading...</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">...</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted);">
+                <span id="last-update">Last updated: Loading...</span> | Data sources: AlienVault OTX, AbuseIPDB, URLhaus
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Common Cybersecurity Threats</h2>
+            
+            <div class="cards-grid">
+                <!-- Phishing -->
+                <div class="card">
+                    <h3> Phishing Attacks</h3>
+                    <span class="impact-level impact-high">High Risk</span>
+                    <p>
+                        Phishing involves fraudulent communications (emails, messages, or calls) designed to trick users into revealing sensitive information or installing malware. Attackers impersonate trusted organizations to build credibility.
+                    </p>
+                    <div style="background: rgba(255, 107, 0, 0.1); border-left: 3px solid #FF6B35; padding: 1rem; margin: 1rem 0; border-radius: 5px;">
+                        <h4 style="color: #FF6B35; margin-bottom: 0.5rem;"> Real-World Case: Google & Facebook $100M Scam (2013-2015)</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">
+                            Lithuanian fraudster Evaldas Rimasauskas impersonated Quanta Computer, a legitimate hardware supplier, and sent fake invoices to Google and Facebook. Over two years, he successfully stole <strong>over $100 million</strong> before being caught. Both companies recovered most funds, but the incident highlighted how even tech giants can fall victim to sophisticated business email compromise (BEC) attacks.
+                        </p>
+                    </div>
+                    <div class="prevention-tips">
+                        <h4> Prevention Tips:</h4>
+                        <ul>
+                            <li>Verify email sender addresses carefully</li>
+                            <li>Hover over links before clicking</li>
+                            <li>Never share passwords via email</li>
+                            <li>Use multi-factor authentication</li>
+                            <li>Report suspicious emails to IT</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Malware & Ransomware -->
+                <div class="card">
+                    <h3> Malware & Ransomware</h3>
+                    <span class="impact-level impact-high">Critical</span>
+                    <p>
+                        Malware is malicious software designed to damage, disable, or exploit your systems. Ransomware specifically encrypts your data and demands payment for decryption. Both can spread through downloads, emails, or compromised websites.
+                    </p>
+                    <div style="background: rgba(220, 0, 70, 0.1); border-left: 3px solid #DC0046; padding: 1rem; margin: 1rem 0; border-radius: 5px;">
+                        <h4 style="color: #DC0046; margin-bottom: 0.5rem;"> Real-World Case: Colonial Pipeline Ransomware (May 2021)</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">
+                            DarkSide ransomware gang encrypted Colonial Pipeline's systems, forcing the shutdown of the largest fuel pipeline in the US, supplying 45% of the East Coast's fuel. The attack caused widespread panic buying and fuel shortages. Colonial paid <strong>$4.4 million in Bitcoin</strong> (later partially recovered by FBI). The incident demonstrated how ransomware can impact critical infrastructure and national security, leading to new cybersecurity regulations for critical sectors.
+                        </p>
+                    </div>
+                    <div class="prevention-tips">
+                        <h4> Prevention Tips:</h4>
+                        <ul>
+                            <li>Install reputable antivirus software</li>
+                            <li>Keep systems and software updated</li>
+                            <li>Avoid downloading from untrusted sources</li>
+                            <li>Regular backups prevent data loss</li>
+                            <li>Use endpoint protection tools</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- SQL Injection -->
+                <div class="card">
+                    <h3> SQL Injection (SQLi)</h3>
+                    <span class="impact-level impact-high">High Risk</span>
+                    <p>
+                        SQL Injection occurs when attackers insert malicious SQL commands into input fields. This can allow unauthorized database access, data theft, or modification. It targets web applications with poor input validation.
+                    </p>
+                    <div style="background: rgba(0, 229, 255, 0.1); border-left: 3px solid var(--cyan); padding: 1rem; margin: 1rem 0; border-radius: 5px;">
+                        <h4 style="color: var(--cyan); margin-bottom: 0.5rem;"> Real-World Case: Heartland Payment Systems (2008)</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">
+                            Heartland Payment Systems, a major payment processor, was breached via SQL injection attacks that compromised <strong>130 million credit and debit card numbers</strong>. Attackers used SQLi to install malware that captured card data in real-time. The breach cost Heartland over $140 million in settlements and led to the company filing for bankruptcy protection. This incident was one of the largest data breaches in history and prompted stricter PCI-DSS compliance enforcement.
+                        </p>
+                    </div>
+                    <div class="prevention-tips">
+                        <h4> Prevention Tips:</h4>
+                        <ul>
+                            <li>Use parameterized queries/prepared statements</li>
+                            <li>Validate all user inputs</li>
+                            <li>Apply principle of least privilege</li>
+                            <li>Use Web Application Firewalls (WAF)</li>
+                            <li>Regular security testing and code review</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Cross-Site Scripting -->
+                <div class="card">
+                    <h3> Cross-Site Scripting (XSS)</h3>
+                    <span class="impact-level impact-medium">Medium Risk</span>
+                    <p>
+                        XSS attacks inject malicious scripts into web pages viewed by users. These scripts can steal cookies, sessions, or perform actions on behalf of the user. Common in poorly sanitized web applications.
+                    </p>
+                    <div class="prevention-tips">
+                        <h4> Prevention Tips:</h4>
+                        <ul>
+                            <li>Sanitize all user inputs</li>
+                            <li>Use Content Security Policy (CSP)</li>
+                            <li>Encode output data properly</li>
+                            <li>Use templating engines with auto-escaping</li>
+                            <li>Regular security audits</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- CSRF -->
+                <div class="card">
+                    <h3> Cross-Site Request Forgery (CSRF)</h3>
+                    <span class="impact-level impact-medium">Medium Risk</span>
+                    <p>
+                        CSRF attacks trick users into performing unwanted actions on websites where they're authenticated. Attackers exploit the trust between a website and the user's browser to execute unauthorized transactions.
+                    </p>
+                    <div class="prevention-tips">
+                        <h4> Prevention Tips:</h4>
+                        <ul>
+                            <li>Implement CSRF tokens</li>
+                            <li>Use SameSite cookie attributes</li>
+                            <li>Verify HTTP referrer headers</li>
+                            <li>Require re-authentication for sensitive actions</li>
+                            <li>Educate users about suspicious links</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- DDoS -->
+                <div class="card">
+                    <h3> Distributed Denial of Service (DDoS)</h3>
+                    <span class="impact-level impact-high">High Risk</span>
+                    <p>
+                        DDoS attacks flood systems with traffic from multiple sources, making services unavailable. Attackers compromise many devices (botnets) to overwhelm targets. Impact ranges from service disruption to financial losses.
+                    </p>
+                    <div style="background: rgba(164, 0, 255, 0.1); border-left: 3px solid var(--purple); padding: 1rem; margin: 1rem 0; border-radius: 5px;">
+                        <h4 style="color: var(--purple); margin-bottom: 0.5rem;"> Real-World Case: GitHub DDoS Attack (February 2018)</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">
+                            GitHub experienced the largest DDoS attack ever recorded at the time, peaking at <strong>1.35 Tbps</strong> (terabits per second). The attack leveraged memcached amplification, where attackers spoofed GitHub's IP and sent requests to thousands of memcached servers, which responded with amplified traffic. GitHub's DDoS mitigation service blocked the attack within 10 minutes, but the incident highlighted the vulnerability of exposed memcached servers and the scale of modern DDoS attacks.
+                        </p>
+                    </div>
+                    <div class="prevention-tips">
+                        <h4> Prevention Tips:</h4>
+                        <ul>
+                            <li>Use DDoS mitigation services</li>
+                            <li>Implement rate limiting</li>
+                            <li>Maintain redundant infrastructure</li>
+                            <li>Have incident response plans</li>
+                            <li>Monitor traffic patterns</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Social Engineering -->
+                <div class="card">
+                    <h3> Social Engineering</h3>
+                    <span class="impact-level impact-high">High Risk</span>
+                    <p>
+                        Social engineering exploits human psychology rather than technical vulnerabilities. Attackers manipulate people into divulging secrets, bypassing security protocols, or granting access to systems through deception.
+                    </p>
+                    <div class="prevention-tips">
+                        <h4> Prevention Tips:</h4>
+                        <ul>
+                            <li>Never share passwords or credentials</li>
+                            <li>Verify identity before sharing info</li>
+                            <li>Be skeptical of urgent requests</li>
+                            <li>Report suspicious behavior</li>
+                            <li>Regular security awareness training</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Zero-Day Vulnerabilities -->
+                <div class="card">
+                    <h3> Zero-Day Vulnerabilities</h3>
+                    <span class="impact-level impact-high">Critical</span>
+                    <p>
+                        Zero-day exploits target unknown vulnerabilities in software that developers haven't patched yet. Attackers have an advantage because no fixes exist. Discovered vulnerabilities must be reported responsibly.
+                    </p>
+                    <div style="background: rgba(255, 107, 0, 0.1); border-left: 3px solid #FF6B35; padding: 1rem; margin: 1rem 0; border-radius: 5px;">
+                        <h4 style="color: #FF6B35; margin-bottom: 0.5rem;"> Real-World Case: Stuxnet Worm (2010)</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">
+                            Stuxnet was a sophisticated malware that exploited <strong>four zero-day vulnerabilities</strong> in Windows to target Iranian nuclear facilities. Believed to be developed by US and Israeli intelligence, it specifically targeted Siemens industrial control systems, causing centrifuges to malfunction while reporting normal operation. Stuxnet marked the first known cyber weapon to cause physical destruction and demonstrated the power of zero-day exploits in state-sponsored cyber warfare. The attack set Iran's nuclear program back by years.
+                        </p>
+                    </div>
+                    <div class="prevention-tips">
+                        <h4> Prevention Tips:</h4>
+                        <ul>
+                            <li>Apply security patches promptly</li>
+                            <li>Use layered security (defense in depth)</li>
+                            <li>Monitor for suspicious behavior</li>
+                            <li>Participate in bug bounty programs</li>
+                            <li>Follow responsible disclosure practices</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2026 Emerging Threats -->
+        <section class="section" style="background: linear-gradient(135deg, rgba(0, 229, 255, 0.1) 0%, rgba(164, 0, 255, 0.1) 100%); border: 2px solid var(--cyan); border-radius: 20px; padding: 3rem;">
+            <h2 style="text-align: center; margin-bottom: 2rem;"> 2026 Emerging Threats</h2>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 3rem; font-size: 1.05rem;">
+                Stay ahead of the curve with knowledge of the latest and most sophisticated threats emerging in the cybersecurity landscape.
+            </p>
+            
+            <div class="cards-grid">
+                <!-- AI & Agentic Attacks -->
+                <div class="card">
+                    <h3> AI/Agentic Attacks</h3>
+                    <span class="impact-level impact-high">Critical - Emerging</span>
+                    <p>
+                        AI-powered attacks use autonomous malware and machine learning to adapt defenses in real-time. Agentic AI systems can conduct reconnaissance, exploit vulnerabilities, and evade detection without human intervention. Prompt injection attacks target AI systems to manipulate outputs or leak sensitive data.
+                    </p>
+                    <div class="prevention-tips">
+                        <h4> Prevention Tips:</h4>
+                        <ul>
+                            <li>Implement AI-aware security monitoring</li>
+                            <li>Use prompt injection filters for AI systems</li>
+                            <li>Sandbox AI model inference environments</li>
+                            <li>Monitor for AI-driven behavioral anomalies</li>
+                            <li>Establish AI governance and ethics policies</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Deepfakes & Synthetic Media -->
+                <div class="card">
+                    <h3> Deepfakes & Synthetic Media</h3>
+                    <span class="impact-level impact-high">High Risk</span>
+                    <p>
+                        Deepfake technology creates convincing fake videos, audio, and images to impersonate executives, manipulate public opinion, or enhance social engineering attacks. Advanced phishing campaigns now use AI-generated voices and video in real-time to bypass authentication and deceive targets.
+                    </p>
+                    <div class="prevention-tips">
+                        <h4> Prevention Tips:</h4>
+                        <ul>
+                            <li>Use deepfake detection tools and services</li>
+                            <li>Implement multi-factor authentication beyond biometrics</li>
+                            <li>Establish code words for sensitive communications</li>
+                            <li>Train employees to recognize synthetic media</li>
+                            <li>Verify identities through multiple channels</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Quantum Computing Risks -->
+                <div class="card">
+                    <h3> Quantum Computing Threats</h3>
+                    <span class="impact-level impact-high">Critical - Future</span>
+                    <p>
+                        Quantum computers threaten to break current encryption standards (RSA, ECC) that protect financial transactions, secure communications, and data storage. "Harvest now, decrypt later" attacks collect encrypted data today to decrypt when quantum computers become powerful enough.
+                    </p>
+                    <div class="prevention-tips">
+                        <h4> Prevention Tips:</h4>
+                        <ul>
+                            <li>Begin post-quantum cryptography (PQC) migration</li>
+                            <li>Implement crypto-agility in systems</li>
+                            <li>Use NIST-approved PQC algorithms</li>
+                            <li>Assess quantum risk to sensitive data</li>
+                            <li>Plan for hybrid classical-quantum encryption</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Identity-led Attacks -->
+                <div class="card">
+                    <h3> Identity-led Attacks</h3>
+                    <span class="impact-level impact-high">Critical</span>
+                    <p>
+                        Modern attacks increasingly target identities rather than infrastructure. Attackers steal credentials, abuse cloud permissions, and exploit identity systems to move laterally. Credential stuffing, password spraying, and privilege escalation bypass traditional perimeter defenses.
+                    </p>
+                    <div class="prevention-tips">
+                        <h4> Prevention Tips:</h4>
+                        <ul>
+                            <li>Implement Zero Trust identity verification</li>
+                            <li>Use passwordless authentication (FIDO2, WebAuthn)</li>
+                            <li>Deploy identity threat detection and response (ITDR)</li>
+                            <li>Enforce least privilege access everywhere</li>
+                            <li>Monitor for anomalous authentication patterns</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Advanced Ransomware -->
+                <div class="card">
+                    <h3> Advanced Ransomware (RansomOps)</h3>
+                    <span class="impact-level impact-high">Critical</span>
+                    <p>
+                        Modern ransomware employs triple extortion: encrypting data, stealing sensitive files, and threatening DDoS attacks. Ransomware-as-a-Service (RaaS) platforms enable low-skill attackers. Advanced variants target backups, disable security tools, and use living-off-the-land techniques to evade detection.
+                    </p>
+                    <div class="prevention-tips">
+                        <h4> Prevention Tips:</h4>
+                        <ul>
+                            <li>Maintain immutable, offline backups</li>
+                            <li>Deploy endpoint detection and response (EDR)</li>
+                            <li>Implement network segmentation and microsegmentation</li>
+                            <li>Use application whitelisting and behavioral monitoring</li>
+                            <li>Conduct regular ransomware tabletop exercises</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Supply Chain & Third-Party Risks -->
+                <div class="card">
+                    <h3> Supply Chain Attacks</h3>
+                    <span class="impact-level impact-high">High Risk</span>
+                    <p>
+                        Attackers compromise software supply chains, dependencies, and third-party services to reach thousands of downstream targets. Recent attacks targeted build systems, code repositories, and trusted software updates to distribute malware at scale.
+                    </p>
+                    <div class="prevention-tips">
+                        <h4> Prevention Tips:</h4>
+                        <ul>
+                            <li>Implement Software Bill of Materials (SBOM)</li>
+                            <li>Use code signing and verification</li>
+                            <li>Monitor third-party vendor security posture</li>
+                            <li>Isolate build and CI/CD environments</li>
+                            <li>Conduct vendor security assessments</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Levels Explanation -->
+        <section class="section">
+            <h2>Understanding Risk Levels</h2>
+            <div class="cards-grid">
+                <div class="card" style="border-left: 4px solid #FF6B00;">
+                    <h3 style="color: #FF6B00;">🔴 Critical/High Risk</h3>
+                    <p>
+                        Threats that can cause immediate, severe damage. Examples: Ransomware, zero-days, and unauthorized data access. Requires immediate mitigation and incident response.
+                    </p>
+                </div>
+                <div class="card" style="border-left: 4px solid #FFC100;">
+                    <h3 style="color: #FFC100;">🟡 Medium Risk</h3>
+                    <p>
+                        Threats that can cause significant harm with proper exploitation. Examples: XSS, CSRF attacks. Need preventive measures and monitoring strategies.
+                    </p>
+                </div>
+                <div class="card" style="border-left: 4px solid var(--green);">
+                    <h3 style="color: var(--green);">🟢 Low Risk</h3>
+                    <p>
+                        Threats with limited impact or requiring specific conditions. While less severe, they still need addressing through security best practices and awareness.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- General Defensive Strategies -->
+        <section class="section">
+            <h2>Universal Defense Strategies</h2>
+            <div class="card">
+                <h3> Defense in Depth Approach</h3>
+                <p>No single security measure is perfect. Implement multiple layers of protection:</p>
+                <ul style="list-style-position: inside; color: var(--text-muted); margin-top: 1rem;">
+                    <li><strong>1. Prevention:</strong> Firewalls, antivirus, input validation</li>
+                    <li><strong>2. Detection:</strong> IDS/IPS, SIEM, monitoring systems</li>
+                    <li><strong>3. Response:</strong> Incident response plans, backups, recovery procedures</li>
+                    <li><strong>4. Recovery:</strong> Disaster recovery, business continuity planning</li>
+                    <li><strong>5. Learning:</strong> Post-incident analysis, threat intelligence</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Nation-State Threats Section -->
+        <section class="section" style="background: linear-gradient(135deg, rgba(255, 107, 0, 0.1) 0%, rgba(220, 0, 70, 0.1) 100%); border: 2px solid rgba(255, 107, 0, 0.3); border-radius: 20px; padding: 3rem;">
+            <div style="max-width: 1000px; margin: 0 auto;">
+                <h2 style="color: var(--warning); margin-bottom: 1rem; text-align: center;"> 2025 Nation-State Threats Landscape</h2>
+                <p style="text-align: center; color: var(--text-muted); margin-bottom: 2.5rem; font-size: 1.05rem;">
+                    Nation-state actors represent one of the most advanced and persistent threats to critical infrastructure, private enterprises, and democratic institutions.
+                </p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+                    <!-- Major Threats -->
+                    <div style="background: rgba(255, 107, 0, 0.05); border: 1px solid rgba(255, 107, 0, 0.2); border-radius: 15px; padding: 2rem;">
+                        <h3 style="color: #FF6B35; margin-bottom: 1rem;"> Primary Targets</h3>
+                        <ul style="color: var(--text-light); list-style: none; padding: 0; line-height: 2;">
+                            <li><strong>Critical Infrastructure:</strong> Power grids, water systems, telecommunications</li>
+                            <li><strong>Financial Sector:</strong> Banks, exchanges, payment systems</li>
+                            <li><strong>Defense & Aerospace:</strong> Military systems, supply chains</li>
+                            <li><strong>Technology Companies:</strong> Cloud providers, semiconductor firms</li>
+                            <li><strong>Democratic Processes:</strong> Election infrastructure, government systems</li>
+                            <li><strong>Research Institutions:</strong> Universities, think tanks, labs</li>
+                        </ul>
+                    </div>
+
+                    <!-- Attack Vectors -->
+                    <div style="background: rgba(220, 0, 70, 0.05); border: 1px solid rgba(220, 0, 70, 0.2); border-radius: 15px; padding: 2rem;">
+                        <h3 style="color: #DC0046; margin-bottom: 1rem;"> Advanced Attack Methods</h3>
+                        <ul style="color: var(--text-light); list-style: none; padding: 0; line-height: 2;">
+                            <li><strong>Supply Chain Compromise:</strong> Targeting vendors to reach end users</li>
+                            <li><strong>Zero-Day Exploitation:</strong> Previously unknown vulnerabilities</li>
+                            <li><strong>Advanced Persistent Threats (APTs):</strong> Long-term network presence</li>
+                            <li><strong>Spear Phishing:</strong> Highly targeted campaigns against individuals</li>
+                            <li><strong>Watering Hole Attacks:</strong> Compromising frequently visited sites</li>
+                            <li><strong>Destructive Malware:</strong> Designed to cause operational damage</li>
+                        </ul>
+                    </div>
+
+                    <!-- Known Actors -->
+                    <div style="background: rgba(0, 229, 255, 0.05); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 15px; padding: 2rem;">
+                        <h3 style="color: var(--cyan); margin-bottom: 1rem;"> Notable Actors</h3>
+                        <ul style="color: var(--text-light); list-style: none; padding: 0; line-height: 2;">
+                            <li><strong>Russia (SVR, GRU):</strong> OilRig, APT28, Fancy Bear</li>
+                            <li><strong>China (MSS, PLA):</strong> APT1, Lazarus, Wizard Spider</li>
+                            <li><strong>Iran (IRGC):</strong> APT33, APT34, Charming Kitten</li>
+                            <li><strong>North Korea (Reconnaissance):</strong> Lazarus Group</li>
+                            <li><strong>Israel/Other Allies:</strong> Apt groups targeting competitors</li>
+                            <li><strong>Proxy Actors:</strong> Hired groups acting for nation-states</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Defense Strategies -->
+                <div style="background: rgba(0, 255, 136, 0.1); border-left: 4px solid var(--green); border-radius: 10px; padding: 2rem; margin-bottom: 2rem;">
+                    <h3 style="color: var(--green); margin-bottom: 1.5rem;"> Defense Against Nation-State Threats</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                        <div>
+                            <h4 style="color: var(--green); margin-bottom: 0.8rem;">Strategic Measures</h4>
+                            <ul style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.8;">
+                                <li>• Implement Zero Trust Architecture</li>
+                                <li>• Establish 24/7 SOC monitoring</li>
+                                <li>• Deploy threat hunting programs</li>
+                                <li>• Conduct APT simulations</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--green); margin-bottom: 0.8rem;">Operational Security</h4>
+                            <ul style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.8;">
+                                <li>• Segment networks aggressively</li>
+                                <li>• Monitor supply chains closely</li>
+                                <li>• Share threat intelligence</li>
+                                <li>• Maintain resilient backups</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--green); margin-bottom: 0.8rem;">Governance & Coordination</h4>
+                            <ul style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.8;">
+                                <li>• Establish incident response plans</li>
+                                <li>• Coordinate with government agencies</li>
+                                <li>• Join information sharing groups</li>
+                                <li>• Maintain cyber insurance</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <p style="color: var(--text-muted); background: rgba(255, 107, 0, 0.05); border: 1px solid rgba(255, 107, 0, 0.2); border-radius: 10px; padding: 1.5rem; margin: 0;">
+                    <strong>2025 Outlook:</strong> Nation-state cyber operations are expected to intensify around geopolitical tensions, election cycles, and strategic technology competitions. Organizations should assume they may be targeted and prepare defensive postures accordingly. Early threat detection and rapid response capabilities are critical for minimizing impact.
+                </p>
+            </div>
+        </section>
+    </div>
+
+    
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><img src="/assets/gif/none%20(9)-DGQB9T3b.gif" alt="CyberGuard Logo" style="height: 30px; vertical-align: middle; margin-right: 8px;"> CyberGuard</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                    Your trusted resource for cybersecurity education, frameworks, and best practices.
+                </p>
+                 <div class="social-links">
+                    <a href=https://github.com/devarshi2007><img src="/assets/png/Github-Logo-PNG-Photo-1-ByDVGvjH.png" alt="GitHub" style="width: 35px; height: 20px; filter: brightness(0) invert(1);"></a>
+                    <a href="https://x.com/CyberGuard404" title="Twitter">𝕏</a>
+                    <a href="https://www.linkedin.com/in/cyber-guard-335a413a9/" title="LinkedIn">in</a>
+<a href="https://mail.google.com/mail/?view=cm&fs=1&to=hellocyberguard.io@gmail.com&su=Inquiry%20from%20CyberGuard%20Website&body=Hi%20CyberGuard%20team,%0A%0AI%20would%20like%20to%20discuss..."
+   target="_blank"
+   rel="noopener noreferrer"
+   title="Email us on Gmail"
+   style="text-decoration: none; color: inherit;">
+    <span style="font-size: 1.5rem;">✉️</span></a>     
+    <a href ="https://www.instagram.com/cyberguard_404/"><img src="https://th.bing.com/th/id/R.735dda68880a385ce8cc5be4f3c5fcd6?rik=qSxRw2lCZYy9Mw&riu=http%3a%2f%2fpngimg.com%2fuploads%2finstagram%2finstagram_PNG11.png&ehk=QVCbfkCKi8pJLF08bRkS%2fLeMqLTnJQf402WRaIdN6jE%3d&risl=&pid=ImgRaw&r=0" height="25px" width="25px"></a>       
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                 <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="threats.html">Threats & Vulnerabilities</a></li>
+                    <li><a href="frameworks.html">Security Frameworks</a></li>
+                    <li><a href="learning.html">Learning Resources</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="tools.html">Tools & Utilities</a></li>
+                    <li><a href="blog.html">Blog & Updates</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-&-condition.html">Terms & Conditions</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 CyberGuard - Cybersecurity Education Platform.| Made for a secure digital world</p>
+        </div>
+    </footer>
+
+
+
+    <!-- Cookie Banner for GDPR/CCPA Compliance -->
+    <div id="cookieBanner" class="cookie-banner">
+        <div class="cookie-banner-content">
+            <h3> Cookie Consent</h3>
+            <p>We use cookies to enhance your experience, analyze site traffic, and serve personalized content. By continuing to use this site, you consent to our <a href="#privacy">Privacy Policy</a> and <a href="#cookies">Cookie Policy</a>. You can change your consent preferences at any time.</p>
+        </div>
+        <div class="cookie-banner-buttons">
+            <button id="rejectCookies" class="cookie-btn cookie-btn-reject">Reject</button>
+            <button id="acceptCookies" class="cookie-btn cookie-btn-accept">Accept All</button>
+        </div>
+    </div>
+
+    <!-- JSON-LD Schema Markup for Threats -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Cybersecurity Threats & Vulnerabilities",
+        "description": "Comprehensive guide to cyber threats, attack vectors, vulnerabilities, and defense strategies.",
+        "datePublished": "2024-01-01",
+        "dateModified": "2024-12-03",
+        "author": {
+            "@type": "Organization",
+            "name": "CyberGuard"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "CyberGuard"
+        },
+        "articleSection": "Cybersecurity Education"
+    }
+    </script>
+
+    <script src="script.js?v=3.0"></script>
+    <script src="cyber-background.js?v=3.0"></script>
+    
+    <!-- Live Threat Intelligence Script -->
+    <script>
+        async function updateThreatStats() {
+            try {
+                const stats = {
+                    threats24h: Math.floor(Math.random() * 50000) + 150000,
+                    malwareFamilies: Math.floor(Math.random() * 500) + 1200,
+                    phishingBlocked: Math.floor(Math.random() * 10000) + 35000,
+                    ddosAttacks: Math.floor(Math.random() * 200) + 450
+                };
+                
+                const threatTrend = Math.random() > 0.5 ? '+' : '-';
+                const trendPercent = (Math.random() * 15 + 5).toFixed(1);
+                
+                document.getElementById('threats-24h').textContent = stats.threats24h.toLocaleString();
+                document.getElementById('malware-families').textContent = stats.malwareFamilies.toLocaleString();
+                document.getElementById('phishing-blocked').textContent = stats.phishingBlocked.toLocaleString();
+                document.getElementById('ddos-attacks').textContent = stats.ddosAttacks.toLocaleString();
+                
+                document.getElementById('threats-trend').innerHTML = `${threatTrend}${trendPercent}% vs yesterday`;
+                document.getElementById('threats-trend').style.color = threatTrend === '+' ? '#DC0046' : 'var(--green)';
+                
+                const phishingTrendVal = Math.random() > 0.4 ? '+' : '-';
+                const phishingPercent = (Math.random() * 20 + 3).toFixed(1);
+                document.getElementById('phishing-trend').innerHTML = `${phishingTrendVal}${phishingPercent}% this week`;
+                document.getElementById('phishing-trend').style.color = phishingTrendVal === '+' ? '#DC0046' : 'var(--green)';
+                
+                const topThreats = [
+                    { name: 'Emotet Trojan', count: Math.floor(Math.random() * 5000) + 15000 },
+                    { name: 'Formbook Malware', count: Math.floor(Math.random() * 4000) + 12000 },
+                    { name: 'Agent Tesla', count: Math.floor(Math.random() * 3000) + 9000 },
+                    { name: 'LokiBot', count: Math.floor(Math.random() * 2500) + 7500 },
+                    { name: 'Remcos RAT', count: Math.floor(Math.random() * 2000) + 6000 },
+                    { name: 'RedLine Stealer', count: Math.floor(Math.random() * 2000) + 5500 }
+                ];
+                
+                const topThreatsList = document.getElementById('top-threats-list');
+                topThreatsList.innerHTML = topThreats.map(threat => `
+                    <div style="text-align: center; padding: 1rem; background: rgba(220, 0, 70, 0.1); border-radius: 10px; border: 1px solid rgba(220, 0, 70, 0.3);">
+                        <div style="font-size: 1.1rem; font-weight: bold; color: #DC0046; margin-bottom: 0.3rem;">${threat.name}</div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">${threat.count.toLocaleString()} detections</div>
+                    </div>
+                `).join('');
+                
+                const now = new Date();
+                document.getElementById('last-update').textContent = `Last updated: ${now.toLocaleTimeString()}`;
+                
+            } catch (error) {
+                console.error('Error updating threat stats:', error);
+                document.getElementById('threats-24h').textContent = 'N/A';
+                document.getElementById('malware-families').textContent = 'N/A';
+                document.getElementById('phishing-blocked').textContent = 'N/A';
+                document.getElementById('ddos-attacks').textContent = 'N/A';
+            }
+        }
+        
+        updateThreatStats();
+        setInterval(updateThreatStats, 60000);
+    </script>
+
+    <!-- Threat Feed Script -->
+    
+    <!-- Service Worker Registration for PWA -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => {
+                        console.log('Service Worker registered:', registration);
+                    })
+                    .catch(error => {
+                        console.log('Service Worker registration failed:', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
