@@ -73,6 +73,63 @@
     </style>
 </head>
 <body>
+    <!-- PWA Install Banner -->
+    <div id="pwa-install-banner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:99999;background:#0d1b2e;border-bottom:1px solid #00E5FF33;padding:10px 16px;display:none;align-items:center;gap:12px;box-shadow:0 2px 16px #00E5FF22;">
+        <div style="width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,#001a33,#003366);border:1.5px solid #00E5FF55;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L4 6V12C4 16.4 7.4 20.5 12 22C16.6 20.5 20 16.4 20 12V6L12 2Z" fill="#00E5FF" opacity="0.15"/><path d="M12 2L4 6V12C4 16.4 7.4 20.5 12 22C16.6 20.5 20 16.4 20 12V6L12 2Z" stroke="#00E5FF" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 12L11 14L15 10" stroke="#00E5FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div style="flex:1;min-width:0;">
+            <div style="color:#fff;font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Install CyberGuard</div>
+            <div id="pwa-install-origin" style="color:#00E5FF99;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></div>
+        </div>
+        <button id="pwa-install-btn" style="background:transparent;border:1.5px solid #00E5FF;color:#00E5FF;padding:6px 16px;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;letter-spacing:0.5px;transition:background 0.2s,color 0.2s;">Install</button>
+        <button id="pwa-dismiss-btn" style="background:transparent;border:none;color:#ffffff66;font-size:20px;cursor:pointer;padding:0 4px;line-height:1;flex-shrink:0;" aria-label="Dismiss">&times;</button>
+    </div>
+    <style>
+        #pwa-install-banner { display: none; }
+        #pwa-install-banner.pwa-visible { display: flex !important; }
+        #pwa-install-btn:hover { background: #00E5FF; color: #0A0F1F; }
+    </style>
+    <script>
+        (function() {
+            let deferredPrompt = null;
+            const banner = document.getElementById('pwa-install-banner');
+            const installBtn = document.getElementById('pwa-install-btn');
+            const dismissBtn = document.getElementById('pwa-dismiss-btn');
+            const originEl = document.getElementById('pwa-install-origin');
+
+            if (originEl) originEl.textContent = location.hostname || location.href;
+
+            window.addEventListener('beforeinstallprompt', function(e) {
+                e.preventDefault();
+                deferredPrompt = e;
+                if (banner) banner.classList.add('pwa-visible');
+            });
+
+            if (installBtn) {
+                installBtn.addEventListener('click', async function() {
+                    if (!deferredPrompt) return;
+                    deferredPrompt.prompt();
+                    const { outcome } = await deferredPrompt.userChoice;
+                    deferredPrompt = null;
+                    if (banner) banner.classList.remove('pwa-visible');
+                });
+            }
+
+            if (dismissBtn) {
+                dismissBtn.addEventListener('click', function() {
+                    if (banner) banner.classList.remove('pwa-visible');
+                    deferredPrompt = null;
+                });
+            }
+
+            window.addEventListener('appinstalled', function() {
+                if (banner) banner.classList.remove('pwa-visible');
+                deferredPrompt = null;
+            });
+        })();
+    </script>
+
     <!-- ============================================
          ANIMATED CYBERSECURITY BACKGROUND SYSTEM
          - Particle network animation
