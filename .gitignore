@@ -31,3 +31,7 @@ pnpm-debug.log*
 
 # Local Netlify folder
 .netlify
+
+# Production build
+dist/
+
